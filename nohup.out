@@ -1,0 +1,248 @@
+module.js:550
+    throw err;
+    ^
+
+Error: Cannot find module '/home/bik3njruudv1/public_html/dev.texdinamo.com/proclub-api-rest/[ruta'
+    at Function.Module._resolveFilename (module.js:548:15)
+    at Function.Module._load (module.js:475:25)
+    at Function.Module.runMain (module.js:694:10)
+    at startup (bootstrap_node.js:204:16)
+    at bootstrap_node.js:625:3
+module.js:550
+    throw err;
+    ^
+
+Error: Cannot find module '/home/bik3njruudv1/public_html/dev.texdinamo.com/proclub-api-rest/npm'
+    at Function.Module._resolveFilename (module.js:548:15)
+    at Function.Module._load (module.js:475:25)
+    at Function.Module.runMain (module.js:694:10)
+    at startup (bootstrap_node.js:204:16)
+    at bootstrap_node.js:625:3
+module.js:550
+    throw err;
+    ^
+
+Error: Cannot find module '/home/bik3njruudv1/public_html/dev.texdinamo.com/proclub-api-rest/[npm'
+    at Function.Module._resolveFilename (module.js:548:15)
+    at Function.Module._load (module.js:475:25)
+    at Function.Module.runMain (module.js:694:10)
+    at startup (bootstrap_node.js:204:16)
+    at bootstrap_node.js:625:3
+module.js:550
+    throw err;
+    ^
+
+Error: Cannot find module '/home/bik3njruudv1/public_html/dev.texdinamo.com/proclub-api-rest/npm'
+    at Function.Module._resolveFilename (module.js:548:15)
+    at Function.Module._load (module.js:475:25)
+    at Function.Module.runMain (module.js:694:10)
+    at startup (bootstrap_node.js:204:16)
+    at bootstrap_node.js:625:3
+
+> api-deporte@1.0.0 start /home/bik3njruudv1/public_html/dev.texdinamo.com/proclub-api-rest
+> node server.js
+
+app running en el puerto 3000
+(node:1802999) [SEQUELIZE0006] DeprecationWarning: This database engine version is not supported, please update your database server. More information https://github.com/sequelize/sequelize/blob/main/ENGINE.md
+Executing (default): CREATE TABLE IF NOT EXISTS `pais` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `pais`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'pais' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `pais` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): SHOW INDEX FROM `pais`
+Executing (default): CREATE TABLE IF NOT EXISTS `provincia` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `countryId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`countryId`) REFERENCES `pais` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `provincia`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'provincia' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `provincia` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='provincia' AND constraint_name = 'provincia_ibfk_1' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `provincia` DROP FOREIGN KEY `provincia_ibfk_1`;
+Executing (default): ALTER TABLE `provincia` ADD FOREIGN KEY (`countryId`) REFERENCES `pais` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `provincia`
+Executing (default): CREATE TABLE IF NOT EXISTS `direccions` (`id` INTEGER auto_increment , `calle` VARCHAR(255), `numero` INTEGER, `localidad` VARCHAR(255), `provinciaId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`provinciaId`) REFERENCES `provincia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `direccions`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'direccions' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `direccions` CHANGE `calle` `calle` VARCHAR(255);
+Executing (default): ALTER TABLE `direccions` CHANGE `numero` `numero` INTEGER;
+Executing (default): ALTER TABLE `direccions` CHANGE `localidad` `localidad` VARCHAR(255);
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='direccions' AND constraint_name = 'direccions_ibfk_1' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `direccions` DROP FOREIGN KEY `direccions_ibfk_1`;
+Executing (default): ALTER TABLE `direccions` ADD FOREIGN KEY (`provinciaId`) REFERENCES `provincia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `direccions`
+Executing (default): CREATE TABLE IF NOT EXISTS `tipoDocumentos` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `tipoDocumentos`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'tipoDocumentos' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `tipoDocumentos` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): SHOW INDEX FROM `tipoDocumentos`
+Executing (default): CREATE TABLE IF NOT EXISTS `personas` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `apellido` VARCHAR(255), `documento` VARCHAR(255), `sexo` VARCHAR(255), `correo` VARCHAR(255), `telefono` VARCHAR(255), `fechaNacimiento` VARCHAR(255), `direccionPersonaId` INTEGER, `tipoDocumentId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`direccionPersonaId`) REFERENCES `direccions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY (`tipoDocumentId`) REFERENCES `tipoDocumentos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `personas`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'personas' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `personas` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `personas` CHANGE `apellido` `apellido` VARCHAR(255);
+Executing (default): ALTER TABLE `personas` CHANGE `documento` `documento` VARCHAR(255);
+Executing (default): ALTER TABLE `personas` CHANGE `sexo` `sexo` VARCHAR(255);
+Executing (default): ALTER TABLE `personas` CHANGE `correo` `correo` VARCHAR(255);
+Executing (default): ALTER TABLE `personas` CHANGE `telefono` `telefono` VARCHAR(255);
+Executing (default): ALTER TABLE `personas` CHANGE `fechaNacimiento` `fechaNacimiento` VARCHAR(255);
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='personas' AND constraint_name = 'personas_ibfk_5' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `personas` DROP FOREIGN KEY `personas_ibfk_5`;
+Executing (default): ALTER TABLE `personas` ADD FOREIGN KEY (`direccionPersonaId`) REFERENCES `direccions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='personas' AND constraint_name = 'personas_ibfk_6' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `personas` DROP FOREIGN KEY `personas_ibfk_6`;
+Executing (default): ALTER TABLE `personas` ADD FOREIGN KEY (`tipoDocumentId`) REFERENCES `tipoDocumentos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `personas`
+Executing (default): CREATE TABLE IF NOT EXISTS `clubs` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `descripcion` VARCHAR(255), `logo` VARCHAR(255), `colorPrimario` VARCHAR(255), `colorTextoPrimario` VARCHAR(255), `colorSecundario` VARCHAR(255), `colorTextoSecundario` VARCHAR(255), `activo` INTEGER, `direccionId` INTEGER, `personaId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`direccionId`) REFERENCES `direccions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY (`personaId`) REFERENCES `personas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `clubs`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'clubs' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `clubs` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `descripcion` `descripcion` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `logo` `logo` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `colorPrimario` `colorPrimario` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `colorTextoPrimario` `colorTextoPrimario` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `colorSecundario` `colorSecundario` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `colorTextoSecundario` `colorTextoSecundario` VARCHAR(255);
+Executing (default): ALTER TABLE `clubs` CHANGE `activo` `activo` INTEGER;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='clubs' AND constraint_name = 'clubs_ibfk_5' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `clubs` DROP FOREIGN KEY `clubs_ibfk_5`;
+Executing (default): ALTER TABLE `clubs` ADD FOREIGN KEY (`direccionId`) REFERENCES `direccions` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='clubs' AND constraint_name = 'clubs_ibfk_6' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `clubs` DROP FOREIGN KEY `clubs_ibfk_6`;
+Executing (default): ALTER TABLE `clubs` ADD FOREIGN KEY (`personaId`) REFERENCES `personas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `clubs`
+Executing (default): CREATE TABLE IF NOT EXISTS `rols` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `rols`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'rols' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `rols` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): SHOW INDEX FROM `rols`
+Executing (default): CREATE TABLE IF NOT EXISTS `usuarios` (`id` INTEGER auto_increment , `idFirebase` VARCHAR(255), `activo` INTEGER DEFAULT 1, `personaId` INTEGER, `rolId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`personaId`) REFERENCES `personas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY (`rolId`) REFERENCES `rols` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `usuarios`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'usuarios' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `usuarios` CHANGE `idFirebase` `idFirebase` VARCHAR(255);
+Executing (default): ALTER TABLE `usuarios` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='usuarios' AND constraint_name = 'usuarios_ibfk_5' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `usuarios` DROP FOREIGN KEY `usuarios_ibfk_5`;
+Executing (default): ALTER TABLE `usuarios` ADD FOREIGN KEY (`personaId`) REFERENCES `personas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='usuarios' AND constraint_name = 'usuarios_ibfk_6' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `usuarios` DROP FOREIGN KEY `usuarios_ibfk_6`;
+Executing (default): ALTER TABLE `usuarios` ADD FOREIGN KEY (`rolId`) REFERENCES `rols` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `usuarios`
+Executing (default): CREATE TABLE IF NOT EXISTS `clubxusuarios` (`id` INTEGER auto_increment , `activo` INTEGER DEFAULT 0, `Estado` INTEGER DEFAULT 1, `clubId` INTEGER, `usuarioId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`clubId`) REFERENCES `clubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `clubxusuarios`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'clubxusuarios' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `clubxusuarios` CHANGE `activo` `activo` INTEGER DEFAULT 0;
+Executing (default): ALTER TABLE `clubxusuarios` CHANGE `Estado` `Estado` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='clubxusuarios' AND constraint_name = 'clubxusuarios_ibfk_5' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `clubxusuarios` DROP FOREIGN KEY `clubxusuarios_ibfk_5`;
+Executing (default): ALTER TABLE `clubxusuarios` ADD FOREIGN KEY (`clubId`) REFERENCES `clubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='clubxusuarios' AND constraint_name = 'clubxusuarios_ibfk_6' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `clubxusuarios` DROP FOREIGN KEY `clubxusuarios_ibfk_6`;
+Executing (default): ALTER TABLE `clubxusuarios` ADD FOREIGN KEY (`usuarioId`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `clubxusuarios`
+Executing (default): CREATE TABLE IF NOT EXISTS `disciplinas` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `descripcion` VARCHAR(255), `activo` INTEGER DEFAULT 1, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `disciplinas`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'disciplinas' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `disciplinas` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `disciplinas` CHANGE `descripcion` `descripcion` VARCHAR(255);
+Executing (default): ALTER TABLE `disciplinas` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SHOW INDEX FROM `disciplinas`
+Executing (default): CREATE TABLE IF NOT EXISTS `reldisciplinaxclubs` (`id` INTEGER auto_increment , `activo` INTEGER DEFAULT 1, `clubId` INTEGER, `disciplinaId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`clubId`) REFERENCES `clubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY (`disciplinaId`) REFERENCES `disciplinas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `reldisciplinaxclubs`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'reldisciplinaxclubs' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `reldisciplinaxclubs` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reldisciplinaxclubs' AND constraint_name = 'reldisciplinaxclubs_ibfk_5' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `reldisciplinaxclubs` DROP FOREIGN KEY `reldisciplinaxclubs_ibfk_5`;
+Executing (default): ALTER TABLE `reldisciplinaxclubs` ADD FOREIGN KEY (`clubId`) REFERENCES `clubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reldisciplinaxclubs' AND constraint_name = 'reldisciplinaxclubs_ibfk_6' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `reldisciplinaxclubs` DROP FOREIGN KEY `reldisciplinaxclubs_ibfk_6`;
+Executing (default): ALTER TABLE `reldisciplinaxclubs` ADD FOREIGN KEY (`disciplinaId`) REFERENCES `disciplinas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `reldisciplinaxclubs`
+Executing (default): CREATE TABLE IF NOT EXISTS `posicions` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `activo` INTEGER DEFAULT 1, `disciplinaxclubId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`disciplinaxclubId`) REFERENCES `reldisciplinaxclubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `posicions`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'posicions' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `posicions` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `posicions` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='posicions' AND constraint_name = 'posicions_ibfk_1' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `posicions` DROP FOREIGN KEY `posicions_ibfk_1`;
+Executing (default): ALTER TABLE `posicions` ADD FOREIGN KEY (`disciplinaxclubId`) REFERENCES `reldisciplinaxclubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `posicions`
+Executing (default): CREATE TABLE IF NOT EXISTS `reldisciplinaxclubxcategoria` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `activo` INTEGER DEFAULT 1, `disciplinaxclubId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`disciplinaxclubId`) REFERENCES `reldisciplinaxclubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `reldisciplinaxclubxcategoria`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'reldisciplinaxclubxcategoria' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `reldisciplinaxclubxcategoria` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `reldisciplinaxclubxcategoria` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='reldisciplinaxclubxcategoria' AND constraint_name = 'reldisciplinaxclubxcategoria_ibfk_1' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `reldisciplinaxclubxcategoria` DROP FOREIGN KEY `reldisciplinaxclubxcategoria_ibfk_1`;
+Executing (default): ALTER TABLE `reldisciplinaxclubxcategoria` ADD FOREIGN KEY (`disciplinaxclubId`) REFERENCES `reldisciplinaxclubs` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `reldisciplinaxclubxcategoria`
+Executing (default): CREATE TABLE IF NOT EXISTS `relusuarioxcatxdis` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `activo` INTEGER DEFAULT 1, `disxclubxcatId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`disxclubxcatId`) REFERENCES `reldisciplinaxclubxcategoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `relusuarioxcatxdis`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'relusuarioxcatxdis' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `relusuarioxcatxdis` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `relusuarioxcatxdis` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='relusuarioxcatxdis' AND constraint_name = 'relusuarioxcatxdis_ibfk_1' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `relusuarioxcatxdis` DROP FOREIGN KEY `relusuarioxcatxdis_ibfk_1`;
+Executing (default): ALTER TABLE `relusuarioxcatxdis` ADD FOREIGN KEY (`disxclubxcatId`) REFERENCES `reldisciplinaxclubxcategoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `relusuarioxcatxdis`
+Executing (default): CREATE TABLE IF NOT EXISTS `relposxusuarioxdivxdeps` (`id` INTEGER auto_increment , `nombre` VARCHAR(255), `activo` INTEGER DEFAULT 1, `disxclubxcatId` INTEGER, PRIMARY KEY (`id`), FOREIGN KEY (`disxclubxcatId`) REFERENCES `reldisciplinaxclubxcategoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) ENGINE=InnoDB;
+Executing (default): SHOW FULL COLUMNS FROM `relposxusuarioxdivxdeps`;
+Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'relposxusuarioxdivxdeps' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='proclub' AND REFERENCED_TABLE_NAME IS NOT NULL;
+Executing (default): ALTER TABLE `relposxusuarioxdivxdeps` CHANGE `nombre` `nombre` VARCHAR(255);
+Executing (default): ALTER TABLE `relposxusuarioxdivxdeps` CHANGE `activo` `activo` INTEGER DEFAULT 1;
+Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='relposxusuarioxdivxdeps' AND constraint_name = 'relposxusuarioxdivxdeps_ibfk_1' AND TABLE_SCHEMA = 'proclub';
+Executing (default): ALTER TABLE `relposxusuarioxdivxdeps` DROP FOREIGN KEY `relposxusuarioxdivxdeps_ibfk_1`;
+Executing (default): ALTER TABLE `relposxusuarioxdivxdeps` ADD FOREIGN KEY (`disxclubxcatId`) REFERENCES `reldisciplinaxclubxcategoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+Executing (default): SHOW INDEX FROM `relposxusuarioxdivxdeps`
+Conectado al Servidor
+
+> api-deporte@1.0.0 start /home/bik3njruudv1/public_html/dev.texdinamo.com/proclub-api-rest
+> node server.js "dev"
+
+events.js:183
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE 127.0.0.1:3000
+    at Server.setupListenHandle [as _listen2] (net.js:1360:14)
+    at listenInCluster (net.js:1401:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1510:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:72:10)
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! api-deporte@1.0.0 start: `node server.js "dev"`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the api-deporte@1.0.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/bik3njruudv1/.npm/_logs/2021-05-20T13_49_38_349Z-debug.log
+[0mGET /api [32m200[0m 6.629 ms - 1631[0m
+[0mGET /api [32m200[0m 1.568 ms - 1631[0m
+[0mGET /api [32m200[0m 0.968 ms - 1631[0m
+[0mGET /api [32m200[0m 0.647 ms - 1631[0m
+[0mGET /api [32m200[0m 0.497 ms - 1631[0m
+[0mGET /api [32m200[0m 0.655 ms - 1631[0m
+[0mGET /api [32m200[0m 0.614 ms - 1631[0m
+[0mGET /api [32m200[0m 0.614 ms - 1631[0m
+[0mGET /api [32m200[0m 0.592 ms - 1631[0m
+[0mGET /api [32m200[0m 0.666 ms - 1631[0m
+[0mGET /api [32m200[0m 0.669 ms - 1631[0m
+[0mGET /api [32m200[0m 0.563 ms - 1631[0m
+[0mGET /api [32m200[0m 0.582 ms - 1631[0m
+[0mGET /api [32m200[0m 0.706 ms - 1631[0m
+[0mGET /api [32m200[0m 0.763 ms - 1631[0m
+[0mGET /api [32m200[0m 0.771 ms - 1631[0m
+[0mGET /api [32m200[0m 0.747 ms - 1631[0m
+Executing (default): SELECT `id`, `nombre`, `descripcion`, `logo`, `colorPrimario`, `colorTextoPrimario`, `colorSecundario`, `colorTextoSecundario`, `activo`, `direccionId`, `personaId` FROM `clubs` AS `club`;
+[0mGET /api/clubs [32m200[0m 7.348 ms - 2[0m
+Executing (default): SELECT `id`, `nombre` FROM `pais` AS `pais`;
+[0mGET /api/pais [32m200[0m 2.613 ms - 2[0m
+Executing (default): SELECT clubs.id, clubs.nombre, concat(personas.nombre,' ',personas.apellido) AS 'contacto',  provincia.nombre AS 'ciudad' , pais.nombre AS 'pais'  
+   FROM clubs, personas, direccions , provincia, pais
+   WHERE personas.id = clubs.personaId AND direccions.id = clubs.direccionId AND provincia.id = direccions.provinciaId AND pais.id = provincia.countryId AND clubs.activo = 1;
+[0mGET /api/lista-clubs/activos [32m200[0m 4.135 ms - 2[0m
+Executing (default): SELECT `id`, `nombre`, `apellido`, `documento`, `sexo`, `correo`, `telefono`, `fechaNacimiento`, `direccionPersonaId`, `tipoDocumentId` FROM `personas` AS `persona`;
+[0mGET /api/personas [32m200[0m 3.895 ms - 2[0m
+[0mGET /api [32m200[0m 0.701 ms - 1631[0m
+Executing (3a19e280-e74b-4866-aaac-b82aa20a5ea0): START TRANSACTION;
+Executing (default): SELECT `id`, `nombre`, `apellido`, `documento`, `sexo`, `correo`, `telefono`, `fechaNacimiento`, `direccionPersonaId`, `tipoDocumentId` FROM `personas` AS `persona` WHERE `persona`.`correo` = 'nuevo1@gmail.com' LIMIT 1;
+Executing (3a19e280-e74b-4866-aaac-b82aa20a5ea0): ROLLBACK;
+[0mPOST /api/signup [33m400[0m 56.562 ms - 35[0m

@@ -1,0 +1,173 @@
+{
+    "clubs": "GET /api/clubs",
+    "clubs por id" : "GET  /api/clubs/:id",
+
+    "clubs crear" : "POST  api/club",
+    "club modificar": "PUT api/clubs/:id ",
+    "club eliminar" : "POST /club/eliminar/:id ",
+
+    "club, responsable y direccion por idClub" : "GET  /api/clubs/clubWithResponsableYDireccion/:id",
+    "clubs lista activo" : "GET /api/lista-clubs/activos",
+
+    "pais" : "GET  /pais",
+    "pais por id" : "GET  /pais/:id",
+    
+    "provincias" : "GET  /provincias",
+    "provincias por id" : "GET  /provincias/:id",
+    
+    "provincia por pais" : "GET /provincias/pais/:id",
+
+    "personas" : "GET  /personas",
+    "personas por id" : "GET  /personas:id",
+
+    "tipo de documento" : "GET  /tipo-documento",
+    "tipo de documento por id" : "GET  /tipo-documento/:id",
+
+    "direcciones" : "GET /direccion",
+    "direcciones por id" : "GET /direccion/:id",
+
+    "usuarios" : "GET /lista-usuarios",
+    "eliminar usuario" : "DELETE /usuario/:club/usuario",
+    "usuarios x club" : "GET /api/usuario/:club/:usuario",
+    "usuarios x club modificar" : "PUT /api/usuario/:club/:usuario",
+
+    "cambiar de estado del usuario de un club" : "POST /estado/:club/:usuario/:estado",
+   
+
+
+    "disciplina" : "GET /disciplina",
+    "disciplina by id" : "GET /disciplina/:id",
+    
+    "disciplina crear" : "POST /disciplina",
+    "disciplina modificar": "PUT /disciplina/:id",
+    "disciplina eliminar": "DELETE /disciplina/:id",
+    
+    "disciplinas x club " : "GET  /disciplina-club/:club",
+    "disciplina x club by id": "GET /disciplina-club/:club/:disciplina",
+    "eliminar disciplina x club" : "DELETE /disciplina-club/:club/:disciplina",
+    "crear disciplina x club" : "POST /disciplina-club",
+
+    "verifica si existe el usuario o el id de firebase": "POST /validate",
+    "crear usuario": "POST /signup",
+    "iniciar sesion" : "POST /signin",
+    "registrar usuarion en firebase" : "POST  /registrar-firebase ",
+    "envio email para recuperar password" : "POST  /reset-password ",
+    "cambiar el password debe enviar 3 campos y poner el token para hacer la consulta": "POST /nueva-clave",
+
+    "post image de prueba" : "POST   /image",
+    "get trae la imagen con la extension rfrf.jpg" : "/image/:img",
+
+
+    "Beneficios" : "GET /beneficios",
+    "Beneficio by id" : "GET /beneficios/:id",
+    "Beneficio modificar" : "PUT /beneficios/:id",
+    "Beneficio eliminar" : "DELETE /beneficios/:id",
+
+
+    "rubros" : "GET  /rubro",
+    "rubro por id" : "GET  /rubro/:id",
+    
+    
+    "crea un nuevo beneficio para un usuario de un club": "POST /beneficios/:club/:usuario/:beneficio",
+    "trae todo los beneficios que otorgo un club" : "GET  /beneficios/club/:club",
+    "trae todos lo beneficios de tiene un usuario de un club"  : "GET  /beneficios/club/usuario/:club/:usuario",
+    "elimina el beneficio que posee un usuario de un club" : "DELETE  '/beneficios/club/usuario/beneficio/:club/:usuario/:beneficio'",
+    
+
+    "--------------------------------": "...................................",
+
+    "crear notificacion" : "POST /notificacion",
+    "traer todas las notificaciones" : "GET /notificacion",
+    "traer una notifcacion" : "GET /notificacion/:id",
+    "eliminar una notifcacion por su id" : "POST /notificacion/:id",
+    "modifica una notifcacion por su id" : "PUT /notificacion/:id",
+   
+    "crear notificacion x club" : "POST /notificacion/:notificacion/:club",
+    "trae las  notificacion x club" : "GET /notificacion/:notificacion/:club",
+    "trae una  notificacion x club por id" : "GET /notificacion-club/:id",
+    "eliminar una notificacion x club por id" : "DELETE /notificacion-club/:id",
+    
+    "crear notificacion x club x usuario" : "POST /notificacion-usuario/:notxclub/:clubxusuario",
+    "trae las  notificacion x club x usuario " : "GET /notificacion-clubxusuario/:clubxusuario",
+    "trae las  notificacion x club x usuario por id " : "GET /notificacion-usuario/:id",
+     "envia la notificacion" : "/notificacion-post",
+
+
+     "crear encuesta " : "POST /encuesta",
+     "traer encuesta" : "GET /encuesta",
+     "traer encuesta por id" : "GET /encuesta/:id",
+     "modificar encuestar por id " : "PUT /encuesta/:id",
+     "eliminar encuestar por id " : "DELETE /encuesta/:id",
+     "enviar encuesta" : "POST /encuesta-post",
+    
+    "crear pregunta con el id encuesta" : "POST /pregunta/:encuesta",
+    "traer a todas la preguntas de una encuesta" : "GET /pregunta/:encuesta",
+    "traer  pregunta por id" : "GET /pregunta/id/:id",
+    "modificar pregunta por id" : "PUT /pregunta/:id",
+    "eliminar pregunta por id" : "DELETE /pregunta/:id",
+    
+    "crear respuesta de id de un pregunta": "POST /respuesta/pregunta/:pregunta",
+    "trae toda las respuesta de una pregunta": "GET /respuesta/pregunta/:pregunta",
+    "trae una respuesta por su id": "GET /respuesta/:id",
+    "modifica respuesta por su id": "PUT /respuesta/:id",
+    "elimina una respuesta por su id" : "DELETE /respuesta/:id",
+
+
+    "crear espacio" : "POST /espacio",
+    "traer espacio" : "GET /espacio",
+    "traer espacio por el id" : "GET /espacio/:id",
+    "modificar espacio por el id" : "PUT /espacio/:id",
+    "eliminar al espacio por el id": "DELETE /espacio/:id",
+
+    "traer todos los estado del espacio" : "GET /estado-espacio",
+    "traer estado del espacio por id" : "GET /estado-espacio/:id",
+    
+    "traer a todo los excluidos": "GET /excluidos",
+    "traer excluido por id": "GET /excluidos/:id",
+    "crear excluidos agregando el id de clubxusuario": "POST /excluidos/:id",
+    
+    "get traer todos los estado de turno"  : "GET /estado-turno",
+    "traer un estado de turno por id"  : "GET /estado-turno/:id",
+    
+    "traer todos los turnos ": "GET /turno",
+    "traer turno por id" : "GET /turno/:id",
+    "crear turno con su estado de turno": "POST /turno/:estado",
+    "eliminar turno " : "DELETE /turno/:id",
+    
+    "trae todo los estado de documento": "GET /estado-documento",
+    "traer estado de documento por id":  "GET /estado-documento/:id",
+
+    "crear archivo" : "POST /archivo",
+    "get de un archivo por el nombre del archivo ejemplo  kskdkd.pdf" : "GET /archivo/:id",
+
+    
+    "crear documentacion de un usuario perteneciente a un club" :  "POST /documento/:club/:usuario",
+    "traer todos los documentos de los usuarios de un club" :  "GET /documento/club/:club",
+    "traer un documento de un usuario que pertenece a un club" :  "GET /documento/club/usuario/:club/:usuario",
+    "modificar documento de un usuario perteneciente a un club": "PUT /documento/club/usuario/:club/:usuario",
+    "eliminar un documento que pertenece a un usuario de un club" : "DELETE /documento/club/usuario/:club/:usuario",
+    "modificar el estado de un documento de un usuario que pertenece a un club" : "PUT /documento/club/usuario/:club/:usuario/:estado", 
+
+   
+    "trae el estado de reserva":"GET /estado-reserva",
+    "trae el estado de reserva por id":"GET /estado-reserva/:id",
+    
+    "trae todas las reserva" : "GET /reserva",
+    "trae todas las reserva por id" : "GET /reserva/:id",
+    "trae todas las reserva de un usuario" : "GET  /reserva/usuario/:usuario",
+    "modifica el estado de la reserva por el id de la reserva" : "PUT /reserva/:id/:estado",
+    "Creo una reserva pasando el id del usuario y el id del turno elegido" : "POST  /reserva/:usuario/:turno",
+    "Elimino una reserva" : "DELETE /reserva/:id",
+    
+    
+    
+    "trae todo los ingresos": "GET /ingreso",
+    "trae un ingreso por su id": "GET /ingreso/:id",
+    "crea un ingresa y se le pasa el id de reserva": "POST /ingreso/:reserva"
+            
+
+
+}
+
+
+
