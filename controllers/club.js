@@ -6,6 +6,8 @@ const TipoDocumento = require('../models/TipoDocumento')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const Pais = require('../models/Pais')
 const ClubXusuario = require('../models/ClubXUsuario')
+const Provincia = require('../models/Provincia')
+
 
 exports.clubTodos = async (req, res) => {
 
