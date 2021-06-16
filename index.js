@@ -111,6 +111,6 @@ const host = process.env.HOST || '0.0.0.0'
 var port = process.env.PORT || 3000;
 
 
-app.listen(port,host,function() {
+app.listen(port,function() {
     console.log(`app running en el puerto ${port}`); 
 });
