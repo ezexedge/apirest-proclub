@@ -107,8 +107,8 @@ app.use(function (err, req, res, next) {
 
 
 
-const host = process.env.BD_HOST || '0.0.0.0'
-var port = process.env.BD_PORT || 3000;
+const host = process.env.HOST || '0.0.0.0'
+var port = process.env.PORT || 3000;
 
 
 app.listen(port,host,function() {
