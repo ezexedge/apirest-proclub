@@ -6,7 +6,10 @@ exports.crearDisciplina =  async (req,res) => {
 
     try{
         
-    const result = await Disciplina.create({nombre: disciplina.nombre, descripcion: disciplina.descripcion})
+        const {nombre , descripcion} = req.body
+        
+        console.log(req.body)
+    const result = await Disciplina.create({nombre: nombre, descripcion: descripcion})
     
     res.status(200).json(result)    
 
