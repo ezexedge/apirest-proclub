@@ -8,12 +8,15 @@ const Pais = require('../models/Pais')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Provincia = require('../models/Provincia')
 
-
 exports.clubTodos = async (req, res) => {
 
 
   try {
-    const result = await Club.findAll({ order: [['id', 'DESC']]})
+    const result = await Club.findAll({
+      where: {
+        activo: 1
+      },
+      order: [['id', 'DESC']]})
 
     res.status(200).json(result)
 
@@ -170,7 +173,7 @@ exports.clubEliminar = async (req, res) => {
 
     await club.save()
 
-    res.status(200).json(club)
+    res.status(200).json({message:'eliminado correctamente'})
 
   } catch (err) {
     console.log('errorr-----', err)
