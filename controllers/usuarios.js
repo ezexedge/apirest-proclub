@@ -14,15 +14,27 @@ exports.usuarioListado = async (req,res) =>{
     try {
         
         
-     const  result = await db.query(`
-     
-     SELECT personas.id, clubxusuarios.usuarioId as 'IdUsuario', personas.correo AS 'usuario' , personas.nombre AS 'nombre' , personas.apellido AS 'apellido' , personas.documento AS 'documento' , rols.nombre AS 'rol'   FROM  usuarios , personas , rols,clubxusuarios 
-            WHERE usuarios.id = clubxusuarios.usuarioId AND personas.id = usuarios.personaId AND rols.id = usuarios.rolId AND clubxusuarios.activo =1 AND clubxusuarios.clubId = ${req.params.club}  ORDER BY id DESC
+      const club = req.params.club
+        
+    const result = await  ClubXusuario.findAll({
+     include: [{
+       model: Usuario,
+       as: 'usuario',
+       include: [{
+         model: Persona,
+         as: 'persona'
+       }]
+     }],
+      where:{
+        clubId: club,
+        activo:1
+      }
+    })
 
-     `)
+
   
       
-      res.status(200).send(result[0])
+      res.status(200).send(result)
     
   } catch (err) {
       res.status(400).json(err)
