@@ -130,8 +130,8 @@ exports.createDeporteXClub = async (req,res)=> {
 
     try{
 
-        const { club,disciplina } = req.body
-
+        const club = req.params.club
+        const disciplina = req.params.disciplina
 
         const resp = await RelDisciplinaXClub.findAll({
             where: {
