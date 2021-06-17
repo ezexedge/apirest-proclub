@@ -68,7 +68,7 @@ router.get('/estado/:id',estadoControllers.getById)
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
     router.get('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.getDeporteXClubById)
     router.delete('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.deleteDeporteXClub)
-    router.post('/disciplina-club',reldisciplinaxclubControllers.createDeporteXClub)
+    router.post('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.createDeporteXClub)
      
    
    //pais
