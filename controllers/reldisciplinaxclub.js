@@ -145,6 +145,29 @@ exports.createDeporteXClub = async (req,res)=> {
         }
 
 
+        const resultClub = await Club.findOne({
+            where:{
+                id: club,
+                activo: 1
+            }
+        })
+
+        if(!resultClub){
+            throw new Error('el id del club no existe')
+        }
+
+        const resultDisciplina = await Disciplina.findOne({
+            where:{
+                id: club,
+                activo: 1
+            }
+        })
+
+        if(!resultDisciplina){
+            throw new Error('el id de disciplina no existe')
+        }
+
+
         const result = await RelDisciplinaXClub.create({clubId: club , disciplinaId: disciplina})
         
         if(result){
