@@ -52,53 +52,53 @@ exports.usuarioById = async (req,res) =>{
     const usuarioParams = req.params.usuario
   
 
-const result = await  ClubXusuario.findAll({
-    include: [
+    const result = await  ClubXusuario.findOne({
+      include: [
         {
-          model: Usuario,
-          as: 'usuario',
-          include: [
-            {
-              model: Persona,
-            as: 'persona',
+          model: Rol,
+          as: 'rol'
+      },
+          {
+            
+            model: Usuario,
+            as: 'usuario',
             include: [
-                {
-                  model: TipoDocumento,
-                as: 'tipoDocument'
-                },
-                {
-                 model: Direccion,
-                  as: 'direccionPersona',
-                  include: [{
-                    model: Provincia,
-                    as: 'provincia',
-                    include : [{
-                        model: Pais,
-                        as: 'country'
-                    }]
-                  }],
-
-                  }
-              ],
-              
-            },{
-                model: Rol,
-                as: 'rol'
-            }
-          ],
-        },
-      ],
-      where: {
-        usuarioId: usuarioParams,
-        clubId: clubParams,
-        activo: 1
-      }
-});
-
-        
-        if(result.length === 0){
-            throw new Error('el usuario no existe o no esta activo')
+              {
+                model: Persona,
+              as: 'persona',
+              include: [
+                  {
+                    model: TipoDocumento,
+                  as: 'tipoDocument'
+                  },
+                  {
+                   model: Direccion,
+                    as: 'direccionPersona',
+                    include: [{
+                      model: Provincia,
+                      as: 'provincia',
+                      include : [{
+                          model: Pais,
+                          as: 'country'
+                      }]
+                    }],
+  
+                    }
+                ],
+                
+              }
+            ],
+           
+          },
+        ],
+        where: {
+          usuarioId: usuarioParams,
+          clubId: clubParams,
+          activo: 1
         }
+  });
+        
+      if(!result)throw new Error('el usuario no existe')
             
       res.status(200).json(result)
     
