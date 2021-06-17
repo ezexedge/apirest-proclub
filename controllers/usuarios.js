@@ -7,7 +7,7 @@ const TipoDocumento = require('../models/TipoDocumento')
 const Rol = require('../models/rol')
 const Provincia = require('../models/Provincia')
 const Pais = require('../models/Pais')
-
+const Club = require('../models/Club')
 exports.usuarioListado = async (req,res) =>{
 
 
