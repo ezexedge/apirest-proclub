@@ -155,7 +155,7 @@ exports.signin = async (req,res)=>{
 
 
     }catch(error){
-        res.status(400).json({'message': error.message})
+        res.status(400).json({'error': error.message})
     }
 }
 
