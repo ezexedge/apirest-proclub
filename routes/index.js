@@ -176,7 +176,7 @@ router.get('/estado/:id',estadoControllers.getById)
 
     //notificacio x club x usuario
     router.post('/notificacion-usuario/:notxclub/:clubxusuario',notxclubxusuario.crear)
-    router.get('/notificacion-clubxusuario/:usuario',notxclubxusuario.getAllByClubByUser)
+    router.get('/notificacion-clubxusuario/:clubxusuario',notxclubxusuario.getAllByClubByUser)
     router.get('/notificacion-usuario/:id',notxclubxusuario.getById)
     router.post('/notificacion-post',notificacionControllers.sendNotificacion)
     router.get('/notificacion-get',notificacionControllers.getTokenFirebase)
