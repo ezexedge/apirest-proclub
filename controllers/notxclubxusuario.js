@@ -48,7 +48,7 @@ exports.crear = async (req,res)=> {
 exports.getAllByClubByUser = async (req,res) => {
     try{
 
-        const clubxusario = req.params.clubxusuario
+        const usuario = req.params.usuario
        
       
 
@@ -56,9 +56,11 @@ exports.getAllByClubByUser = async (req,res) => {
         const result =  await ClubXUsuario.findOne({
             where: {
                 activo: 1,
-                id: clubxusario
+                usuarioId: usuario
             }
         })
+
+
 
         if(!result)throw new Error('el usuario no existe o no existe en el club')
 
@@ -66,7 +68,7 @@ exports.getAllByClubByUser = async (req,res) => {
         const resp =  await NotXClubXUsuario.findAll({
             where:{
                 activo:1,
-                clubxusuarioId: clubxusario
+                clubxusuarioId: result.id
             }
         })
 
@@ -88,7 +90,38 @@ exports.getById = async (req,res) => {
         const id = req.params.id
       
 
+    
+        const result = await NotXClubXUsuario.findOne({
+            where: {
+                activo: 1,
+                id: id
+            }
+        })
 
+        if(!result)throw new Error('el id no existe')
+
+        result.visto+=1
+
+        await result.save()
+       
+        res.status(200).json(result)
+
+
+    }catch(err){
+
+        
+        res.status(400).json({error: err.message})
+
+    }
+}
+
+exports.getNotUser = async (req,res) => {
+    try{
+
+        const id = req.params.id
+      
+        
+    
         const result = await NotXClubXUsuario.findOne({
             where: {
                 activo: 1,
