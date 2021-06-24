@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
 const db = require('../config/db');
-const Club = require('../models/Club')
+const NotificacionXClub = require('../models/NotificacionXClub')
 const ClubXUsuario = require('../models/ClubXUsuario')
 
 const NotXClubXUsuario = db.define('notxclubxusuario', {
@@ -22,7 +22,7 @@ const NotXClubXUsuario = db.define('notxclubxusuario', {
 });
 
 
-NotXClubXUsuario.belongsTo(Club,{as:"club",foreignKey: 'notificacionxclubId'})
+NotXClubXUsuario.belongsTo(NotificacionXClub,{as:"club",foreignKey: 'notificacionxclubId'})
 NotXClubXUsuario.belongsTo(ClubXUsuario,{as:"clubxusuario",foreignKey: 'clubxusuarioId'})
 
 
