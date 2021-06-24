@@ -54,10 +54,7 @@ exports.getAllByClubByUser = async (req,res) => {
 
 
         const result =  await ClubXUsuario.findOne({
-            include:[{
-            model: NotificacionXClub,
-            as: 'club'
-            }],
+           
             where: {
                 activo: 1,
                 id: clubxusario
@@ -68,6 +65,10 @@ exports.getAllByClubByUser = async (req,res) => {
 
         
         const resp =  await NotXClubXUsuario.findAll({
+            include:[{
+                model: NotificacionXClub,
+                as: 'club'
+                }],
             where:{
                 activo:1,
                 clubxusuarioId: clubxusario
