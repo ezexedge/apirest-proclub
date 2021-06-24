@@ -48,31 +48,29 @@ exports.crear = async (req,res)=> {
 exports.getAllByClubByUser = async (req,res) => {
     try{
 
-        const usuario = req.params.usuario
+        const clubxusario = req.params.clubxusuario
        
       
 
 
         const result =  await ClubXUsuario.findOne({
+            include:[{
+            model: NotificacionXClub,
+            as: 'club'
+            }],
             where: {
                 activo: 1,
-                usuarioId: usuario
+                id: clubxusario
             }
         })
-
-
 
         if(!result)throw new Error('el usuario no existe o no existe en el club')
 
         
         const resp =  await NotXClubXUsuario.findAll({
-            include:[{
-                model: NotificacionXClub,
-                as: 'club'
-            }],
             where:{
                 activo:1,
-                clubxusuarioId: result.id
+                clubxusuarioId: clubxusario
             }
         })
 
@@ -94,38 +92,7 @@ exports.getById = async (req,res) => {
         const id = req.params.id
       
 
-    
-        const result = await NotXClubXUsuario.findOne({
-            where: {
-                activo: 1,
-                id: id
-            }
-        })
 
-        if(!result)throw new Error('el id no existe')
-
-        result.visto+=1
-
-        await result.save()
-       
-        res.status(200).json(result)
-
-
-    }catch(err){
-
-        
-        res.status(400).json({error: err.message})
-
-    }
-}
-
-exports.getNotUser = async (req,res) => {
-    try{
-
-        const id = req.params.id
-      
-        
-    
         const result = await NotXClubXUsuario.findOne({
             where: {
                 activo: 1,
