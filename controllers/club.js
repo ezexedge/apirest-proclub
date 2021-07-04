@@ -194,19 +194,24 @@ exports.crearClub = async (req, res) => {
   try {
 
     
-    if(!req.file) {
-      
-      throw new Error('debe ingresar una logo el club')
-    }
+    
 
     const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable } = JSON.parse(req.body.data)
    
-   
-
+    let imagen
+  
+    if(!req.file) {
       
-      let imagen = req.file.filename
+      //throw new Error('debe ingresar una logo el club')
+       imagen = ''
+    }else{
+       imagen = req.file.filename
       console.log(imagen)
  
+    }
+
+      
+     
 
     const nuevaPersona = await Persona.create({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono },{ transaction: t })
 
