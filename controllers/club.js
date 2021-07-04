@@ -195,8 +195,8 @@ exports.crearClub = async (req, res) => {
 
     
     if(!req.file) {
-      continue
-      //throw new Error('debe ingresar una logo el club')
+      
+      throw new Error('debe ingresar una logo el club')
     }
 
     const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable } = JSON.parse(req.body.data)
