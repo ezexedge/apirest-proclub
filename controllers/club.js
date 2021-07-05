@@ -14,9 +14,11 @@ exports.clubTodos = async (req, res) => {
 
   try {
     const result = await Club.findAll({
-      
-        model: Persona,
-        as: 'persona',
+      include: [
+        {
+          model: Persona,
+          as: 'persona'
+        }],   
       where: {
         activo: 1
       },
