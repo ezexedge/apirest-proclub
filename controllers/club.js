@@ -17,7 +17,9 @@ exports.clubTodos = async (req, res) => {
       include: [
         {
           model: Persona,
-          as: 'persona'
+          as: 'persona',
+          model: Direccion,
+          as: 'direccion'
         }],   
       where: {
         activo: 1
