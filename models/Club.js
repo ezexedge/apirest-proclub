@@ -25,7 +25,15 @@ const Club = db.define('club', {
     colorTextoPrimario: Sequelize.STRING,
     colorSecundario: Sequelize.STRING,
     colorTextoSecundario: Sequelize.STRING,
-    activo: Sequelize.INTEGER
+    nombre_visible: Sequelize.STRING,
+    activo: Sequelize.INTEGER,
+    email: Sequelize.STRING,
+    telefono: Sequelize.STRING,
+    cuit: Sequelize.STRING,
+    instagram: Sequelize.STRING,
+    facebook: Sequelize.STRING,
+    twitter: Sequelize.STRING,
+    cp: Sequelize.STRING
 
     
 });

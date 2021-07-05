@@ -1,3 +1,4 @@
+
 const Club = require('../models/Club')
 const db = require('../config/db')
 const Persona = require('../models/Persona')
@@ -173,7 +174,7 @@ exports.clubEliminar = async (req, res) => {
 
     await club.save()
 
-    res.status(200).json({message:'eliminado correctamente'})
+    res.status(200).json(club)
 
   } catch (err) {
     console.log('errorr-----', err)
@@ -193,10 +194,10 @@ exports.crearClub = async (req, res) => {
 
   try {
 
-    
-    
+  
 
-    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable } = JSON.parse(req.body.data)
+    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp } = JSON.parse(req.body.data)
+   
    
     let imagen
   
@@ -210,18 +211,15 @@ exports.crearClub = async (req, res) => {
  
     }
 
-      
-     
-
-    const nuevaPersona = await Persona.create({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono },{ transaction: t })
+    const nuevaPersona = await Persona.create({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono, correo: responsable.correo },{ transaction: t })
 
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
 
     const clubNuevo = await Club.create({
      logo: imagen, nombre: nombre, descripcion: descripcion, logo: imagen, colorPrimario: colorPrimario,
       colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
-      colorTextoSecundario: colorTextoSecundario, direccionId: nuevaDireccion.id, personaId: nuevaPersona.id, activo: 1
-    },{ transaction: t })
+      colorTextoSecundario: colorTextoSecundario, direccionId: nuevaDireccion.id, personaId: nuevaPersona.id, activo: 1 , email: email
+ , telefono: telefono , cuit: cuit  ,instagram: instagram,facebook:facebook,twitter:twitter, nombre_visible: nombre_visible , cp: cp  },{ transaction: t })
 
 
     await t.commit();
