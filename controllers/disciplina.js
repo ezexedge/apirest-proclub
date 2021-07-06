@@ -6,10 +6,10 @@ exports.crearDisciplina =  async (req,res) => {
 
     try{
         
-        const {nombre , descripcion} = req.body
+        const {nombre , descripcion,icono} = req.body
         
         console.log(req.body)
-    const result = await Disciplina.create({nombre: nombre, descripcion: descripcion})
+    const result = await Disciplina.create({nombre: nombre, descripcion: descripcion,icono:icono})
     
     res.status(200).json(result)    
 
@@ -79,13 +79,13 @@ exports.updateDisciplina =  async (req,res) => {
 
     const id = req.params.id
 
-    const {nombre,descripcion} = req.body
+    const {nombre,descripcion,icono} = req.body
 
     const result = await Disciplina.findByPk(id)
 
     if(result){
 
-        await Disciplina.update({nombre: nombre, descripcion: descripcion}, { where: { id: id }})
+        await Disciplina.update({nombre: nombre, descripcion: descripcion,icono: icono}, { where: { id: id }})
 
         res.status(200).json({'message': 'modificado correctamente'})    
     
