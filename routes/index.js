@@ -66,6 +66,7 @@ router.get('/estado/:id',estadoControllers.getById)
 
 //el id hacer referencia al id de clubxusuario 
     router.get('/disciplina-usuario/:id',usuarioXDisciplina.getDeportesXclub)
+    router.get('/disciplina-usuario',usuarioXDisciplina.getAll)
 
    //relacion  disciplina por club
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
