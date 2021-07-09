@@ -16,20 +16,25 @@ exports.usuarioListado = async (req,res) =>{
         
       const club = req.params.club
         
-    const result = await  ClubXusuario.findAll({
-     include: [{
-       model: Usuario,
-       as: 'usuario',
-       include: [{
-         model: Persona,
-         as: 'persona'
-       }]
-     }],
-      where:{
-        clubId: club,
-        activo:1
-      }
-    })
+      const result = await  ClubXusuario.findAll({
+        include: [{
+          model: Usuario,
+          as: 'usuario',
+          include: [{
+            model: Persona,
+            as: 'persona'
+          }]
+        },
+       {
+         model: Rol,
+         as: 'rol'
+       }],
+         where:{
+           clubId: club,
+           activo:1
+         }
+       })
+   
 
 
   
