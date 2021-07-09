@@ -37,7 +37,7 @@ exports.getDeportesXclub = async(req,res) => {
 exports.getAll = async (req,res) => {
     try{
         const resultado = await RelUsuarioXDis.findAll()
-        res.status(200).json(result)
+        res.status(200).json(resultado)
     }catch(error){
         console.log(error)
     }
