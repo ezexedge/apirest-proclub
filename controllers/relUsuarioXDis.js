@@ -36,7 +36,16 @@ exports.getDeportesXclub = async(req,res) => {
 
 exports.getAll = async (req,res) => {
     try{
-        const resultado = await RelUsuarioXDis.findAll()
+        const resultado = await RelUsuarioXDis.findAll({
+            include : [{
+                model:  RelDisciplinaXClub,
+                as: 'disciplinaxclub',
+                include: [{
+                    model: Disciplina,
+                    as: 'disciplina'
+                }]
+            }]
+        })
         res.status(200).json(resultado)
     }catch(error){
         console.log(error)
