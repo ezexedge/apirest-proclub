@@ -37,6 +37,7 @@ const estadoReservaControllers = require('../controllers/estadoReserva')
 const reservaControllers = require('../controllers/reserva')
 const ingresoControllers = require('../controllers/ingreso')
 const estadoControllers = require('../controllers/estado')
+const usuarioXDisciplina = require('../controllers/relUsuarioXDis')
 
 module.exports = function(){
 
@@ -63,6 +64,8 @@ router.get('/estado/:id',estadoControllers.getById)
    router.put('/disciplina/:id',disciplinaControllers.updateDisciplina)
    router.delete('/disciplina/:id',disciplinaControllers.eliminarDisciplina)
 
+//el id hacer referencia al id de clubxusuario 
+    router.get('/disciplina-usuario/:id',usuarioXDisciplina.getDeportesXclub)
 
    //relacion  disciplina por club
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
