@@ -311,6 +311,10 @@ exports.usuarioEliminar = async (req, res) => {
               ],
              
             },
+            {
+              model: Estados,
+              as: 'estado'
+            }
           ],
           where: {
             usuarioId: usuarioParams,
