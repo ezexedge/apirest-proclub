@@ -57,12 +57,14 @@ exports.usuarioListado = async (req,res) =>{
 
 exports.usuarioById = async (req,res) =>{
 
-
+ 
+  console.log('/////////////',req.params)
     try {
-    console.log(req.params)
+    console.log('/////////////',req.params)
     const clubParams = req.params.club
     const usuarioParams = req.params.usuario
   
+
 
     const result = await  ClubXusuario.findOne({
       include: [
@@ -115,6 +117,8 @@ exports.usuarioById = async (req,res) =>{
       res.status(200).json(result)
     
   } catch (err) {
+
+    console.log('///////////////',err)
       res.status(400).json({'error': err.message})
   }
   
@@ -256,3 +260,74 @@ exports.usuarioEliminar = async (req, res) => {
       res.status(400).json({'error': err.message})
     }
   }
+
+
+  exports.usuarioXClub = async (req,res) =>{
+
+ 
+    console.log('/////////////',req.params)
+      try {
+      console.log('/////////////',req.params)
+      const clubParams = req.params.club
+      const usuarioParams = req.params.usuario
+    
+  
+  
+      const result = await  ClubXusuario.findOne({
+        include: [
+          {
+            model: Rol,
+            as: 'rol'
+        },
+            {
+              
+              model: Usuario,
+              as: 'usuario',
+              include: [
+                {
+                  model: Persona,
+                as: 'persona',
+                include: [
+                    {
+                      model: TipoDocumento,
+                    as: 'tipoDocument'
+                    },
+                    {
+                     model: Direccion,
+                      as: 'direccionPersona',
+                      include: [{
+                        model: Provincia,
+                        as: 'provincia',
+                        include : [{
+                            model: Pais,
+                            as: 'country'
+                        }]
+                      }],
+    
+                      }
+                  ],
+                  
+                }
+              ],
+             
+            },
+          ],
+          where: {
+            usuarioId: usuarioParams,
+            clubId: clubParams,
+            activo: 1
+          }
+    });
+          
+        if(!result)throw new Error('el usuario no existe')
+              
+        res.status(200).json(result)
+      
+    } catch (err) {
+  
+      console.log('///////////////',err)
+        res.status(400).json({'error': err.message})
+    }
+    
+    }
+  
