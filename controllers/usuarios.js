@@ -8,6 +8,7 @@ const Rol = require('../models/rol')
 const Provincia = require('../models/Provincia')
 const Pais = require('../models/Pais')
 const Club = require('../models/Club')
+const Estados = require('../models/Estados')
 exports.usuarioListado = async (req,res) =>{
 
 
@@ -28,7 +29,12 @@ exports.usuarioListado = async (req,res) =>{
        {
          model: Rol,
          as: 'rol'
-       }],
+       },
+      {
+        model: Estados,
+        as: 'estado'
+      }
+      ],
          where:{
            clubId: club,
            activo:1
