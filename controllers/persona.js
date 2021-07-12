@@ -80,18 +80,20 @@ exports.crearPersona = async (req, res) => {
   try {
 
 
-    if(!req.file) {
-      throw new Error('debe ingresar un avatar para el usuario')
-    }
+  
 
 
     let valores = JSON.parse(req.body.data)
     const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria } = valores
 
-console.log(valores.idClub)
-    let imagen = req.file.filename
-    console.log(imagen)
-
+    let imagen
+    if(req.file) {
+     imagen = req.file.filename
+   
+    }else{
+      imagen = logo
+    }
+    
     const aprobado = await Estados.findOne({where:{ nombre : 'aprobado' }})
     if(!aprobado){
       throw new Error('no existe el estado aprobado en la base de datos')
