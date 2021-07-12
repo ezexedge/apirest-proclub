@@ -86,6 +86,7 @@ exports.crearPersona = async (req, res) => {
     let valores = JSON.parse(req.body.data)
     const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria } = valores
 
+     console.log('////////////ss',nombre,apellido,rol)
     let imagen
     if(req.file) {
      imagen = req.file.filename
@@ -104,9 +105,9 @@ exports.crearPersona = async (req, res) => {
 
     const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, direccionPersonaId: nuevaDireccion.id, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{ transaction: t })
   
-    const nuevoUsuario = await Usuario.create({ rolId: rol, personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
+    const nuevoUsuario = await Usuario.create({ personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
 
-    const clubxusuarioId =  await ClubXusuario.create({ clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+    const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
 
      await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
 
