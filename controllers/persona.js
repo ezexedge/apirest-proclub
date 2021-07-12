@@ -91,9 +91,9 @@ exports.crearPersona = async (req, res) => {
      imagen = req.file.filename
    
     }else{
-      imagen = logo
+      imagen = ''
     }
-    
+
     const aprobado = await Estados.findOne({where:{ nombre : 'aprobado' }})
     if(!aprobado){
       throw new Error('no existe el estado aprobado en la base de datos')
