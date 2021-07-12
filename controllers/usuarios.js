@@ -38,7 +38,8 @@ exports.usuarioListado = async (req,res) =>{
          where:{
            clubId: club,
            activo:1
-         }
+         },
+         order: [['id', 'DESC']]
        })
    
 
