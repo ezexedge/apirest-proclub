@@ -3,6 +3,8 @@ const Usuario = require('../models/Usuario')
 const Direccion = require('../models/Direccion')
 const TipoDocumento = require('../models/TipoDocumento')
 const ClubXusuario = require('../models/ClubXUsuario')
+const RelUsuarioXDis = require('../models/RelUsuarioXDis')
+const RelUsuarioXCatXDis = require('../models/RelUsuarioXCatXDis')
 const db = require('../config/db')
 const admin = require("firebase-admin")
 const Estados = require('../models/Estados')
@@ -84,7 +86,7 @@ exports.crearPersona = async (req, res) => {
 
 
     let valores = JSON.parse(req.body.data)
-    const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion } = valores
+    const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria } = valores
 
 console.log(valores.idClub)
     let imagen = req.file.filename
@@ -102,7 +104,12 @@ console.log(valores.idClub)
   
     const nuevoUsuario = await Usuario.create({ rolId: rol, personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
 
-     await ClubXusuario.create({ clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+    const clubxusuarioId =  await ClubXusuario.create({ clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+
+     await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id})
+
+    await RelUsuarioXCatXDis.create({disxclubxcatId: categoria,clubxusuarioId:clubxusuarioId.id})
+    
 
     /*  const rta = await admin.auth().createUser({
         email: 'desarrollo@texdinamo.com',
