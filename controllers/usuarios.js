@@ -341,7 +341,34 @@ exports.usuarioEliminar = async (req, res) => {
 
       try{
 
-        const result = await Usuario.findAll()
+        const result = await Usuario.findAll({
+          include: [
+            {
+              model: Persona,
+            as: 'persona',
+            include: [
+                {
+                  model: TipoDocumento,
+                as: 'tipoDocument'
+                },
+                {
+                 model: Direccion,
+                  as: 'direccionPersona',
+                  include: [{
+                    model: Provincia,
+                    as: 'provincia',
+                    include : [{
+                        model: Pais,
+                        as: 'country'
+                    }]
+                  }],
+
+                  }
+              ],
+              
+            }
+          ]
+        })
         res.status(200).json(result)
 
 
