@@ -27,7 +27,9 @@ exports.clubTodos = async (req, res) => {
       where: {
         activo: 1
       },
-      order: [['id', 'DESC']]})
+      order: [['id', 'DESC']]
+    
+    })
 
     res.status(200).json(result)
 

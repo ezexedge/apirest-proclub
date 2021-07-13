@@ -9,6 +9,7 @@ const Provincia = require('../models/Provincia')
 const Pais = require('../models/Pais')
 const Club = require('../models/Club')
 const Estados = require('../models/Estados')
+
 exports.usuarioListado = async (req,res) =>{
 
 
@@ -335,3 +336,21 @@ exports.usuarioEliminar = async (req, res) => {
     
     }
   
+
+    exports.getAllUsuarios = async (req,res) => {
+
+      try{
+
+        const result = await Usuario.findAll()
+        res.status(200).json(result)
+
+
+      }catch(error){
+        res.status(400).json({'error': err.message})
+
+      }
+      
+
+
+
+    }
