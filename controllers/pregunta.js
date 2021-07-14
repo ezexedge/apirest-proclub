@@ -1,4 +1,5 @@
 const Pregunta = require('../models/Pregunta')
+const db = require('../config/db')
 
 exports.crear = async(req,res) => {
     try{
@@ -43,12 +44,24 @@ exports.getAll = async(req,res) => {
 
         const encuesta = req.params.encuesta
 
+
+      
+/*
         const result = await Pregunta.findAll({
             where: {
                 activo: 1,
                 encuestaId: encuesta
             }
         })
+
+*/
+
+const  result = await db.query(`
+     
+SELECT pregunta.id , pregunta.titulo , pregunta.activo , pregunta.encuestaId , respuesta.id , respuesta.titulo , respuesta.contadorDeRespuestas, respuesta.activo FROM pregunta , respuesta
+WHERE pregunta.id = respuesta.preguntaId  AND pregunta.encuestaId = ${encuesta}
+
+`)
         res.status(200).json(result)
 
     }catch(err){
