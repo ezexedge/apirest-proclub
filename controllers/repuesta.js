@@ -19,6 +19,7 @@ exports.crear = async(req,res) => {
 exports.getById = async(req,res) => {
     try{
 
+        
         const id = req.params.id
 
         const result = await Respuesta.findOne({

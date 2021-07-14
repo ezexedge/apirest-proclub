@@ -367,7 +367,8 @@ exports.usuarioEliminar = async (req, res) => {
               ],
               
             }
-          ]
+          ],
+          order: [['id', 'DESC']]
         })
         res.status(200).json(result)
 
