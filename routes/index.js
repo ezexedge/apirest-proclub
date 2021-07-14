@@ -169,6 +169,7 @@ router.get('/estado/:id',estadoControllers.getById)
 
     router.post('/notificacion',notificacionControllers.crear)
     router.get('/notificacion',notificacionControllers.getAll)
+   
     router.get('/notificacion/:id',notificacionControllers.getById)
     router.delete('/notificacion/:id',notificacionControllers.eliminar)
     router.put('/notificacion/:id',notificacionControllers.modificar)
@@ -257,6 +258,8 @@ router.get('/estado-turno/:id',estadoTurnoControllers.getById)
 
 //turno
 router.get('/turno',turnoControllers.getAll)
+
+router.get('/turno-inactivo',turnoControllers.getAllInactivo)
 router.get('/turno/:id',turnoControllers.getById)
 router.post('/turno/:estado',turnoControllers.crear)
 router.delete('/turno/:id',turnoControllers.eliminar)

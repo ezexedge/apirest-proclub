@@ -37,6 +37,21 @@ exports.getAll = async(req,res) => {
     }
 }
 
+exports.getAllInactivo = async(req,res) => {
+    try{
+
+        const result = await Turno.findAll({
+            where: {
+                activo: 0
+            }
+        })
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
 
 exports.crear = async(req,res) =>{
     try{

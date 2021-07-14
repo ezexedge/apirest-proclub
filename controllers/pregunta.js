@@ -46,7 +46,7 @@ exports.getAll = async(req,res) => {
 
 
       
-/*
+
         const result = await Pregunta.findAll({
             where: {
                 activo: 1,
@@ -54,15 +54,9 @@ exports.getAll = async(req,res) => {
             }
         })
 
-*/
 
-const  result = await db.query(`
-     
-SELECT pregunta.id , pregunta.titulo , pregunta.activo , pregunta.encuestaId , respuesta.id , respuesta.titulo , respuesta.contadorDeRespuestas, respuesta.activo FROM pregunta , respuesta
-WHERE pregunta.id = respuesta.preguntaId  AND pregunta.encuestaId = ${encuesta}
 
-`)
-        res.status(200).json(result[0])
+        res.status(200).json(result)
 
     }catch(err){
         res.status(400).json({error: err.message})
