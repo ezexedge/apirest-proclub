@@ -62,7 +62,7 @@ SELECT pregunta.id , pregunta.titulo , pregunta.activo , pregunta.encuestaId , r
 WHERE pregunta.id = respuesta.preguntaId  AND pregunta.encuestaId = ${encuesta}
 
 `)
-        res.status(200).json(result)
+        res.status(200).json(result[0])
 
     }catch(err){
         res.status(400).json({error: err.message})
