@@ -109,6 +109,8 @@ router.get('/estado/:id',estadoControllers.getById)
     //usuario
 
     router.get('/usuarios',usuariosControllers.getAllUsuarios)
+    router.post('/agregar-club/:usuario/:club',usuariosControllers.agregarClub)
+
     router.get('/usuario/clubs/:usuario',usuariosControllers.usuarioClubs)
   router.get('/usuario/:id', usuariosControllers.usuarioById)
     router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)

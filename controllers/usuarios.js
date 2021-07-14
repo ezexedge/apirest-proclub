@@ -382,3 +382,40 @@ exports.usuarioEliminar = async (req, res) => {
 
 
     }
+
+
+    exports.agregarClub = async (req,res) => {
+      const usuario = req.params.usuario
+      const club = req.params.club
+
+      try{
+
+
+        const result = await Usuario.findByPk(usuario)
+
+        if(!result)throw new Error('el usuario no existe')
+
+      const resultClub = await Club.findByPk(club)
+
+       if(!resultClub)throw new Error('el club no existe')
+
+      const clubUsuario = await  ClubXusuario.findOne({
+        where:{
+          usuarioId: usuario,
+          clubId: club
+        }
+      })
+
+      if(clubUsuario)throw new Error('ya se encuentra registrado')
+
+      await ClubXusuario.create({clubId: club , usuarioId: usuario , rolId: 3 , estadoId: 3 , activo: 1})
+
+      res.status(200).json({ "message": 'agregado correctamente' })
+
+      
+
+      }catch(err){
+        res.status(400).json({'error': err.message})
+
+      }
+    }
