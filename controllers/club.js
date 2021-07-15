@@ -227,7 +227,7 @@ exports.crearClub = async (req, res) => {
 
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
 
-    const clubNuevo = await Club.create({
+     await Club.create({
      logo: imagen, nombre: nombre, descripcion: descripcion, logo: imagen, colorPrimario: colorPrimario,
       colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
       colorTextoSecundario: colorTextoSecundario, direccionId: nuevaDireccion.id, personaId: nuevaPersona.id, activo: 1 , email: email
