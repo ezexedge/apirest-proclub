@@ -96,10 +96,11 @@ exports.crear = async(req,res) =>{
 
 
         const estado = req.params.estado
+        const espacio =  req.params.espacio
 
         const { fecha,horaDesde,horaHasta,precio,cupo } = req.body
 
-        const resp = await Turno.create({fecha:fecha,horaDesde:horaDesde,horaHasta:horaHasta,precio:precio,cupo:cupo,estadoturnoId:estado})
+        const resp = await Turno.create({fecha:fecha,horaDesde:horaDesde,horaHasta:horaHasta,precio:precio,cupo:cupo,estadoturnoId:estado , espacioId: espacio})
 
         res.status(200).json(resp)
 

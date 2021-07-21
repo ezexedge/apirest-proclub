@@ -43,6 +43,7 @@ exports.getAll = async(req,res) => {
         const pregunta = req.params.pregunta
 
         const result = await Respuesta.findAll({
+            
             where: {
                 activo: 1,
                 preguntaId: pregunta

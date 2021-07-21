@@ -250,7 +250,7 @@ router.delete('/reserva/:id',reservaControllers.eliminar)
 router.get('/ingreso',ingresoControllers.getAll)
 router.get('/ingreso/:id',ingresoControllers.getById)
 router.post('/ingreso/:reserva',ingresoControllers.crear)
-
+router.get('/ingreso/usuario/:userId',ingresoControllers.getByUser)
 
 
 //ESTADO TURNO
@@ -263,7 +263,7 @@ router.get('/turno',turnoControllers.getAll)
 
 router.get('/turno-inactivo',turnoControllers.getAllInactivo)
 router.get('/turno/:id',turnoControllers.getById)
-router.post('/turno/:estado',turnoControllers.crear)
+router.post('/turno/:espacio/:estado',turnoControllers.crear)
 router.delete('/turno/:id',turnoControllers.eliminar)
 
 
