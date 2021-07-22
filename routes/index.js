@@ -166,7 +166,12 @@ router.get('/estado/:id',estadoControllers.getById)
     router.get('/beneficios/club/:club',beneficiosControllers.getBeneficioXClubByClub)
     router.get('/beneficios/club/usuario/:club/:usuario',beneficiosControllers.getBeneficioXClubByClubByUsario)
     router.delete('/beneficios/club/usuario/beneficio/:club/:usuario/:beneficio',beneficiosControllers.eliminarBeneficioXUsuario)
+    router.get('/beneficios/club/rubro/:club/:rubro',beneficiosControllers.getBeneficioXClubXRubro)
     
+
+    //getBeneficioXClubXRubro
+
+
     //notificacion
 
     router.post('/notificacion',notificacionControllers.crear)
