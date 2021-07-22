@@ -1,6 +1,6 @@
 const Pregunta = require('../models/Pregunta')
 const db = require('../config/db')
-
+const Respuesta = require('../models/Respuesta')
 exports.crear = async(req,res) => {
     try{
 
@@ -110,4 +110,58 @@ exports.modificar = async (req,res)=> {
 
     }
 
+}
+
+
+
+exports.getPreguntas = async(req,res) => {
+    try{
+
+      
+
+        const result = await Pregunta.findAll()
+
+        
+
+        let arr = []
+        for(let val of result){
+            
+            let valor = {id: val.id , titulo: val.titulo , activo: val.activo,encuestaId: val.encuestaId ,respuesta: []}
+            arr.push(valor)
+        }
+
+
+        const resultRespuesta = await Respuesta.findAll()
+
+
+        for(let respuesta of resultRespuesta){
+
+            //console.log(respuesta.preguntaId)
+ 
+        
+            const val = arr.find(valor => valor.id === respuesta.preguntaId)
+
+           if(val){
+
+            const resp = {
+                id: respuesta.id,
+                titulo: respuesta.titulo,
+                contadorDeRespuestas: respuesta.contadorDeRespuestas,
+                activo: respuesta.activo,
+                preguntaId: respuesta.preguntaId
+              }
+
+
+             
+               val.respuesta.push(resp)
+           }
+
+        }
+
+
+        res.status(200).json(arr)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
 }

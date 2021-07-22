@@ -51,6 +51,7 @@ require('./models/Documentacion')
 require('./models/Reservas')
 require('./models/Ingreso')
 require('./models/RelDivXClubXDis')
+require('./models/Division')
 
 db.sync({alter:true})
     .then(() => console.log('Conectado al Servidor'))

@@ -211,6 +211,7 @@ router.get('/estado/:id',estadoControllers.getById)
     router.post('/encuesta-post',notificacionControllers.sendNotificacion)
     
     //pregunta
+    router.get('/preguntas',preguntaControllers.getPreguntas)
     router.post('/pregunta/:encuesta',preguntaControllers.crear)
     router.get('/pregunta/:encuesta',preguntaControllers.getAll)
     router.get('/pregunta/id/:id',preguntaControllers.getById)
