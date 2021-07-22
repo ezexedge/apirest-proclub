@@ -1,4 +1,5 @@
 const Posicion = require('../models/Posicion')
+const Disciplina = require('../models/Disciplina')
 
 exports.getDisciplinaxpos = async (req,res) => {
     
