@@ -19,20 +19,73 @@ exports.crear = async(req,res) => {
 }
 
 exports.getById = async(req,res) => {
+    
+  
+
     try{
 
         const id = req.params.id
 
-        const result = await Pregunta.findOne({
+
+        const existe =  await Pregunta.findByPk(id)
+
+        if(!existe)throw new Error('no existe la pregunta')
+        
+        
+        const result = await Pregunta.findAll({
             where: {
-                id:id,
-                activo: 1
+                activo: 1,
+                id:id
             }
         })
 
-        if(!result)throw new Error(`el id:${id} no existe`)
 
-        res.status(200).json(result)
+        
+
+        let arr = []
+        for(let val of result){
+            
+            let valor = {id: val.id , titulo: val.titulo , activo: val.activo,encuestaId: val.encuestaId ,respuesta: []}
+            arr.push(valor)
+        }
+
+
+        const resultRespuesta = await Respuesta.findAll(
+            {
+                where: {
+                    activo: 1,
+                    preguntaId: id
+                }
+            }
+        )
+
+
+        for(let respuesta of resultRespuesta){
+
+            //console.log(respuesta.preguntaId)
+ 
+        
+            const val = arr.find(valor => valor.id === respuesta.preguntaId)
+
+           if(val){
+
+            const resp = {
+                id: respuesta.id,
+                titulo: respuesta.titulo,
+                contadorDeRespuestas: respuesta.contadorDeRespuestas,
+                activo: respuesta.activo,
+                preguntaId: respuesta.preguntaId
+              }
+
+
+             
+               val.respuesta.push(resp)
+           }
+
+        }
+
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
@@ -119,7 +172,11 @@ exports.getPreguntas = async(req,res) => {
 
       
 
-        const result = await Pregunta.findAll()
+        const result = await Pregunta.findAll({
+            where: {
+                activo: 1
+            }
+        })
 
         
 
@@ -131,7 +188,13 @@ exports.getPreguntas = async(req,res) => {
         }
 
 
-        const resultRespuesta = await Respuesta.findAll()
+        const resultRespuesta = await Respuesta.findAll(
+            {
+                where: {
+                    activo: 1
+                }
+            }
+        )
 
 
         for(let respuesta of resultRespuesta){
