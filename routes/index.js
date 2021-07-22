@@ -39,6 +39,8 @@ const ingresoControllers = require('../controllers/ingreso')
 const estadoControllers = require('../controllers/estado')
 const usuarioXDisciplina = require('../controllers/relUsuarioXDis')
 
+const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos')
+
 module.exports = function(){
 
     //club
@@ -127,6 +129,9 @@ router.get('/estado/:id',estadoControllers.getById)
     router.post('/nueva-clave',authSignupControllers.requireSignin,authSignupControllers.cambiarClave)
    
     //posicion
+
+    router.get('/posiciones/:disciplina',posicionxdisciplinaControllers.getDisciplinaxpos)
+   
     router.get('/posiciones/:club/:disciplina',posicionControllers.getPosicion)
     router.post('/posiciones/:club/:disciplina',posicionControllers.crearPosicion)
     router.put('/posiciones/:id',posicionControllers.modificarPosicion)
