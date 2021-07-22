@@ -50,6 +50,7 @@ require('./models/EstadoDocumento')
 require('./models/Documentacion')
 require('./models/Reservas')
 require('./models/Ingreso')
+require('./models/RelDivXClubXDis')
 
 db.sync({alter:true})
     .then(() => console.log('Conectado al Servidor'))

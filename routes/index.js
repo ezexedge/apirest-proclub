@@ -38,7 +38,7 @@ const reservaControllers = require('../controllers/reserva')
 const ingresoControllers = require('../controllers/ingreso')
 const estadoControllers = require('../controllers/estado')
 const usuarioXDisciplina = require('../controllers/relUsuarioXDis')
-
+const divisionControllers = require('../controllers/division')
 const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos')
 
 module.exports = function(){
@@ -294,6 +294,11 @@ router.get('/documento/club/usuario/:club/:usuario',documentoControllers.getAllB
 router.delete('/documento/club/usuario/:club/:usuario',documentoControllers.eliminar)
 //cambio de estado de documentacion
 router.put('/documento/club/usuario/:club/:usuario/:estado',documentoControllers.cambiarEstado)
+
+
+///division
+router.get('/division/:club/:disciplina',divisionControllers.getByClubByDis)
+
 
 
 
