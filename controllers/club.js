@@ -215,8 +215,8 @@ exports.crearClub = async (req, res) => {
   
     if(!req.file) {
       
-      throw new Error('debe ingresar una logo el club')
-       
+    //  throw new Error('debe ingresar una logo el club')
+      imagen = '' 
     }else{
        imagen = req.file.filename
       console.log(imagen)
