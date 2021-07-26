@@ -1,6 +1,9 @@
 const Pregunta = require('../models/Pregunta')
 const db = require('../config/db')
 const Respuesta = require('../models/Respuesta')
+const Encuesta = require('../models/Encuesta')
+
+
 exports.crear = async(req,res) => {
     try{
 
@@ -90,6 +93,88 @@ exports.getById = async(req,res) => {
     }catch(err){
         res.status(400).json({error: err.message})
     }
+}
+
+
+
+exports.getByEncuesta = async(req,res) => {
+    
+  /*
+
+    try{
+
+        const encuesta = req.params.encuenta
+
+
+        const encuestaExiste = await Encuesta.findByPk(encuesta)
+
+        if(!encuestaExiste)throw new Error('no existe la encuesta')
+        
+
+        const existe =  await Pregunta.findByPk(id)
+
+        if(!existe)throw new Error('no existe la pregunta')
+        
+        
+        const result = await Pregunta.findAll({
+            where: {
+                activo: 1,
+                id:id
+            }
+        })
+
+
+        
+
+        let arr = []
+        for(let val of result){
+            
+            let valor = {id: val.id , titulo: val.titulo , activo: val.activo,encuestaId: val.encuestaId ,respuesta: []}
+            arr.push(valor)
+        }
+
+
+        const resultRespuesta = await Respuesta.findAll(
+            {
+                where: {
+                    activo: 1,
+                    preguntaId: id
+                }
+            }
+        )
+
+
+        for(let respuesta of resultRespuesta){
+
+            //console.log(respuesta.preguntaId)
+ 
+        
+            const val = arr.find(valor => valor.id === respuesta.preguntaId)
+
+           if(val){
+
+            const resp = {
+                id: respuesta.id,
+                titulo: respuesta.titulo,
+                contadorDeRespuestas: respuesta.contadorDeRespuestas,
+                activo: respuesta.activo,
+                preguntaId: respuesta.preguntaId
+              }
+
+
+             
+               val.respuesta.push(resp)
+           }
+
+        }
+
+
+        res.status(200).json(arr)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+    */
 }
 
 exports.getAll = async(req,res) => {

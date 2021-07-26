@@ -40,8 +40,13 @@ const estadoControllers = require('../controllers/estado')
 const usuarioXDisciplina = require('../controllers/relUsuarioXDis')
 const divisionControllers = require('../controllers/division')
 const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos')
+const dashboardControllers = require('../controllers/dashboard')
+
 
 module.exports = function(){
+
+
+    router.get('/dashboard/:club/:user',dashboardControllers.getAll)
 
     //club
     router.get('/clubs',clubControllers.clubTodos)
@@ -212,6 +217,8 @@ router.get('/estado/:id',estadoControllers.getById)
     
     //pregunta
     router.get('/preguntas',preguntaControllers.getPreguntas)
+
+    router.get('/pregunta/encuesta/:encuesta',preguntaControllers.getByEncuesta)
     router.post('/pregunta/:encuesta',preguntaControllers.crear)
     router.get('/pregunta/:encuesta',preguntaControllers.getAll)
     router.get('/pregunta/id/:id',preguntaControllers.getById)
