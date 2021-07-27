@@ -52,6 +52,9 @@ require('./models/Reservas')
 require('./models/Ingreso')
 require('./models/RelDivXClubXDis')
 require('./models/Division')
+require('./models/Tematica')
+require('./models/NotificacionXTematica')
+//NotificacionXTematica
 
 db.sync({alter:true})
     .then(() => console.log('Conectado al Servidor'))
