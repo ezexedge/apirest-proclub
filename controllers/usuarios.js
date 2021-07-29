@@ -419,3 +419,73 @@ exports.usuarioEliminar = async (req, res) => {
 
       }
     }
+
+
+    exports.crearUsuarioWeb = async (req, res) => {
+
+      const t = await db.transaction()
+    
+      try {
+    
+    
+      
+        console.log('////////////ss',req.body)
+    
+    
+        let valores = JSON.parse(req.body.data)
+        
+        const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria  , cp} = valores
+    
+        let imagen
+        if(req.file) {
+         imagen = req.file.filename
+       
+        }else{
+          imagen = ''
+        }
+    
+        const aprobado = await Estados.findOne({where:{ nombre : 'aprobado' }})
+        if(!aprobado){
+          throw new Error('no existe el estado aprobado en la base de datos')
+        }
+    
+    
+        const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia ,cp: cp },{ transaction: t })
+    
+        const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, direccionPersonaId: nuevaDireccion.id, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{ transaction: t })
+      
+        const nuevoUsuario = await Usuario.create({ personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
+    
+        const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+    
+       //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
+    
+     //   await RelUsuarioXCatXDis.create({disxclubxcatId: categoria,clubxusuarioId:clubxusuarioId.id},{ transaction: t })
+        
+    
+        /*  const rta = await admin.auth().createUser({
+            email: 'desarrollo@texdinamo.com',
+            password: 'admin123'                 
+          })
+          console.log(rta);
+    
+          await admin.auth().setCustomUserClaims(rta.uid, { role: 'SuperAdmin' }) */
+    
+        await t.commit();
+    
+       
+      res.status(200).json({ "message": 'agregado correctamente' })
+    
+      } catch (err) {
+        
+        await t.rollback();
+        
+        
+        res.status(400).json({ "error": err.message })
+    
+      }
+    
+    };
+    
+    
+    

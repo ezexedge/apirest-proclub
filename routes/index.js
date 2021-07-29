@@ -115,6 +115,9 @@ router.get('/estado/:id',estadoControllers.getById)
 
     //usuario
 
+
+    router.post('/agregar-usuario',imageControllers.subirArchivos,usuariosControllers.crearUsuarioWeb)
+
     router.get('/usuarios',usuariosControllers.getAllUsuarios)
     router.post('/agregar-club/:usuario/:club',usuariosControllers.agregarClub)
 
