@@ -93,7 +93,6 @@ exports.signin = async (req,res)=>{
 
         const {email,password} = req.body
         const resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
-
         console.log('tokken',resultFirebase)
         let token = ''
         if(resultFirebase){

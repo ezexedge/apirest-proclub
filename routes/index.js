@@ -118,6 +118,8 @@ router.get('/estado/:id',estadoControllers.getById)
 
     router.post('/agregar-usuario',imageControllers.subirArchivos,usuariosControllers.crearUsuarioWeb)
 
+    router.put('/usuarios/:email/:firebase',usuariosControllers.agregarUID)
+   
     router.get('/usuarios',usuariosControllers.getAllUsuarios)
     router.post('/agregar-club/:usuario/:club',usuariosControllers.agregarClub)
 

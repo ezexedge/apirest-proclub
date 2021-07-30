@@ -9,6 +9,8 @@ const Provincia = require('../models/Provincia')
 const Pais = require('../models/Pais')
 const Club = require('../models/Club')
 const Estados = require('../models/Estados')
+const firebase = require('../firebase')
+const admin = require('firebase-admin')
 
 exports.usuarioListado = async (req,res) =>{
 
@@ -435,7 +437,30 @@ exports.usuarioEliminar = async (req, res) => {
         let valores = JSON.parse(req.body.data)
         
         const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria  , cp} = valores
-    
+        
+        const resp = await admin.auth().listUsers()
+
+        //console.log('respuestaaaaa',resp)
+
+        const encontrado = resp.users.find(obj => obj.email === correo)
+        
+        if(encontrado){
+           
+          throw new Error('El email esta registrado')
+        
+        }
+
+        const config = {
+          url: 'http://localhost:3002/complete-registration',
+          handleCodeInApp: true
+      };
+
+     await firebase.default.auth().sendSignInLinkToEmail(correo,config)
+     //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
+        
+                  
+
+
         let imagen
         if(req.file) {
          imagen = req.file.filename
@@ -461,7 +486,8 @@ exports.usuarioEliminar = async (req, res) => {
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
     
      //   await RelUsuarioXCatXDis.create({disxclubxcatId: categoria,clubxusuarioId:clubxusuarioId.id},{ transaction: t })
-        
+       
+         
     
         /*  const rta = await admin.auth().createUser({
             email: 'desarrollo@texdinamo.com',
@@ -474,11 +500,56 @@ exports.usuarioEliminar = async (req, res) => {
         await t.commit();
     
        
-      res.status(200).json({ "message": 'agregado correctamente' })
+      res.status(200).json({message: 'agregadoo'})
     
       } catch (err) {
         
         await t.rollback();
+        
+        
+        res.status(400).json({ "error": err.message })
+    
+      }
+    
+    };
+    
+    
+
+
+    exports.agregarUID = async (req, res) => {
+
+    
+      try {
+        
+        const email = req.params.email
+        const firebase  = req.params.firebase
+
+        const resultPersona = await Persona.findOne({
+          where:{correo: email}
+        })
+
+
+        if(!resultPersona)throw new Error('el email no existe')
+
+
+        const resultUsuario = await Usuario.findOne({
+          where: {personaId: resultPersona.id}
+        })
+    
+        if(!resultUsuario)throw new Error('el email no se encuentra')
+
+
+        if(resultUsuario.idFirebase !== null)throw new Error('el usuario ya esta registrado')
+
+        
+        await Usuario.update({ idFirebase: firebase },{where: {id: resultUsuario.id}})
+
+
+
+      res.status(200).json({message: 'update'})
+    
+      } catch (err) {
+        
         
         
         res.status(400).json({ "error": err.message })
