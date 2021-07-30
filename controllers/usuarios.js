@@ -443,7 +443,7 @@ exports.usuarioEliminar = async (req, res) => {
           where: {id: rol}
         })
 
-        const estado
+        let estado = 1
         if(resultRol.nombre === 'socio'){
           estado = 3
         }else{
