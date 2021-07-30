@@ -438,6 +438,20 @@ exports.usuarioEliminar = async (req, res) => {
         
         const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria  , cp} = valores
         
+
+        const resultRol = await Rol.findOne({
+          where: {id: rol}
+        })
+
+        const estado
+        if(resultRol.nombre === 'socio'){
+          estado = 3
+        }else{
+          estado = 1
+        }
+        
+        
+
         const resp = await admin.auth().listUsers()
 
         //console.log('respuestaaaaa',resp)
@@ -480,8 +494,10 @@ exports.usuarioEliminar = async (req, res) => {
         const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, direccionPersonaId: nuevaDireccion.id, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{ transaction: t })
       
         const nuevoUsuario = await Usuario.create({ personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
+
+
     
-        const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+        const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: estado  },{ transaction: t })
     
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
     
