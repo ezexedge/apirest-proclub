@@ -15,7 +15,7 @@
   
       servers: [
         {
-          url: "http://secure-temple-46604.herokuapp.com",
+          url: "https://secure-temple-46604.herokuapp.com",
           description: "My API Documentation",
         },
       ],
