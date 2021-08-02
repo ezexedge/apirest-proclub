@@ -15,7 +15,7 @@
   
       servers: [
         {
-          url: "http://localhost:3000",
+          url: "http://secure-temple-46604.herokuapp.com",
           description: "My API Documentation",
         },
       ],
