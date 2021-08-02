@@ -8,15 +8,14 @@ const cors = require('cors');
 const admin = require('firebase-admin')
 var multer = require('multer');
 var upload = multer();
-const  {fs , readdirSync } = require('fs')
-
+const  fs  = require('fs-extra')
 
 require('dotenv').config({path: 'variables.env'});
 
 const db = require('./config/db')
 
 
-readdirSync('./models').map((r)=> require(`./models/${r}`))
+fs.readdirSync('./models').map((r)=> require(`./models/${r}`))
 
 db.sync({alter:true})
     .then(() => console.log('Conectado al Servidor'))
