@@ -44,12 +44,217 @@ const dashboardControllers = require('../controllers/dashboard')
 
 
 module.exports = function(){
+ /**
+ * @swagger
+ * components:
+ *   schemas:
+ *     TipoDocumento:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string     
+ *     Rubros:
+ *       type: object
+ *       properties:
+ *     Rols:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string  
+ *     Estado:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string     
+ *     Pais:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string  
+ *     Provincia:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *     Direccion:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        calle:
+ *          type: string
+ *        numero: 
+ *          type: integer
+ *        localidad:
+ *          type: string
+ *        cp:
+ *          type: string
+ *        direccion:
+ *          $ref: '#/components/schemas/Provincia'     
+ *     Persona:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         apellido:
+ *           type: string
+ *         documento:
+ *           type: string
+ *         sexo:
+ *           type: string
+ *         avatar:
+ *           type: string
+ *         correo:
+ *           type: string
+ *         telefono:
+ *           type: string
+ *         fechaNacimiento:
+ *           type: string   
+ *         tipoDocumento:
+ *           type: integer
+ *          
+ *     Usuarios:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer 
+ *         idFirebase:
+ *           type: string
+ *         ultimoIngreso:
+ *           type: string
+ *         activo:
+ *           type: integer
+ *         personaId:
+ *           type: integer        
+ *     Clubs:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         descripcion:
+ *           type: string
+ *         logo:
+ *           type: string
+ *         colorPrimario:
+ *           type: string
+ *         colorTextoPrimario:
+ *           type: string
+ *         colorSecundario:
+ *           type: string
+ *         colorTextoSecundario:
+ *           type: string
+ *         nombre_visible:
+ *           type: string
+ *         activo:
+ *           type: integer
+ *         email:
+ *           type: string
+ *         telefono:
+ *           type: string
+ *         cuit:
+ *           type: string
+ *         instagram: 
+ *           type: string
+ *         facebook:
+ *           type: string
+ *         twitter: 
+ *           type: string  
+ *         direccion:
+ *           $ref: '#/components/schemas/Direccion'     
+ *       example:
+ *         id: 1
+ *         nombre: club prueba
+ *         descripcion: es un club
+ *         logo: image1
+ *         colorPrimario: #FFFF
+ *         colorSecundario: #FFFF
+ *         colorTextoPrimario: #FFFF
+ *         colorTextoSecundario: #FFFF
+ *         nombre_visible: club
+ *         activo: 1
+ *         email: club@gmail.com
+ *         telefono: 11114533
+ *         cuit: 1111030344
+ *         instagram: club
+ *         facebook: club
+ *         twitter: club
+ *         direccion: 
+ *           calle: "calle falsa"
+ *           numero: 123
+ *           cp: '113'
+ *           localidad: 'moreno'
+ *           provinciaId: 1
+ * 
+ *           
+ *       
+ *         
+ *         
+ *
+ */
+
 
 
     router.get('/dashboard/:club/:user',dashboardControllers.getAll)
 
-    //club
+/**
+ * @swagger
+ * /api/clubs:
+ *   get:
+ *     summary: Returns all clubs
+ *     tags: [Clubs]
+ *     responses:
+ *       200:
+ *         description: trae todos los clubs
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Clubs'
+
+ */
+
     router.get('/clubs',clubControllers.clubTodos)
+/**
+ * @swagger
+ * /api/clubs/{id}:
+ *   get:
+ *     summary: gets clubs by id
+ *     tags: [Clubs]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id of post
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: posts by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clubs'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/clubs/:id',clubControllers.clubById)
     router.post('/clubs',imageControllers.subirArchivos,clubControllers.crearClub)
     router.delete('/clubs/:id',clubControllers.clubEliminar)

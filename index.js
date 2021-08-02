@@ -3,58 +3,22 @@ const express = require('express')
 const morgan = require('morgan')
 const path = require('path')
 const bodyParser = require('body-parser')
-const fs = require('fs')
 const routes = require('./routes')
 const cors = require('cors');
 const admin = require('firebase-admin')
 var multer = require('multer');
 var upload = multer();
+const  {fs , readdirSync } = require('fs')
+const swaggerUI  = require('swagger-ui-express')
+const swaggerJsDoc = require('swagger-jsdoc')
+const   options  = require('./options')
+
 require('dotenv').config({path: 'variables.env'});
 
 const db = require('./config/db')
 
-require('./models/Usuario')
-require('./models/Club')
-require('./models/Direccion')
-require('./models/Pais')
-require('./models/Provincia')
-require('./models/Persona')
-require('./models/TipoDocumento')
- require('./models/rol')
-require('./models/ClubXUsuario')
-require('./models/Disciplina')
-require('./models/RelDisciplinaXClub')
-require('./models/Posicion')
-require('./models/RelDisXClubXCat')
-require('./models/RelUsuarioXCatXDis')
-require('./models/RelPosXUsarioXDiviXDep')
-require('./models/RelDisciplinaXPos')
-require('./models/RelUsuarioXDis')
-require('./models/Estados')
-require('./models/Rubro')
-require('./models/Beneficios')
-require('./models/BeneficioXClub')
-require('./models/Notificacion')
-require('./models/NotXClubXUsuario')
-require('./models/NotificacionXClub')
-require('./models/Encuesta')
-require('./models/Pregunta')
-require('./models/Respuesta')
-require('./models/Destinatario')
-require('./models/Espacio')
-require('./models/EstadoEspacio')
-require('./models/Excluidos')
-require('./models/Turno')
-require('./models/EstadoTurno')
-require('./models/EstadoDocumento')
-require('./models/Documentacion')
-require('./models/Reservas')
-require('./models/Ingreso')
-require('./models/RelDivXClubXDis')
-require('./models/Division')
-require('./models/Tematica')
-require('./models/NotificacionXTematica')
-//NotificacionXTematica
+
+readdirSync('./models').map((r)=> require(`./models/${r}`))
 
 db.sync({alter:true})
     .then(() => console.log('Conectado al Servidor'))
@@ -65,6 +29,9 @@ const app = express()
 
 
 
+
+const specs = swaggerJsDoc(options);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 // Admin SDK Firebase
 var serviceAccount = require("./serviceAccountKey.json");

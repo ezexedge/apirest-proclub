@@ -16,10 +16,6 @@ const ClubXusuario = db.define('clubxusuario', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 0
-    },
-    Estado:{
-        type: Sequelize.INTEGER,   
-        defaultValue: 1
     }
      
 });
