@@ -9,9 +9,7 @@ const admin = require('firebase-admin')
 var multer = require('multer');
 var upload = multer();
 const  {fs , readdirSync } = require('fs')
-const swaggerUI  = require('swagger-ui-express')
-const swaggerJsDoc = require('swagger-jsdoc')
-const   options  = require('./options')
+
 
 require('dotenv').config({path: 'variables.env'});
 
@@ -28,10 +26,6 @@ db.sync({alter:true})
 const app = express()
 
 
-
-
-const specs = swaggerJsDoc(options);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 // Admin SDK Firebase
 var serviceAccount = require("./serviceAccountKey.json");
