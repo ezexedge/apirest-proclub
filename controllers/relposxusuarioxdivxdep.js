@@ -105,7 +105,7 @@ exports.filterPosicion = async (req,res) => {
          arr.push(obj)
         }
 
-        
+
         const resultFinal =arr.filter((v,i) => {
             return arr.map((val)=> val.nombre).indexOf(v.nombre) == i
           })
@@ -186,7 +186,14 @@ exports.filterUsuario = async (req,res) => {
         }
 
 
-        res.status(200).json(arr)
+
+            
+        const resultFinal =arr.filter((v,i) => {
+            return arr.map((val)=> val.clubxusuarioId).indexOf(v.clubxusuarioId) == i
+          })
+       
+
+        res.status(200).json(resultFinal)
 
     }catch(error){
         res.status(400).json({'error': error.message})
