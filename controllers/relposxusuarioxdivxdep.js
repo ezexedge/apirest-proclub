@@ -105,14 +105,12 @@ exports.filterPosicion = async (req,res) => {
          arr.push(obj)
         }
 
-        const mySet = new Set();
-
-        for(let val of arr){
-            mySet.add(val)
-        }
-     
-
-        res.status(200).json(mySet)
+        
+        const resultFinal =arr.filter((v,i) => {
+            return arr.map((val)=> val.nombre).indexOf(v.nombre) == i
+          })
+       
+        res.status(200).json(resultFinal)
 
     }catch(error){
         res.status(400).json({'error': error.message})
