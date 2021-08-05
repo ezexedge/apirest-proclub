@@ -370,7 +370,10 @@ router.get('/estado/:id',estadoControllers.getById)
 
     //usuario informacion final
     router.get('/usuario-final',usuarioInformacionFinal.getAll)
+    //filterPosicion
+    router.get('/filtro-posicion/:club/:disciplina/:division',usuarioInformacionFinal.filterPosicion)
     
+
     //imagen
 
     router.post('/image',imageControllers.subirArchivos)
