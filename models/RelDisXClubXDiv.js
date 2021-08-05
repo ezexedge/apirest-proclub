@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const db = require('../config/db');
 const RelDisciplinaXClub = require('./RelDisciplinaXClub')
 
-const RelDisXClubXCat = db.define('reldisciplinaxclubxcategoria', {
+const RelDisXClubXDiv = db.define('reldisciplinaxclubxdiv', {
     id: {
         type: Sequelize.INTEGER, 
         autoIncrement: true,
@@ -19,11 +19,11 @@ const RelDisXClubXCat = db.define('reldisciplinaxclubxcategoria', {
 });
 
 
-RelDisXClubXCat.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub",foreignKey: 'disciplinaxclubId'})
+RelDisXClubXDiv.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub",foreignKey: 'disciplinaxclubId'})
 
 
 
 
 
 
-module.exports = RelDisXClubXCat;
+module.exports = RelDisXClubXDiv;

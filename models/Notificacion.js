@@ -14,6 +14,9 @@ const Notificacion = db.define('notificacion', {
     },
     descripcion: {
         type: Sequelize.STRING
+    },
+    descripcion_corta: {
+        type: Sequelize.STRING
     }
     ,
     fecha: {

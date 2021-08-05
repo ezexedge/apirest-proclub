@@ -11,6 +11,9 @@ const RelDisciplinaXPos = db.define('reldisciplinaxpos', {
         primaryKey: true
 
     },
+    nombre: {
+        type: Sequelize.STRING
+    },
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
@@ -21,7 +24,6 @@ const RelDisciplinaXPos = db.define('reldisciplinaxpos', {
 
 
 
-RelDisciplinaXPos.belongsTo(Posicion,{as:"posicion",foreignKey: 'posicionId'})
 
 RelDisciplinaXPos.belongsTo(Disciplina,{as:"disciplina",foreignKey: 'disciplinaId'})
 //Usuario.belongsTo(Persona,{as:"persona"})

@@ -15,7 +15,7 @@ const reldisciplinaxclubControllers = require('../controllers/reldisciplinaxclub
 const authValidateControllers = require('../controllers/auth/validate')
 const authSignupControllers = require('../controllers/auth/login')
 const posicionControllers = require('../controllers/posicion')
-const categoriaControllers = require('../controllers/reldisciplinaxclubxcat')
+const divisionControllers = require('../controllers/reldisciplinaxclubxdiv')
 const imageControllers = require('../controllers/imagen')
 const beneficiosControllers = require('../controllers/beneficios')
 const rubroControllers = require('../controllers/rubro')
@@ -38,11 +38,10 @@ const reservaControllers = require('../controllers/reserva')
 const ingresoControllers = require('../controllers/ingreso')
 const estadoControllers = require('../controllers/estado')
 const usuarioXDisciplina = require('../controllers/relUsuarioXDis')
-const divisionControllers = require('../controllers/division')
+const divControllers = require('../controllers/division')
 const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos')
 const dashboardControllers = require('../controllers/dashboard')
-
-
+const usuarioInformacionFinal = require('../controllers/relposxusuarioxdivxdep')
 module.exports = function(){
  /**
  * @swagger
@@ -335,6 +334,7 @@ router.get('/estado/:id',estadoControllers.getById)
     router.delete('/usuario/:club/:usuario',usuariosControllers.usuarioEliminar)
     router.put('/usuario/:club/:usuario',imageControllers.subirArchivos,personControllers.ModificarPersona)
 
+    router.get('/usuario/')
     //auth
     router.post('/validate',authValidateControllers.validate)
     router.post('/signup',authSignupControllers.signup)
@@ -343,25 +343,34 @@ router.get('/estado/:id',estadoControllers.getById)
     router.post('/reset-password',authSignupControllers.resetPassword)
     router.post('/nueva-clave',authSignupControllers.requireSignin,authSignupControllers.cambiarClave)
    
+
+
     //posicion
 
     router.get('/posiciones/:disciplina',posicionxdisciplinaControllers.getDisciplinaxpos)
+    router.post('/posiciones/:disciplina',posicionxdisciplinaControllers.agregarPosicionEnDisciplina)
    
+
+
     router.get('/posiciones/:club/:disciplina',posicionControllers.getPosicion)
     router.post('/posiciones/:club/:disciplina',posicionControllers.crearPosicion)
     router.put('/posiciones/:id',posicionControllers.modificarPosicion)
     router.get('/posiciones/:id',posicionControllers.getPosicionById)
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
-    //categoria
+    //division
 
 
-    router.get('/categoria/:club/:disciplina',categoriaControllers.getAll)
-    router.get('/categoria/:id',categoriaControllers.getId)
-    router.put('/categoria/:id',categoriaControllers.editar)
-    router.delete('/categoria/:id',categoriaControllers.eliminar)     
-    router.post('/categoria/:club/:disciplina',categoriaControllers.crear)
+    router.get('/div/:club/:disciplina',divisionControllers.getAll)
+    router.get('/div/:id',divisionControllers.getId)
+    router.put('/div/:id',divisionControllers.editar)
+    router.delete('/div/:id',divisionControllers.eliminar)     
+    router.post('/div/:club/:disciplina',divisionControllers.crear)
 
+
+    //usuario informacion final
+    router.get('/usuario-final',usuarioInformacionFinal.getAll)
+    
     //imagen
 
     router.post('/image',imageControllers.subirArchivos)
@@ -515,7 +524,7 @@ router.put('/documento/club/usuario/:club/:usuario/:estado',documentoControllers
 
 
 ///division
-router.get('/division/:club/:disciplina',divisionControllers.getByClubByDis)
+router.get('/division/:club/:disciplina',divControllers.getByClubByDis)
 
 
 

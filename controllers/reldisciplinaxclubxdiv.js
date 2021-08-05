@@ -1,6 +1,6 @@
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
-const RelDisXClubXCat = require('../models/RelDisXClubXCat')
 const Disciplina = require('../models/Disciplina')
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const Club = require('../models/Club')
 
 exports.getAll = async (req,res) => {
@@ -30,7 +30,7 @@ exports.getAll = async (req,res) => {
         if(!result) throw new Error('la disciplinaxclub no existe')
 
 
-        const resp = await RelDisXClubXCat.findAll({
+        const resp = await RelDisXClubXDiv.findAll({
             where: {    
                 disciplinaxclubId: result.id,
                 activo: 1
@@ -52,11 +52,36 @@ exports.getId = async(req,res) => {
     try{
 
         const id = req.params.id
-        const result = await RelDisXClubXCat.findByPk(id)
+        const result = await RelDisXClubXDiv.findByPk(id)
 
         if(!result)throw new Error('la categoria no existe')
 
         res.status(200).json(result)
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+    }
+}
+
+
+exports.getByDisciplinaXClubId = async(req,res) => {
+    try{
+
+     const  club = req.params.club
+     const  disciplina = req.params.disciplina
+    
+     const disciplinaxclub = await RelDisciplinaXClub.findOne({
+         where: {
+            clubId: club,
+            disciplinaId: disciplina
+         }
+     })
+    if(!disciplinaxclub)throw new Error('el club y disciplina no existe o no coinciden')
+
+    res.status(200).json(disciplinaxclub)
+     
+
 
     }catch(error){
 
@@ -70,7 +95,7 @@ exports.eliminar = async (req,res) => {
 
         const id = req.params.id
 
-        const categoria = await RelDisXClubXCat.findByPk(id)
+        const categoria = await RelDisXClubXDiv.findByPk(id)
 
         if(!categoria) throw new Error('La categoria no existe')
 
@@ -95,7 +120,7 @@ exports.editar = async (req,res) => {
         const id = req.params.id
         const {nombre} =  req.body
 
-        const result = await RelDisXClubXCat.update({nombre: nombre},{where: {id:id}})
+        const result = await RelDisXClubXDiv.update({nombre: nombre},{where: {id:id}})
 
         if(!result)throw new Error()
 
@@ -135,7 +160,7 @@ exports.crear = async (req,res) => {
         if(!result) throw new Error('la disciplinaxclub no existe')
 
 
-        const resp = await RelDisXClubXCat.create({ nombre: nombre, disciplinaxclubId: result.id })
+        const resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
 
         if(!resp)throw new Error('error al crear categoria')
 
