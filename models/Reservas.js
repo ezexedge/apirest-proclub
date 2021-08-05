@@ -19,6 +19,9 @@ const Reserva = db.define('reserva', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
+    },
+    qr:{
+        type: Sequelize.STRING
     }
 
 

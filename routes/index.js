@@ -480,7 +480,7 @@ router.get('/estado-reserva/:id',estadoReservaControllers.getById)
 //reserva
 router.get('/reserva',reservaControllers.getAll)
 router.get('/reserva/:id',reservaControllers.getbyId)
-router.get('/reserva/usuario/:usuario',reservaControllers.getbyUserId)
+router.get('/reserva/usuario/:usuario/:club',reservaControllers.getbyUserId)
 router.put('/reserva/:id/:estado',reservaControllers.modificiarEstado)
 router.post('/reserva/:usuario/:turno',reservaControllers.crear)
 router.delete('/reserva/:id',reservaControllers.eliminar)
