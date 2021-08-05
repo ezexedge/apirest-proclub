@@ -371,7 +371,7 @@ router.get('/estado/:id',estadoControllers.getById)
     //usuario informacion final
     router.get('/usuario-final',usuarioInformacionFinal.getAll)
     //filterPosicion
-    router.get('/filtro-posicion/:club/:disciplina/:division',usuarioInformacionFinal.filterPosicion)
+    router.get('/filtro-posicion/:disxclubxdiv',usuarioInformacionFinal.filterPosicion)
     
 
     //imagen

@@ -50,12 +50,12 @@ exports.filterPosicion = async (req,res) => {
     
     try{
 
-        const club = req.params.club
-        const disciplina = req.params.disciplina
-        const division = req.params.division
+    
 
 
 
+
+    const id = req.params.disxclubxdiv
 
 
 
@@ -67,12 +67,10 @@ exports.filterPosicion = async (req,res) => {
             {
                 model: RelDisXClubXDiv,
                 as: 'disxclubxdiv',
-                where: {id: division},
+                where: {id: id},
                 include:[{
                  model: RelDisciplinaXClub,
-                 as: 'disciplinaxclub',
-                 where:{clubId:club,
-                    disciplinaId:disciplina}
+                 as: 'disciplinaxclub'
                 }]  
             },
             {
