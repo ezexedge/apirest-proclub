@@ -4,8 +4,8 @@ const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
-
-
+const Usuario = require('../models/Usuario')
+const Persona = require('../models/Persona')
 exports.getAll = async (req,res) => {
     
     try{
@@ -15,7 +15,15 @@ exports.getAll = async (req,res) => {
         const result = await RelPosXUsarioXDiviXDep.findAll({
             include: [{
                 model: ClubXUsuario,
-                as: 'clubxusuario'
+                as: 'clubxusuario',
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
             },
             {
                 model: RelDisXClubXDiv,
@@ -125,7 +133,15 @@ exports.filterUsuario = async (req,res) => {
         const result = await RelPosXUsarioXDiviXDep.findAll({
             include: [{
                 model: ClubXUsuario,
-                as: 'clubxusuario'
+                as: 'clubxusuario',
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
             },
             {
                 model: RelDisXClubXDiv,
@@ -149,8 +165,22 @@ exports.filterUsuario = async (req,res) => {
         })
 
      
+        let arr = []
 
-        res.status(200).json(result)
+        for(let val of result){
+            const obj = {
+                id: val.id,
+                clubxusuarioId: val.clubxusuarioId,
+                nombre: val.clubxusuario.usuario.persona.nombre,
+                apellido: val.clubxusuario.usuario.persona.apellido
+            
+            }
+
+
+            arr.push(obj)
+        }
+
+        res.status(200).json(arr)
 
     }catch(error){
         res.status(400).json({'error': error.message})
