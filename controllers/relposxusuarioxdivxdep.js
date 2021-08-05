@@ -84,9 +84,21 @@ exports.filterPosicion = async (req,res) => {
         ]
         })
 
+
+        let arr = []
+        for(let val of result){
+         
+         let obj = {
+           id: val.id,
+           nombre: val.disciplinaxclubxpos.disciplinaxpos.nombre,
+           disciplinaxclubxposId: val.disciplinaxclubxposId,
+           disxclubxdivId: val.disxclubxdivId
+         }
+         arr.push(obj)
+        }
      
 
-        res.status(200).json(result)
+        res.status(200).json(arr)
 
     }catch(error){
         res.status(400).json({'error': error.message})
