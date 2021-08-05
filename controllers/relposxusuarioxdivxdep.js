@@ -104,9 +104,15 @@ exports.filterPosicion = async (req,res) => {
          }
          arr.push(obj)
         }
+
+        const mySet = new Set();
+
+        for(let val of arr){
+            mySet.add(val)
+        }
      
 
-        res.status(200).json(arr)
+        res.status(200).json(mySet)
 
     }catch(error){
         res.status(400).json({'error': error.message})
@@ -166,7 +172,7 @@ exports.filterUsuario = async (req,res) => {
 
      
         let arr = []
-
+        
         for(let val of result){
             const obj = {
                 id: val.id,
@@ -178,7 +184,9 @@ exports.filterUsuario = async (req,res) => {
 
 
             arr.push(obj)
+
         }
+
 
         res.status(200).json(arr)
 
