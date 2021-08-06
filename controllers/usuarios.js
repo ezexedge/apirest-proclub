@@ -498,9 +498,10 @@ exports.usuarioEliminar = async (req, res) => {
 
     
         const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: estado  },{ transaction: t })
-    
+        
+        
 
-        await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos },{ transaction: t })
+        await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos },{ transaction: t })
 
 
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
