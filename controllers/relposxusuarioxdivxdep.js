@@ -202,6 +202,39 @@ exports.filterUsuario = async (req,res) => {
 
 
 
+exports.filterClubPosicion = async (req,res) => {
+    
+    try{
+
+    
+
+
+
+
+     const club = req.params.club
+
+
+    const resultFinal = await DisciplinaXClubXPos.findAll({
+        include:[{
+            model: RelDisciplinaXPos,
+            as: 'disciplinaxpos'
+        }],
+        where: {
+            disxclubId: club,
+
+        }
+    })
+
+    
+
+        res.status(200).json(resultFinal)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+
+
 /*
 
 RelDisXClubXDiv.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub",foreignKey: 'disciplinaxclubId'})

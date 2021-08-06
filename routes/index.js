@@ -374,6 +374,7 @@ router.get('/estado/:id',estadoControllers.getById)
     router.get('/filtro-posicion/:disxclubxdiv',usuarioInformacionFinal.filterPosicion)
     router.get('/filtro-usuario/:disciplinaxclubxposId/:disxclubxdivId',usuarioInformacionFinal.filterUsuario)
 
+    router.get('/filtro-posicion/nuevo/:club',usuarioInformacionFinal.filterClubPosicion)
     //imagen
 
     router.post('/image',imageControllers.subirArchivos)

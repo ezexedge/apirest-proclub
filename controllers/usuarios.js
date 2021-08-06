@@ -11,7 +11,7 @@ const Club = require('../models/Club')
 const Estados = require('../models/Estados')
 const firebase = require('../firebase')
 const admin = require('firebase-admin')
-
+const RelPosXUsuarioXDivXDep  = require('../models/RelPosXUsarioXDiviXDep')
 exports.usuarioListado = async (req,res) =>{
 
 
@@ -436,7 +436,7 @@ exports.usuarioEliminar = async (req, res) => {
     
         let valores = JSON.parse(req.body.data)
         
-        const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria  , cp} = valores
+        const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,disciplinaxclubxdiv, disciplinaxpos  , cp} = valores
         
 
         const resultRol = await Rol.findOne({
@@ -499,6 +499,10 @@ exports.usuarioEliminar = async (req, res) => {
     
         const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: estado  },{ transaction: t })
     
+
+        await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos },{ transaction: t })
+
+
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
     
      //   await RelUsuarioXCatXDis.create({disxclubxcatId: categoria,clubxusuarioId:clubxusuarioId.id},{ transaction: t })
