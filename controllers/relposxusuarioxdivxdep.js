@@ -225,9 +225,19 @@ exports.filterClubPosicion = async (req,res) => {
         }
     })
 
-    
+         let arr = []
+         for(let val of resultFinal){
+            let obj = {
+                posicion: val.disciplinaxpos.nombre,
+                disciplinaxclubxpos: val.id
+            }
 
-        res.status(200).json(resultFinal)
+            arr.push(obj)
+         }
+
+
+
+        res.status(200).json(arr)
 
     }catch(error){
         res.status(400).json({'error': error.message})
