@@ -103,7 +103,14 @@ exports.getByUser =  async (req,res) => {
 
 
         const result = await Ingreso.findAll({
-            include:[{
+            include:[    {
+                model: Usuario,
+                as: 'usuario',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            },{
                 model: Reserva,
                 as: 'reserva',
                 include:[{
