@@ -59,12 +59,8 @@ exports.getbyUserId = async (req,res) => {
     try{
 
         const usuario = req.params.usuario
-
         const club = req.params.club
-
-
-        
-
+      
 
         const usuarioResult = await Usuario.findOne({
             where:{
@@ -75,46 +71,16 @@ exports.getbyUserId = async (req,res) => {
 
         if(!usuarioResult) throw new Error('el usuario no existe')
 
-
-        const resultclubxusuario = await ClubXUsuario.findOne({
-            where: {clubId: club,usuarioId: usuario,activo:1}
-        })
-
-        if(!resultclubxusuario)throw new Error('la relacion entre el usuario y el club no existe')
-
-
-        //RelPosXUsuarioXDivXDep
-
-        const usuarioFinal = await  RelPosXUsuarioXDivXDep.findOne({
-            include: [{
-                model: RelDisXClubXDiv,
-                as: 'disxclubxdiv'
-            },
-           {
-            model: DisciplinaXClubXPos,
-            as: 'disciplinaxclubxpos',
-                include: [{
-                    model: RelDisciplinaXPos,
-                    as: 'disciplinaxpos'
-
-                }]
-           }
-        ],
-            where: {clubxusuarioId: resultclubxusuario.id}
-        }) 
-
-        
-       
-
-
         const result =  await Reservas.findAll({
-            
-            include: [{
+            attributes: ['id','fecha'],
+            include:[{
                 model: Turno,
                 as: 'turno',
+               attributes: ['fecha','horaDesde','horaHasta'],
                 include: [{
                     model: Espacio,
-                    as: 'espacio'
+                    as: 'espacio',
+                    attributes:['nombre', 'descripcion'],
                 }]
             }],
            where:{
@@ -124,25 +90,14 @@ exports.getbyUserId = async (req,res) => {
        })
 
 
-       let arr = []
-       for(let val of result){
-            const obj = {
-                division: usuarioFinal.disxclubxdiv.nombre,
-                posicion: usuarioFinal.disciplinaxclubxpos.disciplinaxpos.nombre,
-                espacio: val.turno.espacio.nombre
-            }
-
-            arr.push(obj)
-       }
-
-
-        res.status(200).json(arr)
+        res.status(200).json(result)
       
     }catch(err){
         res.status(400).json({error: err.message})
         
     }
 }
+
 
 exports.crear = async(req,res) => {
     try{
