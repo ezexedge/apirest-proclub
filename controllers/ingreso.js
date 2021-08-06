@@ -3,12 +3,22 @@ const Reserva = require('../models/Reservas')
 const Turno = require('../models/Turno')
 const Espacio = require('../models/Espacio')
 const Usuario =  require('../models/Usuario')
+const Persona = require('../models/Persona')
 exports.getAll =  async (req,res) => {
 
     try{
 
         const result = await Ingreso.findAll({
-            include:[{
+            include:[
+                {
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                },
+                {
                 model: Reserva,
                 as: 'reserva',
                 include:[{
