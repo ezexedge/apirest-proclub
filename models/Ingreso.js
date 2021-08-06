@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 const Reservas = require('../models/Reservas')
+const Usuario = require('../models/Usuario')
 
 const Ingreso = db.define('ingreso', {
     id: {
@@ -21,6 +22,8 @@ const Ingreso = db.define('ingreso', {
 
 
 Ingreso.belongsTo(Reservas,{as:"reserva",foreignKey: 'reservaId'})
+
+Ingreso.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 
 
 

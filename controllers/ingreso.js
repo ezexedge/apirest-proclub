@@ -96,7 +96,6 @@ exports.getByUser =  async (req,res) => {
             include:[{
                 model: Reserva,
                 as: 'reserva',
-                where: { usuarioId: id },
                 include:[{
                     model: Turno,
                     as: 'turno',
@@ -106,6 +105,7 @@ exports.getByUser =  async (req,res) => {
                     }]
                 }]
             }],
+            where: { usuarioId: id },
             order: [['id', 'DESC']]
         })
 
