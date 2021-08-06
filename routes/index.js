@@ -42,6 +42,8 @@ const divControllers = require('../controllers/division')
 const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos')
 const dashboardControllers = require('../controllers/dashboard')
 const usuarioInformacionFinal = require('../controllers/relposxusuarioxdivxdep')
+const tematicaControllers = require('../controllers/tematica')
+
 module.exports = function(){
  /**
  * @swagger
@@ -358,6 +360,8 @@ router.get('/estado/:id',estadoControllers.getById)
     router.get('/posiciones/:id',posicionControllers.getPosicionById)
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
+
+
     //division
 
 
@@ -428,6 +432,9 @@ router.get('/estado/:id',estadoControllers.getById)
     router.post('/notificacion-post',notificacionControllers.sendNotificacion)
     router.get('/notificacion-get',notificacionControllers.getTokenFirebase)
 
+    //tematica
+
+    router.get('/tematicas',tematicaControllers.getAll)
    
 
     //encuesta
