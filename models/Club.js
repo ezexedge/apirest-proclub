@@ -18,7 +18,7 @@ const Club = db.define('club', {
         type: Sequelize.STRING
     }
     , logo: {
-        type: Sequelize.STRING(2000)
+        type: Sequelize.STRING
     }
     ,
     colorPrimario: Sequelize.STRING,
