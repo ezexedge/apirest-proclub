@@ -33,7 +33,8 @@ const Club = db.define('club', {
     instagram: Sequelize.STRING,
     facebook: Sequelize.STRING,
     twitter: Sequelize.STRING,
-    cp: Sequelize.STRING
+    cp: Sequelize.STRING,
+    urlImage: Sequelize.STRING
 
     
 });
