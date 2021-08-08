@@ -208,7 +208,7 @@ exports.crearClub = async (req, res) => {
 
   
 
-    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp } = JSON.parse(req.body.data)
+    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp  } = JSON.parse(req.body.data)
    
    
     let imagen
@@ -228,7 +228,7 @@ exports.crearClub = async (req, res) => {
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
 
      await Club.create({
-     logo: imagen, nombre: nombre, descripcion: descripcion, logo: imagen, colorPrimario: colorPrimario,
+     logo: logo, nombre: nombre, descripcion: descripcion, logo: imagen, colorPrimario: colorPrimario,
       colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
       colorTextoSecundario: colorTextoSecundario, direccionId: nuevaDireccion.id, personaId: nuevaPersona.id, activo: 1 , email: email
  , telefono: telefono , cuit: cuit  ,instagram: instagram,facebook:facebook,twitter:twitter, nombre_visible: nombre_visible , cp: cp  },{ transaction: t })
@@ -263,7 +263,7 @@ exports.clubEditar = async (req, res) => {
 
     const id = req.params.id
     
-    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario, direccion, responsable } = JSON.parse(req.body.data)
+    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario, direccion, responsable  } = JSON.parse(req.body.data)
 
     let imagen
     if(req.file) {
