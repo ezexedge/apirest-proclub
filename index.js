@@ -78,9 +78,6 @@ cloudinary.config({
 })
 
 
-app.get('/api/test',(req,res)=>{
-  res.send('es una prueba')
-})
 
 
 app.post('/api/uploadimages',(req,res)=>{
