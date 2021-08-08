@@ -12,6 +12,7 @@ const  fs  = require('fs-extra')
 const swaggerUI  = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
 const   options  = require('./options')
+const cloudinary  = require('cloudinary')
 
 require('dotenv').config({path: 'variables.env'});
 
@@ -45,13 +46,16 @@ app.use(cors());
 app.use(morgan('dev'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+app.use(bodyParser.json({limit: '5mb'}))
 app.use(bodyParser());
 
 
 app.use('/api', routes() );
 
 app.use(express.static('uploads'))
+
+
 
 
 app.get('/api', (req, res) => {
@@ -65,6 +69,34 @@ app.get('/api', (req, res) => {
       res.json(docs);
   });
 })
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+
+app.get('/api/test',(req,res)=>{
+  res.send('es una prueba')
+})
+
+
+app.post('/api/uploadimages',(req,res)=>{
+  cloudinary.uploader.upload(req.body.image, result =>{
+      res.send({
+          url: result.url,
+          public_id: result.public_id
+      })
+  },{
+      public_id: `${Date.now()}`,
+      resource_type: 'auto'
+  })
+})
+
+
+
 
 
 app.use((req, res, next) => {
@@ -81,7 +113,7 @@ app.use(function (err, req, res, next) {
 
 
 const host = process.env.HOST || '0.0.0.0'
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 
 
 app.listen(port,function() {
