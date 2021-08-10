@@ -903,40 +903,344 @@ module.exports = function(){
  */
 
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
+
+
     router.get('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.getDeporteXClubById)
     router.delete('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.deleteDeporteXClub)
     router.post('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.createDeporteXClub)
      
    
    //pais
+
+
+   /**
+ * @swagger
+ * /api/pais:
+ *   get:
+ *     summary: get de todos los paises
+ *     tags: [Pais]
+ *     responses:
+ *       200:
+ *         description: get all pais
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Pais'
+
+ */
+
     router.get('/pais',paisControllers.paisTodos)
+
+    /**
+ * @swagger
+ * /api/pais/{id}:
+ *   get:
+ *     summary: get pais por id
+ *     tags: [Pais]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get pais by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: pais by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pais'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     router.get('/pais/:id',paisControllers.paisById)
 
-    //provincia
+    //provinci
+
+        /**
+ * @swagger
+ * /api/provincias/pais/{id}:
+ *   get:
+ *     summary: get de todas las provincias que pertenece a un pais
+ *     tags: [Provincias]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get provincia por id de pais
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: pais by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Provincia'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/provincias/pais/:id',provinciaControllers.provinciaPorPaisById)
+
+  /**
+ * @swagger
+ * /api/provincias:
+ *   get:
+ *     summary: get de todos las provincias
+ *     tags: [Provincias]
+ *     responses:
+ *       200:
+ *         description: get all provincias
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Provincia'
+
+ */
+  
     router.get('/provincias',provinciaControllers.provinciaTodos)
-    router.get('/provincias',provinciaControllers.provinciaTodos)
+
+
+   
+    /**
+ * @swagger
+ * /api/provincias/{id}:
+ *   get:
+ *     summary: get provincia by id
+ *     tags: [Provincias]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get provincia by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: provincia by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Provincia'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     router.get('/provincias/:id',provinciaControllers.provinciaById)
     
     //persona
 
+  /**
+ * @swagger
+ * /api/personas:
+ *   get:
+ *     summary: get de todas la persona
+ *     tags: [Persona]
+ *     responses:
+ *       200:
+ *         description: get all persona
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Persona'
+
+ */
+  
+
     router.get('/personas',personControllers.personaTodos)
+
+        /**
+ * @swagger
+ * /api/personas/{id}:
+ *   get:
+ *     summary: get persona by id
+ *     tags: [Persona]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get persona by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: persona by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Persona'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/personas/:id',personControllers.personaById)
     router.post('/persona',imageControllers.subirArchivos, personControllers.crearPersona)
 
     router.get('/personas/lista-personas/personaWithDireccion/:id', personControllers.personaWhitDireccionById)
 
     //tipo documnto
+  /**
+ * @swagger
+ * /api/tipo-documento:
+ *   get:
+ *     summary: get de todos los tipo de documento
+ *     tags: [TipoDocumento]
+ *     responses:
+ *       200:
+ *         description: get all tipo de documento
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/TipoDocumento'
+
+ */
+
     router.get('/tipo-documento',tipoDocumentoControllers.tipoDocumentos)
+        /**
+ * @swagger
+ * /api/tipo-documento/{id}:
+ *   get:
+ *     summary: get tipo documento by id
+ *     tags: [TipoDocumento]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get tipo documento by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: tipo documento by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/TipoDocumento'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/tipo-documento/:id',tipoDocumentoControllers.tipoDocumentoById)
 
     //direccion
+  /**
+ * @swagger
+ * /api/direccion:
+ *   get:
+ *     summary: get de todas las direcciones
+ *     tags: [Direccion]
+ *     responses:
+ *       200:
+ *         description: get all direcciones
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Direccion'
+
+ */
+
     router.get('/direccion',direccionControllers.direccionTodos)
+
+
+        /**
+ * @swagger
+ * /api/direccion/{id}:
+ *   get:
+ *     summary: get direccion by id
+ *     tags: [Direccion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get direccion by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: tipo direccion by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Direccion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/direccion/:id',direccionControllers.direccionById)
 
 
     //roles
+   
+  /**
+ * @swagger
+ * /api/roles:
+ *   get:
+ *     summary: get de todos los roles
+ *     tags: [Roles]
+ *     responses:
+ *       200:
+ *         description: get all roles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Rol'
+
+ */
     router.get('/roles',rolControllers.rolTodos)
+
+        /**
+ * @swagger
+ * /api/roles/{id}:
+ *   get:
+ *     summary: get roles by id
+ *     tags: [Roles]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get roles by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: tipo rol by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Rol'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/roles/:id',rolControllers.rolById)
 
     //usuario
@@ -945,18 +1249,126 @@ module.exports = function(){
     router.post('/agregar-usuario',imageControllers.subirArchivos,usuariosControllers.crearUsuarioWeb)
 
     router.put('/usuarios/:email/:firebase',usuariosControllers.agregarUID)
-   
+
+  /**
+ * @swagger
+ * /api/usuarios:
+ *   get:
+ *     summary: get de todos los usuarios
+ *     tags: [Usuario]
+ *     responses:
+ *       200:
+ *         description: get all usuarios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Usuarios'
+
+ */
+
+
     router.get('/usuarios',usuariosControllers.getAllUsuarios)
     router.post('/agregar-club/:usuario/:club',usuariosControllers.agregarClub)
 
+
+        /**
+ * @swagger
+ * /api/usuario/clubs/{usuario}:
+ *   get:
+ *     summary: get de los clubs a los que esta vinculado 1 usuario (usuarioId)
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: usuario
+ *         description: get clubxusuario by usuarioId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get clubxusuario by usuarioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ClubXUsuarios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
     router.get('/usuario/clubs/:usuario',usuariosControllers.usuarioClubs)
+        /**
+ * @swagger
+ * /api/usuario/{id}:
+ *   get:
+ *     summary: get usuario by id
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get usuario by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: usuario by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+   
+    
   router.get('/usuario/:id', usuariosControllers.usuarioById)
+
+
+        /**
+ * @swagger
+ * /api/lista-usuarios/{club}:
+ *   get:
+ *     summary: get de usuarios que pertenece a un club (clubId)
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get clubxusuario by clubId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get clubxusuario by usuarioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ClubXUsuarios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
+
+
     router.get('/usuario-club/:club/:usuario',usuariosControllers.usuarioXClub)
     router.delete('/usuario/:club/:usuario',usuariosControllers.usuarioEliminar)
     router.put('/usuario/:club/:usuario',imageControllers.subirArchivos,personControllers.ModificarPersona)
 
-    router.get('/usuario/')
+   
     //auth
     router.post('/validate',authValidateControllers.validate)
     router.post('/signup',authSignupControllers.signup)
@@ -969,15 +1381,73 @@ module.exports = function(){
 
     //posicion
 
+        /**
+ * @swagger
+ * /api/posiciones/{disciplina}:
+ *   get:
+ *     summary: get de las posiciones relacionada a una disciplina (disciplinaId)
+ *     tags: [Posicion]
+ *     parameters:
+ *       - in : path
+ *         name: disciplina
+ *         description: get posiciones by disciplinaId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get posiciones by disciplinaId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Posicion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/posiciones/:disciplina',posicionxdisciplinaControllers.getDisciplinaxpos)
     router.post('/posiciones/:disciplina',posicionxdisciplinaControllers.agregarPosicionEnDisciplina)
    
 
 
+
     router.get('/posiciones/:club/:disciplina',posicionControllers.getPosicion)
     router.post('/posiciones/:club/:disciplina',posicionControllers.crearPosicion)
+   
+   
     router.put('/posiciones/:id',posicionControllers.modificarPosicion)
-    router.get('/posiciones/:id',posicionControllers.getPosicionById)
+   
+   
+            /**
+ * @swagger
+ * /api/posicion/{id}:
+ *   get:
+ *     summary: get posiciones by id
+ *     tags: [Posicion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get posiciones by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: posiciones by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Posicion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+    router.get('/posicion/:id',posicionControllers.getPosicionById)
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
 
