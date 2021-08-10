@@ -107,7 +107,10 @@ app.use(function (err, req, res, next) {
     }
   });
 
-
+  app.use(function(req,res,next){
+    console.log('sssss',req.auth)
+    next()
+  })
 
 const host = process.env.HOST || '0.0.0.0'
 var port = process.env.PORT || 5000;

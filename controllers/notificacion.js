@@ -9,6 +9,7 @@ const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Destinatario = require('../models/Destinatario')
+const Usuario = require('../models/Usuario')
 
 exports.crear = async(req,res) => {
     try{
@@ -117,7 +118,13 @@ exports.sendNotificacion = async (req,res) => {
     try{
 
 
+
+        const enviadoPor = req.params.userId
         const val  = req.body
+
+
+        const usuarioExiste = await Usuario.findByPk(enviadoPor)
+        if(!usuarioExiste)throw new Error('el usuario que envia no existe')
 
         let arr = []
 
@@ -160,7 +167,8 @@ exports.sendNotificacion = async (req,res) => {
                 
                 let user = {
                     encuestId: valor.encuesta,
-                    usuarioId:  usuario.clubxusuario.usuarioId
+                    usuarioId:  usuario.clubxusuario.usuarioId,
+                    enviadoporId: Number(enviadoPor)
                 }
                 arr.push(user)
 

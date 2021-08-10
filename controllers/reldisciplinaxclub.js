@@ -11,7 +11,7 @@ exports.getDeporteXClub = async (req,res)=> {
 
         const resp = await Club.findByPk(club)
 
-        if(resp){
+        if(!resp)throw new Error('el club no existe')
 
 
         const result = await RelDisciplinaXClub.findAll({
@@ -29,11 +29,6 @@ exports.getDeporteXClub = async (req,res)=> {
 
         res.status(200).json(result)
 
-        }else{
-
-            throw new Error('el club no existe')
-
-        }
 
         
 

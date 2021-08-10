@@ -45,7 +45,9 @@ const usuarioInformacionFinal = require('../controllers/relposxusuarioxdivxdep')
 const tematicaControllers = require('../controllers/tematica')
 
 module.exports = function(){
- /**
+
+
+/**
  * @swagger
  * components:
  *   schemas:
@@ -55,31 +57,50 @@ module.exports = function(){
  *        id:
  *          type: integer
  *        nombre:
- *          type: string     
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: dni    
  *     Rubros:
  *       type: object
  *       properties:
+ *        id: 
+ *         type: integer
+ *        nombre: 
+ *         type: string
+ *       example:
+ *        id: 1
+ *        nombre: cines
  *     Rols:
  *       type: object
  *       properties:
  *        id:
  *          type: integer
  *        nombre:
- *          type: string  
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: superadmin 
  *     Estado:
  *       type: object
  *       properties:
  *        id:
  *          type: integer
  *        nombre:
- *          type: string     
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: aprobado        
  *     Pais:
  *       type: object
  *       properties:
  *        id:
  *          type: integer
  *        nombre:
- *          type: string  
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: argentina  
  *     Provincia:
  *       type: object
  *       properties:
@@ -87,6 +108,10 @@ module.exports = function(){
  *          type: integer
  *        nombre:
  *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: la pampa
+ *        countryId: 1 
  *     Direccion:
  *       type: object
  *       properties:
@@ -100,8 +125,15 @@ module.exports = function(){
  *          type: string
  *        cp:
  *          type: string
- *        direccion:
- *          $ref: '#/components/schemas/Provincia'     
+ *        direccionId:
+ *          type: integer
+ *       example:
+ *        id: 1
+ *        calle: vedia y mitre
+ *        numero: 123
+ *        localidad: moreno
+ *        cp: 1744
+ *        direccionId: 12      
  *     Persona:
  *       type: object
  *       properties:
@@ -125,7 +157,18 @@ module.exports = function(){
  *           type: string   
  *         tipoDocumento:
  *           type: integer
- *          
+ *       example:
+ *        id: 1195
+ *        nombre: juan
+ *        apellido: gallardo
+ *        documento: 36596211
+ *        sexo: masculino
+ *        avatar: https://thumbs.dreamstime.com/z/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg
+ *        correo: otracuentanueva@gmail.com
+ *        telefono: 351575757
+ *        fechaNacimiento: 2021-08-19T01:23:14.000Z
+ *        direccionPersonaId: 1065
+ *        tipoDocumentId: 1                  
  *     Usuarios:
  *       type: object
  *       properties:
@@ -138,7 +181,13 @@ module.exports = function(){
  *         activo:
  *           type: integer
  *         personaId:
- *           type: integer        
+ *           type: integer
+ *       example:
+ *         id: 685
+ *         idFirebase: SzOB7MtYgbaTZOkuLoK4yFVC42p1
+ *         ultimoIngreso: 135
+ *         activo: 1
+ *         personaId: 1195                
  *     Clubs:
  *       type: object
  *       properties:
@@ -199,7 +248,382 @@ module.exports = function(){
  *           cp: '113'
  *           localidad: 'moreno'
  *           provinciaId: 1
- * 
+ *     Beneficios:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *        descripcion:
+ *          type: string
+ *        telefono:
+ *          type: string
+ *        web:
+ *          type: string
+ *        instagram:
+ *          type: string
+ *        correo:
+ *          type: string
+ *        pathImage:
+ *          type: string
+ *        activo:
+ *          type: integer
+ *        rubroId:
+ *          type: integer
+ *       example: 
+ *        id: 1
+ *        nombre: cinemark
+ *        descripcion: entradas para cine
+ *        telefono: 0224213146
+ *        web: https://www.cinemarkhoyts.com.ar/
+ *        instagram: (arroba)cine
+ *        correo: cine@gmail.com
+ *        pathImage: https://oxigeno.com/images/default-source/tiendas/cinemark/logo-cinemark-min.jpg?sfvrsn=e4323cc1_8
+ *        activo: 1
+ *        rubro: 1
+  *     Encuesta:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        titulo:
+ *          type: string  
+ *        descripcion:
+ *          type: string
+ *        activo:
+ *          type: integer
+ *     Pregunta:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        titulo:
+ *          type: string  
+ *        encuestaId:
+ *          type: integer
+ *        activo:
+ *          type: integer
+ *     Respuesta:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        titulo:
+ *          type: string  
+ *        contadorDeRespuestas:
+ *          type: integer
+ *        preguntaId:
+ *          type: integer
+ *        activo:
+ *          type: integer    
+ *     Reservas:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        fecha:
+ *          type: date
+ *        turnoId:
+ *          type: integer
+ *        usuarioId:
+ *          type: integer
+ *        estadoreservaId:
+ *          type: integer
+ *        activo:
+ *          type: integer
+ *       example:
+ *        id: 1
+ *        fecha: 2021-06-24
+ *        activo: 1
+ *        turnoId: 1
+ *        usuarioId: 35
+ *        estadoreservaId: 1
+ *     Turnos:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        fecha:
+ *          type: string
+ *        horaDesde:
+ *          type: string
+ *        horaHasta:
+ *          type: string
+ *        precio:
+ *          type: integer
+ *        cupo:
+ *          type: integer
+ *        activo:
+ *          type: integer
+ *        estadoturnoId:
+ *          type: integer
+ *        espacioId:
+ *          type: integer           
+ *       example:
+ *        id: 1
+ *        fecha: 2021/06/30
+ *        horaDesde: 09:00
+ *        horaHasta: 12:00
+ *        precio: 1000
+ *        cupo: 11
+ *        activo: 0
+ *        estadoturnoId: 1
+ *        espacioId: 1 
+ *     EstadoEspacio:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: aprobado
+ *     Espacios:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *        descripcion:
+ *          type: string
+ *        maxReservasDia:
+ *          type: integer
+ *        maxReservasSem:
+ *          type: integer
+ *        maxReservasAno:
+ *          type: integer
+ *        horasPrevia:
+ *          type: string
+ *        tiempoDeAnticipacion:
+ *          type: string
+ *        tiempoDeCancelacion:
+ *          type: string
+ *        estadoespacioId:
+ *          type: integer
+ *        clubId:
+ *          type: integer
+ *        activo:
+ *          type: integer
+ *       example:
+ *        id: 1
+ *        nombre: espacio 1
+ *        descripcion: es un espacio de prueba
+ *        maxReservasDia: 10
+ *        maxReservasSem: 200
+ *        maxReservasAno: 400
+ *        horasPrevia: 1
+ *        tiempoDeAnticipacion: 1
+ *        tiempoDeCancelacion: 1
+ *        activo: 1
+ *        clubId: 145
+ *        estadoespacioId: 1
+ *     Posicion:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         activo:
+ *          type: integer
+ *         disciplinaId:
+ *          type: integer
+ *        example:
+ *         id: 15
+ *         nombre: delantero
+ *         activo: 1
+ *         disciplinaId: 185
+ *     Notificaciones:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         titulo:
+ *           type: string
+ *         descripcion:
+ *          type: string
+ *         fecha:
+ *          type: string
+ *         activo:
+ *          type: integer
+ *         descripcion_corta:
+ *          type: string
+ *     RelUsuarioXDis:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer   
+ *         clubxusuarioId:
+ *           type: integer
+ *         disciplinaxclubId:
+ *           type: integer
+ *         activo:
+ *           type: integer
+ *        example:
+ *         id: 325
+ *         activo: 1
+ *         disciplinaxclubId: 73
+ *         clubxusuarioId: 375       
+ *     BeneficioXClubs:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         clubId:
+ *           type: integer
+ *         usuarioId:
+ *           type: integer
+ *         beneficioId:
+ *           type: integer
+ *         actvio:
+ *           type: integer
+ *        example:
+ *         id: 1
+ *         activo: 1
+ *         clubId: 4
+ *         usuarioId: 35
+ *         beneficioId: 2   
+ *     RelPosXUsuarioXDivXDeps:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         clubxusuarioId:
+ *           type: integer
+ *         disxclubxdivId:
+ *           type: integer
+ *         disciplinaxclubxposId:
+ *           type: integer
+ *         activo:
+ *           type: integer
+ *        example:
+ *         id: 75
+ *         activo: 1
+ *         clubxusuarioId: 705
+ *         disxclubxdivId: 5
+ *         disciplinaxclubxposId: 2      
+ *     RelDisciplinaXClubXDiv:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         disciplinaxclubId:
+ *          type: integer
+ *         activo: 
+ *          type: integer
+ *        example:
+ *          id: 5
+ *          nombre: division 1
+ *          activo: 1
+ *          disciplinaxclubId: 72
+ *     DisciplinaXClubXPos:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         disxclubId: 
+ *          type: integer
+ *         disciplinaxposId:
+ *          type: integer
+ *         activo:
+ *           type: integer
+ *        example:
+ *         id: 1
+ *         activo: 1
+ *         disxclubId: 72
+ *         disciplinaxposId: 2
+ *     RelDisciplinaXPos:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         activo:
+ *           type: integer
+ *         disciplinaId:
+ *           type: integer
+ *        example:
+ *         id: 1
+ *         activo: 1
+ *         disciplinaId: 1
+ *         nombre: arquero
+ *     Disciplinas:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         activo:
+ *           type: integer
+ *         icono:
+ *           type: string
+ *        example:
+ *         id: 95
+ *         nombre: tenis
+ *         activo: 1
+ *         icono: sports_tennis
+ *     RelDisciplinaxClub:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         clubId:
+ *           type: integer
+ *         disciplinaId:
+ *           type: integer
+ *         activo:
+ *           type: integer
+ *        example:
+ *         id: 73
+ *         activo: 1
+ *         clubId: 135
+ *         disciplinaId: 95
+ *     ClubXUsuarios:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         clubId: 
+ *           type: integer
+ *         rolId:
+ *           type: integer
+ *         usuarioId:
+ *           type: integer
+ *         estadoId:
+ *           type: integer
+ *         activo:
+ *           type: integer
+ *        example:
+ *         id: 5
+ *         activo: 1
+ *         clubId: 135
+ *         rolId: 3
+ *         usuarioId: 75
+ *         estadoId: 1
+ *     Dashboard:
+ *        type: object
+ *        properties:
+ *         notificaciones:
+ *           type: array
+ *         disciplinaxclub:
+ *           type: array
+ *         turnos:
+ *           type: array
+ *         beneficios:
+ *           type: array
+ *        example:
+ *         notificaciones: []
+ *         disciplinaxclub: []
+ *         turnos: []
+ *         beneficios: []     
+ *         
  *           
  *       
  *         
@@ -207,7 +631,37 @@ module.exports = function(){
  *
  */
 
-
+/**
+ * @swagger
+ * /api/dashboard/{club}/{usuario}:
+ *   get:
+ *     summary: GET dashboard trae informacion del dashboard en mobile para id del club y id del usuario
+ *     tags: [Dashboard]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id del club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: usuario
+ *         description: id del usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: posts by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Dashboard'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 
     router.get('/dashboard/:club/:user',dashboardControllers.getAll)
 
@@ -266,22 +720,188 @@ module.exports = function(){
 
 
    //estado
+/**
+ * @swagger
+ * /api/estado:
+ *   get:
+ *     summary: Returns all estado
+ *     tags: [Estado]
+ *     responses:
+ *       200:
+ *         description: get estado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Estado'
+
+ */
+
    router.get('/estado',estadoControllers.getAll)
-router.get('/estado/:id',estadoControllers.getById)
+
+/**
+ * @swagger
+ * /api/estado/{id}:
+ *   get:
+ *     summary: get estado by id
+ *     tags: [Estado]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id of estado
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: estado by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Estado'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+   router.get('/estado/:id',estadoControllers.getById)
 
 
    //disciplina
    router.post('/disciplina',disciplinaControllers.crearDisciplina)
+
+/**
+ * @swagger
+ * /api/disciplina:
+ *   get:
+ *     summary: Returns all disciplina
+ *     tags: [Disciplina]
+ *     responses:
+ *       200:
+ *         description: trae todos las disciplina
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Disciplinas'
+
+ */
+
    router.get('/disciplina',disciplinaControllers.getDisciplina)
+
+/**
+ * @swagger
+ * /api/disciplina/{id}:
+ *   get:
+ *     summary: get disciplina by id
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de la disciplina
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: disciplina por id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Disciplinas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
    router.get('/disciplina/:id',disciplinaControllers.getDisciplinaById)
    router.put('/disciplina/:id',disciplinaControllers.updateDisciplina)
    router.delete('/disciplina/:id',disciplinaControllers.eliminarDisciplina)
 
 //el id hacer referencia al id de clubxusuario 
+
+/**
+ * @swagger
+ * /api/disciplina-usuario/{id}:
+ *   get:
+ *     summary: get de las disciplina que tiene un usuario que pertenece a un club (clubxusuarioId)
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: agregar el id del ClubXUsuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: estado by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RelUsuarioXDis'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/disciplina-usuario/:id',usuarioXDisciplina.getDeportesXclub)
+
+/**
+ * @swagger
+ * /api/disciplina-usuario:
+ *   get:
+ *     summary: get de todas las disciplinas vinculadas a los usuarios que existen en la base de datos
+ *     tags: [Disciplina]
+ *     responses:
+ *       200:
+ *         description: get 
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/RelUsuarioXDis'
+
+ */
+
     router.get('/disciplina-usuario',usuarioXDisciplina.getAll)
 
    //relacion  disciplina por club
+
+/**
+ * @swagger
+ * /api/disciplina-club/{club}:
+ *   get:
+ *     summary: get disciplinas que pertenecen a un club 
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get disciplina de un club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/RelDisciplinaxClub'
+
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
     router.get('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.getDeporteXClubById)
     router.delete('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.deleteDeporteXClub)
@@ -443,7 +1063,7 @@ router.get('/estado/:id',estadoControllers.getById)
     router.get('/encuesta/:id',encuestaControllers.getById)
     router.put('/encuesta/:id',encuestaControllers.modificar)
     router.delete('/encuesta/:id',encuestaControllers.eliminar)
-    router.post('/encuesta-post',notificacionControllers.sendNotificacion)
+    router.post('/encuesta-post/:userId',notificacionControllers.sendNotificacion)
     
     //pregunta
     router.get('/preguntas',preguntaControllers.getPreguntas)
