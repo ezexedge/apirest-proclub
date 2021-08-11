@@ -622,7 +622,18 @@ module.exports = function(){
  *         notificaciones: []
  *         disciplinaxclub: []
  *         turnos: []
- *         beneficios: []     
+ *         beneficios: []
+ *     FiltroPosicion:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *        example:
+ *         id: 1
+ *         nombre: delantero
+ *         disciplinaxclubxposId: 1
+ *         disxclubxdivId: 5
+ *      
  *         
  *           
  *       
@@ -630,6 +641,10 @@ module.exports = function(){
  *         
  *
  */
+
+
+
+
 
 /**
  * @swagger
@@ -1364,6 +1379,9 @@ module.exports = function(){
     router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
 
 
+    router.get('/clubxusuario/:id', usuariosControllers.clubxUsuarioById)
+
+
     router.get('/usuario-club/:club/:usuario',usuariosControllers.usuarioXClub)
     router.delete('/usuario/:club/:usuario',usuariosControllers.usuarioEliminar)
     router.put('/usuario/:club/:usuario',imageControllers.subirArchivos,personControllers.ModificarPersona)
@@ -1422,31 +1440,7 @@ module.exports = function(){
     router.put('/posiciones/:id',posicionControllers.modificarPosicion)
    
    
-            /**
- * @swagger
- * /api/posicion/{id}:
- *   get:
- *     summary: get posiciones by id
- *     tags: [Posicion]
- *     parameters:
- *       - in : path
- *         name: id
- *         description: get posiciones by id
- *         schema:
- *           type: integer
- *         required: true
- *     responses:
- *       200:
- *         description: posiciones by its id
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Posicion'
- *       400:
- *         description: post can not be found
- * 
- * 
- */
+  
     router.get('/posicion/:id',posicionControllers.getPosicionById)
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
@@ -1454,7 +1448,7 @@ module.exports = function(){
 
     //division
 
-
+   
     router.get('/div/:club/:disciplina',divisionControllers.getAll)
     router.get('/div/:id',divisionControllers.getId)
     router.put('/div/:id',divisionControllers.editar)
@@ -1465,6 +1459,9 @@ module.exports = function(){
     //usuario informacion final
     router.get('/usuario-final',usuarioInformacionFinal.getAll)
     //filterPosicion
+
+    
+
     router.get('/filtro-posicion/:disxclubxdiv',usuarioInformacionFinal.filterPosicion)
     router.get('/filtro-usuario/:disciplinaxclubxposId/:disxclubxdivId',usuarioInformacionFinal.filterUsuario)
 
@@ -1476,7 +1473,7 @@ module.exports = function(){
 
     
     //beneficios
-
+   
     router.post('/beneficios',imageControllers.subirArchivos,beneficiosControllers.crear)
     router.put('/beneficios/:id',imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',beneficiosControllers.eliminar)

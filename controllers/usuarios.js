@@ -580,4 +580,84 @@ exports.usuarioEliminar = async (req, res) => {
     };
     
     
+    //clubxUsuarioById
+
+
+    exports.clubxUsuarioById = async (req,res) =>{
+
+ 
+      console.log('/////////////',req.params)
+        try {
+        console.log('/////////////',req.params)
+      
+
+        const id = req.params.id
+
+        
+        const existe = await ClubXusuario.findByPk(id)
+
+        if(!existe)throw new Error('el id no existe')
+      
+    
+    
+        const result = await  ClubXusuario.findOne({
+          include: [
+            {
+              model: Rol,
+              as: 'rol'
+          },
+              {
+                
+                model: Usuario,
+                as: 'usuario',
+                include: [
+                  {
+                    model: Persona,
+                  as: 'persona',
+                  include: [
+                      {
+                        model: TipoDocumento,
+                      as: 'tipoDocument'
+                      },
+                      {
+                       model: Direccion,
+                        as: 'direccionPersona',
+                        include: [{
+                          model: Provincia,
+                          as: 'provincia',
+                          include : [{
+                              model: Pais,
+                              as: 'country'
+                          }]
+                        }],
+      
+                        }
+                    ],
+                    
+                  }
+                ],
+               
+              },
+              {
+                model: Estados,
+                as: 'estado'
+              }
+            ],
+            where: {
+              id: id,
+              activo: 1
+            }
+      });
+            
+          if(!result)throw new Error('el usuario no existe')
+                
+          res.status(200).json(result)
+        
+      } catch (err) {
+    
+        console.log('///////////////',err)
+          res.status(400).json({'error': err.message})
+      }
+      
+      }
     
