@@ -1378,7 +1378,7 @@ module.exports = function(){
 
     router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
 
-
+    router.get('/clubxusuario', usuariosControllers.clubxUsuarioAll)
     router.get('/clubxusuario/:id', usuariosControllers.clubxUsuarioById)
 
 

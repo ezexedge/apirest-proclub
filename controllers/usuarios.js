@@ -661,3 +661,71 @@ exports.usuarioEliminar = async (req, res) => {
       
       }
     
+
+
+
+      exports.clubxUsuarioAll = async (req,res) =>{
+
+ 
+          try {
+           
+          const result = await  ClubXusuario.findAll({
+            include: [
+              {
+                model: Rol,
+                as: 'rol'
+            },
+                {
+                  
+                  model: Usuario,
+                  as: 'usuario',
+                  include: [
+                    {
+                      model: Persona,
+                    as: 'persona',
+                    include: [
+                        {
+                          model: TipoDocumento,
+                        as: 'tipoDocument'
+                        },
+                        {
+                         model: Direccion,
+                          as: 'direccionPersona',
+                          include: [{
+                            model: Provincia,
+                            as: 'provincia',
+                            include : [{
+                                model: Pais,
+                                as: 'country'
+                            }]
+                          }],
+        
+                          }
+                      ],
+                      
+                    }
+                  ],
+                 
+                },
+                {
+                  model: Estados,
+                  as: 'estado'
+                }
+              ],
+              where: {
+                activo: 1
+              }
+        });
+              
+            if(!result)throw new Error('el usuario no existe')
+                  
+            res.status(200).json(result)
+          
+        } catch (err) {
+      
+          console.log('///////////////',err)
+            res.status(400).json({'error': err.message})
+        }
+        
+        }
+      
