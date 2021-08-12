@@ -12,7 +12,7 @@ const NotificacionXClub = db.define('notificacionxclub', {
         primaryKey: true
 
     },
-    creadorUsuarioId: Sequelize.INTEGER,
+ 
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1

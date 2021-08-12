@@ -12,7 +12,7 @@ const Destinatario = require('../models/Destinatario')
 const Usuario = require('../models/Usuario')
 const NotificacionXTematica = require('../models/NotificacionXTematica')
 const NotificacionXClub = require('../models/NotificacionXClub')
-
+const NotXClubXUsuario = require('../models/NotXClubXUsuario')
 exports.crear = async(req,res) => {
     try{
 
@@ -280,14 +280,14 @@ exports.getTokenFirebase = async (req,res)=>{
 exports.crearSuperadmin = async(req,res) => {
     try{
 
-    //    const t = await db.transaction()
+       const t = await db.transaction()
 
         const {notificacion,usuarios} = req.body
 
 
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta})
+        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta},{ transaction: t })
       
         //  const result = await Notificacion.bulkCreate(req.body)
 
@@ -303,36 +303,38 @@ exports.crearSuperadmin = async(req,res) => {
             }
         }
         
-        await NotificacionXTematica.bulkCreate(arrTematica)
+        await NotificacionXTematica.bulkCreate(arrTematica,{ transaction: t })
      
         let arrFinal = []
     for(let val of usuarios){
         
-        const result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id})
+        const result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id},{ transaction: t })
         let obj = {
             notificacionxclubId: result.id,
             clubxusuarioId: val.id
         }
 
-        arrFinal.push(obj)
+        
     }
+
+
 
     console.log('arrrfinal',arrFinal)
 
-
+    await NotXClubXUsuario.bulkCreate(arrFinal,{ transaction: t })
       
 
         
 
 
-    //  await t.commit();
+      await t.commit();
 
         res.status(200).json({message: 'enviadooo'})
 
 
     }catch(err){
 
-     //   await t.rollback();
+       await t.rollback();
 
         res.status(400).json({error: err.message})
     }
