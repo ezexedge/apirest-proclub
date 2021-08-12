@@ -13,6 +13,8 @@ const Usuario = require('../models/Usuario')
 const NotificacionXTematica = require('../models/NotificacionXTematica')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
+const db = require('../config/db')
+
 exports.crear = async(req,res) => {
     try{
 
@@ -278,9 +280,11 @@ exports.getTokenFirebase = async (req,res)=>{
 //'
 
 exports.crearSuperadmin = async(req,res) => {
+    
+    const t = await db.transaction()
     try{
 
-       const t = await db.transaction()
+     
 
         const {notificacion,usuarios} = req.body
 
@@ -305,6 +309,7 @@ exports.crearSuperadmin = async(req,res) => {
         
         await NotificacionXTematica.bulkCreate(arrTematica,{ transaction: t })
      
+
         let arrFinal = []
     for(let val of usuarios){
         
@@ -316,7 +321,6 @@ exports.crearSuperadmin = async(req,res) => {
 
         
     }
-
 
 
     console.log('arrrfinal',arrFinal)
