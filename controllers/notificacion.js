@@ -274,3 +274,31 @@ exports.getTokenFirebase = async (req,res)=>{
 }
 
 //'
+
+exports.crearSuperadmin = async(req,res) => {
+    try{
+
+        const t = await db.transaction()
+
+        const {notificacion,usuarios} = req.body
+
+
+        console.log('aqui notificacion',notificacion)
+        console.log('aquii usuarios',usuarios)
+      //  const resultNotificacion  =  await Notificacion.create({titulo:titulo,descripcion:descripcion,descripcion_corta:descripcion_corta},{ transaction: t })
+      //  const result = await Notificacion.bulkCreate(req.body)
+        
+
+
+      await t.commit();
+
+        res.status(200).json(result)
+
+
+    }catch(err){
+
+        await t.rollback();
+
+        res.status(400).json({error: err.message})
+    }
+}

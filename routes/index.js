@@ -1499,6 +1499,8 @@ module.exports = function(){
     //notificacion
 
     router.post('/notificacion',notificacionControllers.crear)
+
+    router.post('/notificacion/superadmin',notificacionControllers.crearSuperadmin)
     router.get('/notificacion',notificacionControllers.getAll)
    
     router.get('/notificacion/:id',notificacionControllers.getById)
