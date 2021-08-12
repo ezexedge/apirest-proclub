@@ -10,6 +10,8 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Destinatario = require('../models/Destinatario')
 const Usuario = require('../models/Usuario')
+const NotificacionXTematica = require('../models/NotificacionXTematica')
+const NotificacionXClub = require('../models/NotificacionXClub')
 
 exports.crear = async(req,res) => {
     try{
@@ -285,8 +287,41 @@ exports.crearSuperadmin = async(req,res) => {
 
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
-      //  const resultNotificacion  =  await Notificacion.create({titulo:titulo,descripcion:descripcion,descripcion_corta:descripcion_corta},{ transaction: t })
-      //  const result = await Notificacion.bulkCreate(req.body)
+        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta})
+      
+        //  const result = await Notificacion.bulkCreate(req.body)
+
+        let arrTematica = []
+        if(notificacion.tematica.length > 0){
+            for(let val of notificacion.tematica){
+                let obj = {
+                    notificacionId: resultNotificacion.id,
+                    tematicaId: val.id
+                }
+
+                arrTematica.push(obj)
+            }
+        }
+        
+        await NotificacionXTematica.bulkCreate(arrTematica)
+     
+        let arrFinal = []
+    for(let val of usuarios){
+        
+        const result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id})
+        let obj = {
+            notificacionxclubId: result.id,
+            clubxusuarioId: val.id
+        }
+
+        arrFinal.push(obj)
+    }
+
+    console.log('arrrfinal',arrFinal)
+
+
+      
+
         
 
 
