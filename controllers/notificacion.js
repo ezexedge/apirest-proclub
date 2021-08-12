@@ -310,6 +310,7 @@ exports.crearSuperadmin = async(req,res) => {
         await NotificacionXTematica.bulkCreate(arrTematica,{ transaction: t })
      
 
+
         let arrFinal = []
     for(let val of usuarios){
         
@@ -319,7 +320,7 @@ exports.crearSuperadmin = async(req,res) => {
             clubxusuarioId: val.id
         }
 
-        
+        arrFinal.push(obj)
     }
 
 
