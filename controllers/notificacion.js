@@ -278,7 +278,7 @@ exports.getTokenFirebase = async (req,res)=>{
 exports.crearSuperadmin = async(req,res) => {
     try{
 
-        const t = await db.transaction()
+    //    const t = await db.transaction()
 
         const {notificacion,usuarios} = req.body
 
@@ -290,14 +290,14 @@ exports.crearSuperadmin = async(req,res) => {
         
 
 
-      await t.commit();
+    //  await t.commit();
 
-        res.status(200).json(result)
+        res.status(200).json({message: 'enviadooo'})
 
 
     }catch(err){
 
-        await t.rollback();
+     //   await t.rollback();
 
         res.status(400).json({error: err.message})
     }
