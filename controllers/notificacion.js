@@ -334,7 +334,7 @@ exports.crearSuperadmin = async(req,res) => {
 
       await t.commit();
 
-        res.status(200).json({message: 'enviadooo'})
+        res.status(200).json({message: 'enviadooo',notificacionId: resultNotificacion})
 
 
     }catch(err){
