@@ -4,6 +4,7 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const Persona = require('../models/Persona')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
+const Usuario = require('../models/Usuario')
 exports.crear = async (req,res)=> {
 
     try{
@@ -48,36 +49,32 @@ exports.crear = async (req,res)=> {
 exports.getAllByClubByUser = async (req,res) => {
     try{
 
-        const clubxusario = req.params.clubxusuario
+        const notificacion = req.params.Notificacion
        
       
-
-
-        const result =  await ClubXUsuario.findOne({
-           
-            where: {
-                activo: 1,
-                id: clubxusario
-            }
-        })
-
-        if(!result)throw new Error('el usuario no existe o no existe en el club')
-
-        
         const resp =  await NotXClubXUsuario.findAll({
-            include:[{
+            include:[
+                {
+                 model: ClubXUsuario,
+                 as: 'clubxusuario',
+                include: [{
+                  model: Usuario,
+                  as: 'usuario'
+                }]
+                },
+                {
                 model: NotificacionXClub,
-                as: 'club',
+                as: 'notificacionxclub',
+                where: { notificacionId: notificacion },
                 include:[{
                     model: Notificacion,
                     as: 'notificacion'
+                },{
+                    model: Club,
+                    as: 'club'
                 }]
                 }   
-            ],
-            where:{
-                activo:1,
-                clubxusuarioId: clubxusario
-            }
+            ]
         })
 
         res.status(200).json(resp)
