@@ -49,7 +49,7 @@ exports.crear = async (req,res)=> {
 exports.getAllByClubByUser = async (req,res) => {
     try{
 
-        const notificacion = req.params.Notificacion
+        const notificacion = req.params.notificacion
        
       
         const resp =  await NotXClubXUsuario.findAll({
