@@ -51,15 +51,28 @@ exports.getAllByClubByUser = async (req,res) => {
 
         const notificacion = req.params.notificacion
        
-
-        console.log('////////////notificacion',notificacion)
       
         const resp =  await NotXClubXUsuario.findAll({
             include:[
-              {
+                {
+                 model: ClubXUsuario,
+                 as: 'clubxusuario',
+                include: [{
+                  model: Usuario,
+                  as: 'usuario'
+                }]
+                },
+                {
                 model: NotificacionXClub,
                 as: 'club',
-                where: { notificacionId: notificacion }
+                where: { notificacionId: notificacion },
+                include:[{
+                    model: Notificacion,
+                    as: 'notificacion'
+                },{
+                    model: Club,
+                    as: 'club'
+                }]
                 }   
             ]
         })
