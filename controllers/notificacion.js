@@ -312,9 +312,13 @@ exports.crearSuperadmin = async(req,res) => {
 
 
         let arrFinal = []
-    for(let val of usuarios){
-        
-        const result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id},{ transaction: t })
+        let flag = 0
+        let result
+        for(let val of usuarios){
+        if(flag === 0){
+          result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id},{ transaction: t })
+         flag = 1
+        }
         let obj = {
             notificacionxclubId: result.id,
             clubxusuarioId: val.id
