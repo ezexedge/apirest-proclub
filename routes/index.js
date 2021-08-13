@@ -1525,6 +1525,8 @@ module.exports = function(){
     //tematica
 
     router.get('/tematicas',tematicaControllers.getAll)
+
+    router.get('/tematicas/:notificacion',tematicaControllers.getByNotificacion)
    
 
     //encuesta
