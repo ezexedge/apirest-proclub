@@ -59,7 +59,11 @@ exports.getAllByClubByUser = async (req,res) => {
                  as: 'clubxusuario',
                 include: [{
                   model: Usuario,
-                  as: 'usuario'
+                  as: 'usuario',
+                  include: [{
+                      model: Persona,
+                      as: 'persona'
+                  }]
                 }]
                 },
                 {
