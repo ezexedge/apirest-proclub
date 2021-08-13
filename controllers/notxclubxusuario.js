@@ -64,7 +64,7 @@ exports.getAllByClubByUser = async (req,res) => {
                 },
                 {
                 model: NotificacionXClub,
-                as: 'notificacionxclub',
+                as: 'club',
                 where: { notificacionId: notificacion },
                 include:[{
                     model: Notificacion,
