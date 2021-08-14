@@ -186,12 +186,16 @@ exports.crear = async (req,res) => {
 
         for(let val of resp2){
             let obj = {
-                disxclubId: result,
+
+                disxclubId: result.id,
                 disciplinaxposId: val.id
             }
 
+
             arrFinal.push(obj)
         }
+
+        console.log(arrFinal)
 
         await DisciplinaXClubXPos.bulkCreate(arrFinal)
 
