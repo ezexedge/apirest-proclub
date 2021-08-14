@@ -182,6 +182,9 @@ exports.crear = async (req,res) => {
         
         const resp2 = await RelDisciplinaXPos.bulkCreate(arr)
         
+        console.log('rrresp2',resp2)
+
+        
         let arrFinal = []
 
         for(let val of resp2){
