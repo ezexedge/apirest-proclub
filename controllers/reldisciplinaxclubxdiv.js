@@ -141,6 +141,7 @@ exports.crear = async (req,res) => {
         const disciplinaId = req.params.disciplina
 
         const club = await Club.findByPk(clubId)
+        console.log(req.body)
 
         if(!club) throw new Error('El club no existe')
 
