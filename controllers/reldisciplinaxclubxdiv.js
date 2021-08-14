@@ -186,11 +186,8 @@ exports.crear = async (req,res) => {
             arr.push(obj)
         }
         
-       console.log('rrrespuesta',arr)
         
-
-        
-        //await DisciplinaXClubXPos.bulkCreate(arrFinal)
+        await DisciplinaXClubXPos.bulkCreate(arr)
 
 
         res.status(200).json({message: 'creado correctamente'})
