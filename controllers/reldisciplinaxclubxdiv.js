@@ -172,35 +172,25 @@ exports.crear = async (req,res) => {
 
         for(let val of posiciones){
          
-            let obj = {
-                disciplinaId: disciplinaId,
-                nombre: val
-            }
          
-            arr.push(obj)
-        }
-        
-        const resp2 = await RelDisciplinaXPos.bulkCreate(arr)
-        
-        console.log('rrresp2',resp2)
 
-        
-        let arrFinal = []
-
-        for(let val of resp2){
+            const resp = await RelDisciplinaXPos.create({disciplinaId: disciplinaId,nombre:val})
+         
             let obj = {
 
                 disxclubId: result.id,
-                disciplinaxposId: val.id
+                disciplinaxposId: resp.id
             }
 
 
-            arrFinal.push(obj)
+            arr.push(obj)
         }
+        
+       console.log('rrrespuesta',arr)
+        
 
-        console.log(arrFinal)
-
-        await DisciplinaXClubXPos.bulkCreate(arrFinal)
+        
+        //await DisciplinaXClubXPos.bulkCreate(arrFinal)
 
 
         res.status(200).json({message: 'creado correctamente'})
