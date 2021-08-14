@@ -136,7 +136,7 @@ exports.crear = async (req,res) => {
     
     try{
 
-        const {nombre} = req.body
+        const {nombre,posiciones} = req.body
         const clubId = req.params.club
         const disciplinaId = req.params.disciplina
 

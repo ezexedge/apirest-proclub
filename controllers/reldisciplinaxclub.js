@@ -176,3 +176,8 @@ exports.createDeporteXClub = async (req,res)=> {
     }
 
 }
+
+
+
+
+
