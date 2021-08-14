@@ -3,6 +3,7 @@ const Disciplina = require('../models/Disciplina')
 const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const Club = require('../models/Club')
+const DisciplinaXClubXPos  = require('../models/DisciplinaXClubXPos')
 
 exports.getAll = async (req,res) => {
     
@@ -180,10 +181,22 @@ exports.crear = async (req,res) => {
         }
         
         const resp2 = await RelDisciplinaXPos.bulkCreate(arr)
-        console.log('aca esta bulkcreate',resp2)
+        
+        let arrFinal = []
+
+        for(let val of resp2){
+            let obj = {
+                disxclubId: result,
+                disciplinaxposId: val.id
+            }
+
+            arrFinal.push(obj)
+        }
+
+        await DisciplinaXClubXPos.bulkCreate(arrFinal)
 
 
-        res.status(200).json(resp)
+        res.status(200).json({message: 'creado correctamente'})
 
     }catch(error){
         res.status(400).json({'error': error.message})
