@@ -1,6 +1,7 @@
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
 const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const Club = require('../models/Club')
 
 exports.getAll = async (req,res) => {
@@ -164,6 +165,22 @@ exports.crear = async (req,res) => {
         const resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
 
         if(!resp)throw new Error('error al crear categoria')
+
+
+        let arr = []
+
+        for(let val of posiciones){
+         
+            let obj = {
+                disciplinaId: disciplinaId,
+                nombre: val
+            }
+         
+            arr.push(obj)
+        }
+        
+        const resp2 = await RelDisciplinaXPos.bulkCreate(arr)
+        console.log('aca esta bulkcreate',resp2)
 
 
         res.status(200).json(resp)
