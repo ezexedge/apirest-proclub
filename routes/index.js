@@ -43,6 +43,7 @@ const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos
 const dashboardControllers = require('../controllers/dashboard')
 const usuarioInformacionFinal = require('../controllers/relposxusuarioxdivxdep')
 const tematicaControllers = require('../controllers/tematica')
+const disciplinaAdminControllers = require('../controllers/disciplinaxclubxpos')
 
 module.exports = function(){
 
@@ -1445,6 +1446,9 @@ module.exports = function(){
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
 
+    //division por admin
+    router.get('/disciplina/admin/:club/:disciplina',disciplinaAdminControllers.getAll)
+   
 
     //division
 
