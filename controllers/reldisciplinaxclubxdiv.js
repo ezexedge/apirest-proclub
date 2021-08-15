@@ -162,7 +162,11 @@ exports.crear = async (req,res) => {
             }
         })
 
-        if(!result) throw new Error('la disciplinaxclub no existe')
+        if(!result) {
+
+        result  =   await RelDisciplinaXClub.create({clubId: clubId,disciplinaId:disciplinaId})
+
+        }
 
 
         const resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
