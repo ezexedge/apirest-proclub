@@ -176,12 +176,13 @@ exports.crear = async (req,res) => {
          
          
 
-            const resp = await RelDisciplinaXPos.create({disciplinaId: disciplinaId,nombre:val})
+            const respuesta = await RelDisciplinaXPos.create({disciplinaId: disciplinaId,nombre:val})
          
             let obj = {
 
                 disxclubId: result.id,
-                disciplinaxposId: resp.id
+                disciplinaxposId: respuesta.id,
+                disciplinaxclubxdivxId: resp.id
             }
 
 
