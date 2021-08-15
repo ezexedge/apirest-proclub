@@ -91,6 +91,8 @@ exports.getByDisciplinaXClubId = async(req,res) => {
     }
 }
 
+
+
 exports.eliminar = async (req,res) => {
     
     try{
@@ -196,3 +198,7 @@ exports.crear = async (req,res) => {
         res.status(400).json({'error': error.message})
     }
 }
+
+
+
+
