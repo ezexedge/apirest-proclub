@@ -1507,7 +1507,7 @@ module.exports = function(){
 
 
 
-    router.post('/beneficios',imageControllers.subirArchivos,beneficiosControllers.crear)
+    router.post('/beneficios',beneficiosControllers.crear)
     router.put('/beneficios/:id',imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',beneficiosControllers.eliminar)
     router.get('/beneficios',beneficiosControllers.getAll)

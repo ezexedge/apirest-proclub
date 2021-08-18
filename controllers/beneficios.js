@@ -22,7 +22,7 @@ exports.crear = async (req, res) => {
   
     
   
-      const { nombre , descripcion , telefono , web ,instagram , pathImage , correo , rubroId } = JSON.parse(req.body.data)
+      const { nombre , descripcion , telefono , web ,instagram , pathImage , correo , rubroId } = req.body.data
      
      
   
