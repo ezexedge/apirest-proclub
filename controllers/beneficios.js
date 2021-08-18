@@ -20,20 +20,17 @@ exports.crear = async (req, res) => {
   
     try {
   
-      if(!req.file) {
-        throw new Error('debe ingresar una imagen')
-      }
+    
   
-      const { nombre , descripcion , telefono , web ,instagram , correo , rubroId } = JSON.parse(req.body.data)
+      const { nombre , descripcion , telefono , web ,instagram , pathImage , correo , rubroId } = JSON.parse(req.body.data)
      
      
   
+       
         
-        let imagen = req.file.filename
-        console.log(imagen)
    
   
-       await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : imagen },{ transaction: t })
+       await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : pathImage },{ transaction: t })
   
      
   

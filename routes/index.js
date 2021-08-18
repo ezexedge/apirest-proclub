@@ -1478,30 +1478,32 @@ module.exports = function(){
 
 
    
+
+
+
+
 /**
  * @swagger
- *  api/beneficios/:
- *    post:
- *      summary: Create a new beneficio
- *      tags: [Beneficiosx]
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Beneficios'
- *      responses:
- *        "200":
- *          description: A user schema
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/Beneficios'
+ * /api/beneficios:
+ *   post:
+ *     summary: Create a new book
+ *     tags: [Beneficios]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Benefecios'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Beneficios'
+ *       500:
+ *         description: Some server error
  */
-
-
-
-
 
 
 
