@@ -4,6 +4,7 @@ const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const Club = require('../models/Club')
 const DisciplinaXClubXPos  = require('../models/DisciplinaXClubXPos')
+const db = require('../config/db')
 
 
 

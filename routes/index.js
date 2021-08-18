@@ -1446,7 +1446,8 @@ module.exports = function(){
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
 
-    //division por admin
+    //division por admin para que vea toda la infomarcion de la disciplina en este caso traera todo sus divisiones
+    //y las posiciones que esten relacionada al club 
     router.get('/disciplina/admin/:club/:disciplina',disciplinaAdminControllers.getAll)
    
 
@@ -1475,9 +1476,35 @@ module.exports = function(){
     router.post('/image',imageControllers.subirArchivos)
     router.get('/image/:img',imageControllers.getImage)
 
-    
-    //beneficios
+
    
+/**
+ * @swagger
+ *  api/beneficios/:
+ *    post:
+ *      summary: Create a new beneficio
+ *      tags: [Beneficiosx]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Beneficios'
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Beneficios'
+ */
+
+
+
+
+
+
+
     router.post('/beneficios',imageControllers.subirArchivos,beneficiosControllers.crear)
     router.put('/beneficios/:id',imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',beneficiosControllers.eliminar)
