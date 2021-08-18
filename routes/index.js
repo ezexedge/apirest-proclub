@@ -1493,7 +1493,7 @@ module.exports = function(){
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Benefecios'
+ *             $ref: '#/components/schemas/Beneficios'
  *     responses:
  *       200:
  *         description: The post was successfully created
