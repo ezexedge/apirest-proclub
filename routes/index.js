@@ -391,6 +391,16 @@ module.exports = function(){
  *       example:
  *        id: 1
  *        nombre: aprobado
+ *     EstadoReserva:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: aprobado
  *     Espacios:
  *       type: object
  *       properties:
@@ -644,6 +654,22 @@ module.exports = function(){
  *         nombre: delantero
  *         disciplinaxclubxposId: 1
  *         disxclubxdivId: 5
+ *     Ingreso:
+ *        type: object
+ *        properties:
+ *         id:
+ *           type: integer
+ *         fecha:
+ *            type: date
+ *         reservaId:
+ *            type: integer
+ *         usuarioId:
+ *            type: integer
+ *        example:
+ *         id: 1
+ *         fecha: 2021-08-06
+ *         reservaId: 95
+ *         usuarioId: 5
  *         
  *             
  *         
@@ -3067,10 +3093,62 @@ router.put('/espacio/:id',espacioControllers.updateEspacio)
 router.delete('/espacio/:id',espacioControllers.eliminarEspacio)
 
 //estado espacio
+
+
+
+                /**
+ * @swagger
+ * /api/estado-espacio:
+ *   get:
+ *     summary: get de los estado de espacios
+ *     tags: [EstadoEspacio]
+ *     responses:
+ *       200:
+ *         description: get de los estado de espacios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EstadoEspacio'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/estado-espacio',estadoEspacioControllers.getAll)
+
+
+
+                /**
+ * @swagger
+ * /api/estado-espacio/{id}:
+ *   get:
+ *     summary: get estado espacio by id
+ *     tags: [EstadoEspacio]
+ *     responses:
+ *       200:
+ *         description:  get estado espacio by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EstadoEspacio'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+
 router.get('/estado-espacio/:id',estadoEspacioControllers.getById)
 
 //excluir
+
+
+
 router.get('/excluidos',excluidoControllers.getAll)
 router.get('/excluidos/:id',excluidoControllers.getById)
 router.post('/excluidos/:id',excluidoControllers.crear)
@@ -3079,20 +3157,272 @@ router.post('/fcm', excluidoControllers.test)
 
 
 //estado reserva
+
+
+                /**
+ * @swagger
+ * /api/estado-reserva:
+ *   get:
+ *     summary: get de los estado de la reserva
+ *     tags: [EstadoReserva]
+ *     responses:
+ *       200:
+ *         description: get de los estado de la reserva
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EstadoReserva'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.get('/estado-reserva',estadoReservaControllers.getAll)
+
+
+                /**
+ * @swagger
+ * /api/estado-reserva/{id}:
+ *   get:
+ *     summary: get estado reserva by id
+ *     tags: [EstadoReserva]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un estado de reserva
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get estado reserva by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EstadoReserva'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 router.get('/estado-reserva/:id',estadoReservaControllers.getById)
 
 //reserva
+
+                /**
+ * @swagger
+ * /api/reserva:
+ *   get:
+ *     summary: get all reserva
+ *     tags: [Reserva]
+ *     responses:
+ *       200:
+ *         description: get all reserva
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reservas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.get('/reserva',reservaControllers.getAll)
+
+
+
+                /**
+ * @swagger
+ * /api/reserva/{id}:
+ *   get:
+ *     summary: get reserva by id
+ *     tags: [Reserva]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una reserva
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  reserva by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reservas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 router.get('/reserva/:id',reservaControllers.getbyId)
+
+
+                        /**
+ * @swagger
+ * /api/reserva/usuario/{usuario}/{club}:
+ *   get:
+ *     summary: get reservas que tiene un usuario realizadas
+ *     tags: [Reserva]
+ *     parameters:
+ *       - in : path
+ *         name: usuario
+ *         description:  usuarioId
+ *       - in : path
+ *         name: club
+ *         description: clubId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  reservar x usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
 router.get('/reserva/usuario/:usuario/:club',reservaControllers.getbyUserId)
+
+    /**
+ * @swagger
+ * /api/reserva/{id}/{estado}:
+ *   put:
+ *     summary: cambiar el estado de una reserva
+ *     tags: [Reserva]
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        type: number
+ *        description: reserva id
+ *      - in: path
+ *        name: estado
+ *        type: number
+ *        description: estado de reserva id
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
+
+
 router.put('/reserva/:id/:estado',reservaControllers.modificiarEstado)
+
+
+
 router.post('/reserva/:usuario/:turno',reservaControllers.crear)
+
+
+
+                    /**
+ * @swagger
+ * /api/reserva/{id}:
+ *   delete:
+ *     summary: eliminar una reserva
+ *     tags: [Reserva]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una reserva
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de una reserva
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reserva'
+ *
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 router.delete('/reserva/:id',reservaControllers.eliminar)
 
 
 //ingreso
+
+ 
+                /**
+ * @swagger
+ * /api/ingreso:
+ *   get:
+ *     summary: get all ingreso
+ *     tags: [Ingreso]
+ *     responses:
+ *       200:
+ *         description: get all ingreso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Ingreso'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/ingreso',ingresoControllers.getAll)
+
+
+                /**
+ * @swagger
+ * /api/ingreso/{id}:
+ *   get:
+ *     summary: get ingreso  by id
+ *     tags: [Ingreso]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un ingrso
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  ingreso by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Ingreso'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.get('/ingreso/:id',ingresoControllers.getById)
 router.post('/ingreso/:reserva',ingresoControllers.crear)
 router.get('/ingreso/usuario/:userId',ingresoControllers.getByUser)

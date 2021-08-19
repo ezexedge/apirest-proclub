@@ -48,7 +48,33 @@ exports.getById =  async (req,res) => {
 
         const id = req.params.id
         
-        const result = await Ingreso.findBYPk(id)
+        const result = await Ingreso.findOne({
+            include:[
+                {
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                },
+                {
+                model: Reserva,
+                as: 'reserva',
+                include:[{
+                    model: Turno,
+                    as: 'turno',
+                    include:[{
+                        model : Espacio,
+                        as: 'espacio'
+                    }]
+                }]
+            }],
+            where: {id: id}
+        })
+
+        if(!result)throw new Error('el ingreso no existe')
+        
 
         res.status(200).json(result)
 
