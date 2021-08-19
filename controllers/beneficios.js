@@ -10,45 +10,46 @@ const Persona = require('../models/Persona')
 
 
 
-
 exports.crear = async (req, res) => {
   
 
  
  
-    const t = await db.transaction()
-  
-    try {
-  
-    
-  
-      const { nombre , descripcion , telefono , web ,instagram , pathImage , correo , rubroId } = req.body
-     
-     
-  
-       
-        
-   
-  
-       await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : pathImage },{ transaction: t })
-  
-     
-  
-      await t.commit();
-  
-      res.status(200).json({'message': 'beneficio creado'})
-  
-    } catch (err) {
-      console.log('error', err)
-  
-      await t.rollback();
-  
-      res.status(400).json({ "error": err.message })
-  
+  const t = await db.transaction()
+
+  try {
+
+    if(!req.file) {
+      throw new Error('debe ingresar una imagen')
     }
-  
+
+    const { nombre , descripcion , telefono , web ,instagram , correo , rubroId } = JSON.parse(req.body.data)
+   
+   
+
+      
+      let imagen = req.file.filename
+      console.log(imagen)
+ 
+
+     await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : imagen },{ transaction: t })
+
+   
+
+    await t.commit();
+
+    res.status(200).json({'message': 'beneficio creado'})
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+
+    res.status(400).json({ "error": err.message })
+
   }
 
+}
 
 
 

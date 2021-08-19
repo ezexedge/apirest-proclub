@@ -1489,11 +1489,18 @@ module.exports = function(){
  *     summary: Create a new book
  *     tags: [Beneficios]
  *     requestBody:
- *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Beneficios'
+ *             type: object
+ *             properties:
+ *              orderId:
+ *                type: integer
+ *              userId:
+ *                type: integer
+ *              fileName:
+ *                type: string
+ *                format: binary
  *     responses:
  *       200:
  *         description: The post was successfully created

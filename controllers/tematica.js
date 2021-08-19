@@ -25,6 +25,7 @@ exports.getByNotificacion = async(req,res) => {
     try{
 
         const notificacion = req.params.notificacion
+        
         const result = await NotificacionXTematica.findAll({
             include:[{
                 model: Tematica,
