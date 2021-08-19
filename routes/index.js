@@ -391,6 +391,16 @@ module.exports = function(){
  *       example:
  *        id: 1
  *        nombre: aprobado
+ *     EstadoTurno:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: aprobado
  *     EstadoReserva:
  *       type: object
  *       properties:
@@ -3424,26 +3434,232 @@ router.get('/ingreso',ingresoControllers.getAll)
  */
 
 router.get('/ingreso/:id',ingresoControllers.getById)
+
+
+
+    /**
+ * @swagger
+ * /api/ingreso/{userId}/{reserva}:
+ *   post:
+ *     summary: hace ingreso a la reserva <--------------Falta agregar el userid
+ *     tags: [Ingreso]
+ *     parameters:
+ *      - in: path
+ *        name: reserva
+ *        type: number
+ *        description: agregar id de una reserva
+ *     responses:
+ *       200:
+ *        description: OK
+ *       400:
+ *         description: post can not be found
+
+ */  
+
+
 router.post('/ingreso/:reserva',ingresoControllers.crear)
+
+
+
+                /**
+ * @swagger
+ * /api/ingreso/usuario/{userId}:
+ *   get:
+ *     summary: get ver los ingresos de un usuario 
+ *     tags: [Ingreso]
+ *     parameters:
+ *       - in : path
+ *         name: userId
+ *         description: id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  ingreso de un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Ingreso'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/ingreso/usuario/:userId',ingresoControllers.getByUser)
 
 
 //ESTADO TURNO
+
+                /**
+ * @swagger
+ * /api/estado-turno:
+ *   get:
+ *     summary: get de los estado de un turno
+ *     tags: [EstadoTurno]
+ *     responses:
+ *       200:
+ *         description: get de los estado de turnos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EstadoTurno'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.get('/estado-turno',estadoTurnoControllers.getAll)
+
+
+                /**
+ * @swagger
+ * /api/estado-turno/{id}:
+ *   get:
+ *     summary: get estado turno by id
+ *     tags: [EstadoTurno]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un estado de turno
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get estado de turno by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EstadoTurno'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/estado-turno/:id',estadoTurnoControllers.getById)
 
 
 //turno
+
+                /**
+ * @swagger
+ * /api/turno:
+ *   get: 
+ *     summary: get all de los turnos
+ *     tags: [Turno]
+ *     responses:
+ *       200:
+ *         description: get de los estado de turnos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Turnos'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/turno',turnoControllers.getAll)
 
+               /**
+ * @swagger
+ * /api/turno-inactivo:
+ *   get: 
+ *     summary: get all de los turnos inactivos
+ *     tags: [Turno]
+ *     responses:
+ *       200:
+ *         description: get de los estado de turnos inactivos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Turnos'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.get('/turno-inactivo',turnoControllers.getAllInactivo)
+
+                /**
+ * @swagger
+ * /api/turno/{id}:
+ *   get:
+ *     summary: get turno  by id
+ *     tags: [Turno]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un turno
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  turno by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Turnos'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/turno/:id',turnoControllers.getById)
+
+   /**
+ * @swagger
+ * /api/turno/{espacio}:
+ *   post:
+ *     summary: Crear un espacio
+ *     tags: [Turno]
+ *     parameters:
+ *       - in : path
+ *         name: estado
+ *         description: id de estado
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Turnos'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Turnos'
+ *       500:
+ *         description: Some server error
+ */
+
 router.post('/turno/:espacio/:estado',turnoControllers.crear)
 router.delete('/turno/:id',turnoControllers.eliminar)
 
 
 
 //estado de documento
+
+
+
+
 router.get('/estado-documento',estadodocumentoControllers.getAll)
 router.get('/estado-documento/:id',estadodocumentoControllers.getById)
 
