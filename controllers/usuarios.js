@@ -161,7 +161,7 @@ exports.usuarioEliminar = async (req, res) => {
 
       await result[0].save()
   
-      res.status(200).json(result[0])
+      res.status(200).json({message: 'eliminado correctamente'})
   
     } catch (err) {
 

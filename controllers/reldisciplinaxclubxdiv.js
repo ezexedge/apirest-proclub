@@ -58,7 +58,41 @@ exports.getId = async(req,res) => {
 
         if(!result)throw new Error('la categoria no existe')
 
-        res.status(200).json(result)
+        const resultFinal = await DisciplinaXClubXPos.findAll({
+            include:[{
+                model: RelDisciplinaXPos,
+                as: 'disciplinaxpos'
+            },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disciplinaxclubxdiv'
+        }
+        ],
+            where: {
+                disxclubId: result.disciplinaxclubId,
+                disciplinaxclubxdivxId: result.id
+            },
+            activo: 1
+        })
+
+        let arr = []
+        let flag = 0
+        let division 
+        for(let val of resultFinal){
+            if(flag===0){
+                division = val.disciplinaxclubxdiv
+                flag = 1
+            }
+            arr.push(val.disciplinaxpos)
+        }
+
+
+        const obj = {
+            division: division,
+            posiciones: arr
+        }
+
+        res.status(200).json(obj)
 
     }catch(error){
 

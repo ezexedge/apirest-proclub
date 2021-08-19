@@ -732,6 +732,39 @@ module.exports = function(){
     router.put('/clubs/:id',imageControllers.subirArchivos, clubControllers.clubEditar)
    router.get('/lista-clubs/activos',clubControllers.listClubWithRespAndPais);
 
+
+    //estado
+/**
+ * @swagger
+ * /api/estado/{club}/{usuario}/{estado}:
+ *   post:
+ *     summary: Returns all estado
+ *     tags: [Estado]
+ *     parameters:
+ *      - in: path
+ *        name: club
+ *        type: number
+ *        description: agregar id de un club existente.
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar el id de un usario existente 
+ *      - in: path
+ *        name: estado
+ *        type: number
+ *        description: agregar el id de un estado existente
+ *     responses:
+ *       200:
+ *         description: get estado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Estado'
+
+ */  
+
    router.post('/estado/:club/:usuario/:estado',clubControllers.estado)
 
 
@@ -897,7 +930,7 @@ module.exports = function(){
  *     tags: [Disciplina]
  *     parameters:
  *       - in : path
- *         name: id
+ *         name: club
  *         description: id de un club
  *         schema:
  *           type: integer
@@ -919,7 +952,37 @@ module.exports = function(){
  */
 
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
+/**
+ * @swagger
+ * /api/disciplina-club/{club}/{disciplina}:
+ *   get:
+ *     summary: get trae toda la informacion de una disciplina que pertenece a un club
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *       - in : path
+ *         name: disciplina
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get disciplina de un club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/RelDisciplinaxClub'
 
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 
     router.get('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.getDeporteXClubById)
     router.delete('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.deleteDeporteXClub)
@@ -1262,6 +1325,7 @@ module.exports = function(){
     //usuario
 
 
+
     router.post('/agregar-usuario',imageControllers.subirArchivos,usuariosControllers.crearUsuarioWeb)
 
     router.put('/usuarios/:email/:firebase',usuariosControllers.agregarUID)
@@ -1286,6 +1350,29 @@ module.exports = function(){
 
 
     router.get('/usuarios',usuariosControllers.getAllUsuarios)
+
+
+    /**
+ * @swagger
+ * /api/agregar-club/{usuario}/{club}:
+ *   post:
+ *     summary: agregar usuario a un club
+ *     tags: [Usuario]
+ *     parameters:
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un usuario existente.
+ *      - in: path
+ *        name: club
+ *        type: number
+ *        description: agregar el id de un club existente 
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
     router.post('/agregar-club/:usuario/:club',usuariosControllers.agregarClub)
 
 
@@ -1358,7 +1445,7 @@ module.exports = function(){
  *     parameters:
  *       - in : path
  *         name: club
- *         description: get clubxusuario by clubId
+ *         description: get  by clubId
  *         schema:
  *           type: integer
  *         required: true
@@ -1379,11 +1466,76 @@ module.exports = function(){
 
     router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
 
+
+
     router.get('/clubxusuario', usuariosControllers.clubxUsuarioAll)
     router.get('/clubxusuario/:id', usuariosControllers.clubxUsuarioById)
 
 
+
+        /**
+ * @swagger
+ * /api/usuario-club/{club}/{usuario}:
+ *   get:
+ *     summary: get informacion de un usuario que pertenece a un club
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get  by clubId
+ *       - in : path
+ *         name: usuario
+ *         description: get  by usuarioId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get clubxusuario by usuarioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ClubXUsuarios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/usuario-club/:club/:usuario',usuariosControllers.usuarioXClub)
+
+           /**
+ * @swagger
+ * /api/usuario/{club}/{usuario}:
+ *   delete:
+ *     summary: get informacion de un usuario que pertenece a un club
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get  by clubId
+ *       - in : path
+ *         name: usuario
+ *         description: get  by usuarioId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get clubxusuario by usuarioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ClubXUsuarios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */ 
     router.delete('/usuario/:club/:usuario',usuariosControllers.usuarioEliminar)
     router.put('/usuario/:club/:usuario',imageControllers.subirArchivos,personControllers.ModificarPersona)
 
@@ -1432,6 +1584,8 @@ module.exports = function(){
     router.post('/posiciones/:disciplina',posicionxdisciplinaControllers.agregarPosicionEnDisciplina)
    
 
+    //posicion
+
 
 
     router.get('/posiciones/:club/:disciplina',posicionControllers.getPosicion)
@@ -1446,6 +1600,38 @@ module.exports = function(){
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
 
+            /**
+ * @swagger
+ * /api/disciplina/admin/{club}/{disciplina}:
+ *   get:
+ *     summary: get de las divisiones con las posiciones creadas
+ *     tags: [Posicion]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get posiciones by clubId
+ *       - in : path
+ *         name: disciplina
+ *         description: get posiciones by disciplinaId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get posiciones by disciplinaId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Posicion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
     //division por admin para que vea toda la infomarcion de la disciplina en este caso traera todo sus divisiones
     //y las posiciones que esten relacionada al club 
     router.get('/disciplina/admin/:club/:disciplina',disciplinaAdminControllers.getAll)
@@ -1453,8 +1639,72 @@ module.exports = function(){
 
     //division
 
+
+                /**
+ * @swagger
+ * /api/div/{club}/{disciplina}:
+ *   get:
+ *     summary: get todas la divisiones de una disciplina
+ *     tags: [Posicion]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get posiciones by clubId
+ *       - in : path
+ *         name: disciplina
+ *         description: get posiciones by disciplinaId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get posiciones by disciplinaId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Posicion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
    
     router.get('/div/:club/:disciplina',divisionControllers.getAll)
+
+                    /**
+ * @swagger
+ * /api/div/{id}:
+ *   get:
+ *     summary: get id de una division trae la division y sus posiciones
+ *     tags: [Posicion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de una division
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get posiciones by disciplinaId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Posicion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+
     router.get('/div/:id',divisionControllers.getId)
     router.put('/div/:id',divisionControllers.editar)
     router.delete('/div/:id',divisionControllers.eliminar)     
