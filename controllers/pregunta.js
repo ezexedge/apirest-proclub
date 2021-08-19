@@ -10,7 +10,7 @@ exports.crear = async(req,res) => {
 
         const encuesta =  req.params.encuesta
         const {titulo} = req.body
-        const result  =  await Pregunta.create({titulo: titulo , encuestaId: encuesta})
+        const result  =  await Pregunta.create({titulo: titulo , encuestaId: Number(encuesta)})
       //  const result = await Notificacion.bulkCreate(req.body)
 
         res.status(200).json(result)
@@ -99,7 +99,7 @@ exports.getById = async(req,res) => {
 
 exports.getByEncuesta = async(req,res) => {
     
-  /*
+
 
     try{
 
@@ -174,7 +174,7 @@ exports.getByEncuesta = async(req,res) => {
     }catch(err){
         res.status(400).json({error: err.message})
     }
-    */
+    
 }
 
 exports.getAll = async(req,res) => {

@@ -102,6 +102,16 @@ module.exports = function(){
  *       example:
  *        id: 1
  *        nombre: argentina  
+ *     Tematicas:
+ *       type: object
+ *       properties:
+ *        id:
+ *          type: integer
+ *        nombre:
+ *          type: string
+ *       example:
+ *        id: 1
+ *        nombre: viajes
  *     Provincia:
  *       type: object
  *       properties:
@@ -634,7 +644,8 @@ module.exports = function(){
  *         nombre: delantero
  *         disciplinaxclubxposId: 1
  *         disxclubxdivId: 5
- *      
+ *         
+ *             
  *         
  *           
  *       
@@ -642,7 +653,6 @@ module.exports = function(){
  *         
  *
  */
-
 
 
 
@@ -1940,8 +1950,72 @@ module.exports = function(){
 
 
     router.get('/beneficios/club/:club',beneficiosControllers.getBeneficioXClubByClub)
+
+                       /**
+ * @swagger
+ * /api/beneficios/club/usuario/{club}/{usuario}:
+ *   get:
+ *     summary: get beneficios de un usuario que pertenece a un club
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get beneficios by clubId
+ *       - in : path
+ *         name: usuario
+ *         description: get beneficios by usuarioId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get beneficios x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */ 
     router.get('/beneficios/club/usuario/:club/:usuario',beneficiosControllers.getBeneficioXClubByClubByUsario)
     router.delete('/beneficios/club/usuario/beneficio/:club/:usuario/:beneficio',beneficiosControllers.eliminarBeneficioXUsuario)
+    
+
+                        /**
+ * @swagger
+ * /api/beneficios/club/rubro/{club}/{rubro}:
+ *   get:
+ *     summary: get beneficio por rubro que tenga un club
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get beneficios by clubId
+ *       - in : path
+ *         name: rubro
+ *         description: get beneficios by rubro
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get beneficios x club x rubro
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+    
     router.get('/beneficios/club/rubro/:club/:rubro',beneficiosControllers.getBeneficioXClubXRubro)
     
 
@@ -1950,49 +2024,642 @@ module.exports = function(){
 
     //notificacion
 
+    /**
+ * @swagger
+ * /api/notificacion:
+ *   post:
+ *     summary: Crer una notificacion
+ *     tags: [Notificacion]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Notificaciones'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Notificaciones'
+ *       500:
+ *         description: Some server error
+ */
+
+
+
     router.post('/notificacion',notificacionControllers.crear)
 
     router.post('/notificacion/superadmin',notificacionControllers.crearSuperadmin)
+
+                           /**
+ * @swagger
+ * /api/notificacion:
+ *   get:
+ *     summary: get all notificaciones
+ *     tags: [Notificacion]
+ *     responses:
+ *       200:
+ *         description:  get all notificaciones
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */ 
     router.get('/notificacion',notificacionControllers.getAll)
    
+
+                          /**
+ * @swagger
+ * /api/notificacion/{id}:
+ *   get:
+ *     summary: get id 
+ *     tags: [Notificacion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de un rubro
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get notificacion id
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
     router.get('/notificacion/:id',notificacionControllers.getById)
+
+                          /**
+ * @swagger
+ * /api/notificacion/{id}:
+ *   delete:
+ *     summary: get id 
+ *     tags: [Notificacion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de un rubro
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get notificacion id
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
     router.delete('/notificacion/:id',notificacionControllers.eliminar)
     router.put('/notificacion/:id',notificacionControllers.modificar)
 
     //notificacion x club
+
+                          /**
+ * @swagger
+ * /api/notificacion/{notificacion}/{club}:
+ *   post:
+ *     summary: post de notificacion a un club
+ *     tags: [NotificacionXClub]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description:  id de un club
+ *       - in : path
+ *         name: notificacion
+ *         description: id de una notificacion
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:   enviar una notificacion a un club
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
     router.post('/notificacion/:notificacion/:club',notxclubControllers.crear)
+
+                          /**
+ * @swagger
+ * /api/notificacion/club/{club}:
+ *   get:
+ *     summary: get notificaciones que pertenecen a un club
+ *     tags: [NotificacionXClub]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get notificacion by clubid
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */      
     router.get('/notificacion/club/:club',notxclubControllers.getByClub)
+
+                          /**
+ * @swagger
+ * /api/notificacion-club/{id}:
+ *   get:
+ *     summary: get notificaciones que pertenecen a un club
+ *     tags: [NotificacionXClub]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de notificacionxclub
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id de notificacionxclub
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+
     router.get('/notificacion-club/:id',notxclubControllers.getById)
+
+                          /**
+ * @swagger
+ * /api/notificacion-club/{id}:
+ *   delete:
+ *     summary: get notificaciones que pertenecen a un club
+ *     tags: [NotificacionXClub]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de notificacionxclub
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id de notificacionxclub
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+
     router.delete('/notificacion-club/:id',notxclubControllers.eliminar)
 
 
     //notificacio x club x usuario
+
+
+                          /**
+ * @swagger
+ * /api/notificacion-usuario/{notxclub}/{clubxusuario}:
+ *   post:
+ *     summary: envio de notificacacion a un usuario
+ *     tags: [NotificacionXClubXUsuario]
+ *     parameters:
+ *       - in : path
+ *         name: notxclub
+ *         description:  id de un club
+ *       - in : path
+ *         name: clubxusuario
+ *         description: id club x usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:   enviar una notificacion a un club
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
     router.post('/notificacion-usuario/:notxclub/:clubxusuario',notxclubxusuario.crear)
     //usar
+
+                          /**
+ * @swagger
+ * /api/notificacion-clubxusuario/{notificacion}:
+ *   get:
+ *     summary: get usuarios que reciben la notificacion <---------------FALTA REVISAR
+ *     tags: [NotificacionXClubXUsuario]
+ *     parameters:
+ *       - in : path
+ *         name: notificacion
+ *         description: id 
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id de notificacionxclub
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/notificacion-clubxusuario/:notificacion',notxclubxusuario.getAllByClubByUser)
+
+
+                             /**
+ * @swagger
+ * /api/notificacion-usuario/{id}:
+ *   get:
+ *     summary: get usuarios que reciben la notificacion 
+ *     tags: [NotificacionXClubXUsuario]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  una notificiacion que pertenece a un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/notificacion-usuario/:id',notxclubxusuario.getById)
+
+
+                             /**
+ * @swagger
+ * /api/notificacion-post:
+ *   post:
+ *     summary: envio de notificacions  <----- FALTA REVISAR
+ *     tags: [NotificacionXClubXUsuario]
+ *     responses:
+ *       200:
+ *         description:  get  una notificiacion que pertenece a un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+    
     router.post('/notificacion-post',notificacionControllers.sendNotificacion)
     router.get('/notificacion-get',notificacionControllers.getTokenFirebase)
 
     //tematica
 
+
+                               /**
+ * @swagger
+ * /api/tematicas:
+ *   get:
+ *     summary: get all tematicas
+ *     tags: [Tematicas]
+ *     responses:
+ *       200:
+ *         description:  get all tematicas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Tematicas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */ 
     router.get('/tematicas',tematicaControllers.getAll)
 
+
+
+                              /**
+ * @swagger
+ * /api/tematicas/{notificacion}:
+ *   get:
+ *     summary: get de notificacion por tematicas
+ *     tags: [Notificacion]
+ *     parameters:
+ *       - in : path
+ *         name: notificacion
+ *         description: id notificacion
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get tematica by id de notificacion
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Tematicas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
     router.get('/tematicas/:notificacion',tematicaControllers.getByNotificacion)
    
 
     //encuesta
+
+    /**
+ * @swagger
+ * /api/encuesta:
+ *   post:
+ *     summary: Crer una encuesta
+ *     tags: [Encuesta]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Encuesta'
+ *     responses:
+ *       200:
+ *         description: The encursta was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Encuesta'
+ *       500:
+ *         description: Some server error
+ */
+
+
     router.post('/encuesta',encuestaControllers.crear)
+
+   
+                               /**
+ * @swagger
+ * /api/encuesta:
+ *   get:
+ *     summary: get all encuesta
+ *     tags: [Encuesta]
+ *     responses:
+ *       200:
+ *         description:  get all encuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Encuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
     router.get('/encuesta',encuestaControllers.getAll)
+
+                                 /**
+ * @swagger
+ * /api/encuesta/{id}:
+ *   put:
+ *     summary: get de una encuesta por id
+ *     tags: [Encuesta]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de una encuesta por id
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Encuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     router.get('/encuesta/:id',encuestaControllers.getById)
+
+
+    //encuesta
+
+    /**
+ * @swagger
+ * /api/encuesta/{id}:
+ *   put:
+ *     summary: modificar una encuesta
+ *     tags: [Encuesta]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Encuesta'
+ *     responses:
+ *       200:
+ *         description: The encursta was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Encuesta'
+ *       500:
+ *         description: Some server error
+ */
     router.put('/encuesta/:id',encuestaControllers.modificar)
+
+
+                                 /**
+ * @swagger
+ * /api/encuesta/{id}:
+ *   delete:
+ *     summary: eliminar una encuesta
+ *     tags: [Encuesta]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de una encuesta por id
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Encuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     router.delete('/encuesta/:id',encuestaControllers.eliminar)
+
+
+                                /**
+ * @swagger
+ * /api/encuesta-post/{userId}:
+ *   post:
+ *     summary: envio de encuesta  <----- FALTA REVISAR
+ *     tags: [Encuesta]
+ *     parameters:
+ *       - in : path
+ *         name: userId
+ *         description: id 
+ *     responses:
+ *       200:
+ *         description:  get  una notificiacion que pertenece a un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.post('/encuesta-post/:userId',notificacionControllers.sendNotificacion)
+
+     
     
     //pregunta
+
+                               /**
+ * @swagger
+ * /api/preguntas:
+ *   get:
+ *     summary: get all preguntas
+ *     tags: [Preguntas]
+ *     responses:
+ *       200:
+ *         description:  get all preguntas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Preguntas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
     router.get('/preguntas',preguntaControllers.getPreguntas)
 
+ 
+
+
+
     router.get('/pregunta/encuesta/:encuesta',preguntaControllers.getByEncuesta)
+
+
+ 
+
+   /**
+ * @swagger
+ * /api/pregunta/{encuesta}:
+ *   post:
+ *     summary: Crer una notificacion
+ *     tags: [Preguntas]
+ *     parameters:
+ *       - in : path
+ *         name: encuesta
+ *         description: id 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Pregunta'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pregunta'
+ *       500:
+ *         description: Some server error
+ */
     router.post('/pregunta/:encuesta',preguntaControllers.crear)
     router.get('/pregunta/:encuesta',preguntaControllers.getAll)
     router.get('/pregunta/id/:id',preguntaControllers.getById)
