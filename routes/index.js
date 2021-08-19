@@ -1724,6 +1724,34 @@ module.exports = function(){
     //imagen
 
     router.post('/image',imageControllers.subirArchivos)
+
+                    /**
+ * @swagger
+ * /api/image/{img}:
+ *   get:
+ *     summary: get de una imagen en el caso de que no tenga una url
+ *     tags: [imagen]
+ *     parameters:
+ *       - in : path
+ *         name: img
+ *         type: string
+ *         description: get imagen by name
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get image
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: file
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/image/:img',imageControllers.getImage)
 
 
@@ -1765,16 +1793,152 @@ module.exports = function(){
     router.post('/beneficios',imageControllers.subirArchivos,beneficiosControllers.crear)
     router.put('/beneficios/:id',imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',beneficiosControllers.eliminar)
+
+
+                    /**
+ * @swagger
+ * /api/beneficios:
+ *   get:
+ *     summary: get all beneficios
+ *     tags: [Beneficios]
+ *     responses:
+ *       200:
+ *         description:  get all beneficios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     router.get('/beneficios',beneficiosControllers.getAll)
+
+                    /**
+ * @swagger
+ * /api/beneficios/{id}:
+ *   get:
+ *     summary: get id 
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de un beneficio
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id by beneficio
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     router.get('/beneficios/:id',beneficiosControllers.getById)
 
     //rubros
+
+
+                    /**
+ * @swagger
+ * /api/rubro:
+ *   get:
+ *     summary: get all rubro
+ *     tags: [Rubro]
+ *     responses:
+ *       200:
+ *         description:  get all rubro
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Rubros'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.get('/rubro',rubroControllers.getAll)
+
+                      /**
+ * @swagger
+ * /api/rubro/{id}:
+ *   get:
+ *     summary: get id 
+ *     tags: [Rubro]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de un rubro
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id by rubro
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Rubros'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+
     router.get('/rubro/:id',rubroControllers.getById)
 
 
     //beneficio x club
+
+
+
+
+
     router.post('/beneficios/:club/:usuario/:beneficio',beneficiosControllers.crearBeneficioXClub)
+
+
+
+                    /**
+ * @swagger
+ * /api/beneficios/club/{club}:
+ *   get:
+ *     summary: get beneficios de un club
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get beneficios by clubId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get beneficios x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
     router.get('/beneficios/club/:club',beneficiosControllers.getBeneficioXClubByClub)
     router.get('/beneficios/club/usuario/:club/:usuario',beneficiosControllers.getBeneficioXClubByClubByUsario)
     router.delete('/beneficios/club/usuario/beneficio/:club/:usuario/:beneficio',beneficiosControllers.eliminarBeneficioXUsuario)

@@ -239,7 +239,7 @@ exports.getBeneficioXClubByClub = async (req,res) => {
     const club = req.params.club
 
 
-    const resultClub =  await Beneficios.findByPk(club)
+    const resultClub =  await Club.findByPk(club)
 
     if(!resultClub)throw new Error('el id del club no existe')
 
