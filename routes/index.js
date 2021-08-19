@@ -1494,13 +1494,11 @@ module.exports = function(){
  *           schema:
  *             type: object
  *             properties:
- *              orderId:
- *                type: integer
- *              userId:
- *                type: integer
- *              fileName:
+ *              imagen:
  *                type: string
  *                format: binary
+ *              data:
+ *                type: object
  *     responses:
  *       200:
  *         description: The post was successfully created
@@ -1514,7 +1512,7 @@ module.exports = function(){
 
 
 
-    router.post('/beneficios',beneficiosControllers.crear)
+    router.post('/beneficios',imageControllers.subirArchivos,beneficiosControllers.crear)
     router.put('/beneficios/:id',imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',beneficiosControllers.eliminar)
     router.get('/beneficios',beneficiosControllers.getAll)
