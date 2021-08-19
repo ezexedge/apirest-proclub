@@ -29,7 +29,9 @@ exports.getEspacio =  async (req,res) => {
     try{
 
 
-    const result = await Espacio.findAll({})
+    const result = await Espacio.findAll({
+        where: {activo: 1}
+    })
 
     res.status(200).json(result)    
 
@@ -49,7 +51,9 @@ exports.getEspacioById =  async (req,res) => {
 
         const id = req.params.id
 
-        const result = await Espacio.findByPk(id)
+        const result = await Espacio.findOne({
+            where: {activo: 1, id: id}
+        })
         
         
         if(result){
@@ -58,7 +62,7 @@ exports.getEspacioById =  async (req,res) => {
             res.status(200).json(result)    
         
         }else{
-            throw new Error('el espacio no existe')
+            throw new Error('el espacio no existe ')
         }
     
 

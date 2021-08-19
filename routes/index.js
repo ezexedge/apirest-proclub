@@ -2792,16 +2792,278 @@ module.exports = function(){
  */
 
 router.post('/respuesta/pregunta/:pregunta',respuestaControllers.crear)
+
+
+                    /**
+ * @swagger
+ * /api/respuesta/pregunta/{pregunta}:
+ *   get:
+ *     summary: get respuesta by id pregunta
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: pregunta
+ *         description: get respuesta by id pregunta
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get respuesta by id de pregunta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Respuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/respuesta/pregunta/:pregunta',respuestaControllers.getAll) 
+
+
+                    /**
+ * @swagger
+ * /api/respuesta/{id}:
+ *   get:
+ *     summary: get respuesta by id
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get respuesta by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get respuesta by id 
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Respuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.get('/respuesta/:id',respuestaControllers.getById)
+
+
+
+  /**
+ * @swagger
+ * /api/respuesta/{id}:
+ *   put:
+ *     summary: update de una respuesta
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Respuesta'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Respuesta'
+ *       500:
+ *         description: Some server error
+ */   
 router.put('/respuesta/:id',respuestaControllers.modificar)
+
+
+
+                    /**
+ * @swagger
+ * /api/respuesta/{id}:
+ *   delete:
+ *     summary: eliminar respuesta
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una respuesta
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de una respuesta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Respuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 router.delete('/respuesta/:id',respuestaControllers.eliminar)  
 
 //espacio
+
+
+
+
+
+   /**
+ * @swagger
+ * /api/espacio:
+ *   post:
+ *     summary: Crear un espacio
+ *     tags: [Espacio]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Espacios'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Espacios'
+ *       500:
+ *         description: Some server error
+ */
+
 router.post('/espacio',espacioControllers.crearEspacio)
+
+
+                /**
+ * @swagger
+ * /api/espacio:
+ *   get:
+ *     summary: get all espacios
+ *     tags: [Espacio]
+ *     responses:
+ *       200:
+ *         description:  get all espacios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Espacios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 router.get('/espacio',espacioControllers.getEspacio)
+
+
+                   /**
+ * @swagger
+ * /api/espacio/{id}:
+ *   get:
+ *     summary: get respuesta by id
+ *     tags: [Espacio]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get Espacio by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get Espacio by id 
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Espacios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 router.get('/espacio/:id',espacioControllers.getEspacioById)
+
+
+
+  /**
+ * @swagger
+ * /api/espacio/{id}:
+ *   put:
+ *     summary: update de un espacio
+ *     tags: [Espacio]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un espacio
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Espacios'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Espacios'
+ *       500:
+ *         description: Some server error
+ */   
+
 router.put('/espacio/:id',espacioControllers.updateEspacio)
+
+
+
+                    /**
+ * @swagger
+ * /api/espacio/{id}:
+ *   delete:
+ *     summary: eliminar un espacio
+ *     tags: [Espacio]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un espacio
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de un espacio
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Espacios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 router.delete('/espacio/:id',espacioControllers.eliminarEspacio)
 
 //estado espacio
