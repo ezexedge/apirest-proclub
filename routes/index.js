@@ -1486,7 +1486,7 @@ module.exports = function(){
  * @swagger
  * /api/beneficios:
  *   post:
- *     summary: Create a new book
+ *     summary: Crear un nuevo beneficio
  *     tags: [Beneficios]
  *     requestBody:
  *       content:
