@@ -3650,7 +3650,7 @@ router.get('/turno/:id',turnoControllers.getById)
  *         description: Some server error
  */
 
-router.post('/turno/:espacio/:estado',turnoControllers.crear)
+router.post('/turno/:espacio',turnoControllers.crear)
 router.delete('/turno/:id',turnoControllers.eliminar)
 
 
