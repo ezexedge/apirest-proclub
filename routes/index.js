@@ -2616,7 +2616,7 @@ module.exports = function(){
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Preguntas'
+ *                 $ref: '#/components/schemas/Pregunta'
  *       400:
  *         description: post can not be found
  * 
@@ -2629,6 +2629,8 @@ module.exports = function(){
 
 
 
+
+
     router.get('/pregunta/encuesta/:encuesta',preguntaControllers.getByEncuesta)
 
 
@@ -2638,12 +2640,12 @@ module.exports = function(){
  * @swagger
  * /api/pregunta/{encuesta}:
  *   post:
- *     summary: Crer una notificacion
+ *     summary: Crear una pregunta 
  *     tags: [Preguntas]
  *     parameters:
  *       - in : path
  *         name: encuesta
- *         description: id 
+ *         description: id de una encuesta existente (asociar)
  *     requestBody:
  *       required: true
  *       content:
@@ -2661,12 +2663,134 @@ module.exports = function(){
  *         description: Some server error
  */
     router.post('/pregunta/:encuesta',preguntaControllers.crear)
+
+                    /**
+ * @swagger
+ * /api/pregunta/{encuesta}:
+ *   get:
+ *     summary: get pregunta por encuesta by id
+ *     tags: [Preguntas]
+ *     parameters:
+ *       - in : path
+ *         name: encuesta
+ *         description: get encuesta by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get pregunta por encuesta by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Pregunta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+    
     router.get('/pregunta/:encuesta',preguntaControllers.getAll)
+
+
     router.get('/pregunta/id/:id',preguntaControllers.getById)
+
+
+   /**
+ * @swagger
+ * /api/pregunta/{id}:
+ *   put:
+ *     summary: update de una pregunta
+ *     tags: [Preguntas]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Pregunta'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Pregunta'
+ *       500:
+ *         description: Some server error
+ */                                               
+
     router.put('/pregunta/:id',preguntaControllers.modificar)
+
+                    /**
+ * @swagger
+ * /api/pregunta/{id}:
+ *   delete:
+ *     summary: eliminar pregunta
+ *     tags: [Preguntas]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una pregunta
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de una pregunta
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Pregunta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
     router.delete('/pregunta/:id',preguntaControllers.eliminar)
 
 //respuesta
+
+
+
+ 
+
+   /**
+ * @swagger
+ * /api/respuesta/pregunta/{pregunta}:
+ *   post:
+ *     summary: Crear una respuesta asociada a un id de pregunta 
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: pregunta
+ *         description: id de pregunta
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Respuesta'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Respuesta'
+ *       500:
+ *         description: Some server error
+ */
+
 router.post('/respuesta/pregunta/:pregunta',respuestaControllers.crear)
 router.get('/respuesta/pregunta/:pregunta',respuestaControllers.getAll) 
 router.get('/respuesta/:id',respuestaControllers.getById)

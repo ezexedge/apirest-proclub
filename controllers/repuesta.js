@@ -1,3 +1,4 @@
+const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 
 exports.crear = async(req,res) => {
@@ -6,6 +7,9 @@ exports.crear = async(req,res) => {
 
         const pregunta =  req.params.pregunta
         const {titulo} = req.body
+
+        const resultPregunta = await Pregunta.findByPk(pregunta)
+        if(!resultPregunta)throw new Error('la pregunta no existe')
         const result  =  await Respuesta.create({titulo: titulo , preguntaId: pregunta})
 
         res.status(200).json(result)
