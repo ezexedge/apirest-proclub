@@ -131,3 +131,40 @@ exports.eliminarEspacio =  async (req,res) => {
      
     }
 }
+
+exports.getEspacioByClubId =  async (req,res) => {
+
+    try{
+
+
+        const club = req.params.club
+
+        if(!club)throw new Error('el club no existe')
+
+        const result = await Espacio.findAll({
+            where: {
+            activo: 1,
+            clubId: club
+
+                }
+        })
+        
+        
+        if(result){
+
+    
+            res.status(200).json(result)    
+        
+        }else{
+            throw new Error('el espacio no existe ')
+        }
+    
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+}
+//getEspacioByClubId

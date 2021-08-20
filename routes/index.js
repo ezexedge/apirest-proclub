@@ -3294,6 +3294,12 @@ router.post('/espacio',espacioControllers.crearEspacio)
 router.get('/espacio',espacioControllers.getEspacio)
 
 
+
+router.get('/espacio/club/:club',espacioControllers.getEspacioByClubId)
+
+
+
+
                    /**
  * @swagger
  * /api/espacio/{id}:
@@ -3566,6 +3572,7 @@ router.get('/reserva',reservaControllers.getAll)
 
 
 router.get('/reserva/:id',reservaControllers.getbyId)
+
 
 
                         /**
