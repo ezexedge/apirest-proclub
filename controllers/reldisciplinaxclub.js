@@ -107,7 +107,7 @@ exports.deleteDeporteXClub = async (req,res)=> {
 
             result[0].activo = 0
             await result[0].save()
-            res.status(200).json(result)
+            res.status(200).json({message: 'eliminado correctamente'})
 
         }
     
@@ -153,7 +153,7 @@ exports.createDeporteXClub = async (req,res)=> {
 
         const resultDisciplina = await Disciplina.findOne({
             where:{
-                id: club,
+                id: disciplina,
                 activo: 1
             }
         })

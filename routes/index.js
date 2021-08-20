@@ -240,7 +240,6 @@ module.exports = function(){
  *         id: 1
  *         nombre: club prueba
  *         descripcion: es un club
- *         logo: image1
  *         colorPrimario: #FFFF
  *         colorSecundario: #FFFF
  *         colorTextoPrimario: #FFFF
@@ -259,6 +258,11 @@ module.exports = function(){
  *           cp: '113'
  *           localidad: 'moreno'
  *           provinciaId: 1
+ *         responsable:
+ *          nombre: "victor"
+ *          apellido: "martinez"
+ *          telefono: 112223
+ *          correo: "victor@gmail.com"
  *     Beneficios:
  *       type: object
  *       properties:
@@ -804,7 +808,71 @@ module.exports = function(){
  */
 
     router.post('/clubs',imageControllers.subirArchivos,clubControllers.crearClub)
+
+                          /**
+ * @swagger
+ * /api/clubs/{id}:
+ *   delete:
+ *     summary: delete club by id 
+ *     tags: [Clubs]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un club existente
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de un club
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Clubs'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
     router.delete('/clubs/:id',clubControllers.clubEliminar)
+
+
+
+    /**
+ * @swagger
+ * /api/clubs/{id}:
+ *   put:
+ *     summary: modificar un club
+ *     tags: [Clubs]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *              data:
+ *                type: object
+ *     responses:
+ *       200:
+ *         description: The encursta was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clubs'
+ *       500:
+ *         description: Some server error
+ */
+
     router.put('/clubs/:id',imageControllers.subirArchivos, clubControllers.clubEditar)
    router.get('/lista-clubs/activos',clubControllers.listClubWithRespAndPais);
 
@@ -895,6 +963,31 @@ module.exports = function(){
 
 
    //disciplina
+
+    /**
+ * @swagger
+ * /api/disciplina:
+ *   post:
+ *     summary: agregar una disciplina
+ *     tags: [Disciplina]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Disciplinas'
+ *     responses:
+ *       200:
+ *         description: The encursta was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Disciplinas'
+ *       500:
+ *         description: Some server error
+ */
+
+
    router.post('/disciplina',disciplinaControllers.crearDisciplina)
 
 /**
@@ -943,7 +1036,67 @@ module.exports = function(){
  * 
  */
    router.get('/disciplina/:id',disciplinaControllers.getDisciplinaById)
+
+
+
+    /**
+ * @swagger
+ * /api/disciplina/{id}:
+ *   put:
+ *     summary: modificar una discplina
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id 
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Disiciplinas'
+ *     responses:
+ *       200:
+ *         description: The encursta was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Disicplinas'
+ *       500:
+ *         description: Some server error
+ */
+
    router.put('/disciplina/:id',disciplinaControllers.updateDisciplina)
+
+
+                             /**
+ * @swagger
+ * /api/disciplina/{id}:
+ *   delete:
+ *     summary: get id 
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de una disciplina
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete disciplina
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Disciplinas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+
    router.delete('/disciplina/:id',disciplinaControllers.eliminarDisciplina)
 
 //el id hacer referencia al id de clubxusuario 
@@ -1061,7 +1214,71 @@ module.exports = function(){
  */
 
     router.get('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.getDeporteXClubById)
+
+
+                             /**
+ * @swagger
+ * /api/disciplina-club/{club}/{disciplina}:
+ *   delete:
+ *     summary: delete de una disciplina que esta relacionada a un club
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get id de un club
+ *       - in : path
+ *         name: disciplina
+ *         description: get id de una disciplina
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete disciplina x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/RelDisciplinaxClub'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+
     router.delete('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.deleteDeporteXClub)
+    
+    
+                             /**
+ * @swagger
+ * /api/disciplina-club/{club}/{disciplina}:
+ *   post:
+ *     summary: agregar una disciplina a un club
+ *     tags: [Disciplina]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get id de un club
+ *       - in : path
+ *         name: disciplina
+ *         description: get id de una disciplina
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  agregar disciplina x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/RelDisciplinaxClub'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+    
     router.post('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.createDeporteXClub)
      
    

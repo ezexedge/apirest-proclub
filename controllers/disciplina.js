@@ -115,7 +115,7 @@ exports.eliminarDisciplina =  async (req,res) => {
             result.activo = 0
 
             await result.save()
-            res.status(200).json(result)
+            res.status(200).json({message: 'eliminado correctamente'})
           
             
         }else{

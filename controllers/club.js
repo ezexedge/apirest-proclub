@@ -186,7 +186,7 @@ exports.clubEliminar = async (req, res) => {
 
     await club.save()
 
-    res.status(200).json(club)
+    res.status(200).json({message: 'club eliminado'})
 
   } catch (err) {
     console.log('errorr-----', err)
