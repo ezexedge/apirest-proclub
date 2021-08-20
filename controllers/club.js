@@ -200,11 +200,6 @@ exports.clubEliminar = async (req, res) => {
 exports.crearClub = async (req, res) => {
   
 
-
- 
-
-    
- 
  
   const t = await db.transaction()
 
@@ -218,6 +213,7 @@ exports.crearClub = async (req, res) => {
     const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp  } = JSON.parse(req.body.data)
   
 
+    console.log( JSON.parse(req.body.data))
     let imagen = req.file.filename
     console.log(imagen)
 
