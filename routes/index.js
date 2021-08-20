@@ -773,6 +773,36 @@ module.exports = function(){
  */
 
     router.get('/clubs/:id',clubControllers.clubById)
+
+
+/**
+ * @swagger
+ * /api/clubs:
+ *   post:
+ *     summary: Crear un nuevo club
+ *     tags: [Clubs]
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *              data:
+ *                type: object
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Clubs'
+ *       500:
+ *         description: Some server error
+ */
+
     router.post('/clubs',imageControllers.subirArchivos,clubControllers.crearClub)
     router.delete('/clubs/:id',clubControllers.clubEliminar)
     router.put('/clubs/:id',imageControllers.subirArchivos, clubControllers.clubEditar)
@@ -1837,6 +1867,8 @@ module.exports = function(){
 
 
     router.post('/beneficios',imageControllers.subirArchivos,beneficiosControllers.crear)
+
+
     router.put('/beneficios/:id',imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',beneficiosControllers.eliminar)
 
@@ -3631,8 +3663,8 @@ router.get('/turno/:id',turnoControllers.getById)
  *     tags: [Turno]
  *     parameters:
  *       - in : path
- *         name: estado
- *         description: id de estado
+ *         name: espacio
+ *         description: id de espacio
  *     requestBody:
  *       required: true
  *       content:
@@ -3651,6 +3683,37 @@ router.get('/turno/:id',turnoControllers.getById)
  */
 
 router.post('/turno/:espacio',turnoControllers.crear)
+
+                    /**
+ * @swagger
+ * /api/turno/{id}:
+ *   delete:
+ *     summary: eliminar un turno por id
+ *     tags: [Turno]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de un turno
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de una reserva
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Turnos'
+ *
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 router.delete('/turno/:id',turnoControllers.eliminar)
 
 
@@ -3659,25 +3722,120 @@ router.delete('/turno/:id',turnoControllers.eliminar)
 
 
 
-
+                                       /**
+ * @swagger
+ * /api/estado-documento:
+ *   get:
+ *     summary: get de los estado de documento
+ *     tags: [EstadoDocumento <---falta terminar]
+ * 
+ */
 router.get('/estado-documento',estadodocumentoControllers.getAll)
+
+                    /**
+ * @swagger
+ * /api/estado-documento/{id}:
+ *   get:
+ *     summary: eliminar un turno por id
+ *     tags: [EstadoDocumento <---falta terminar]
+ * 
+ */
+
 router.get('/estado-documento/:id',estadodocumentoControllers.getById)
 
 
 //documentacion
+
+
+                                       /**
+ * @swagger
+ * /api/archivo:
+ *   post:
+ *     summary: post agregar archivo
+ *     tags: [Archivo <---falta terminar]
+ * 
+ */
 router.post('/archivo',archivoControllers.subirArchivos)
+
+
+                                       /**
+ * @swagger
+ * /api/archivo/{id}:
+ *    get:
+ *     summary: get archivo by id
+ *     tags: [Archivo <---falta terminar]
+ * 
+ */
 router.get('/archivo/:id',archivoControllers.getArchivo)
     
+                                      /**
+ * @swagger
+ * /api/documento/{club}/{usuario}:
+ *    post:
+ *     summary: get archivo by id
+ *     tags: [Documento <---falta terminar]
+ * 
+ */
+
 router.post('/documento/:club/:usuario',archivoControllers.subirArchivos,documentoControllers.crear)
+
+                                      /**
+ * @swagger
+ * /api/documento/club/{club}:
+ *    get:
+ *     summary: get archivo by id
+ *     tags: [Documento <---falta terminar]
+ * 
+ */
 router.get('/documento/club/:club',documentoControllers.getAllByClub)
+                                     /**
+ * @swagger
+ * /api/documento/club/usuario/{club}/{usuario}:
+ *    put:
+ *     summary: get archivo by id
+ *     tags: [Documento <---falta terminar]
+ * 
+ */
+
 router.put('/documento/club/usuario/:club/:usuario',archivoControllers.subirArchivos,documentoControllers.ModificarImagen)
+
+                                      /**
+ * @swagger
+ * /api/documento/club/usuario/{club}/{usuario}:
+ *    get:
+ *     summary: get archivo by id
+ *     tags: [Documento <---falta terminar]
+ * 
+ */
 router.get('/documento/club/usuario/:club/:usuario',documentoControllers.getAllByClubByUser)
+
+                                      /**
+ * @swagger
+ * /api/documento/club/usuario/{club}/{usuario}:
+ *    delete:
+ *     summary: get archivo by id
+ *     tags: [Documento <---falta terminar]
+ * 
+ */
+
 router.delete('/documento/club/usuario/:club/:usuario',documentoControllers.eliminar)
 //cambio de estado de documentacion
+
+
+                                      /**
+ * @swagger
+ * /api/documento/club/usuario/{club}/{usuario}/{estado}:
+ *    put:
+ *     summary: get archivo by id
+ *     tags: [Documento <---falta terminar]
+ * 
+ */
+
 router.put('/documento/club/usuario/:club/:usuario/:estado',documentoControllers.cambiarEstado)
 
 
 ///division
+
 router.get('/division/:club/:disciplina',divControllers.getByClubByDis)
 
 

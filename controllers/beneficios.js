@@ -71,8 +71,9 @@ exports.crear = async (req, res) => {
       if(!result) throw new Error('el beneficio no existe')
 
 
-      const { nombre , descripcion , telefono , web ,instagram , correo , rubroId , pathImage} = JSON.parse(req.body.data)
-     
+      const { nombre , descripcion , telefono , web ,instagram , correo , rubro } = JSON.parse(req.body.data)
+   
+    
      
       let imagen
       if(req.file) {
@@ -83,7 +84,7 @@ exports.crear = async (req, res) => {
       } 
    
 
-      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : imagen },{where: {id: result.id}, transaction: t })
+      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubro , pathImage : imagen },{where: {id: result.id}, transaction: t })
   
     
       await t.commit();

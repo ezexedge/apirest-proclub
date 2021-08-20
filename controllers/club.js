@@ -226,6 +226,10 @@ exports.crearClub = async (req, res) => {
  
     }
 
+    if(!logo || logo === ''){
+      logo = imagen
+    }
+
     const nuevaPersona = await Persona.create({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono, correo: responsable.correo },{ transaction: t })
 
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
