@@ -1868,6 +1868,9 @@ module.exports = function(){
    
     //auth
     router.post('/validate',authValidateControllers.validate)
+
+
+
     router.post('/signup',authSignupControllers.signup)
     router.post('/signin',authSignupControllers.signin)
     router.post('/registrar-firebase',authSignupControllers.registrarEnFirebase)
@@ -3622,6 +3625,31 @@ router.get('/reserva/usuario/:usuario/:club',reservaControllers.getbyUserId)
 
 router.put('/reserva/:id/:estado',reservaControllers.modificiarEstado)
 
+
+
+  /**
+ * @swagger
+ * /api/reserva/{usuario}/{turno}:
+ *   post:
+ *     summary: Crear reserva
+ *     tags: [Reserva]
+ *     parameters:
+ *       - in : path
+ *         name: usuario
+ *         description: id de usuario
+ *       - in : path
+ *         name: turno
+ *         description: id de turno
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Reserva'
+ *       500:
+ *         description: Some server error
+ */
 
 
 router.post('/reserva/:usuario/:turno',reservaControllers.crear)
