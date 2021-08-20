@@ -3598,7 +3598,7 @@ router.get('/reserva/:id',reservaControllers.getbyId)
  * 
  * 
  */   
-router.get('/reserva/usuario/:usuario/:club',reservaControllers.getbyUserId)
+router.get('/reserva/usuario/:usuario',reservaControllers.getbyUserId)
 
     /**
  * @swagger

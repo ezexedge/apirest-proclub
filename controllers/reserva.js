@@ -59,7 +59,6 @@ exports.getbyUserId = async (req,res) => {
     try{
 
         const usuario = req.params.usuario
-        const club = req.params.club
       
 
         const usuarioResult = await Usuario.findOne({
@@ -72,15 +71,12 @@ exports.getbyUserId = async (req,res) => {
         if(!usuarioResult) throw new Error('el usuario no existe')
 
         const result =  await Reservas.findAll({
-            attributes: ['id','fecha'],
             include:[{
                 model: Turno,
                 as: 'turno',
-               attributes: ['fecha','horaDesde','horaHasta'],
                 include: [{
                     model: Espacio,
                     as: 'espacio',
-                    attributes:['nombre', 'descripcion'],
                 }]
             }],
            where:{
