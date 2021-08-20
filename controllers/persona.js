@@ -29,6 +29,7 @@ exports.personaById = async (req, res) => {
   try {
 
 
+
     const id = req.params.id
 
     const result = await Persona.findByPk(id)
@@ -78,7 +79,9 @@ exports.crearPersona = async (req, res) => {
 
   try {
 
-
+  if(!req.file) {
+      throw new Error('debe ingresar una imagen')
+    }
   
 
 
@@ -94,6 +97,7 @@ exports.crearPersona = async (req, res) => {
       imagen = ''
     }
 
+    
     const aprobado = await Estados.findOne({where:{ nombre : 'aprobado' }})
     if(!aprobado){
       throw new Error('no existe el estado aprobado en la base de datos')

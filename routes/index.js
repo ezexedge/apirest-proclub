@@ -1463,6 +1463,39 @@ module.exports = function(){
  */
 
     router.get('/personas/:id',personControllers.personaById)
+    
+    
+
+
+/**
+ * @swagger
+ * /api/persona:
+ *   post:
+ *     summary: Crear una nueva persona
+ *     tags: [Persona]
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *              data:
+ *                type: object
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Persona'
+ *       500:
+ *         description: Some server error
+ */
+    
+    
     router.post('/persona',imageControllers.subirArchivos, personControllers.crearPersona)
 
     router.get('/personas/lista-personas/personaWithDireccion/:id', personControllers.personaWhitDireccionById)
