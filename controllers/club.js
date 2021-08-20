@@ -210,7 +210,7 @@ exports.crearClub = async (req, res) => {
       throw new Error('debe ingresar una imagen')
     }
 
-    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp  } = JSON.parse(req.body.data)
+    const { descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp  } = JSON.parse(req.body.data)
   
 
     console.log( JSON.parse(req.body.data))
@@ -223,7 +223,7 @@ exports.crearClub = async (req, res) => {
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
 
      await Club.create({
-     logo: imagen, nombre: nombre, descripcion: descripcion, colorPrimario: colorPrimario,
+     logo: imagen, nombre: 'sss', descripcion: descripcion, colorPrimario: colorPrimario,
       colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
       colorTextoSecundario: colorTextoSecundario, direccionId: nuevaDireccion.id, personaId: nuevaPersona.id, activo: 1 , email: email
  , telefono: telefono , cuit: cuit  ,instagram: instagram,facebook:facebook,twitter:twitter, nombre_visible: nombre_visible , cp: cp  },{ transaction: t })
