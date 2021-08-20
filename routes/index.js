@@ -3570,7 +3570,7 @@ router.get('/reserva/:id',reservaControllers.getbyId)
 
                         /**
  * @swagger
- * /api/reserva/usuario/{usuario}/{club}:
+ * /api/reserva/usuario/{usuario}:
  *   get:
  *     summary: get reservas que tiene un usuario realizadas
  *     tags: [Reserva]
@@ -3578,9 +3578,6 @@ router.get('/reserva/:id',reservaControllers.getbyId)
  *       - in : path
  *         name: usuario
  *         description:  usuarioId
- *       - in : path
- *         name: club
- *         description: clubId
  *         schema:
  *           type: integer
  *         required: true
