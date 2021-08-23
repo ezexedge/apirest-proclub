@@ -151,66 +151,44 @@ exports.ModificarPersona = async (req, res) => {
 
   try {
 
-    const clubParams = req.params.club
     const usuarioParams = req.params.usuario
   
-    const result = await ClubXusuario.findAll({
-      include: [
-        {
-          model: Usuario,
-          as: 'usuario',
-          include : [
-            {
-              model: Persona,
-              as: 'persona'
-            }
-          ]
-        }
-      ],
-
-      where: {
-          usuarioId: usuarioParams,
-          clubId: clubParams
-        }  
-    })
+    const result = await Usuario.findByPk(usuarioParams)
+    if(!result)throw new Error('el usuario no existe')
 
     if(result.length === 0){
       throw new Error('el usuario no existe')
     }
 
+    const resultPersona = await Persona.findByPk(result.personaId)
+
+ 
+   
+
 console.log('sssssss',JSON.parse(req.body.data))
 
 
+let valores = JSON.parse(req.body.data)
 
-    const { nombre, apellido, telefono, correo, fechaNacimiento, rol, numeroDocumento, tipoDocumento, sexo, direccion ,avatar } = JSON.parse(req.body.data)
+const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria } = valores
     
     let imagen
     if(req.file) {
      imagen = req.file.filename
    
     }else{
-      imagen = avatar
+      imagen = resultPersona.avatar
     } 
     
-    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumento, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: numeroDocumento ,avatar : imagen },{where: {id: result[0].usuario.personaId},  transaction: t})
+    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{where: {id: result.personaId},  transaction: t})
 
-  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{where: {id: result[0].usuario.persona.direccionPersonaId},  transaction: t})
+  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia , cp: direccion.cp },{where: {id: resultPersona.direccionPersonaId},  transaction: t})
 
-  await Usuario.update({ rolId: rol, personaId: result[0].usuario.personaId  },{ where: { id: result[0].usuarioId }, transaction: t })
    
 
-    /*  const rta = await admin.auth().createUser({
-        email: 'desarrollo@texdinamo.com',
-        password: 'admin123'                 
-      })
-      console.log(rta);
-
-      await admin.auth().setCustomUserClaims(rta.uid, { role: 'SuperAdmin' }) */
-
-   // res.status(200).json({ "message": 'agregado correctamente' })
 
    await t.commit();
-
+ 
    res.status(200).json({ "message": "modificado con exito" })
 
   } catch (err) {

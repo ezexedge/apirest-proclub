@@ -1466,6 +1466,36 @@ module.exports = function(){
     
     
 
+            /**
+ * @swagger
+ * /api/personas/{id}:
+ *   get:
+ *     summary: get persona by id
+ *     tags: [Persona]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get persona by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: persona by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Persona'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+             router.put('/personas/update/:usuario',imageControllers.subirArchivos,personControllers.ModificarPersona)
+    
+    
+
 
 /**
  * @swagger
@@ -1497,6 +1527,9 @@ module.exports = function(){
     
     
     router.post('/persona',imageControllers.subirArchivos, personControllers.crearPersona)
+
+
+
 
     router.get('/personas/lista-personas/personaWithDireccion/:id', personControllers.personaWhitDireccionById)
 
