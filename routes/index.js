@@ -1513,7 +1513,11 @@ module.exports = function(){
  * /api/personas/update/{usuario}:
  *   put:
  *     summary: get persona by id
-  *     tags: [Persona]
+ *     tags: [Persona]
+ *     parameters:
+ *       - in : path
+ *         name: usuario
+ *         description: id de usuario
  *     requestBody:
  *       content:
  *         multipart/form-data:
