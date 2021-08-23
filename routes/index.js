@@ -3778,7 +3778,7 @@ router.get('/ingreso/:id',ingresoControllers.getById)
 
                /**
  * @swagger
- * /api/ingreso/{reserva}:
+ * /api/ingreso/reserva/{reserva}:
  *   get:
  *     summary: get ingreso  by reserva id
  *     tags: [Ingreso]
