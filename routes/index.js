@@ -3781,13 +3781,17 @@ router.get('/ingreso/:id',ingresoControllers.getById)
  * @swagger
  * /api/ingreso/{userId}/{reserva}:
  *   post:
- *     summary: hace ingreso a la reserva <--------------Falta agregar el userid
+ *     summary: hace ingreso a la reserva 
  *     tags: [Ingreso]
  *     parameters:
  *      - in: path
  *        name: reserva
  *        type: number
  *        description: agregar id de una reserva
+ *      - in: path
+ *        name: userId
+ *        type: number
+ *        description: agregar id de un usuario
  *     responses:
  *       200:
  *        description: OK
