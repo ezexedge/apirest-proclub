@@ -1513,14 +1513,18 @@ module.exports = function(){
  * /api/personas/update/{usuario}:
  *   put:
  *     summary: get persona by id
- *     tags: [Persona]
- *     parameters:
- *       - in : path
- *         name: usuario
- *         description: get persona by id
- *         schema:
- *           type: integer
- *         required: true
+  *     tags: [Persona]
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *              data:
+ *                type: object
  *     responses:
  *       200:
  *         description: persona by its id
