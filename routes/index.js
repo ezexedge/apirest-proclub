@@ -179,7 +179,49 @@ module.exports = function(){
  *        telefono: 351575757
  *        fechaNacimiento: 2021-08-19T01:23:14.000Z
  *        direccionPersonaId: 1065
- *        tipoDocumentId: 1                  
+ *        tipoDocumentId: 1  
+ *     PersonaModificar:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         nombre:
+ *           type: string
+ *         apellido:
+ *           type: string
+ *         documento:
+ *           type: string
+ *         sexo:
+ *           type: string
+ *         avatar:
+ *           type: string
+ *         correo:
+ *           type: string
+ *         telefono:
+ *           type: string
+ *         fechaNacimiento:
+ *           type: string  
+ *         direccion:
+ *           type: object 
+ *         tipoDocumento:
+ *           type: integer
+ *       example:
+ *        id: 1195
+ *        nombre: juan
+ *        apellido: gallardo
+ *        documento: 36596211
+ *        sexo: masculino
+ *        avatar: https://thumbs.dreamstime.com/z/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg
+ *        correo: otracuentanueva@gmail.com
+ *        telefono: 351575757
+ *        fechaNacimiento: 2021-08-19T01:23:14.000Z
+ *        direccion: 
+ *           calle: "calle falsa"
+ *           numero: 123
+ *           cp: '113'
+ *           localidad: 'moreno'
+ *           provinciaId: 1
+ *        tipoDocumentId: 1             
  *     Usuarios:
  *       type: object
  *       properties:
@@ -1468,13 +1510,13 @@ module.exports = function(){
 
             /**
  * @swagger
- * /api/personas/{id}:
- *   get:
+ * /api/personas/update/{usuario}:
+ *   put:
  *     summary: get persona by id
  *     tags: [Persona]
  *     parameters:
  *       - in : path
- *         name: id
+ *         name: usuario
  *         description: get persona by id
  *         schema:
  *           type: integer
@@ -1485,7 +1527,7 @@ module.exports = function(){
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Persona'
+ *               $ref: '#/components/schemas/PersonaModificar'
  *       400:
  *         description: post can not be found
  * 
