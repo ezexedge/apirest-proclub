@@ -91,6 +91,7 @@ exports.crear =  async (req,res) => {
     try{
 
         const reserva = req.params.reserva
+        const user = req.params.userId
 
 
         const reservaResult = await Reserva.findOne({
@@ -101,7 +102,7 @@ exports.crear =  async (req,res) => {
 
         if(!reservaResult)throw new Error('la reserva no existe')
         
-        const result = await Ingreso.create({reservaId: reserva})
+        const result = await Ingreso.create({reservaId: reserva,usuarioId: user})
 
         res.status(200).json(result)
 

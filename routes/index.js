@@ -3797,7 +3797,7 @@ router.get('/ingreso/:id',ingresoControllers.getById)
  */  
 
 
-router.post('/ingreso/:reserva',ingresoControllers.crear)
+router.post('/ingreso/:userId/:reserva',ingresoControllers.crear)
 
 
 
@@ -3910,6 +3910,41 @@ router.get('/estado-turno/:id',estadoTurnoControllers.getById)
  * 
  */
 router.get('/turno',turnoControllers.getAll)
+
+
+                /**
+ * @swagger
+ * /api/turno/{espacio}:
+ *   get:
+ *     summary: get estado turno by id
+ *     tags: [Turno]
+ *     parameters:
+ *       - in : path
+ *         name: espacio
+ *         description: id del espacio
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get turno by espacioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Turno'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+router.get('/turno/:espacio',turnoControllers.getByEspacioId)
+
+
+
 
                /**
  * @swagger

@@ -1,5 +1,6 @@
 const Turno = require('../models/Turno')
 const EstadoTurno = require('../models/EstadoTurno')
+const Espacio = require('../models/Espacio')
 const moment = require('moment')
 
 exports.getById = async(req,res) => {
@@ -133,5 +134,34 @@ exports.eliminar = async (req,res) => {
     }catch(err){
         res.status(400).json({error: err.message})
         
+    }
+}
+
+
+//getByEspacioId
+
+
+
+exports.getByEspacioId = async(req,res) => {
+    try{
+
+
+        const espacio = req.params.espacio
+
+        const result = await Espacio.findByPk(espacio)
+
+        if(!result)throw new Error('el espacio no existe')
+                 
+        const resultTurno = await Turno.findAll({
+            where:{
+                activo: 1,
+                espacioId: espacio
+            }
+        })
+
+        res.status(200).json(resultTurno)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
     }
 }
