@@ -180,3 +180,49 @@ exports.modificiarEstado = async (req,res) => {
         
     }
 }
+
+
+
+
+exports.getByEstado = async (req,res) => {
+
+
+    try{
+
+        const usuario = req.params.userId
+        const estado = req.params.estado
+      
+
+        const usuarioResult = await Usuario.findOne({
+            where:{
+                id: usuario,
+                activo: 1
+            }
+        })
+
+        if(!usuarioResult) throw new Error('el usuario no existe')
+
+        const result =  await Reservas.findAll({
+            include:[{
+                model: Turno,
+                as: 'turno',
+                include: [{
+                    model: Espacio,
+                    as: 'espacio',
+                }]
+            }],
+           where:{
+               usuarioId: usuario,
+               estadoreservaId: estado,
+               activo:1
+           }
+       })
+
+
+        res.status(200).json(result)
+      
+    }catch(err){
+        res.status(400).json({error: err.message})
+        
+    }
+}

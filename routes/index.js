@@ -3835,6 +3835,42 @@ router.post('/ingreso/:userId/:reserva',ingresoControllers.crear)
 router.get('/ingreso/usuario/:userId',ingresoControllers.getByUser)
 
 
+
+                /**
+ * @swagger
+ * /api/reserva/usuario/estado/{userId}/{estado}:
+ *   get:
+ *     summary: get de los estado de las reservas
+ *     tags: [Reserva]
+ *     parameters:
+ *       - in : path
+ *         name: userId
+ *         description: id de un usuario
+ *       - in : path
+ *         name: estado
+ *         description: id de estado de reserva
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  ingreso de un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reservas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+router.get('/reserva/usuario/estado/:userId/:estado',reservaControllers.getByEstado)
+
+
+
 //ESTADO TURNO
 
                 /**
