@@ -21,6 +21,7 @@ const Espacio = db.define('espacio', {
     maxReservasSem: Sequelize.INTEGER,
     maxReservasAno: Sequelize.INTEGER,
     horasPrevia: Sequelize.STRING,
+    image: Sequelize.STRING,
     tiempoDeAnticipacion: Sequelize.STRING,
     tiempoDeCancelacion: Sequelize.STRING,
     activo:{
