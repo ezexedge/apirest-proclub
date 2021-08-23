@@ -162,3 +162,49 @@ exports.getByUser =  async (req,res) => {
     }
 
 }
+
+exports.getByReserva =  async (req,res) => {
+
+    try{
+
+        const reserva = req.params.reserva
+
+
+        const resultReserva =  await Reserva.findByPk(reserva)
+
+        if(!resultReserva)throw new Error('el id de la reserva no existe')
+
+        
+        const result = await Ingreso.findAll({
+            include:[    {
+                model: Usuario,
+                as: 'usuario',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            },{
+                model: Reserva,
+                as: 'reserva',
+                include:[{
+                    model: Turno,
+                    as: 'turno',
+                    include:[{
+                        model : Espacio,
+                        as: 'espacio'
+                    }]
+                }]
+            }],
+            where: { reservaId: reserva },
+            order: [['id', 'DESC']]
+        })
+
+        res.status(200).json(result)
+
+     }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+
+}

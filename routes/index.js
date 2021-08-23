@@ -3776,6 +3776,35 @@ router.get('/ingreso',ingresoControllers.getAll)
 router.get('/ingreso/:id',ingresoControllers.getById)
 
 
+               /**
+ * @swagger
+ * /api/ingreso/{reserva}:
+ *   get:
+ *     summary: get ingreso  by reserva id
+ *     tags: [Ingreso]
+ *     parameters:
+ *       - in : path
+ *         name: reserva
+ *         description: id de un ingrso
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  ingreso by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Ingreso'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+router.get('/ingreso/reserva/:reserva',ingresoControllers.getByReserva)
 
     /**
  * @swagger
