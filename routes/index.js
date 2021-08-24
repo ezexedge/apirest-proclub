@@ -4432,11 +4432,78 @@ router.get('/division/:club/:disciplina',divControllers.getByClubByDis)
  * 
  */
 router.get('/filtro-usuarios/:club',usuarioInformacionFinal.filterUsuarioPorClub)
+
+
+
+
+                /**
+ * @swagger
+ * /api/filtro-usuarios/{club}/{disxclub}:
+ *   get:
+ *     summary: filtro de los usuarios por id de un club y el id de displina x club(disciplina asociada a un club)
+ *     tags: [Filtro]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id del club
+ *       - in : path
+ *         name: disxclub
+ *         description: id del disciplina x club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get turno by espacioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
     
 router.get('/filtro-usuarios/:club/:disxclub',usuarioInformacionFinal.filterUsuarioPorClubPorDeporte)
 
 
-router.get('/filtro-usuarios/:club/:disxclub/:division',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivision)
+
+                /**
+ * @swagger
+ * /api/filtro-usuarios/{club}/{disxclub}/{division}:
+ *   get:
+ *     summary: filtro de los usuarios por id de un club y el id de displina x club(disciplina asociada a un club)
+ *     tags: [Filtro]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id del club
+ *       - in : path
+ *         name: disxclub
+ *         description: id del disciplina x club
+ *       - in : path
+ *         name: division
+ *         description: id del disciplina x club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get turno by espacioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+    
+router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivision)
 
 
 router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv/:disciplinaxclubxpos',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivisionPorPosicion)
