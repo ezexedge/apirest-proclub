@@ -4472,9 +4472,9 @@ router.get('/filtro-usuarios/:club/:disxclub',usuarioInformacionFinal.filterUsua
 
                 /**
  * @swagger
- * /api/filtro-usuarios/{club}/{disxclub}/{division}:
+ * /api/filtro-usuarios/{club}/{disxclub}/{disxclubxdiv}:
  *   get:
- *     summary: filtro de los usuarios por id de un club y el id de displina x club(disciplina asociada a un club)
+ *     summary: filtro de los usuarios por id de un club y el id de displina x club(disciplina asociada a un club) y el id de disxclubxdiv (disciplina asociada a un club y a una division)
  *     tags: [Filtro]
  *     parameters:
  *       - in : path
@@ -4484,8 +4484,8 @@ router.get('/filtro-usuarios/:club/:disxclub',usuarioInformacionFinal.filterUsua
  *         name: disxclub
  *         description: id del disciplina x club
  *       - in : path
- *         name: division
- *         description: id del disciplina x club
+ *         name: disxclubxdiv
+ *         description: id disxclubxdiv division
  *         schema:
  *           type: integer
  *         required: true
@@ -4504,6 +4504,44 @@ router.get('/filtro-usuarios/:club/:disxclub',usuarioInformacionFinal.filterUsua
  */
     
 router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivision)
+
+
+                /**
+ * @swagger
+ * /api/filtro-usuarios/{club}/{disxclub}/{disxclubxdiv}/{disciplinaxclubxpos}:
+ *   get:
+ *     summary: filtro de los usuarios por id de un club y el id de displina x club(disciplina asociada a un club) y el id de disxclubxdiv (disciplina asociada a un club y a una division) y el id disciplinaxclubxpos (disciplina asociada a un club y a una posicion)
+ *     tags: [Filtro]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id del club
+ *       - in : path
+ *         name: disxclub
+ *         description: id del disciplina x club
+ *       - in : path
+ *         name: disxclubxdiv
+ *         description: id disxclubxdiv division
+ *       - in : path
+ *         name: disciplinaxclubxpos
+ *         description: id disciplinaxclubxpos posicion
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get turno by espacioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+    
 
 
 router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv/:disciplinaxclubxpos',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivisionPorPosicion)

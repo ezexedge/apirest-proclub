@@ -443,7 +443,7 @@ exports.filterUsuarioPorClubPorDeportePorDivisionPorPosicion = async (req,res) =
     const id = req.params.club
     const deporte = req.params.disxclub
     const division = req.params.disxclubxdiv
-    const posicion = req.params.posicion.disciplinaxclubxpos
+    const posicion = req.params.disciplinaxclubxpos
 
 console.log('//////////////',deporte)
     const result = await RelPosXUsarioXDiviXDep.findAll({
