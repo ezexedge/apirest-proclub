@@ -176,25 +176,6 @@ exports.getByReserva =  async (req,res) => {
 
         
         const result = await Ingreso.findAll({
-            include:[    {
-                model: Usuario,
-                as: 'usuario',
-                include: [{
-                    model: Persona,
-                    as: 'persona'
-                }]
-            },{
-                model: Reserva,
-                as: 'reserva',
-                include:[{
-                    model: Turno,
-                    as: 'turno',
-                    include:[{
-                        model : Espacio,
-                        as: 'espacio'
-                    }]
-                }]
-            }],
             where: { reservaId: reserva },
             order: [['id', 'DESC']]
         })
