@@ -5,6 +5,20 @@
         title: "PROCLUB API",
         version: "1.0.0",
         description: "A simple Express Library API",
+        components: {
+          securitySchemes: {
+            jwt: {
+              type: "http",
+              scheme: "bearer",
+              in: "header",
+              bearerFormat: "JWT"
+            },
+          }
+        }
+        ,
+        security: [{
+          jwt: []
+        }],
         termsOfService: "http://example.com/terms/",
         contact: {
           name: "API Support",

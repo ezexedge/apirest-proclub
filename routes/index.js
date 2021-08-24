@@ -726,6 +726,16 @@ module.exports = function(){
  *         fecha: 2021-08-06
  *         reservaId: 95
  *         usuarioId: 5
+ *     Signin:
+ *        type: object
+ *        properties:
+ *         email:
+ *           type: string
+ *         password:
+ *            type: string
+ *        example:
+ *         email: "ezeedge@gmail.com"
+ *         password: "123456"
  *         
  *             
  *         
@@ -1745,6 +1755,8 @@ module.exports = function(){
  *   get:
  *     summary: get de todos los usuarios
  *     tags: [Usuario]
+ *	    security:
+ *	     - jwt: []
  *     responses:
  *       200:
  *         description: get all usuarios
@@ -1955,8 +1967,59 @@ module.exports = function(){
 
 
     router.post('/signup',authSignupControllers.signup)
+
+    /**
+ * @swagger
+ * /api/signin:
+ *   post:
+ *     summary: Login de un usuario
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Signin'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Signin'
+ *       500:
+ *         description: Some server error
+ */
+
+
+
     router.post('/signin',authSignupControllers.signin)
     router.post('/registrar-firebase',authSignupControllers.registrarEnFirebase)
+
+       /**
+ * @swagger
+ * /api/signin:
+ *   post:
+ *     summary: Login de un usuario
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Signin'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Signin'
+ *       500:
+ *         description: Some server error
+ */
+
+ 
     router.post('/reset-password',authSignupControllers.resetPassword)
     router.post('/nueva-clave',authSignupControllers.requireSignin,authSignupControllers.cambiarClave)
    
@@ -4334,6 +4397,49 @@ router.put('/documento/club/usuario/:club/:usuario/:estado',documentoControllers
 router.get('/division/:club/:disciplina',divControllers.getByClubByDis)
 
 
+
+
+//fitro mobile
+
+
+
+
+
+                /**
+ * @swagger
+ * /api/filtro-usuarios/{club}:
+ *   get:
+ *     summary: filtro de los usuarios por id de un club
+ *     tags: [Filtro]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id del club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get turno by espacioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+router.get('/filtro-usuarios/:club',usuarioInformacionFinal.filterUsuarioPorClub)
+    
+router.get('/filtro-usuarios/:club/:disxclub',usuarioInformacionFinal.filterUsuarioPorClubPorDeporte)
+
+
+router.get('/filtro-usuarios/:club/:disxclub/:division',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivision)
+
+
+router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv/:disciplinaxclubxpos',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivisionPorPosicion)
 
 
 

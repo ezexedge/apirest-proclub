@@ -252,3 +252,245 @@ RelDisXClubXDiv.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub",foreignKey: '
 
 
 */
+/////MOBILE
+
+
+
+exports.filterUsuarioPorClub = async (req,res) => {
+    
+    try{
+
+    
+
+
+
+
+    const id = req.params.club
+
+
+
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [{
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                where: {clubId: id},
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub'
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos'
+             }]
+            }
+        ]
+        })
+
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+
+
+
+exports.filterUsuarioPorClubPorDeporte = async (req,res) => {
+    
+    try{
+
+    
+
+
+
+
+    const id = req.params.club
+    const deporte = req.params.disxclub
+
+console.log('//////////////',deporte)
+    const result = await RelPosXUsarioXDiviXDep.findAll({
+        include: [{
+            model: ClubXUsuario,
+            as: 'clubxusuario',
+            where: {clubId: id},
+            include: [{
+                model: Usuario,
+                as: 'usuario',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            }]
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disxclubxdiv',
+            where: {disciplinaxclubId: deporte},
+            include:[{
+             model: RelDisciplinaXClub,
+             as: 'disciplinaxclub'
+            }]  
+        },
+        {
+         model: DisciplinaXClubXPos,
+         as:   'disciplinaxclubxpos',
+         include: [{
+             model: RelDisciplinaXPos,
+             as: 'disciplinaxpos'
+         }]
+        }
+    ]
+    })
+
+
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+
+
+
+exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
+    
+    try{
+
+    
+
+
+
+
+    const id = req.params.club
+    const deporte = req.params.disxclub
+    const division = req.params.disxclubxdiv
+
+console.log('//////////////',deporte)
+    const result = await RelPosXUsarioXDiviXDep.findAll({
+        where:{disxclubxdivId:division},
+        include: [{
+            model: ClubXUsuario,
+            as: 'clubxusuario',
+            where: {clubId: id},
+            include: [{
+                model: Usuario,
+                as: 'usuario',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            }]
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disxclubxdiv',
+            where: {disciplinaxclubId: deporte},
+            include:[{
+             model: RelDisciplinaXClub,
+             as: 'disciplinaxclub'
+            }]  
+        },
+        {
+         model: DisciplinaXClubXPos,
+         as:   'disciplinaxclubxpos',
+         include: [{
+             model: RelDisciplinaXPos,
+             as: 'disciplinaxpos'
+         }]
+        }
+    ],
+
+
+    })
+
+
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+
+
+exports.filterUsuarioPorClubPorDeportePorDivisionPorPosicion = async (req,res) => {
+    
+    try{
+
+    
+
+
+
+
+    const id = req.params.club
+    const deporte = req.params.disxclub
+    const division = req.params.disxclubxdiv
+    const posicion = req.params.posicion.disciplinaxclubxpos
+
+console.log('//////////////',deporte)
+    const result = await RelPosXUsarioXDiviXDep.findAll({
+        where:{
+            disxclubxdivId:division,
+            disciplinaxclubxposId: posicion
+        },
+        include: [{
+            model: ClubXUsuario,
+            as: 'clubxusuario',
+            where: {clubId: id},
+            include: [{
+                model: Usuario,
+                as: 'usuario',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            }]
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disxclubxdiv',
+            where: {disciplinaxclubId: deporte},
+            include:[{
+             model: RelDisciplinaXClub,
+             as: 'disciplinaxclub'
+            }]  
+        },
+        {
+         model: DisciplinaXClubXPos,
+         as:   'disciplinaxclubxpos',
+         include: [{
+             model: RelDisciplinaXPos,
+             as: 'disciplinaxpos'
+         }]
+        }
+    ],
+
+
+    })
+
+
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
