@@ -762,3 +762,38 @@ exports.usuarioEliminar = async (req, res) => {
             res.status(400).json({'error': err.message})
           }
         }
+
+
+        exports.cambiarRol = async (req, res) => {
+
+    
+          try {
+            
+            const usuario = req.params.clubxusuario
+            const rol  = req.params.rol
+            
+            console.log('id del usuario',usuario)
+          
+    
+        
+            const clubxusuarioResult = await ClubXusuario.findByPk(usuario)
+
+            if(!clubxusuarioResult)throw new Error('el usuario no existe')
+
+           await ClubXusuario.update({rolId: rol},{where: {id: clubxusuarioResult.id }})
+            
+    
+    
+    
+          res.status(200).json({message: 'se cambio el rol'})
+        
+          } catch (err) {
+            
+            
+            
+            res.status(400).json({ "error": err.message })
+        
+          }
+        
+        };
+        
