@@ -729,3 +729,36 @@ exports.usuarioEliminar = async (req, res) => {
         
         }
       
+  
+
+
+
+        exports.usuarioByEmail = async (req,res) => {
+          try{
+      
+            const correo = req.params.email
+      
+            const result = await Usuario.findOne({
+              include:[{
+                model: Persona,
+                as: 'persona',
+               where: {correo: correo},
+                include:[{
+                  model: Direccion,
+                  as:'direccionPersona',
+                }]
+              }]
+            })
+      
+
+            if(!result)throw new Error('usuario no encontrado')
+      
+           res.status(200).json(result)
+      
+            
+      
+          }catch (err) {
+      
+            res.status(400).json({'error': err.message})
+          }
+        }

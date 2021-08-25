@@ -1853,8 +1853,41 @@ module.exports = function(){
  * 
  */
    
-    
+   
+        
   router.get('/usuario/:id', usuariosControllers.usuarioById)
+
+
+
+
+          /**
+ * @swagger
+ * /api/usuario/search/{email}:
+ *   get:
+ *     summary: get usuario by id
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: email
+ *         description: email de un usuario registrado
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: usuario by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+   
+
+  router.get('/usuario/search/:email', usuariosControllers.usuarioByEmail)
 
 
         /**
