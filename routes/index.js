@@ -1871,7 +1871,7 @@ module.exports = function(){
  *         name: email
  *         description: email de un usuario registrado
  *         schema:
- *           type: integer
+ *           type: string
  *         required: true
  *     responses:
  *       200:
