@@ -1,13 +1,18 @@
 const Espacio = require('../models/Espacio')
-
+const EspacioXDisciplinaXClub = require('../models/EspacioXDisciplinaXClub')
+const db = require('../config/db')
 
 
 exports.crearEspacio =  async (req,res) => {
+ 
+ 
+ 
+    const t = await db.transaction()
 
     try{
 
-        
-    const {nombre,image,descripcion,clubId,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia} = JSON.parse(req.body.data)
+
+    const {nombre,image,descripcion,clubId,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia,deporte} = JSON.parse(req.body.data)
     
     console.log( JSON.parse(req.body.data))
 
@@ -19,12 +24,19 @@ exports.crearEspacio =  async (req,res) => {
         //el let imagen lo vamos usar cuando migremos a digital ocean
 
 
-    const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem})
+    const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
-    res.status(200).json(result)    
+    await  EspacioXDisciplinaXClub.create({espacioId:result.id,disciplinaxclubId:deporte,activo: 1},{ transaction: t })
+
+    await t.commit();
+
+    res.status(200).json({message: 'espacio creado'})    
 
 
     }catch(error){
+
+
+        await t.rollback();
 
         res.status(400).json({'error': error.message})
         
