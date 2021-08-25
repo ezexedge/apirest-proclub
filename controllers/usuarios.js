@@ -772,7 +772,9 @@ exports.usuarioEliminar = async (req, res) => {
             const usuario = req.params.clubxusuario
             
             console.log('id del usuario',usuario)
-          
+            
+
+            
     
         
             const clubxusuarioResult = await ClubXusuario.findByPk(usuario)
@@ -803,3 +805,64 @@ exports.usuarioEliminar = async (req, res) => {
         
         };
         
+
+
+  //usuarioListadoRol
+
+
+
+  exports.usuarioListadoRol = async (req,res) =>{
+
+
+    try {
+        
+        
+      const club = req.params.club
+      const rol = req.params.rol
+
+
+      const resultClub = await Club.findByPk(club)
+      if(!resultClub)throw new Error('el id del club no existe')
+    
+      const resultRol = await Rol.findByPk(rol)
+      if(!resultRol)throw new Error('el id del rol no existe')
+
+
+        
+      const result = await  ClubXusuario.findAll({
+        include: [{
+          model: Usuario,
+          as: 'usuario',
+          include: [{
+            model: Persona,
+            as: 'persona'
+          }]
+        },
+       {
+         model: Rol,
+         as: 'rol'
+       },
+      {
+        model: Estados,
+        as: 'estado'
+      }
+      ],
+         where:{
+           clubId: club,
+          rolId: rol,
+           activo:1
+         },
+         order: [['id', 'DESC']]
+       })
+   
+
+
+  
+      
+      res.status(200).send(result)
+    
+  } catch (err) {
+    res.status(400).json({ "error": err.message })
+  }
+  
+  }

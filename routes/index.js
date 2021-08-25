@@ -1940,6 +1940,39 @@ module.exports = function(){
 
     router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
 
+        /**
+ * @swagger
+ * /api/lista-usuarios/{club}/{rol}:
+ *   get:
+ *     summary: get de usuarios con un rol determinado que pertener a un club
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *       - in : path
+ *         name: rol
+ *         description: id de un rol
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get clubxusuario by usuarioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ClubXUsuarios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+    router.get('/lista-usuarios/:club/:rol', usuariosControllers.usuarioListadoRol)
 
 
     router.get('/clubxusuario', usuariosControllers.clubxUsuarioAll)
