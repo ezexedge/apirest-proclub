@@ -64,7 +64,7 @@ exports.getEspacio =  async (req,res) => {
 }
 
 
-exports.getEspacioById =  async (req,res) => {
+exports.getEspacioByClubId =  async (req,res) => {
 
     try{
 
@@ -188,3 +188,26 @@ exports.getEspacioByClubId =  async (req,res) => {
     }
 }
 //getEspacioByClubId
+
+
+
+exports.getEspacio =  async (req,res) => {
+
+    try{
+
+
+    const result = await Espacio.findAll({
+        where: {activo: 1}
+    })
+
+    res.status(200).json(result)    
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+}
+
+

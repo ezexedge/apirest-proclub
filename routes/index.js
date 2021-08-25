@@ -3507,6 +3507,9 @@ router.get('/espacio/:id',espacioControllers.getEspacioById)
 
 
 
+
+
+
   /**
  * @swagger
  * /api/espacio/{id}:
@@ -4548,6 +4551,8 @@ router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv',usuarioInformacionFi
 
 
 router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv/:disciplinaxclubxpos',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivisionPorPosicion)
+
+
 
 
 

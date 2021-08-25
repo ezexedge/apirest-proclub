@@ -205,25 +205,29 @@ exports.crearClub = async (req, res) => {
 
   try {
 
-  
+  /*
     if(!req.file) {
       throw new Error('debe ingresar una imagen')
     }
 
+        console.log( JSON.parse(req.body.data))
+    let imagen = req.file.filename
+    console.log(imagen)
+*/
     const { descripcion, nombre ,logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion, responsable , email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp  } = JSON.parse(req.body.data)
   
 
-    console.log( JSON.parse(req.body.data))
-    let imagen = req.file.filename
-    console.log(imagen)
+    if(logo === null){
+      throw new Error('debe ingresar una imagen')
 
+    }
 
     const nuevaPersona = await Persona.create({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono, correo: responsable.correo },{ transaction: t })
 
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
 
      await Club.create({
-     logo: imagen, nombre: nombre, descripcion: descripcion, colorPrimario: colorPrimario,
+     logo: logo, nombre: nombre, descripcion: descripcion, colorPrimario: colorPrimario,
       colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
       colorTextoSecundario: colorTextoSecundario, direccionId: nuevaDireccion.id, personaId: nuevaPersona.id, activo: 1 , email: email
  , telefono: telefono , cuit: cuit  ,instagram: instagram,facebook:facebook,twitter:twitter, nombre_visible: nombre_visible , cp: cp  },{ transaction: t })
