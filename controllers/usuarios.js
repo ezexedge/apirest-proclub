@@ -770,7 +770,6 @@ exports.usuarioEliminar = async (req, res) => {
           try {
             
             const usuario = req.params.clubxusuario
-            const rol  = req.params.rol
             
             console.log('id del usuario',usuario)
           
@@ -780,7 +779,14 @@ exports.usuarioEliminar = async (req, res) => {
 
             if(!clubxusuarioResult)throw new Error('el usuario no existe')
 
-           await ClubXusuario.update({rolId: rol},{where: {id: clubxusuarioResult.id }})
+
+            const resultRol = await Rol.findOne({
+              where: {nombre: 'admin'}
+            })
+
+            
+            
+           await ClubXusuario.update({rolId: resultRol.id},{where: {id: clubxusuarioResult.id }})
             
     
     

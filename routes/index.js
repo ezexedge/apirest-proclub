@@ -1800,26 +1800,22 @@ module.exports = function(){
 
    /**
  * @swagger
- * /api/usuarios/{usuario}/{rol}:
+ * /api/usuario-update/rol/{clubxusuario}:
  *   put:
  *     summary: agregar usuario a un club
  *     tags: [Usuario]
  *     parameters:
  *      - in: path
- *        name: usuario
+ *        name: clubxusuario
  *        type: number
  *        description: agregar id de clubxusuario (usuario asociado a un club que tiene un rol)
- *      - in: path
- *        name: rol
- *        type: number
- *        description: agregar el id de un rol
  *     responses:
  *       200:
  *        description: OK
 
  */  
 
-    router.put('/usuarios/rol/:clubxusuario/:rol',usuariosControllers.cambiarRol)
+    router.put('/usuario-update/rol/:clubxusuario',usuariosControllers.cambiarRol)
 
         /**
  * @swagger
