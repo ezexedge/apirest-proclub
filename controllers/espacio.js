@@ -1,17 +1,25 @@
 const Espacio = require('../models/Espacio')
 
 
+
 exports.crearEspacio =  async (req,res) => {
 
     try{
 
         
-    const {nombre, descripcion,clubId,estadoespacioId,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia} = req.body
+    const {nombre,image,descripcion,clubId,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia} = JSON.parse(req.body.data)
     
+    console.log( JSON.parse(req.body.data))
+
+    if(req.file){
+        let imagen = req.file.filename
+        console.log(imagen)
+
+    }
+        //el let imagen lo vamos usar cuando migremos a digital ocean
 
 
-
-    const result = await Espacio.create({nombre: nombre, descripcion: descripcion , clubId:clubId, estadoespacioId:estadoespacioId,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem})
+    const result = await Espacio.create({nombre: nombre,imagen:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem})
     
     res.status(200).json(result)    
 

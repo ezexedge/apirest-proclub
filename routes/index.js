@@ -3388,7 +3388,6 @@ router.delete('/respuesta/:id',respuestaControllers.eliminar)
 
 
 
-
    /**
  * @swagger
  * /api/espacio:
@@ -3396,11 +3395,16 @@ router.delete('/respuesta/:id',respuestaControllers.eliminar)
  *     summary: Crear un espacio
  *     tags: [Espacio]
  *     requestBody:
- *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
- *             $ref: '#/components/schemas/Espacios'
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *              data:
+ *                type: object
  *     responses:
  *       200:
  *         description: The post was successfully created
@@ -3412,7 +3416,7 @@ router.delete('/respuesta/:id',respuestaControllers.eliminar)
  *         description: Some server error
  */
 
-router.post('/espacio',espacioControllers.crearEspacio)
+router.post('/espacio',imageControllers.subirArchivos,espacioControllers.crearEspacio)
 
 
                 /**
@@ -4535,7 +4539,6 @@ router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv',usuarioInformacionFi
  *           application/json:
  *             schema:
  *               type: array
-
  *       400:
  *         description: post can not be found
  * 
