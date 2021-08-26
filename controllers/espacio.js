@@ -3,6 +3,7 @@ const EspacioXDisciplinaXClub = require('../models/EspacioXDisciplinaXClub')
 const db = require('../config/db')
 const EstadoEspacio = require('../models/EstadoEspacio')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
+const Disciplina = require('../models/Disciplina')
 
 
 exports.crearEspacio =  async (req,res) => {
@@ -266,7 +267,11 @@ exports.getEspacioByDisciplinaXClub =  async (req,res) => {
         include:[{
         model: RelDisciplinaXClub,
         as: 'disciplinaxclub',
-        where: { clubId: club }
+        where: { clubId: club },
+        include:[{
+            model: Disciplina,
+            as: 'disciplina'
+        }]
         }],
         where: {
             activo: 1,
