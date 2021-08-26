@@ -65,6 +65,7 @@ exports.getEspacio =  async (req,res) => {
 
 
 exports.getEspacioByClubId =  async (req,res) => {
+    
 
     try{
 
@@ -166,7 +167,9 @@ exports.getEspacioByClubId =  async (req,res) => {
             activo: 1,
             clubId: club
 
-                }
+                },
+                order: [['id', 'DESC']]
+
         })
         
         
