@@ -3563,6 +3563,38 @@ router.get('/espacio/club/:club',espacioControllers.getEspacioByClubId)
 
 
 
+                   /**
+ * @swagger
+ * /api/espacio/{id}:
+ *   get:
+ *     summary: get espacio by clubId
+ *     tags: [Espacio]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get Espacio by clubId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Espacios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+router.get('/espacio/:id',espacioControllers.getEspacioById)
+
+
+
+
 
 
   /**

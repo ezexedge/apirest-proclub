@@ -1,6 +1,7 @@
 const Espacio = require('../models/Espacio')
 const EspacioXDisciplinaXClub = require('../models/EspacioXDisciplinaXClub')
 const db = require('../config/db')
+const { ISO_8601 } = require('moment')
 
 
 exports.crearEspacio =  async (req,res) => {
@@ -214,3 +215,33 @@ exports.getEspacio =  async (req,res) => {
 }
 
 
+
+
+
+exports.getEspacioById =  async (req,res) => {
+
+    try{
+
+
+    const id = req.params.id
+
+    const espacioResult = await Espacio.findOne({
+        where: {
+            id: id,
+            activo: 1
+        }
+    })
+    
+    if(!espacioResult)throw new Error('el id del espacio no existe')
+
+
+
+    res.status(200).json(espacioResult)    
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+}
