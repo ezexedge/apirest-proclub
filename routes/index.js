@@ -3595,6 +3595,43 @@ router.get('/espacio/:id',espacioControllers.getEspacioById)
 
 
 
+                   /**
+ * @swagger
+ * /api/espacio/disciplina/{espacio}/{club}:
+ *   get:
+ *     summary: get espacio de un club de una disciplina
+ *     tags: [Espacio]
+ *     parameters:
+ *       - in : path
+ *         name: espacio 
+ *         description: id de un espacio existente
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get Espacio by clubId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Espacios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+router.get('/espacio/disciplina/:espacio/:club',espacioControllers.getEspacioByDisciplinaXClub)
+
+//ByDisciplinaXClub
 
 
   /**

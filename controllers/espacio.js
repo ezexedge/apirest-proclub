@@ -2,6 +2,7 @@ const Espacio = require('../models/Espacio')
 const EspacioXDisciplinaXClub = require('../models/EspacioXDisciplinaXClub')
 const db = require('../config/db')
 const EstadoEspacio = require('../models/EstadoEspacio')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 
 
 exports.crearEspacio =  async (req,res) => {
@@ -249,3 +250,40 @@ exports.getEspacioById =  async (req,res) => {
         
     }
 }
+
+
+
+exports.getEspacioByDisciplinaXClub =  async (req,res) => {
+
+    try{
+
+
+    const espacio = req.params.espacio
+
+    const club = req.params.club
+
+    const result = await EspacioXDisciplinaXClub.findAll({
+        include:[{
+        model: RelDisciplinaXClub,
+        as: 'disciplinaxclub',
+        where: { clubId: club }
+        }],
+        where: {
+            activo: 1,
+            espacioId: espacio
+        }
+    })
+    
+
+
+    res.status(200).json(result)    
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+}
+
+
