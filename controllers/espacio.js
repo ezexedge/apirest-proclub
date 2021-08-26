@@ -1,7 +1,7 @@
 const Espacio = require('../models/Espacio')
 const EspacioXDisciplinaXClub = require('../models/EspacioXDisciplinaXClub')
 const db = require('../config/db')
-const { ISO_8601 } = require('moment')
+const EstadoEspacio = require('../models/EstadoEspacio')
 
 
 exports.crearEspacio =  async (req,res) => {
@@ -226,6 +226,10 @@ exports.getEspacioById =  async (req,res) => {
     const id = req.params.id
 
     const espacioResult = await Espacio.findOne({
+        include: [{
+          model: EstadoEspacio,
+          as: 'estadoespacio'
+        }],
         where: {
             id: id,
             activo: 1
