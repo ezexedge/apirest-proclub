@@ -292,3 +292,44 @@ exports.getEspacioByDisciplinaXClub =  async (req,res) => {
 }
 
 
+
+
+exports.relacionarEspacioConDisciplinaXClub =  async (req,res) => {
+ 
+
+    try{
+
+
+        const espacio = req.params.espacio
+    
+        const disciplinaxclub = req.params.disciplinaxclubId
+    
+        const result = await EspacioXDisciplinaXClub.findOne({
+  
+            where: {
+                activo: 1,
+                espacioId: espacio,
+                disciplinaxclubId: disciplinaxclub
+            }
+        })
+
+        if(result)throw new Error('el deporte ya se vinculado al espacio')
+        
+    
+
+        await  EspacioXDisciplinaXClub.create({espacioId:espacio,disciplinaxclubId:disciplinaxclub,activo: 1})
+    
+        res.status(200).json({messange: 'operacion exitosa'})    
+    
+    
+        }catch(error){
+    
+            res.status(400).json({'error': error.message})
+            
+        }
+ 
+ 
+
+
+}
+
