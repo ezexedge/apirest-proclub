@@ -319,7 +319,7 @@ exports.relacionarEspacioConDisciplinaXClub =  async (req,res) => {
 
         await  EspacioXDisciplinaXClub.create({espacioId:espacio,disciplinaxclubId:disciplinaxclub,activo: 1})
     
-        res.status(200).json({messange: 'operacion exitosa'})    
+        res.status(200).json({message: 'operacion exitosa'})    
     
     
         }catch(error){
