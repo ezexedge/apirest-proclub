@@ -96,6 +96,14 @@ exports.crearPersona = async (req, res) => {
     }
 
     
+    const resultCorreo = await Persona.findOne({
+      where: {correo: correo}
+    })
+
+
+    if(resultCorreo)throw new Error('el correo esta registrado ingrese otro')
+
+
     const aprobado = await Estados.findOne({where:{ nombre : 'aprobado' }})
     if(!aprobado){
       throw new Error('no existe el estado aprobado en la base de datos')
