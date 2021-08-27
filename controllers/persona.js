@@ -79,9 +79,7 @@ exports.crearPersona = async (req, res) => {
 
   try {
 
-  if(!req.file) {
-      throw new Error('debe ingresar una imagen')
-    }
+
   
 
 
