@@ -18,14 +18,27 @@ exports.getAll = async (req,res) => {
         const disciplina = req.params.disciplina
 
 
+        const resp = await RelDisciplinaXClub.findOne({
+            where : {
+                clubId: club,
+                disciplinaId: disciplina,
+                activo: 1  
+            }
+        })
+
+
+        if(!resp)throw new Error('la disciplina no esta relacionada al club')
+
+
+
         const result =  await DisciplinaXClubXPos.findAll({
 
             include: [{
                 model: RelDisciplinaXClub,
                 as: 'disxclub',
                 where:{
-                    clubId: club,
-                    disciplinaId: disciplina
+                    id: resp.id,
+                    activo: 1
                 }
             },{
                 model:  RelDisXClubXDiv,
