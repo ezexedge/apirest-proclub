@@ -92,24 +92,24 @@ exports.deleteDeporteXClub = async (req,res)=> {
         const club = req.params.club
         const disciplina = req.params.disciplina
 
-        const result = await RelDisciplinaXClub.findAll({
+        const result = await RelDisciplinaXClub.findOne({
             where: {
                 clubId: club,
-                disciplinaId: disciplina
+                disciplinaId: disciplina,
+                activo: 1
               }  
             })
 
-        if(result.length === 0){
+    
+        if(!result)throw new Error('El club o la disciplina no existe')
 
-            throw new Error('el club o la disciplina no existe')
+    
 
-        }else{
-
-            result[0].activo = 0
-            await result[0].save()
+            result.activo = 0
+            await result.save()
             res.status(200).json({message: 'eliminado correctamente'})
 
-        }
+        
     
         
 
