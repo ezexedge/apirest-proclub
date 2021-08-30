@@ -2268,8 +2268,18 @@ module.exports = function(){
 
     router.get('/div/:id',divisionControllers.getId)
     router.put('/div/:id',divisionControllers.editar)
-    router.delete('/div/:id',divisionControllers.eliminar)     
+    router.delete('/div/:id',divisionControllers.eliminar) 
+    
+    
+
     router.post('/div/:club/:disciplina',divisionControllers.crear)
+
+
+
+    //crearDivisionXClubXDisciplina
+    router.post('/crear-division/:club/:disciplina',divisionControllers.crearDivisionXClubXDisciplina)
+
+
 
 
     //usuario informacion final

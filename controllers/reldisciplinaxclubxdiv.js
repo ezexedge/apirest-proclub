@@ -243,3 +243,52 @@ exports.crear = async (req,res) => {
 
 
 
+exports.crearDivisionXClubXDisciplina = async (req,res) => {
+    
+    try{
+
+        const {nombre} = req.body
+        const clubId = req.params.club
+        const disciplinaId = req.params.disciplina
+
+        const club = await Club.findByPk(clubId)
+        console.log(req.body)
+
+        if(!club) throw new Error('El club no existe')
+
+        let disciplina = await Disciplina.findByPk(disciplinaId)
+        
+        if(!disciplina) throw new Error('La disiciplina no existe')
+
+
+        let result = await RelDisciplinaXClub.findOne({
+            where: {    
+                clubId: clubId,
+                disciplinaId: disciplinaId,
+                activo: 1
+            }
+        })
+
+        if(!result)throw new Error('la disciplina ya se encuentra creada en el club')
+
+      
+
+
+        let resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
+
+        if(!resp)throw new Error('error al crear la division')
+
+
+
+
+
+        res.status(200).json({message: 'division creada correctamente'})
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+
+
+
+
