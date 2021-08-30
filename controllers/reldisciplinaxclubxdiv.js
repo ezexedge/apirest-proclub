@@ -196,6 +196,8 @@ exports.crear = async (req,res) => {
             }
         })
 
+        if(result)throw new Error('la disciplina ya se encuentra creada en el club')
+
         if(!result) {
 
         result  =   await RelDisciplinaXClub.create({clubId: clubId,disciplinaId:disciplinaId})
