@@ -183,12 +183,12 @@ exports.crear = async (req,res) => {
 
         if(!club) throw new Error('El club no existe')
 
-        const disciplina = await Disciplina.findByPk(disciplinaId)
+        let disciplina = await Disciplina.findByPk(disciplinaId)
         
         if(!disciplina) throw new Error('La disiciplina no existe')
 
 
-        const result = await RelDisciplinaXClub.findOne({
+        let result = await RelDisciplinaXClub.findOne({
             where: {    
                 clubId: clubId,
                 disciplinaId: disciplinaId,
@@ -205,7 +205,7 @@ exports.crear = async (req,res) => {
         }
 
 
-        const resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
+        let resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
 
         if(!resp)throw new Error('error al crear categoria')
 
@@ -216,7 +216,7 @@ exports.crear = async (req,res) => {
          
          
 
-            const respuesta = await RelDisciplinaXPos.create({disciplinaId: disciplinaId,nombre:val})
+            let respuesta = await RelDisciplinaXPos.create({disciplinaId: disciplinaId,nombre:val})
          
             let obj = {
 
