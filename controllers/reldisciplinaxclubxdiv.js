@@ -292,3 +292,17 @@ exports.crearDivisionXClubXDisciplina = async (req,res) => {
 
 
 
+exports.crearDivisionXClubXDisciplinaXPosicion = async (req,res) => {
+    
+    try{
+
+
+
+
+        res.status(200).json({message: 'division creada correctamente'})
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+

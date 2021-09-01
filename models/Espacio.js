@@ -24,6 +24,7 @@ const Espacio = db.define('espacio', {
     image: Sequelize.STRING,
     tiempoDeAnticipacion: Sequelize.STRING,
     tiempoDeCancelacion: Sequelize.STRING,
+    valor: Sequelize.INTEGER,
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
