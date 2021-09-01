@@ -105,13 +105,19 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const {nombre, descripcion,clubId,estadoespacioId,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia} = req.body
+    const { descripcion,valor,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia} = req.body
 
+    console.log('el uppdate',req.body)
+    
     const result = await Espacio.findByPk(id)
 
     if(result){
 
-        await Espacio.update({nombre: nombre, descripcion: descripcion , clubId:clubId, estadoespacioId:estadoespacioId,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem}, { where: { id: id }})
+        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem,valor: valor}, { where: { id: id }})
+
+     //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
+    
+ 
 
         res.status(200).json({'message': 'modificado correctamente'})    
     
