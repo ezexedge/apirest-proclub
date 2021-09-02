@@ -105,7 +105,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia} = req.body
+    const { descripcion,valor,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,horasPrevia} = req.body
 
     console.log('el uppdate',req.body)
     
@@ -113,7 +113,7 @@ exports.updateEspacio =  async (req,res) => {
 
     if(result){
 
-        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem,valor: valor}, { where: { id: id }})
+        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem, maxReservasMes:  maxReservasMes ,valor: valor}, { where: { id: id }})
 
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
