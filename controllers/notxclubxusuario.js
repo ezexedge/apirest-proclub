@@ -81,7 +81,15 @@ exports.getAllByClubByUser = async (req,res) => {
             ]
         })
 
-        res.status(200).json(resp)
+
+        let arr = []
+        for(let val of resp){
+    
+          arr.push(val.clubxusuario)
+        }
+    
+
+        res.status(200).json(arr)
 
 
     }catch(err){
