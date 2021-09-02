@@ -427,9 +427,16 @@ console.log('//////////////',deporte)
 
     })
 
+    let arr = []
+    for(let val of result){
+
+      arr.push(val.clubxusuario)
+    }
 
 
-        res.status(200).json(result)
+
+
+        res.status(200).json(arr)
 
     }catch(error){
         res.status(400).json({'error': error.message})
