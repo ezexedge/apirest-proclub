@@ -500,6 +500,11 @@ console.log('//////////////',deporte)
     })
 
 
+    let arr = []
+    for(let val of result){
+
+      arr.push(val.clubxusuario)
+    }
 
         res.status(200).json(result)
 
