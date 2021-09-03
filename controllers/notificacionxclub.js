@@ -106,15 +106,7 @@ exports.getByClub = async(req,res) => {
         if(!resultClub) throw new Error('el club no existe')
 
         const result = await NotificacionXClub.findAll({
-            include: [{
-                model: Club,
-                as: 'club',
-                include: [{
-                    model: Persona,
-                    as: 'persona'
-                }]
-
-            },
+            include: [
             {
                 model: Notificacion,
                 as: 'notificacion'
