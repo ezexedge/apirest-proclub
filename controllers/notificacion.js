@@ -58,7 +58,8 @@ exports.getAll = async(req,res) => {
         const result = await Notificacion.findAll({
             where: {
                 activo: 1
-            }
+            },
+            order: [['id', 'DESC']]
         })
         res.status(200).json(result)
 
