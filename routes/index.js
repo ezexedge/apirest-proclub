@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const FCM = require('fcm-node')
 
+
+const configuaracionControllers = require('../controllers/configuracion')
 const clubControllers = require('../controllers/club')
 const paisControllers = require('../controllers/pais')
 const provinciaControllers = require('../controllers/provincia')
@@ -4723,6 +4725,11 @@ router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv',usuarioInformacionFi
 
 
 router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv/:disciplinaxclubxpos',usuarioInformacionFinal.filterUsuarioPorClubPorDeportePorDivisionPorPosicion)
+
+
+//configuracion dia y hora
+router.get('/configuracion/:espacio',configuaracionControllers.getByEspacioId)
+
 
 
 

@@ -60,6 +60,9 @@ const Espacio = db.define('espacio', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
+    },
+    visibilidad:{
+        type: Sequelize.BOOLEAN
     }
 
     
