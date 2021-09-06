@@ -20,8 +20,16 @@ const Reserva = db.define('reserva', {
         type: Sequelize.INTEGER,   
         defaultValue: 1
     },
-    qr:{
-        type: Sequelize.STRING
+
+    desde: {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    hasta: {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
     }
 
 
