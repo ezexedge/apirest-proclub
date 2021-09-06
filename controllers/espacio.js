@@ -110,7 +110,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos } = req.body
+    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo  } = req.body
 
     console.log('el uppdate',req.body)
     
@@ -120,6 +120,10 @@ exports.updateEspacio =  async (req,res) => {
 
         await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,DuracionDeTurnos: DuracionDeTurnos,intervaloEntreTurnos: intervaloEntreTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem, maxReservasMes:  maxReservasMes ,valor: valor}, { where: { id: id }})
 
+
+        
+
+     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo })
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
  
