@@ -54,7 +54,11 @@ const Espacio = db.define('espacio', {
 
         allowNull: false
     },
-    valor: Sequelize.INTEGER,
+    valor:  {
+        type: Sequelize.INTEGER,
+
+        allowNull: false
+    },
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
