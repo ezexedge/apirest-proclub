@@ -113,6 +113,12 @@ exports.updateEspacio =  async (req,res) => {
     const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo  } = req.body
 
     console.log('el uppdate',req.body)
+
+    const configuracion = await ConfiguracionDiasHs.findOne({
+        where:{
+            espacioId: id
+        }
+    })
     
     const result = await Espacio.findByPk(id)
 
@@ -123,7 +129,7 @@ exports.updateEspacio =  async (req,res) => {
 
         
 
-     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo })
+     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo },{ where: { id: configuracion.id }})
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
  
