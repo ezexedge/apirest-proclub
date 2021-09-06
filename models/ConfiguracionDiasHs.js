@@ -11,37 +11,37 @@ const ConfiguracionDiasHs = db.define('configuraciondiashs', {
     },
     lunes:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     martes:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     miercoles:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     jueves:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     viernes:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     sabado:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     domingo:{
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
 
     },
     desde: {
