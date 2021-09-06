@@ -4,6 +4,7 @@ const db = require('../config/db')
 const EstadoEspacio = require('../models/EstadoEspacio')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
+const ConfiguracionDiasHs = require('../models/ConfiguracionDiasHs')
 
 
 exports.crearEspacio =  async (req,res) => {
@@ -29,7 +30,11 @@ exports.crearEspacio =  async (req,res) => {
 
     const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,intervaloEntreTurnos: intervaloEntreTurnos,DuracionDeTurnos:DuracionDeTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
+    await ConfiguracionDiasHs.create({espacioId:result.id},{ transaction: t })
+    
     await  EspacioXDisciplinaXClub.create({espacioId:result.id,disciplinaxclubId:deporte,activo: 1},{ transaction: t })
+
+    
 
     await t.commit();
 

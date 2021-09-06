@@ -19,26 +19,31 @@ const Espacio = db.define('espacio', {
     },
     maxReservasDia:  {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
 
         allowNull: false
     },
     maxReservasMes:  {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
 
         allowNull: false
     },
     maxReservasSem:  {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
 
         allowNull: false
     },
     maxReservasAno:  {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
 
         allowNull: false
     },
     intervaloEntreTurnos : {
         type: Sequelize.TIME,
+        defaultValue: '00:00:00',
 
         allowNull: false
 
@@ -46,16 +51,18 @@ const Espacio = db.define('espacio', {
     image: Sequelize.STRING,
     tiempoDeAnticipacion: {
         type: Sequelize.TIME,
-
+        defaultValue: '00:00:00',
         allowNull: false
     },
     DuracionDeTurnos: {
         type: Sequelize.TIME,
+        defaultValue: '00:00:00',
 
         allowNull: false
     },
     valor:  {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
 
         allowNull: false
     },
