@@ -15,7 +15,7 @@ exports.crearEspacio =  async (req,res) => {
     try{
 
 
-    const {nombre,image,descripcion,clubId,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,horasPrevia,deporte} = JSON.parse(req.body.data)
+    const {nombre,image,descripcion,clubId,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,deporte,intervaloEntreTurnos,DuracionDeTurnos} = JSON.parse(req.body.data)
     
     console.log( JSON.parse(req.body.data))
 
@@ -27,7 +27,7 @@ exports.crearEspacio =  async (req,res) => {
         //el let imagen lo vamos usar cuando migremos a digital ocean
 
 
-    const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
+    const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,intervaloEntreTurnos: intervaloEntreTurnos,DuracionDeTurnos:DuracionDeTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
     await  EspacioXDisciplinaXClub.create({espacioId:result.id,disciplinaxclubId:deporte,activo: 1},{ transaction: t })
 
@@ -105,7 +105,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,tiempoDeCancelacion,tiempoDeAnticipacion,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,horasPrevia} = req.body
+    const { descripcion,valor,tiempoDeAnticipacion,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos } = req.body
 
     console.log('el uppdate',req.body)
     
@@ -113,7 +113,7 @@ exports.updateEspacio =  async (req,res) => {
 
     if(result){
 
-        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem, maxReservasMes:  maxReservasMes ,valor: valor}, { where: { id: id }})
+        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,DuracionDeTurnos: DuracionDeTurnos,intervaloEntreTurnos: intervaloEntreTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem, maxReservasMes:  maxReservasMes ,valor: valor}, { where: { id: id }})
 
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
