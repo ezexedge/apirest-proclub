@@ -105,7 +105,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,tiempoDeAnticipacion,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos } = req.body
+    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos } = req.body
 
     console.log('el uppdate',req.body)
     
