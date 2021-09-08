@@ -293,7 +293,11 @@ exports.filterUsuarioPorClub = async (req,res) => {
                 as: 'disxclubxdiv',
                 include:[{
                  model: RelDisciplinaXClub,
-                 as: 'disciplinaxclub'
+                 as: 'disciplinaxclub',
+                 include:[{
+                    model: Disciplina,
+                    as: 'disciplina'
+                }]
                 }]  
             },
             {
