@@ -6,6 +6,7 @@ const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Usuario = require('../models/Usuario')
 const Persona = require('../models/Persona')
+const Disciplina = require('../models/Disciplina')
 exports.getAll = async (req,res) => {
     
     try{
@@ -153,7 +154,11 @@ exports.filterUsuario = async (req,res) => {
                 where: {id:disxclubxdivId },
                 include:[{
                  model: RelDisciplinaXClub,
-                 as: 'disciplinaxclub'
+                 as: 'disciplinaxclub',
+                 include:[{
+                     model: Disciplina,
+                     as: 'disciplina'
+                 }]
                 }]  
             },
             {
