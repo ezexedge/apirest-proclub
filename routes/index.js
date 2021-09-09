@@ -54,86 +54,86 @@ module.exports = function(){
 
 
 
-    router.get('/dashboard/:club/:user',dashboardControllers.getAll)
+    router.get('/dashboard/:club/:user',authSignupControllers.requireSignin ,dashboardControllers.getAll)
 
 
     router.get('/clubs', authSignupControllers.requireSignin  ,clubControllers.clubTodos)
 
 
-    router.get('/clubs/:id',clubControllers.clubById)
+    router.get('/clubs/:id',authSignupControllers.requireSignin ,clubControllers.clubById)
 
 
 
     router.post('/clubs',imageControllers.subirArchivos,clubControllers.crearClub)
 
 
-    router.delete('/clubs/:id',clubControllers.clubEliminar)
+    router.delete('/clubs/:id',authSignupControllers.requireSignin ,clubControllers.clubEliminar)
 
 
 
 
-   router.put('/clubs/:id',imageControllers.subirArchivos, clubControllers.clubEditar)
-   router.get('/lista-clubs/activos',clubControllers.listClubWithRespAndPais);
+   router.put('/clubs/:id',authSignupControllers.requireSignin ,imageControllers.subirArchivos, clubControllers.clubEditar)
+   router.get('/lista-clubs/activos',authSignupControllers.requireSignin ,clubControllers.listClubWithRespAndPais);
 
 
     //estado
 
-   router.post('/estado/:club/:usuario/:estado',clubControllers.estado)
+   router.post('/estado/:club/:usuario/:estado',authSignupControllers.requireSignin ,clubControllers.estado)
 
 
    //estado
 
 
-   router.get('/estado',estadoControllers.getAll)
+   router.get('/estado',authSignupControllers.requireSignin ,estadoControllers.getAll)
 
-   router.get('/estado/:id',estadoControllers.getById)
+   router.get('/estado/:id',authSignupControllers.requireSignin ,estadoControllers.getById)
 
 
    //disciplina
 
-   router.post('/disciplina',disciplinaControllers.crearDisciplina)
+   router.post('/disciplina',authSignupControllers.requireSignin ,disciplinaControllers.crearDisciplina)
 
-   router.get('/disciplina',disciplinaControllers.getDisciplina)
-
-
-   router.get('/disciplina/:id',disciplinaControllers.getDisciplinaById)
+   router.get('/disciplina',authSignupControllers.requireSignin ,disciplinaControllers.getDisciplina)
 
 
+   router.get('/disciplina/:id',authSignupControllers.requireSignin ,disciplinaControllers.getDisciplinaById)
 
 
-   router.put('/disciplina/:id',disciplinaControllers.updateDisciplina)
 
 
-   router.delete('/disciplina/:id',disciplinaControllers.eliminarDisciplina)
+   router.put('/disciplina/:id',authSignupControllers.requireSignin ,disciplinaControllers.updateDisciplina)
+
+
+   router.delete('/disciplina/:id',authSignupControllers.requireSignin ,disciplinaControllers.eliminarDisciplina)
 
 //el id hacer referencia al id de clubxusuario 
 
 
 
-    router.get('/disciplina-usuario/:id',usuarioXDisciplina.getDeportesXclub)
+    router.get('/disciplina-usuario/:id',authSignupControllers.requireSignin ,usuarioXDisciplina.getDeportesXclub)
 
 
 
-    router.get('/disciplina-usuario',usuarioXDisciplina.getAll)
+    router.get('/disciplina-usuario',authSignupControllers.requireSignin ,usuarioXDisciplina.getAll)
 
    //relacion  disciplina por club
 
 
-    router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
+    router.get('/disciplina-club/:club',authSignupControllers.requireSignin ,reldisciplinaxclubControllers.getDeporteXClub)
 
 
-    router.get('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.getDeporteXClubById)
+    router.get('/disciplina-club/:club/:disciplina',authSignupControllers.requireSignin ,reldisciplinaxclubControllers.getDeporteXClubById)
 
 
 
 
 
-    router.delete('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.deleteDeporteXClub)
+    router.delete('/disciplina-club/:club/:disciplina',authSignupControllers.requireSignin ,reldisciplinaxclubControllers.deleteDeporteXClub)
     
     
 
     
-    router.post('/disciplina-club/:club/:disciplina',reldisciplinaxclubControllers.createDeporteXClub)
+    router.post('/disciplina-club/:club/:disciplina',authSignupControllers.requireSignin ,reldisciplinaxclubControllers.createDeporteXClub)
      
    
    //pais
@@ -141,32 +141,32 @@ module.exports = function(){
 
 
 
-    router.get('/pais',paisControllers.paisTodos)
+    router.get('/pais',authSignupControllers.requireSignin ,paisControllers.paisTodos)
 
 
-    router.get('/pais/:id',paisControllers.paisById)
+    router.get('/pais/:id',authSignupControllers.requireSignin ,paisControllers.paisById)
 
     //provinci
 
 
 
-    router.get('/provincias/pais/:id',provinciaControllers.provinciaPorPaisById)
+    router.get('/provincias/pais/:id',authSignupControllers.requireSignin ,provinciaControllers.provinciaPorPaisById)
 
 
   
-    router.get('/provincias',provinciaControllers.provinciaTodos)
+    router.get('/provincias',authSignupControllers.requireSignin ,provinciaControllers.provinciaTodos)
 
 
 
-    router.get('/provincias/:id',provinciaControllers.provinciaById)
+    router.get('/provincias/:id',authSignupControllers.requireSignin ,provinciaControllers.provinciaById)
     
     //persona
 
 
-    router.get('/personas',personControllers.personaTodos)
+    router.get('/personas',authSignupControllers.requireSignin ,personControllers.personaTodos)
 
 
-    router.get('/personas/:id',personControllers.personaById)
+    router.get('/personas/:id',authSignupControllers.requireSignin ,personControllers.personaById)
     
     
 
@@ -187,29 +187,29 @@ module.exports = function(){
     //tipo documnto
 
 
-    router.get('/tipo-documento',tipoDocumentoControllers.tipoDocumentos)
+    router.get('/tipo-documento',authSignupControllers.requireSignin ,tipoDocumentoControllers.tipoDocumentos)
 
-    router.get('/tipo-documento/:id',tipoDocumentoControllers.tipoDocumentoById)
+    router.get('/tipo-documento/:id',authSignupControllers.requireSignin ,tipoDocumentoControllers.tipoDocumentoById)
 
     //direccion
 
 
-    router.get('/direccion',direccionControllers.direccionTodos)
+    router.get('/direccion',authSignupControllers.requireSignin ,direccionControllers.direccionTodos)
 
 
 
 
-    router.get('/direccion/:id',direccionControllers.direccionById)
+    router.get('/direccion/:id',authSignupControllers.requireSignin ,direccionControllers.direccionById)
 
 
     //roles
    
 
-    router.get('/roles',rolControllers.rolTodos)
+    router.get('/roles',authSignupControllers.requireSignin ,rolControllers.rolTodos)
 
 
 
-    router.get('/roles/:id',rolControllers.rolById)
+    router.get('/roles/:id',authSignupControllers.requireSignin ,rolControllers.rolById)
 
     //usuario
 
@@ -221,7 +221,7 @@ module.exports = function(){
 
 
 
-    router.get('/usuarios',usuariosControllers.getAllUsuarios)
+    router.get('/usuarios',authSignupControllers.requireSignin ,usuariosControllers.getAllUsuarios)
 
 
 
@@ -235,11 +235,11 @@ module.exports = function(){
 
 
 
-    router.get('/usuario/clubs/:usuario',usuariosControllers.usuarioClubs)
+    router.get('/usuario/clubs/:usuario',authSignupControllers.requireSignin ,usuariosControllers.usuarioClubs)
 
    
         
-  router.get('/usuario/:id', usuariosControllers.usuarioById)
+  router.get('/usuario/:id',authSignupControllers.requireSignin ,usuariosControllers.usuarioById)
 
 
 
@@ -247,26 +247,26 @@ module.exports = function(){
 
    
 
-  router.get('/usuario/search/:email', usuariosControllers.usuarioByEmail)
+  router.get('/usuario/search/:email',authSignupControllers.requireSignin , usuariosControllers.usuarioByEmail)
 
 
 
 
-    router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
+    router.get('/lista-usuarios/:club',authSignupControllers.requireSignin ,usuariosControllers.usuarioListado)
 
 
 
 
-    router.get('/lista-usuarios/:club/:rol', usuariosControllers.usuarioListadoRol)
+    router.get('/lista-usuarios/:club/:rol',authSignupControllers.requireSignin , usuariosControllers.usuarioListadoRol)
 
 
-    router.get('/clubxusuario', usuariosControllers.clubxUsuarioAll)
-    router.get('/clubxusuario/:id', usuariosControllers.clubxUsuarioById)
+    router.get('/clubxusuario',authSignupControllers.requireSignin , usuariosControllers.clubxUsuarioAll)
+    router.get('/clubxusuario/:id',authSignupControllers.requireSignin , usuariosControllers.clubxUsuarioById)
 
 
 
 
-    router.get('/usuario-club/:club/:usuario',usuariosControllers.usuarioXClub)
+    router.get('/usuario-club/:club/:usuario',authSignupControllers.requireSignin ,usuariosControllers.usuarioXClub)
 
 
     router.delete('/usuario/:club/:usuario',usuariosControllers.usuarioEliminar)
@@ -297,7 +297,7 @@ module.exports = function(){
 
 
 
-    router.get('/posiciones/:disciplina',posicionxdisciplinaControllers.getDisciplinaxpos)
+    router.get('/posiciones/:disciplina',authSignupControllers.requireSignin ,posicionxdisciplinaControllers.getDisciplinaxpos)
     router.post('/posiciones/:disciplina',posicionxdisciplinaControllers.agregarPosicionEnDisciplina)
    
 
@@ -305,7 +305,7 @@ module.exports = function(){
 
 
 
-    router.get('/posiciones/:club/:disciplina',posicionControllers.getPosicion)
+    router.get('/posiciones/:club/:disciplina',authSignupControllers.requireSignin ,posicionControllers.getPosicion)
     router.post('/posiciones/:club/:disciplina',posicionControllers.crearPosicion)
    
    
@@ -313,7 +313,7 @@ module.exports = function(){
    
    
   
-    router.get('/posicion/:id',posicionControllers.getPosicionById)
+    router.get('/posicion/:id',authSignupControllers.requireSignin ,posicionControllers.getPosicionById)
     router.delete('/posiciones/:id',posicionControllers.eliminarPosicion)
 
 
@@ -321,7 +321,7 @@ module.exports = function(){
 
     //division por admin para que vea toda la infomarcion de la disciplina en este caso traera todo sus divisiones
     //y las posiciones que esten relacionada al club 
-    router.get('/disciplina/admin/:club/:disciplina',disciplinaAdminControllers.getAll)
+    router.get('/disciplina/admin/:club/:disciplina',authSignupControllers.requireSignin ,disciplinaAdminControllers.getAll)
    
 
     //division
@@ -329,13 +329,13 @@ module.exports = function(){
 
 
    
-    router.get('/div/:club/:disciplina',divisionControllers.getAll)
+    router.get('/div/:club/:disciplina',authSignupControllers.requireSignin ,divisionControllers.getAll)
 
 
 
 
 
-    router.get('/div/:id',divisionControllers.getId)
+    router.get('/div/:id',authSignupControllers.requireSignin ,divisionControllers.getId)
     router.put('/div/:id',divisionControllers.editar)
     router.delete('/div/:id',divisionControllers.eliminar) 
     
@@ -352,7 +352,7 @@ module.exports = function(){
 
 
     //usuario informacion final
-    router.get('/usuario-final',usuarioInformacionFinal.getAll)
+    router.get('/usuario-final',authSignupControllers.requireSignin ,,usuarioInformacionFinal.getAll)
     //filterPosicion
 
     
@@ -453,7 +453,7 @@ module.exports = function(){
     router.post('/notificacion/:notificacion/:club',notxclubControllers.crear)
 
   
-    router.get('/notificacion/club/:club',notxclubControllers.getByClub)
+    router.get('/notificacion/club/:club',authSignupControllers.requireSignin ,notxclubControllers.getByClub)
 
 
 

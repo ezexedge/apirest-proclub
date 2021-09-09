@@ -23,12 +23,9 @@
           }
         }
       },
-      "security": [
-        {
-        "basicAuth": [],
-        "apiKey": []
-        }
-      ],
+      security: [{ 
+        bearerAuth: [], 
+    }],
       servers: [
         {
           url: "https://secure-temple-46604.herokuapp.com",
