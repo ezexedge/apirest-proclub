@@ -14,11 +14,13 @@
     
   
       },
-      "securityDefinitions": {
-        "Bearer": {
-          "type": "apiKey",
-          "name": "Authorization",
-          "in": "header"
+      "components": {        
+        "securitySchemes": {
+          "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+          }
         }
       },
       "security": [
@@ -34,7 +36,7 @@
         },
       ],
     },
-    apis: ["./routes/*.js"],
+    apis: ["./routes/swagger.js"],
   };
 
   module.exports = options
