@@ -57,7 +57,7 @@ module.exports = function(){
     router.get('/dashboard/:club/:user',dashboardControllers.getAll)
 
 
-    router.get('/clubs',clubControllers.clubTodos)
+    router.get('/clubs', authSignupControllers.requireSignin  ,clubControllers.clubTodos)
 
 
     router.get('/clubs/:id',clubControllers.clubById)
