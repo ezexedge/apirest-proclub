@@ -14,9 +14,29 @@ const ConfiguracionDiasHs = db.define('configuraciondiashs', {
         defaultValue: 1,
 
     },
+    lunesDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    lunesHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
     martes:{
         type: Sequelize.INTEGER,
         defaultValue: 1,
+
+    },
+    martesDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    mastesHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
 
     },
     miercoles:{
@@ -24,9 +44,29 @@ const ConfiguracionDiasHs = db.define('configuraciondiashs', {
         defaultValue: 1,
 
     },
+    miercolesDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    miercolesHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
     jueves:{
         type: Sequelize.INTEGER,
         defaultValue: 1,
+
+    },
+    juevesDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    juevesHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
 
     },
     viernes:{
@@ -34,14 +74,44 @@ const ConfiguracionDiasHs = db.define('configuraciondiashs', {
         defaultValue: 1,
 
     },
+    viernesDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    viernesHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
     sabado:{
         type: Sequelize.INTEGER,
         defaultValue: 1,
 
     },
+    sabadoDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    sabadoHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
     domingo:{
         type: Sequelize.INTEGER,
         defaultValue: 1,
+
+    },
+    domingoDesde:{
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
+
+    },
+    domingoHasta : {
+        type: Sequelize.TIME,
+        defaultValue: '00:00:00',
 
     },
     multiplesReservasEnUnHorario: {
