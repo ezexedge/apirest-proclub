@@ -110,7 +110,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo , multiplesReservasEnUnHorario ,  LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente , ReservaAmpliada  } = req.body
+    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo , multiplesReservasEnUnHorario ,  LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente , ReservaAmpliada , desdeHasta } = req.body
 
     console.log('el uppdate',req.body)
 
@@ -129,7 +129,7 @@ exports.updateEspacio =  async (req,res) => {
 
         
 
-     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo,multiplesReservasEnUnHorario: multiplesReservasEnUnHorario , LimitarAUnSoloEventoAprobado: LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente: ProhibirMasDeUnaReservaPendiente, ReservaAmpliada: ReservaAmpliada  },{ where: { id: configuracion.id }})
+     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo,multiplesReservasEnUnHorario: multiplesReservasEnUnHorario , LimitarAUnSoloEventoAprobado: LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente: ProhibirMasDeUnaReservaPendiente, ReservaAmpliada: ReservaAmpliada , lunesDesde: desdeHasta.lunesDesde , lunesHasta: desdeHasta.lunesHasta ,  martesDesde: desdeHasta.martesDesde , miercolesDesde: desdeHasta.miercolesDesde , miercolesHasta: desdeHasta.miercolesHasta , juevesDesde: desdeHasta.juevesDesde  , juevesHasta: desdeHasta.juevesHasta , viernesDesde: desdeHasta.viernesDesde , viernesHasta: desdeHasta.viernesHasta ,  sabadoDesde: desdeHasta.sabadoDesde , sabadoHasta: desdeHasta.sabadoHasta , domingoDesde: desdeHasta.domingoDesde , domingoHasta: desdeHasta.domingoHasta },{ where: { id: configuracion.id }})
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
  
