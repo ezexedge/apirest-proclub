@@ -2281,6 +2281,8 @@
 
 
 
+
+
  
                            /**
  * @swagger
@@ -2302,6 +2304,9 @@
  * 
  * 
  */ 
+   
+
+
    
 
                           /**
@@ -2330,7 +2335,33 @@
  * 
  */  
 
- 
+                          /**
+ * @swagger
+ * /api/notificacion/usuario/{userId}:
+ *   get:
+ *     summary: get notificaciones del usuario
+ *     tags: [Notificacion]
+ *     parameters:
+ *       - in : path
+ *         name: userId
+ *         description: get id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get notificacion id
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */ 
+                          
+
                           /**
  * @swagger
  * /api/notificacion/{id}:
