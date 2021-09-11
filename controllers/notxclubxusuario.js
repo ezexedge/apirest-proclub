@@ -131,3 +131,53 @@ exports.getById = async (req,res) => {
 
     }
 }
+
+
+
+
+
+
+exports.getNotificacionByUser = async (req,res) => {
+    try{
+
+        const user = req.params.userId
+       
+      
+        const resp =  await NotXClubXUsuario.findAll({
+            include:[
+                {
+                 model: ClubXUsuario,
+                 as: 'clubxusuario',
+                include: [{
+                  model: Usuario,
+                  as: 'usuario',
+                  where:{id: user},
+                  include: [{
+                      model: Persona,
+                      as: 'persona'
+                  }]
+                }]
+                },
+                {
+                model: NotificacionXClub,
+                as: 'club',
+                include:[{
+                    model: Notificacion,
+                    as: 'notificacion'
+                }]
+                }   
+            ]
+        })
+
+
+
+        res.status(200).json(resp)
+
+
+    }catch(err){
+
+        
+        res.status(400).json({error: err.message})
+
+    }
+}

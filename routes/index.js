@@ -477,6 +477,10 @@ module.exports = function(){
     router.get('/notificacion-usuario/:id',notxclubxusuario.getById)
 
 
+    router.get('/notificacion/usuario/:userId',notxclubxusuario.getNotificacionByUser)
+
+
+    
 
     
     router.post('/notificacion-post',notificacionControllers.sendNotificacion)
