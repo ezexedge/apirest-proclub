@@ -142,6 +142,12 @@ exports.getNotificacionByUser = async (req,res) => {
 
         const user = req.params.userId
        
+
+        const usuarioExiste =  await  Usuario.findByPk(user)
+
+        if(!usuarioExiste)throw new Error('el usuario no existe')
+
+
       
         const resp =  await NotXClubXUsuario.findAll({
             include:[
@@ -168,6 +174,7 @@ exports.getNotificacionByUser = async (req,res) => {
                 }   
             ]
         })
+
 
 
 
