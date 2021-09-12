@@ -291,7 +291,9 @@ exports.guardarToken = async (req,res) => {
         
 
         let valParse = Number(userId)
-        const usuario = await Usuario.findOne(valParse)
+        const usuario = await Usuario.findOne({
+            where: { id : valParse}
+        })
 
         if(!usuario)throw new Error('el usuario no existe')
 
