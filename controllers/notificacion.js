@@ -35,7 +35,11 @@ exports.crear = async(req,res) => {
 exports.getById = async(req,res) => {
     try{
 
-        console.log('valorrrr',req)
+       
+        const currentUser = req.aut.userId
+
+
+
         const id = req.params.id
 
         const result = await Notificacion.findOne({
@@ -47,6 +51,17 @@ exports.getById = async(req,res) => {
 
         if(!result)throw new Error(`el id:${id} no existe`)
 
+        const visto = await NotificacionVistasXUsuarios.findOne({
+            where: {
+                usuarioId: currentUser,
+                notificacionId: id
+            }
+        })
+
+        if(!visto){
+            await NotificacionVistasXUsuarios.create({ usuarioId: currentUser, notificacionId: id})
+        }
+        
         res.status(200).json(result)
 
     }catch(err){
