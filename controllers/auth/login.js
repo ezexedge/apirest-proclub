@@ -288,8 +288,10 @@ exports.guardarToken = async (req,res) => {
         const {userId,firebaseToken} = req.body
 
 
+        
 
-        const usuario = await Usuario.findByOne(userId)
+        let valParse = Number(userId)
+        const usuario = await Usuario.findOne(valParse)
 
         if(!usuario)throw new Error('el usuario no existe')
 
