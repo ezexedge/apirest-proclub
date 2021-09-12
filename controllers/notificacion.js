@@ -13,6 +13,7 @@ const Usuario = require('../models/Usuario')
 const NotificacionXTematica = require('../models/NotificacionXTematica')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
+const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
 const db = require('../config/db')
 
 exports.crear = async(req,res) => {
@@ -34,6 +35,7 @@ exports.crear = async(req,res) => {
 exports.getById = async(req,res) => {
     try{
 
+        console.log('valorrrr',req)
         const id = req.params.id
 
         const result = await Notificacion.findOne({
@@ -51,6 +53,9 @@ exports.getById = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+
 
 exports.getAll = async(req,res) => {
     try{
