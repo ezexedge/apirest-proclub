@@ -1958,6 +1958,40 @@
  */
 
 
+
+        /**
+ * @swagger
+ * /notificacion/vistas/{id}:
+ *   get:
+ *     summary: get de los usuarios que vieron la notificacion (el id hace una referencia al id de la notificacion)
+ *     tags: [Notificacion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una notificacion
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de los usuarios que vieron las notificaciones
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+
+
+
+
             /**
  * @swagger
  * /api/disciplina/admin/{club}/{disciplina}:
