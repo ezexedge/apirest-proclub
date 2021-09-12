@@ -297,7 +297,12 @@ exports.crearDivisionXClubXDisciplinaXPosicion = async (req,res) => {
     try{
 
 
+      const {posiciones} = req.body
+        const clubId = req.params.club
+        const disciplinaId = req.params.disciplina
 
+
+        
 
         res.status(200).json({message: 'division creada correctamente'})
 

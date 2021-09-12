@@ -279,6 +279,37 @@ exports.cambiarClave = async (req,res) => {
 
 }
 
+
+exports.guardarToken = async (req,res) => {
+
+
+    try{
+
+        const {userId,firebaseToken} = req.body
+
+
+
+        
+
+
+
+        res.status(200).json({message: 'ee'})
+
+
+    }catch(err){
+
+        console.log(err)
+        res.status(400).json({error : err.message})
+
+    }
+
+}
+
+
+
+
+
+
 exports.requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,
     algorithms: ["HS256"], // added later
