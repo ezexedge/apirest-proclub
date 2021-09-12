@@ -1961,7 +1961,7 @@
 
         /**
  * @swagger
- * /notificacion/vistas/{id}:
+ * /api/notificacion/vistas/{id}:
  *   get:
  *     summary: get de los usuarios que vieron la notificacion (el id hace una referencia al id de la notificacion)
  *     tags: [Notificacion]

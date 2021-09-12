@@ -378,6 +378,11 @@ exports.getNotificacionVistas = async(req,res) => {
        
         const id = req.params.id
 
+
+        const notificacion = await Notificacion.findByPk(id)
+
+        if(!notificacion)throw new Error('La notificacion no existe')
+
         const result = await NotificacionVistasXUsuarios.findAll({
             include : [{
                 model: Usuario,
