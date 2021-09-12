@@ -36,7 +36,7 @@ exports.getById = async(req,res) => {
     try{
 
        
-        const currentUser = req.aut.userId
+        const currentUser = req.auth.userId
 
 
 
