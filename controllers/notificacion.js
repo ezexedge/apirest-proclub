@@ -10,6 +10,7 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Destinatario = require('../models/Destinatario')
 const Usuario = require('../models/Usuario')
+const Persona = require('../models/Persona')
 const NotificacionXTematica = require('../models/NotificacionXTematica')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
@@ -369,3 +370,34 @@ exports.crearSuperadmin = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+exports.getNotificacionVistas = async(req,res) => {
+    try{
+
+       
+        const id = req.params.id
+
+        const result = await NotificacionVistasXUsuarios.findAll({
+            include : [{
+                model: Usuario,
+                as: 'usuario',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            }],
+            where: {
+                notificacionId : id
+            }
+        })
+
+        
+        
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
