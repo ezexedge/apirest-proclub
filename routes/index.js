@@ -859,5 +859,11 @@ router.post('/actualizar-token-firebase',authSignupControllers.requireSignin,aut
 ///actualizar-token-firebase
 
 
+
+router.get('/notificacion/vistas/:id',authSignupControllers.requireSignin,notificacionControllers.getNotificacionVistas)
+
+
+//getNotificacionVistas
+
     return router
 }
