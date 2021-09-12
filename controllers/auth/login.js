@@ -289,11 +289,15 @@ exports.guardarToken = async (req,res) => {
 
 
 
-        
+        const usuario = await Usuario.findByOne(userId)
+
+        if(!usuario)throw new Error('el usuario no existe')
+
+        await Usuario.update({idDevice: firebaseToken }, {where: { id : userId }})
 
 
 
-        res.status(200).json({message: 'ee'})
+        res.status(200).json({message: 'guardado correctamente'})
 
 
     }catch(err){

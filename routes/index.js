@@ -851,7 +851,12 @@ router.get('/configuracion/:espacio',authSignupControllers.requireSignin,configu
 
 
 
+//guardar token
+router.put('/documento/club/usuario/:club/:usuario/:estado',authSignupControllers.requireSignin,documentoControllers.cambiarEstado)
 
+router.post('/actualizar-token-firebase',authSignupControllers.requireSignin,authSignupControllers.guardarToken)
+
+///actualizar-token-firebase
 
 
     return router

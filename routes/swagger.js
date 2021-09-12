@@ -686,6 +686,16 @@
  *        example:
  *         email: "ezeedge@gmail.com"
  *         password: "123456"
+ *     GuardarToken:
+ *        type: object
+ *        properties:
+ *         firebaseToken:
+ *           type: string
+ *         userId:
+ *            type: string
+ *        example:
+ *         firebaseToken: ""
+ *         userId: ""
  *         
  *             
  *         
@@ -1866,6 +1876,30 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Signin'
+ *       500:
+ *         description: Some server error
+ */
+
+
+    /**
+ * @swagger
+ * /api/actualizar-token-firebase:
+ *   post:
+ *     summary: Guardar token del dispositivo
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/GuardarToken'
+ *     responses:
+ *       200:
+ *         description: The post was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GuardarToken'
  *       500:
  *         description: Some server error
  */
