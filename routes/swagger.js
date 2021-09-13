@@ -2350,7 +2350,7 @@
     
 /**
  * @swagger
- * /api/notificacion:
+ * /api/notificacion/crear:
  *   post:
  *     summary: Crer una notificacion
  *     tags: [Notificacion]
