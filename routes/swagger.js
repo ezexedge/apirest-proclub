@@ -1405,7 +1405,7 @@
  * @swagger
  * /api/personas/update/{usuario}:
  *   put:
- *     summary: get persona by id
+ *     summary: modificar los datos de una persona por el ID del usuario
  *     tags: [Persona]
  *     parameters:
  *       - in : path

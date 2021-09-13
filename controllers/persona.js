@@ -162,17 +162,14 @@ exports.ModificarPersona = async (req, res) => {
     const result = await Usuario.findByPk(usuarioParams)
     if(!result)throw new Error('el usuario no existe')
 
-    if(result.length === 0){
-      throw new Error('el usuario no existe')
-    }
+    
 
     const resultPersona = await Persona.findByPk(result.personaId)
 
  
    
 
-console.log('sssssss',JSON.parse(req.body.data))
-
+console.log('resultpersona',resultPersona)
 
 let valores = JSON.parse(req.body.data)
 
@@ -188,6 +185,12 @@ const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, docume
     
     await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{where: {id: result.personaId},  transaction: t})
 
+
+    if(resultPersona.direccionPersonaId === null){
+    const resultDireccion =   await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia , cp: direccion.cp },  {transaction: t})
+      await Persona.update({ direccionPersonaId: resultDireccion.id },{where: {id: result.personaId},  transaction: t})
+
+    }
   await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia , cp: direccion.cp },{where: {id: resultPersona.direccionPersonaId},  transaction: t})
 
    
