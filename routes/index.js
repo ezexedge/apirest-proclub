@@ -435,7 +435,7 @@ module.exports = function(){
 
     router.post('/notificacion',authSignupControllers.requireSignin,notificacionControllers.crear)
 
-    router.post('/notificacion/superadmin',authSignupControllers.requireSignin,notificacionControllers.crearSuperadmin)
+    router.post('/notificacion/crear',authSignupControllers.requireSignin,notificacionControllers.crearSuperadmin)
 
     router.get('/notificacion',authSignupControllers.requireSignin,notificacionControllers.getAll)
    
