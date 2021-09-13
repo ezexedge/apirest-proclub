@@ -827,7 +827,7 @@ router.get('/division/:club/:disciplina',authSignupControllers.requireSignin,div
 
 
 
-router.get('/filtro-usuarios/:club',authSignupControllers.requireSignin,usuarioInformacionFinal.filterUsuarioPorClub)
+router.get('/filtro-usuarios/:club',authSignupControllers.requireSignin,usuariosControllers.usuarioListado)
 
 
 
