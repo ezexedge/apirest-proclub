@@ -317,6 +317,7 @@ exports.crearSuperadmin = async(req,res) => {
       
         //  const result = await Notificacion.bulkCreate(req.body)
 
+        if(notificacion.tematica){
         let arrTematica = []
         if(notificacion.tematica.length > 0){
             for(let val of notificacion.tematica){
@@ -331,7 +332,7 @@ exports.crearSuperadmin = async(req,res) => {
         
         await NotificacionXTematica.bulkCreate(arrTematica,{ transaction: t })
      
-
+    }
 
         let arrFinal = []
         let flag = 0
@@ -406,4 +407,7 @@ exports.getNotificacionVistas = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+
 
