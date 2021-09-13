@@ -2109,6 +2109,30 @@
  * 
  */
 
+
+
+                    /**
+ * @swagger
+ * /api/notificaciones-enviadas-por:
+ *   get:
+ *     summary: get de las notificaciones enviadas por el usuario que inicio sesion
+ *     tags: [Notificacion]
+ *     responses:
+ *       200:
+ *         description:  get de las notificaciones enviadas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 /**
  * @swagger
  * /api/beneficios:
