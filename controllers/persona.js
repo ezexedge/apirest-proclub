@@ -187,11 +187,11 @@ const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, docume
 
 
     if(resultPersona.direccionPersonaId === null){
-    const resultDireccion =   await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia , cp: direccion.cp },  {transaction: t})
+    const resultDireccion =   await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provinciaId , cp: direccion.cp },  {transaction: t})
       await Persona.update({ direccionPersonaId: resultDireccion.id },{where: {id: result.personaId},  transaction: t})
 
     }
-  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia , cp: direccion.cp },{where: {id: resultPersona.direccionPersonaId},  transaction: t})
+  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provinciaId , cp: direccion.cp },{where: {id: resultPersona.direccionPersonaId},  transaction: t})
 
    
 
