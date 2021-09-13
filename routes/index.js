@@ -863,6 +863,8 @@ router.post('/actualizar-token-firebase',authSignupControllers.requireSignin,aut
 router.get('/notificacion/vistas/:id',authSignupControllers.requireSignin,notificacionControllers.getNotificacionVistas)
 
 
+router.get('/notificaciones-enviadas-por',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionEnviadaPor)
+
 //getNotificacionVistas
 
     return router

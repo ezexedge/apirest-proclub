@@ -343,7 +343,8 @@ exports.crearSuperadmin = async(req,res) => {
         }
         let obj = {
             notificacionxclubId: result.id,
-            clubxusuarioId: val.id
+            clubxusuarioId: val.id,
+            usuarioId: req.auth.userId
         }
 
         arrFinal.push(obj)

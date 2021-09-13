@@ -188,3 +188,43 @@ exports.getNotificacionByUser = async (req,res) => {
 
     }
 }
+
+
+
+
+
+exports.getNotificacionEnviadaPor = async (req,res) => {
+    try{
+
+      
+        const resp =  await NotXClubXUsuario.findAll({
+            include:[
+                {
+                model: NotificacionXClub,
+                as: 'club',
+                include:[{
+                    model: Notificacion,
+                    as: 'notificacion'
+                }]
+                }   
+            ],
+            where:{usuarioId: req.auth.userId}
+        })
+
+
+
+
+        res.status(200).json(resp)
+
+
+    }catch(err){
+
+        
+        res.status(400).json({error: err.message})
+
+    }
+}
+
+
+
+
