@@ -867,7 +867,7 @@ router.get('/notificaciones-enviadas-por',authSignupControllers.requireSignin,no
 
 //getNotificacionVistas
 
-router.get('/espacio/disciplina/:disciplinaxclub',authSignupControllers.requireSignin,espacioControllers.getEspacioByDisciplina)
+router.get('/espacio/disciplina/:disciplina',authSignupControllers.requireSignin,espacioControllers.getEspacioByDisciplina)
 
     return router
 }

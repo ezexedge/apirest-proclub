@@ -363,7 +363,7 @@ exports.getEspacioByDisciplina =  async (req,res) => {
     try{
 
 
-    const id = req.params.disciplinaxclub
+    const id = req.params.disciplina
 
     const resultDisiciplina = await RelDisiciplinaXClub.findByPk(id)
 
