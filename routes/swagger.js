@@ -3310,6 +3310,32 @@
 
                    /**
  * @swagger
+ * /api/espacio/disciplina/{disciplina}:
+ *   get:
+ *     summary: get espacio by id de disciplina
+ *     tags: [Espacio]
+ *     parameters:
+ *       - in : path
+ *         name: disciplina
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get Espacio by disciplina
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Espacios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+                   /**
+ * @swagger
  * /api/espacio/disciplina/{espacio}/{club}:
  *   get:
  *     summary: get de todas la disciplina que esta relacionanda a un club(disciplinaxclub) y a un espacio
