@@ -365,22 +365,19 @@ exports.getEspacioByDisciplina =  async (req,res) => {
 
     const id = req.params.disciplina
 
-    const resultDisiciplina = await Disciplina.findByPk(id)
+    const resultDisiciplina = await RelDisiciplinaXClub.findByPk(id)
 
-    if(!resultDisiciplina)throw new Error('la disciplina no existe')
+    if(!resultDisiciplina)throw new Error('la disciplinaxlcub no  existe')
     
 
     const espacioResult = await EspacioXDisciplinaXClub.findAll({
         include: [{
             model: Espacio,
             as: 'espacio'
-        },{
-         model: RelDisiciplinaXClub,
-         as: 'disciplinaxclub',
-         where:{
-            disciplinaId: id
-         }
         }],
+        where:{
+            disciplinaxclubId: id
+        }
         
     })
     
