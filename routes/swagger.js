@@ -4208,6 +4208,34 @@
 
 
 
+                /**
+ * @swagger
+ * /api/filtro-posicion/{disxclubxdiv}:
+ *   get:
+ *     summary: filtro de usuarios por posicion por id disxclubxdiv
+ *     tags: [Filtro]
+ *     parameters:
+ *       - in : path
+ *         name: disxclubxdiv
+ *         description: id del club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get filtro de usuarios por posicion
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 
                 /**
  * @swagger
