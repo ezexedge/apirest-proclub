@@ -3310,7 +3310,7 @@
 
                    /**
  * @swagger
- * /api/espacio/disciplina/{disciplinaxclub}:
+ * /api/espacio/disciplina/{disciplina}:
  *   get:
  *     summary: get espacio by id de disciplinaxclub
  *     tags: [Espacio]
