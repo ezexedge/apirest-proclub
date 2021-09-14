@@ -58,22 +58,6 @@ const ConfiguracionDiasHs = db.define('configuraciondiashs', {
         type: Sequelize.TIME,
         defaultValue: '00:00:00',
 
-    },
-    multiplesReservasEnUnHorario: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    LimitarAUnSoloEventoAprobado:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-    },
-    ProhibirMasDeUnaReservaPendiente: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    ReservaAmpliada:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0
     }
     
 });

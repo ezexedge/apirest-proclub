@@ -63,6 +63,23 @@ const Espacio = db.define('espacio', {
     },
     visibilidad:{
         type: Sequelize.BOOLEAN
+    },
+    
+    multiplesReservasEnUnHorario: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    LimitarAUnSoloEventoAprobado:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+    },
+    ProhibirMasDeUnaReservaPendiente: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    ReservaAmpliada:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
 
     
