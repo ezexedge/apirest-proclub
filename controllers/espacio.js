@@ -5,8 +5,8 @@ const EstadoEspacio = require('../models/EstadoEspacio')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
 const ConfiguracionDiasHs = require('../models/ConfiguracionDiasHs')
-
-
+const RelDisiciplinaXClub = require('../models/RelDisciplinaXClub')
+const Disiciplina = require('../models/Disciplina')
 exports.crearEspacio =  async (req,res) => {
  
  
@@ -354,3 +354,45 @@ exports.relacionarEspacioConDisciplinaXClub =  async (req,res) => {
 
 }
 
+
+
+
+
+exports.getEspacioByDisciplina =  async (req,res) => {
+
+    try{
+
+
+    const id = req.params.disciplina
+
+    const resultDisiciplina = await Disciplina.findByPk(id)
+
+    if(!resultDisiciplina)throw new Error('la disciplina no existe')
+    
+
+    const espacioResult = await EspacioXDisciplinaXClub.findAll({
+        include: [{
+            model: Espacio,
+            as: 'espacio'
+        },{
+         model: EspacioXDisciplinaXClub,
+         as: 'disciplinaxclub',
+         where:{
+            disciplinaId: id
+         }
+        }],
+        
+    })
+    
+
+
+
+    res.status(200).json(espacioResult)    
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+}
