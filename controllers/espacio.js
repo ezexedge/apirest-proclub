@@ -363,7 +363,7 @@ exports.getEspacioByDisciplina =  async (req,res) => {
     try{
 
 
-    const id = req.params.disciplina
+    const id = req.params.disciplinaxclub
 
     const resultDisiciplina = await RelDisiciplinaXClub.findByPk(id)
 
@@ -376,7 +376,8 @@ exports.getEspacioByDisciplina =  async (req,res) => {
             as: 'espacio'
         }],
         where:{
-            disciplinaxclubId: id
+            disciplinaxclubId: id,
+            activo: 1
         }
         
     })
