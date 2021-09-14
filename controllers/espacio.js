@@ -375,7 +375,7 @@ exports.getEspacioByDisciplina =  async (req,res) => {
             model: Espacio,
             as: 'espacio'
         },{
-         model: EspacioXDisciplinaXClub,
+         model: RelDisiciplinaXClub,
          as: 'disciplinaxclub',
          where:{
             disciplinaId: id
