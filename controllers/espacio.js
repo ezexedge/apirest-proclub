@@ -110,7 +110,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo , multiplesReservasEnUnHorario ,  LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente , ReservaAmpliada  } = req.body
+    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo , multiplesReservasEnUnHorario ,  LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente , ReservaAmpliada  , reservas } = req.body
 
     console.log('el uppdate',req.body)
 
@@ -119,6 +119,7 @@ exports.updateEspacio =  async (req,res) => {
             espacioId: id
         }
     })
+
     
     const result = await Espacio.findByPk(id)
 
