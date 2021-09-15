@@ -108,21 +108,9 @@ exports.getAll = async (req,res) => {
 
             },
             {
-          
-            model: Turno,
-            as: 'turno',
-            where: { activo: 1 },
-            include:[{
                 model: Espacio,
-                as: 'espacio',
-                where: {activo:1}
-            },
-        {
-            model: EstadoTurno,
-            as: 'estadoturno',
-        }
-        ]
-        }
+                as: 'espacio'
+            }
     ],
         where:{
             usuarioId: usuario,
