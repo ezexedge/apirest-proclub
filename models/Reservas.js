@@ -11,7 +11,12 @@ const Reserva = db.define('reserva', {
         primaryKey: true
 
     },
-    fecha: {
+    fechaDesde: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: new Date()
+    },
+    fechaHasta: {
         type: Sequelize.DATEONLY,
         allowNull: false,
         defaultValue: new Date()
@@ -30,7 +35,8 @@ const Reserva = db.define('reserva', {
         type: Sequelize.TIME,
         defaultValue: '00:00:00',
 
-    }
+    },
+    nombre: Sequelize.STRING
 
 
     
