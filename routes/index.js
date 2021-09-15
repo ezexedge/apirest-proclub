@@ -698,7 +698,7 @@ router.put('/reserva/:id/:estado',authSignupControllers.requireSignin,reservaCon
 
 
 
-router.post('/reserva/:usuario/:turno',authSignupControllers.requireSignin,reservaControllers.crear)
+router.post('/reserva',authSignupControllers.requireSignin,reservaControllers.crear)
 
 
 

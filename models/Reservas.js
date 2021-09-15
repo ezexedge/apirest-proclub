@@ -11,12 +11,12 @@ const Reserva = db.define('reserva', {
         primaryKey: true
 
     },
-    fechaDesde: {
+    fechaInicio: {
         type: Sequelize.DATEONLY,
         allowNull: false,
         defaultValue: new Date()
     },
-    fechaHasta: {
+    fechaFin: {
         type: Sequelize.DATEONLY,
         allowNull: false,
         defaultValue: new Date()
@@ -43,7 +43,6 @@ const Reserva = db.define('reserva', {
 });
 
 
-Reserva.belongsTo(Turno,{as:"turno",foreignKey: 'turnoId'})
 Reserva.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 Reserva.belongsTo(EstadoReserva,{as:"estadoreserva",foreignKey: 'estadoreservaId'})
 

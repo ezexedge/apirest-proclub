@@ -3668,19 +3668,20 @@
 
 
 
-  /**
+
+
+/**
  * @swagger
- * /api/reserva/{usuario}/{turno}:
+ * /api/reserva:
  *   post:
- *     summary: Crear reserva
+ *     summary: Crer reserva
  *     tags: [Reserva]
- *     parameters:
- *       - in : path
- *         name: usuario
- *         description: id de usuario
- *       - in : path
- *         name: turno
- *         description: id de turno
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Reserva'
  *     responses:
  *       200:
  *         description: The post was successfully created
@@ -3691,9 +3692,6 @@
  *       500:
  *         description: Some server error
  */
-
-
-
 
 
                     /**

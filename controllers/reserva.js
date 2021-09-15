@@ -100,13 +100,12 @@ exports.crear = async(req,res) => {
 
 
         
-        const usuario = req.params.usuario
-        const turno = req.params.turno
+        const usuario = req.auth.userId
 
 
         const estado = await EstadoReserva.findOne({
             where:{
-                nombre: 'pendiente'
+                nombre: 'aprobado'
             }
         })
 
@@ -114,7 +113,8 @@ exports.crear = async(req,res) => {
         if(!estado)throw new Error('el estado pendiente no existe en la base de datos')
 
 
-        const result  =  await Reservas.create({turnoId: Number(turno) , usuarioId: Number(usuario),estadoreservaId: estado.id })
+
+        const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaDesde: req.body.fechaDesde , fechasHasta: req.body.fechaHasta , nombre : req.body.nombre  })
 
         res.status(200).json(result)
 
