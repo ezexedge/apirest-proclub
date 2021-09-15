@@ -112,9 +112,10 @@ exports.crear = async(req,res) => {
        
         if(!estado)throw new Error('el estado pendiente no existe en la base de datos')
 
+ 
 
 
-        const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaDesde: req.body.fechaDesde , fechasHasta: req.body.fechaHasta , nombre : req.body.nombre  })
+        const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre  })
 
         res.status(200).json(result)
 
