@@ -7,6 +7,7 @@ const Disciplina = require('../models/Disciplina')
 const ConfiguracionDiasHs = require('../models/ConfiguracionDiasHs')
 const RelDisiciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disiciplina = require('../models/Disciplina')
+const Reserva = require('../models/Reservas')
 exports.crearEspacio =  async (req,res) => {
  
  
@@ -133,7 +134,29 @@ exports.updateEspacio =  async (req,res) => {
      await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo },{ where: { id: configuracion.id }})
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
- 
+        
+
+     let arr = []
+
+     for(let val of reservas){
+         const obj = {
+            usuarioId: req.auth.userId,
+            nombre: val.nombre !== '' || val.nombre !== null ? val.nombre : 'No ingreso nombre',
+            espacioId: id,
+            desde: val.HoraInicio,
+            hasta: val.HoraFin,
+            fechaInicio: val.FechaInicio,
+            fechaFin: val.FechaFin,
+            estadoreservaId: 1
+         }
+
+         arr.push(obj)
+     }
+
+     console.log(arr)
+
+     await Reserva.bulkCreate(arr)
+
 
         res.status(200).json({'message': 'modificado correctamente'})    
     
