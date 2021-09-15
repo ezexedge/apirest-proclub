@@ -45,6 +45,7 @@ const Reserva = db.define('reserva', {
 
 Reserva.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 Reserva.belongsTo(EstadoReserva,{as:"estadoreserva",foreignKey: 'estadoreservaId'})
+Turno.belongsTo(Espacio,{as:"espacio",foreignKey: 'espacioId'})
 
 
 
