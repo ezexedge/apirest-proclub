@@ -61,29 +61,13 @@ exports.getbyUserId = async (req,res) => {
         const usuario = req.params.usuario
       
 
-        const usuarioResult = await Usuario.findOne({
+        const result = await Usuario.findOne({
             where:{
                 id: usuario,
                 activo: 1
             }
         })
 
-        if(!usuarioResult) throw new Error('el usuario no existe')
-
-        const result =  await Reservas.findAll({
-            include:[{
-                model: Turno,
-                as: 'turno',
-                include: [{
-                    model: Espacio,
-                    as: 'espacio',
-                }]
-            }],
-           where:{
-               usuarioId: usuario,
-               activo:1
-           }
-       })
 
 
         res.status(200).json(result)
@@ -117,6 +101,7 @@ exports.crear = async(req,res) => {
 
         const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre  })
 
+        
         res.status(200).json(result)
 
 
@@ -204,14 +189,7 @@ exports.getByEstado = async (req,res) => {
         if(!usuarioResult) throw new Error('el usuario no existe')
 
         const result =  await Reservas.findAll({
-            include:[{
-                model: Turno,
-                as: 'turno',
-                include: [{
-                    model: Espacio,
-                    as: 'espacio',
-                }]
-            }],
+         
            where:{
                usuarioId: usuario,
                estadoreservaId: estado,

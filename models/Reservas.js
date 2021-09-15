@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const Turno = require('../models/Turno')
 const Usuario =  require('../models/Usuario')
 const EstadoReserva = require('../models/EstadoReserva')
 const Espacio = require('../models/Espacio')
