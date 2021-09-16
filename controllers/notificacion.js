@@ -312,19 +312,6 @@ exports.crearSuperadmin = async(req,res) => {
 
 
 
-        const notification_options = {
-            priority: "high",
-            timeToLive: 60 * 60 * 24
-        };
-        
-
-        const message_notification = {
-            notification: {
-                title: 'title',
-                body: 'pepa'
-            }
-        };
-
 
         
 
@@ -383,9 +370,34 @@ exports.crearSuperadmin = async(req,res) => {
 
     console.log('aca los iddevices',arrDevices)
 
+
+
+    
+
     await NotXClubXUsuario.bulkCreate(arrFinal,{ transaction: t })
       
 
+
+    const notification_options = {
+        priority: "high",
+        timeToLive: 60 * 60 * 24
+    };
+
+
+
+    const message_notification = {
+        notification: {
+            title:  notificacion.titulo ,
+            body: notificacion.descripcion
+        }
+    };
+
+    for(let val of  arrDevices) {
+
+       const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
+        console.log('estado de envio de notificacion',result)
+
+    }
         
 
 
