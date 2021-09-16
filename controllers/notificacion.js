@@ -1,5 +1,4 @@
 const Notificacion = require('../models/Notificacion')
-const admin = require('firebase-admin')
 const  firebase  = require('./../firebase')
 const { getMessaging, getToken } = require("firebase/messaging")
 const fetch =  require('isomorphic-fetch')
@@ -16,6 +15,7 @@ const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
 const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
 const db = require('../config/db')
+const admin = require('firebase-admin')
 
 exports.crear = async(req,res) => {
     try{
@@ -145,7 +145,7 @@ exports.sendNotificacion = async (req,res) => {
 
 
 
-        const enviadoPor = req.params.userId
+        const enviadoPor = req.auth.userId
         const val  = req.body
 
 
@@ -311,6 +311,23 @@ exports.crearSuperadmin = async(req,res) => {
         const {notificacion,usuarios} = req.body
 
 
+
+        const notification_options = {
+            priority: "high",
+            timeToLive: 60 * 60 * 24
+        };
+        
+
+        const message_notification = {
+            notification: {
+                title: 'title',
+                body: message
+            }
+        };
+
+
+        
+
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
         const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta},{ transaction: t })
@@ -334,6 +351,9 @@ exports.crearSuperadmin = async(req,res) => {
      
     }
 
+
+        let arrDevices = []
+
         let arrFinal = []
         let flag = 0
         let result
@@ -348,11 +368,20 @@ exports.crearSuperadmin = async(req,res) => {
             usuarioId: req.auth.userId
         }
 
+
         arrFinal.push(obj)
+
+        if(val.usuario !== null && val.usuario.idDevice !== null){
+            arrDevices.push(val.usuario.idDevice)
+        }
+
     }
 
 
     console.log('arrrfinal',arrFinal)
+
+
+    console.log('aca los iddevices',arrDevices)
 
     await NotXClubXUsuario.bulkCreate(arrFinal,{ transaction: t })
       
