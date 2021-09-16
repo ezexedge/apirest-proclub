@@ -321,7 +321,7 @@ exports.crearSuperadmin = async(req,res) => {
         const message_notification = {
             notification: {
                 title: 'title',
-                body: message
+                body: 'pepa'
             }
         };
 
