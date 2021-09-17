@@ -172,7 +172,9 @@ exports.getNotificacionByUser = async (req,res) => {
                     as: 'notificacion'
                 }]
                 }   
-            ]
+            ],
+            order: [['id', 'DESC']]
+
         })
 
 
@@ -208,7 +210,9 @@ exports.getNotificacionEnviadaPor = async (req,res) => {
                 }]
                 }   
             ],
-            where:{usuarioId: req.auth.userId}
+            where:{usuarioId: req.auth.userId},
+            order: [['id', 'DESC']]
+
         })
 
 
