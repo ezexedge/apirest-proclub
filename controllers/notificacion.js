@@ -168,7 +168,7 @@ exports.sendNotificacion = async (req,res) => {
             }
 
             const destino  = await Destinatario.bulkCreate(arr)
-                res.status(200).json(destino)
+                res.status(200).json({message: 'Encuesta creada'})
 
 
         
