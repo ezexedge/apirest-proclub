@@ -208,7 +208,7 @@ exports.getNotificacionEnviadaPor = async (req,res) => {
                 }]
                 }   
             ],
-            where:{usuarioId: 985}
+            where:{usuarioId: req.auth.userId}
         })
 
 
