@@ -111,7 +111,7 @@ exports.updateEspacio =  async (req,res) => {
 
     const id = req.params.id
 
-    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo , multiplesReservasEnUnHorario ,  LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente , ReservaAmpliada  , reservas } = req.body
+    const { descripcion,valor,maxReservasDia, maxReservasMes,maxReservasSem,maxReservasAno,  DuracionDeTurnos,tiempoDeAnticipacion,intervaloEntreTurnos , lunes , martes , miercoles , jueves , viernes , sabado , domingo , multiplesReservasEnUnHorario ,  LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente , ReservaAmpliada  , reservas ,config} = req.body
 
     console.log('el uppdate',req.body)
 
@@ -153,9 +153,36 @@ exports.updateEspacio =  async (req,res) => {
          arr.push(obj)
      }
 
+
+
      console.log(arr)
 
      await Reserva.bulkCreate(arr)
+
+
+
+     let arrConfiguracion  = []
+
+     for(let val of config){
+
+        const obj = {
+            lunes: val.lunes,
+            martes: val.martes,
+            miercoles: val.miercoles,
+            jueves: val.jueves,
+            viernes: val.viernes,
+            sabado: val.sabado,
+            domingo: val.domingo,
+            desde: val.desde,
+            hasta: val.hasta,
+            espacioId: val.espacioId
+        }
+
+        arrConfiguracion.push(obj)
+
+
+     }
+     await ConfiguracionDiasHs.bulkCreate(arrConfiguracion)
 
 
         res.status(200).json({'message': 'modificado correctamente'})    
