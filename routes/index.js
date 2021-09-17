@@ -528,7 +528,7 @@ module.exports = function(){
 
 
 
-    router.post('/encuesta-post/:userId',authSignupControllers.requireSignin,notificacionControllers.sendNotificacion)
+    router.post('/encuesta-post',authSignupControllers.requireSignin,notificacionControllers.sendNotificacion)
 
      
     

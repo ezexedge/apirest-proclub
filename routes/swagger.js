@@ -2892,9 +2892,9 @@
 
                                 /**
  * @swagger
- * /api/encuesta-post/{userId}:
+ * /api/encuesta-post:
  *   post:
- *     summary: envio de encuesta  <----- FALTA REVISAR
+ *     summary: envio de encuesta 
  *     tags: [Encuesta]
  *     parameters:
  *       - in : path
