@@ -2896,10 +2896,6 @@
  *   post:
  *     summary: envio de encuesta 
  *     tags: [Encuesta]
- *     parameters:
- *       - in : path
- *         name: userId
- *         description: id 
  *     responses:
  *       200:
  *         description:  get  una notificiacion que pertenece a un usuario

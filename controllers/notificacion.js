@@ -146,55 +146,19 @@ exports.sendNotificacion = async (req,res) => {
 
 
         const enviadoPor = req.auth.userId
-        const val  = req.body
+        const {usuarios,encuesta}  = req.body
+
+//val
+       let arr = []
 
 
-        const usuarioExiste = await Usuario.findByPk(enviadoPor)
-        if(!usuarioExiste)throw new Error('el usuario que envia no existe')
-
-        let arr = []
-
-
-       for(let datos of val){
-            if(datos.club && datos.usuario){
-                throw new Error('debe elegir club o usuario')
-            }
-       }
-
-
-       if(val[0].club !== '' && val[0].disciplina !== ''){
-        for await(let valor of val){
-            
-            const result = await RelDisciplinaXClub.findOne({
-                where:{
-                    activo:1,
-                    clubId: valor.club,
-                    disciplinaId: valor.disciplina 
-                }
-            })
-
-            
-            const resp = await RelUsuarioXDis.findAll({
-                include:[{
-                    model: ClubXusuario,
-                    as:'clubxusuario'
-                }],
-                where:{
-                    activo:1,
-                    disciplinaxclubId: result.id
-                }
-            })
-
-            
-
-
-            for(let usuario of resp){
-                //console.log(usuario.clubxusuario.usuarioId)
+    
+            for(let usuario of usuarios){
                 
                 let user = {
-                    encuestId: valor.encuesta,
-                    usuarioId:  usuario.clubxusuario.usuarioId,
-                    enviadoporId: Number(enviadoPor)
+                    encuestId: encuesta,
+                    usuarioId:  usuario.usuarioId,
+                    enviadoporId: enviadoPor
                 }
                 arr.push(user)
 
@@ -207,26 +171,7 @@ exports.sendNotificacion = async (req,res) => {
                 res.status(200).json(destino)
 
 
-        }
-    }
-
-    if(val[0].usuario !== ''){
-            let arr = []
-
-            for(let valor of val){
-                let user = {
-                    usuarioId: valor.usuario,
-                    encuestId: valor.encuesta
-                }
-
-                arr.push(user)
-            }
-
-            const resp = await Destinatario.bulkCreate(arr)
-
-            res.status(200).json(resp)
-    } 
-
+        
       
 
 
