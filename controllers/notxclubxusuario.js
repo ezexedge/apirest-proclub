@@ -78,7 +78,9 @@ exports.getAllByClubByUser = async (req,res) => {
                     as: 'club'
                 }]
                 }   
-            ]
+            ],
+            order: [['id', 'DESC']]
+
         })
 
 
