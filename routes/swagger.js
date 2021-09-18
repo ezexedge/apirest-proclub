@@ -696,6 +696,16 @@
  *        example:
  *         firebaseToken: ""
  *         userId: ""
+ *     EncuestaPost:
+ *        type: object
+ *        properties:
+ *         encuesta:
+ *           type: integer
+ *         usuarios:
+ *            type: array
+ *        example:
+ *         encuesta: 1
+ *         usuarios: []
  *         
  *             
  *         
@@ -2896,20 +2906,23 @@
  *   post:
  *     summary: envio de encuesta 
  *     tags: [Encuesta]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/EncuestaPost'
  *     responses:
  *       200:
- *         description:  get  una notificiacion que pertenece a un usuario
+ *         description: The post was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Notificaciones'
- *       400:
- *         description: post can not be found
- * 
- * 
+ *               $ref: '#/components/schemas/EncuestaPost'
+ *       500:
+ *         description: Some server error
  */
+
 
 
                                /**

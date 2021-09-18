@@ -13,6 +13,7 @@ const Persona = require('../models/Persona')
 const NotificacionXTematica = require('../models/NotificacionXTematica')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
+const Encuesta = require('../models/Encuesta')
 const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
 const db = require('../config/db')
 const admin = require('firebase-admin')
@@ -141,41 +142,76 @@ exports.modificar = async (req,res)=> {
 
 exports.sendNotificacion = async (req,res) => {
 
+
+    const t = await db.transaction()
+
     try{
 
 
 
         const enviadoPor = req.auth.userId
         const {usuarios,encuesta}  = req.body
+        
+        
+        const encuestaExiste = await Encuesta.findOne({
+            where: {id: encuesta}
+        })
 
+        if(!encuestaExiste)throw new Error('La encuesta no existe')
 //val
        let arr = []
-
+        let arrDevice = []
 
     
             for(let usuario of usuarios){
                 
+                if(usuario.usuario.idDevice !== null && usuario.usuario.idDevice !== ''){
+                    arrDevice.push(usuario.usuario.idDevice)
+                }
+            
                 let user = {
                     encuestId: encuesta,
                     usuarioId:  usuario.usuarioId,
                     enviadoporId: enviadoPor
                 }
                 arr.push(user)
-
+            
                 
 
                 
             }
 
-            const destino  = await Destinatario.bulkCreate(arr)
+            const destino  = await Destinatario.bulkCreate(arr,{ transaction: t })
                 res.status(200).json({message: 'Encuesta creada'})
 
 
+                const notification_options = {
+                    priority: "high",
+                    timeToLive: 60 * 60 * 24
+                };
+            
+            
+            
+                const message_notification = {
+                    notification: {
+                        title:  encuestaExiste.titulo ,
+                        body: encuestaExiste.descripcion
+                    }
+                };
+
+
+                for(let val of arrDevice){
+                    const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
+                    console.log('estado de envio de notificacion',result)
+            
+                }
         
       
 
 
     }catch(err){
+
+        await t.rollback();
 
         res.status(400).json({error: err.message})
 
