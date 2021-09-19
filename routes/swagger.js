@@ -2815,7 +2815,31 @@
  * 
  * 
  */  
+
   
+                               /**
+ * @swagger
+ * /api/encuesta-enviada-por:
+ *   get:
+ *     summary: get all de las encuestas que fueron enviadas por un usuario que inicio sesion
+ *     tags: [Encuesta]
+ *     responses:
+ *       200:
+ *         description:  get all encuesta enviadas por un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Encuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */ 
+
+
+
                                  /**
  * @swagger
  * /api/encuesta/{id}:
