@@ -128,7 +128,7 @@ exports.crearRespuestaUsuario = async(req,res) => {
         const resultRespuesta = await Respuesta.findByPk(respuesta)
 
         if(!resultRespuesta)throw new Error('la respuesta no existe no existe')
-        const resultRespuestaUsuario  =  await RespuestaUsuario.findAOne({
+        const resultRespuestaUsuario  =  await RespuestaUsuario.findOne({
             where:{
                 usuarioId: usuario,
                 respuestaId: respuesta
