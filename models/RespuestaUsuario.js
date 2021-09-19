@@ -3,7 +3,7 @@ const db = require('../config/db');
 const Usuario = require('../models/Usuario')
 const Respuesta = require('../models/Respuesta')
 
-const RespuestaUsuario = db.define('respuesta', {
+const RespuestaUsuario = db.define('respuestaUsuario', {
     id: {
         type: Sequelize.INTEGER, 
         autoIncrement: true,
