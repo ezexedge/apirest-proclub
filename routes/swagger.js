@@ -3170,6 +3170,65 @@
  * 
  */
 
+
+
+                    /**
+ * @swagger
+ * /api/respuesta/usuario/{respuestaId}:
+ *   post:
+ *     el usuario selecciona una respuesta y se guarda junto su id
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: respuestaId
+ *         description: la respuestaId debe ser el id de una respuesta
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  post de una respuesta seleccionada por el usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Respuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+                    /**
+ * @swagger
+ * /api/respuesta/usuario/{respuestaId}:
+ *   delete:
+ *     se elimina una respuesta que selecciono anteriormente
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: respuestaId
+ *         description: la respuestaId debe ser el id de una respuesta
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: se elimina una respuesta que selecciono anteriormente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Respuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
                     /**
  * @swagger
  * /api/respuesta/{id}:
