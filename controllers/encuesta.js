@@ -115,7 +115,9 @@ exports.getEnviadoPor = async(req,res) => {
             }],
             where: {
                 enviadoporId: usuario
-            }
+            },
+            order: [['id', 'DESC']]
+
         })
         res.status(200).json(result)
 
@@ -142,7 +144,9 @@ exports.getEncuestaPorUsuario = async(req,res) => {
             }],
             where: {
                 usuarioId: usuario
-            }
+            },
+            order: [['id', 'DESC']]
+
         })
         res.status(200).json(result)
 
