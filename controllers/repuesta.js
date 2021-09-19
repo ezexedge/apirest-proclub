@@ -125,7 +125,11 @@ exports.crearRespuestaUsuario = async(req,res) => {
 
 
 
-        const resultRespuesta = await Respuesta.findByPk(respuesta)
+        const resultRespuesta = await Respuesta.findOne({
+            where: {
+                id: respuesta
+            }
+        })
 
         if(!resultRespuesta)throw new Error('la respuesta no existe no existe')
         const resultRespuestaUsuario  =  await RespuestaUsuario.findOne({
@@ -140,6 +144,9 @@ exports.crearRespuestaUsuario = async(req,res) => {
 
         await RespuestaUsuario.create({usuarioId: usuario, respuestaId: respuesta})
 
+        const contador = resultRespuesta.contadorDeRespuestas + 1
+
+        await  Respuesta.update({contadorDeRespuestas: contador  },{where: {id: respuestaResult.id}})
 
         res.status(200).json({message: 'respuesta seleccionada correctamente'})
 
@@ -162,7 +169,11 @@ exports.eliminarRespuestaUsuario = async (req,res)=> {
 
 
 
-        const result =  await Respuesta.findByPk(respuesta)
+        const result =  await Respuesta.findOne({
+            where: {
+                id: respuesta
+            }
+        })
 
         if(!result)throw new Error(`La respuesta no existe`)
 
@@ -177,6 +188,11 @@ exports.eliminarRespuestaUsuario = async (req,res)=> {
         if(!respuestaResult)throw new Error('la relacion entre respuesta y usuario no existe en la base de datos')
 
         await RespuestaUsuario.update({activo: 0 },{where: {id: respuestaResult.id}})
+
+        const contador = result.contadorDeRespuestas - 1
+
+        await  Respuesta.update({contadorDeRespuestas: contador  },{where: {id: result.id}})
+
 
         res.status(200).json({message: 'modificacion correcta'})
         
