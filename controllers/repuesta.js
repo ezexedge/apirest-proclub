@@ -151,4 +151,43 @@ exports.crearRespuestaUsuario = async(req,res) => {
 
 
 
+exports.eliminarRespuestaUsuario = async (req,res)=> {
+
+    try{
+
+
+        const respuesta =  req.params.respuestaId
+        const usuario = req.auth.userId
+
+
+
+
+        const result =  await Respuesta.findByPk(respuesta)
+
+        if(!result)throw new Error(`La respuesta no existe`)
+
+        const respuestaResult = await RespuestaUsuario.findOne({
+            where: {
+                usuarioId: usuario,
+                respuestaId: respuesta
+            }
+        })
+
+
+        if(!respuestaResult)throw new Error('la relacion entre respuesta y usuario no existe en la base de datos')
+
+        await RespuestaUsuario.update({activo: 0 },{where: {id: respuestaResult.id}})
+
+        res.status(200).json({message: 'modificacion correcta'})
+        
+    }catch(err){
+
+        res.status(400).json({error: err.message})
+
+
+    }
+
+}
+
+
 //dd

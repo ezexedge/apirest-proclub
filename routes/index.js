@@ -583,6 +583,11 @@ router.get('/respuesta/pregunta/:pregunta',authSignupControllers.requireSignin,r
 router.get('/respuesta/:id',authSignupControllers.requireSignin,respuestaControllers.getById)
 
 
+router.post('/respuesta/usuario/:respuestaId',authSignupControllers.requireSignin,respuestaControllers.crearRespuestaUsuario)
+
+
+router.delete('/respuesta/usuario/:respuestaId',authSignupControllers.requireSignin,respuestaControllers.eliminarRespuestaUsuario)
+
 
    
 router.put('/respuesta/:id',authSignupControllers.requireSignin,respuestaControllers.modificar)
