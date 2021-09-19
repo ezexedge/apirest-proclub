@@ -2816,6 +2816,7 @@
  * 
  */  
 
+
   
                                /**
  * @swagger
@@ -2922,7 +2923,36 @@
  * 
  * 
  */
- 
+
+                             /**
+ * @swagger
+ * /api/encuesta/usuario/{userId}:
+ *   get:
+ *     summary: get de las encuesta recibidas por un usuario
+ *     tags: [Encuesta]
+ *     parameters:
+ *       - in : path
+ *         name: userId
+ *         description: userId id del usuario 
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  de las encuestas recibidas por un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Encuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 
                                 /**
  * @swagger
