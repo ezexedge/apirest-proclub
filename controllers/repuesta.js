@@ -1,5 +1,6 @@
 const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
+const RespuestaUsuario = require('../models/RespuestaUsuario')
 
 exports.crear = async(req,res) => {
     try{
@@ -108,3 +109,45 @@ exports.modificar = async (req,res)=> {
     }
 
 }
+
+
+
+
+
+
+exports.crearRespuestaUsuario = async(req,res) => {
+    try{
+
+
+        const respuesta =  req.params.respuestaId
+        const usuario = req.auth.userId
+
+
+
+
+        const resultRespuesta = await Respuesta.findByPk(respuesta)
+
+        if(!resultRespuesta)throw new Error('la respuesta no existe no existe')
+        const resultRespuestaUsuario  =  await RespuestaUsuario.findAOne({
+            where:{
+                usuarioId: usuario,
+                respuestaId: respuesta
+            }
+        })
+
+
+        if(resultRespuestaUsuario)throw new Error('el usuario ya selecciona la respuesta')
+
+        await RespuestaUsuario.create({usuarioId: usuario, respuestaId: respuesta})
+
+
+        res.status(200).json({message: 'respuesta seleccionada correctamente'})
+
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+

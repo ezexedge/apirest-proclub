@@ -9,6 +9,10 @@ const RespuestaUsuario = db.define('respuestaUsuario', {
         autoIncrement: true,
         primaryKey: true
 
+    },
+    activo:{
+        type: Sequelize.INTEGER,   
+        defaultValue: 1
     }
 
 
