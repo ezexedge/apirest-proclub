@@ -146,7 +146,7 @@ exports.crearRespuestaUsuario = async(req,res) => {
 
         const contador = resultRespuesta.contadorDeRespuestas + 1
 
-        await  Respuesta.update({contadorDeRespuestas: contador  },{where: {id: respuestaResult.id}})
+        await  Respuesta.update({contadorDeRespuestas: contador  },{where: {id: resultRespuesta.id}})
 
         res.status(200).json({message: 'respuesta seleccionada correctamente'})
 
