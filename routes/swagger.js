@@ -3899,14 +3899,14 @@
 
                /**
  * @swagger
- * /api/ingreso/reserva/{reserva}:
+ * /api/ingreso/espacio/{espacio}:
  *   get:
  *     summary: get ingreso  by reserva id
  *     tags: [Ingreso]
  *     parameters:
  *       - in : path
- *         name: reserva
- *         description: id de un ingrso
+ *         name: espacio
+ *         description: id de un ingreso
  *         schema:
  *           type: integer
  *         required: true

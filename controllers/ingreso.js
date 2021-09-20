@@ -95,13 +95,17 @@ exports.crear =  async (req,res) => {
       const usuario = req.auth.userId
 
 
+      const resultEspacio = await Espacio.findByPk(espacio)
+
+      if(!resultEspacio)throw new Error('El espacio no existe')
+
       const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
      
    
         const result = await Ingreso.create({espacioId: espacio,usuarioId: usuario,hora:hora})
 
-        res.status(200).json(result)
+        res.status(200).json({message:'se creo  un ingreso'})
 
      }catch(error){
 
@@ -160,16 +164,15 @@ exports.getByUser =  async (req,res) => {
 
 }
 
-exports.getByReserva =  async (req,res) => {
+exports.getByEspacio =  async (req,res) => {
 
     try{
 
-        const reserva = req.params.reserva
+        const espacio = req.params.espacio
 
+        const resultEspacio = await Espacio.findByPk(espacio)
 
-        const resultReserva =  await Reserva.findByPk(reserva)
-
-        if(!resultReserva)throw new Error('el id de la reserva no existe')
+        if(!resultEspacio)throw new Error('el id del espacio no existe')
 
         
         const result = await Ingreso.findAll({
@@ -183,7 +186,7 @@ exports.getByReserva =  async (req,res) => {
                     as: 'persona'
                 }]
             }],
-            where: { reservaId: reserva },
+            where: { espacioId: espacio },
             order: [['id', 'DESC']]
         })
 

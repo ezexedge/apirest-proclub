@@ -726,7 +726,7 @@ router.get('/ingreso/:id',authSignupControllers.requireSignin,ingresoControllers
 
 
 
-router.get('/ingreso/reserva/:reserva',authSignupControllers.requireSignin,ingresoControllers.getByReserva)
+router.get('/ingreso/espacio/:espacio',authSignupControllers.requireSignin,ingresoControllers.getByEspacio)
 
 
 
