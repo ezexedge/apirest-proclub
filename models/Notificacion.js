@@ -20,7 +20,7 @@ const Notificacion = db.define('notificacion', {
     }
     ,
     fecha: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DataTypes.DATE,
         defaultValue: new Date()
     },
     activo:{
