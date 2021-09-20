@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const Reservas = require('../models/Reservas')
 const Usuario = require('../models/Usuario')
+const Espacio = require('../models/Espacio')
+
 
 const Ingreso = db.define('ingreso', {
     id: {
@@ -12,8 +13,10 @@ const Ingreso = db.define('ingreso', {
     },
     fecha: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
         defaultValue: new Date()
+    },
+    hora:{
+        type: Sequelize.TIME
     }
 
 
@@ -21,7 +24,7 @@ const Ingreso = db.define('ingreso', {
 });
 
 
-Ingreso.belongsTo(Reservas,{as:"reserva",foreignKey: 'reservaId'})
+Ingreso.belongsTo(Espacio,{as:"espacio",foreignKey: 'espacioId'})
 
 Ingreso.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 
