@@ -17,6 +17,7 @@ const Encuesta = require('../models/Encuesta')
 const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
 const db = require('../config/db')
 const admin = require('firebase-admin')
+const moment = require('moment')
 
 exports.crear = async(req,res) => {
     try{
@@ -293,12 +294,13 @@ exports.crearSuperadmin = async(req,res) => {
 
 
 
+        const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
         
 
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta},{ transaction: t })
+        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora},{ transaction: t })
       
         //  const result = await Notificacion.bulkCreate(req.body)
 

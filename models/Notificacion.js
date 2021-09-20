@@ -28,8 +28,7 @@ const Notificacion = db.define('notificacion', {
         defaultValue: new Date()
     },
     hora:{
-        type: Sequelize.TIME,
-        defaultValue: moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
+        type: Sequelize.TIME
     }
     ,
     activo:{
