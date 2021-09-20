@@ -3927,19 +3927,15 @@
 
    /**
  * @swagger
- * /api/ingreso/{userId}/{reserva}:
+ * /api/ingreso/{espacio}:
  *   post:
- *     summary: hace ingreso a la reserva 
+ *     summary: se crea un ingreso
  *     tags: [Ingreso]
  *     parameters:
  *      - in: path
- *        name: reserva
+ *        name: espacio
  *        type: number
- *        description: agregar id de una reserva
- *      - in: path
- *        name: userId
- *        type: number
- *        description: agregar id de un usuario
+ *        description: agregar id de un espacio
  *     responses:
  *       200:
  *        description: OK

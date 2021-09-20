@@ -730,7 +730,7 @@ router.get('/ingreso/reserva/:reserva',authSignupControllers.requireSignin,ingre
 
 
 
-router.post('/ingreso/:userId/:reserva',authSignupControllers.requireSignin,ingresoControllers.crear)
+router.post('/ingreso/:espacio',authSignupControllers.requireSignin,ingresoControllers.crear)
 
 
 

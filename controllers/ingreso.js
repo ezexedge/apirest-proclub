@@ -4,6 +4,7 @@ const Turno = require('../models/Turno')
 const Espacio = require('../models/Espacio')
 const Usuario =  require('../models/Usuario')
 const Persona = require('../models/Persona')
+const moment = require('moment')
 exports.getAll =  async (req,res) => {
 
     try{
@@ -90,19 +91,15 @@ exports.crear =  async (req,res) => {
 
     try{
 
-        const reserva = req.params.reserva
-        const user = req.params.userId
+      const espacio = req.params.espacio
+      const usuario = req.auth.userId
 
 
-        const reservaResult = await Reserva.findOne({
-            where:{
-                activo:1
-            }
-        })
+      const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
-        if(!reservaResult)throw new Error('la reserva no existe')
-        
-        const result = await Ingreso.create({reservaId: reserva,usuarioId: user})
+     
+   
+        const result = await Ingreso.create({espacioId: espacio,usuarioId: usuario,hora:hora})
 
         res.status(200).json(result)
 
