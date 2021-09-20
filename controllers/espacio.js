@@ -115,11 +115,17 @@ exports.updateEspacio =  async (req,res) => {
 
     console.log('el uppdate',req.body)
 
-    const configuracion = await ConfiguracionDiasHs.findOne({
+    let configuracion = await ConfiguracionDiasHs.findOne({
         where:{
             espacioId: id
         }
     })
+
+
+    if(!configuracion){
+      configuracion =    await ConfiguracionDiasHs.create({espacioId:id})
+    
+    }
 
     
     const result = await Espacio.findByPk(id)
