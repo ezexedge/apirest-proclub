@@ -29,7 +29,7 @@ const Notificacion = db.define('notificacion', {
     },
     hora:{
         type: Sequelize.TIME,
-        defaultValue: moment().format('HH:mm:ss')
+        defaultValue: moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
     }
     ,
     activo:{
