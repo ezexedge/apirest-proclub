@@ -20,16 +20,8 @@ exports.getAll =  async (req,res) => {
                     }]
                 },
                 {
-                model: Reserva,
-                as: 'reserva',
-                include:[{
-                    model: Turno,
-                    as: 'turno',
-                    include:[{
-                        model : Espacio,
-                        as: 'espacio'
-                    }]
-                }]
+                model: Espacio,
+                as: 'espacio'
             }]
         })
 
