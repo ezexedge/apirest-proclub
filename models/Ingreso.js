@@ -22,7 +22,7 @@ const Ingreso = db.define('ingreso', {
 
     
 });
-
+//prueba
 
 Ingreso.belongsTo(Espacio,{as:"espacio",foreignKey: 'espacioId'})
 
