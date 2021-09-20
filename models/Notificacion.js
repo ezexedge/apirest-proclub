@@ -1,6 +1,10 @@
 const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
 const db = require('../config/db');
+const moment = require('moment')
+
+
+
 
 const Notificacion = db.define('notificacion', {
     id: {
@@ -20,9 +24,14 @@ const Notificacion = db.define('notificacion', {
     }
     ,
     fecha: {
-        type: Sequelize.DataTypes.DATE,
+        type: Sequelize.DATEONLY,
         defaultValue: new Date()
     },
+    hora:{
+        type: Sequelize.TIME,
+        defaultValue: moment().format('HH:mm:ss')
+    }
+    ,
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
