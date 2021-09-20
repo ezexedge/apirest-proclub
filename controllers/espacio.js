@@ -107,9 +107,6 @@ exports.getEspacioByClubId =  async (req,res) => {
 
 exports.updateEspacio =  async (req,res) => {
 
-
-    const t = await db.transaction()
-
     try{
 
     const id = req.params.id
@@ -126,7 +123,7 @@ exports.updateEspacio =  async (req,res) => {
 
 
     if(!configuracion){
-      configuracion =    await ConfiguracionDiasHs.create({espacioId:id},{transaction: t})
+      configuracion =    await ConfiguracionDiasHs.create({espacioId:id})
     
     }
 
@@ -135,12 +132,12 @@ exports.updateEspacio =  async (req,res) => {
 
     if(result){
 
-        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,DuracionDeTurnos: DuracionDeTurnos,intervaloEntreTurnos: intervaloEntreTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem, maxReservasMes:  maxReservasMes ,valor: valor,multiplesReservasEnUnHorario: multiplesReservasEnUnHorario , LimitarAUnSoloEventoAprobado: LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente: ProhibirMasDeUnaReservaPendiente, ReservaAmpliada: ReservaAmpliada}, { where: { id: id },transaction: t})
+        await Espacio.update({ descripcion: descripcion , tiempoDeAnticipacion: tiempoDeAnticipacion,DuracionDeTurnos: DuracionDeTurnos,intervaloEntreTurnos: intervaloEntreTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem, maxReservasMes:  maxReservasMes ,valor: valor,multiplesReservasEnUnHorario: multiplesReservasEnUnHorario , LimitarAUnSoloEventoAprobado: LimitarAUnSoloEventoAprobado, ProhibirMasDeUnaReservaPendiente: ProhibirMasDeUnaReservaPendiente, ReservaAmpliada: ReservaAmpliada}, { where: { id: id }})
 
 
         
 
-     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo },{ where: { id: configuracion.id },transaction: t})
+     await ConfiguracionDiasHs.update({lunes: lunes, martes: martes, miercoles: miercoles, jueves: jueves, viernes: viernes, sabado: sabado,domingo: domingo },{ where: { id: configuracion.id }})
      //   const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,tiempoDeCancelacion: tiempoDeCancelacion,horasPrevia:horasPrevia,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
     
         
@@ -166,7 +163,7 @@ exports.updateEspacio =  async (req,res) => {
 
      console.log(arr)
 
-     await Reserva.bulkCreate(arr,{ transaction: t })
+     await Reserva.bulkCreate(arr)
 
 
 
@@ -192,7 +189,7 @@ exports.updateEspacio =  async (req,res) => {
     
     
          }
-         await ConfiguracionDiasHs.bulkCreate(arrConfiguracion,{ transaction: t })
+         await ConfiguracionDiasHs.bulkCreate(arrConfiguracion)
     
     
 
@@ -206,9 +203,6 @@ exports.updateEspacio =  async (req,res) => {
 
 
     }catch(error){
-
-        await t.rollback();
-
 
         res.status(400).json({'error': error.message})
         
