@@ -214,7 +214,7 @@ exports.getBloqueados = async (req,res) => {
     try{
 
         
-        const espacio = req.param.espacio
+        const espacio = req.params.espacio
 
 
       
