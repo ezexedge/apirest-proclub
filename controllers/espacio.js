@@ -142,7 +142,9 @@ exports.updateEspacio =  async (req,res) => {
     
         
 
-     let arr = []
+
+     if(reservas.length > 0){
+        let arr = []
 
      for(let val of reservas){
          const obj = {
@@ -156,22 +158,17 @@ exports.updateEspacio =  async (req,res) => {
             estadoreservaId: 1
          }
 
-         if(val.FechaFin !== '' && val.FechaInicio !== '' && val.HoraFin !== '' && val.HoraInicio !== '' && val.nombre !== '' ){
             arr.push(obj)
 
-         }
+      
 
      }
 
 
-
-     console.log(arr)
-
-     if(arr.length > 0){
 
         await Reserva.bulkCreate(arr)
 
-     }
+    }
 
 
 
