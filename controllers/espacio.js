@@ -148,6 +148,12 @@ exports.updateEspacio =  async (req,res) => {
 
      for(let val of reservas){
 
+        if(val.id){
+
+            await Reserva.update({desde:val.HoraInicio,hasta:val.HoraFin,nombre:val.nombre,fechaInicio:val.FechaInicio,fechaFin: val.FechaFin},{where:{id: val.id}})
+
+        }
+
 
         if(!val.id){
             const obj = {
@@ -170,6 +176,7 @@ exports.updateEspacio =  async (req,res) => {
 
      }
 
+     
 
 
         await Reserva.bulkCreate(arr)
