@@ -4010,6 +4010,36 @@
 
 
 
+                /**
+ * @swagger
+ * /api/reserva/bloqueado/{espacio}:
+ *   get:
+ *     summary: get de las reservas bloqueadas
+ *     tags: [Reserva]
+ *     parameters:
+ *       - in : path
+ *         name: espacio
+ *         description: id de un espacio
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de una reserva bloqueada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reservas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+
 //ESTADO TURNO
 
                 /**
