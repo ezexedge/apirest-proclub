@@ -38,8 +38,7 @@ const Reserva = db.define('reserva', {
     },
     nombre: Sequelize.STRING,
     bloqueo : {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.INTEGER
     }
 
     
