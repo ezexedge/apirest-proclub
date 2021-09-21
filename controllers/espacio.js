@@ -156,14 +156,23 @@ exports.updateEspacio =  async (req,res) => {
             estadoreservaId: 1
          }
 
-         arr.push(obj)
+         if(val.FechaFin !== '' && val.FechaInicio !== '' && val.HoraFin !== '' && val.HoraInicio !== '' && val.nombre !== '' ){
+            arr.push(obj)
+
+         }
+
      }
 
 
 
      console.log(arr)
 
-     await Reserva.bulkCreate(arr)
+     if(arr.length > 0){
+
+        await Reserva.bulkCreate(arr)
+
+     }
+
 
 
 
