@@ -147,20 +147,25 @@ exports.updateEspacio =  async (req,res) => {
         let arr = []
 
      for(let val of reservas){
-         const obj = {
-            usuarioId: req.auth.userId,
-            nombre: val.nombre !== '' || val.nombre !== null ? val.nombre : 'No ingreso nombre',
-            espacioId: id,
-            desde: val.HoraInicio,
-            hasta: val.HoraFin,
-            fechaInicio: val.FechaInicio,
-            fechaFin: val.FechaFin,
-            estadoreservaId: 1,
-            bloqueo: 1
-         }
 
-            arr.push(obj)
 
+        if(!val.id){
+            const obj = {
+                usuarioId: req.auth.userId,
+                nombre: val.nombre !== '' || val.nombre !== null ? val.nombre : 'No ingreso nombre',
+                espacioId: id,
+                desde: val.HoraInicio,
+                hasta: val.HoraFin,
+                fechaInicio: val.FechaInicio,
+                fechaFin: val.FechaFin,
+                estadoreservaId: 1,
+                bloqueo: 1
+             }
+    
+                arr.push(obj)
+    
+        }
+     
       
 
      }

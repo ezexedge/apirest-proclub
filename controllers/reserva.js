@@ -236,3 +236,5 @@ exports.getBloqueados = async (req,res) => {
         
     }
 }
+
+
