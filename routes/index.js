@@ -744,6 +744,10 @@ router.get('/ingreso/usuario/:userId',authSignupControllers.requireSignin,ingres
 router.get('/reserva/usuario/estado/:userId/:estado',authSignupControllers.requireSignin,reservaControllers.getByEstado)
 
 
+router.get('/reserva/bloqueado/:espacio',authSignupControllers.requireSignin,reservaControllers.getBloqueados)
+
+
+
 
 //ESTADO TURNO
 

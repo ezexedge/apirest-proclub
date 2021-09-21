@@ -205,3 +205,34 @@ exports.getByEstado = async (req,res) => {
         
     }
 }
+
+
+
+exports.getBloqueados = async (req,res) => {
+
+
+    try{
+
+        
+        const espacio = req.param.espacio
+
+
+      
+
+        const result = await Reservas.findAll({
+            where:{
+                espacioId: espacio,
+                activo: 1,
+                bloqueo: 1
+            }
+        })
+
+
+
+        res.status(200).json(result)
+      
+    }catch(err){
+        res.status(400).json({error: err.message})
+        
+    }
+}
