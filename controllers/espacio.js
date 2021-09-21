@@ -155,7 +155,8 @@ exports.updateEspacio =  async (req,res) => {
             hasta: val.HoraFin,
             fechaInicio: val.FechaInicio,
             fechaFin: val.FechaFin,
-            estadoreservaId: 1
+            estadoreservaId: 1,
+            bloqueo: 1
          }
 
             arr.push(obj)
