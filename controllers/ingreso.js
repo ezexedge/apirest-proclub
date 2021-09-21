@@ -39,37 +39,10 @@ exports.getById =  async (req,res) => {
 
     try{
 
-        const id = req.params.id
-        
-        const result = await Ingreso.findOne({
-            include:[
-                {
-                    model: Usuario,
-                    as: 'usuario',
-                    include: [{
-                        model: Persona,
-                        as: 'persona'
-                    }]
-                },
-                {
-                model: Reserva,
-                as: 'reserva',
-                include:[{
-                    model: Turno,
-                    as: 'turno',
-                    include:[{
-                        model : Espacio,
-                        as: 'espacio'
-                    }]
-                }]
-            }],
-            where: {id: id}
-        })
-
-        if(!result)throw new Error('el ingreso no existe')
+ 
         
 
-        res.status(200).json(result)
+        res.status(200).json({message: 'en proceso'})
 
      }catch(error){
 
@@ -114,39 +87,9 @@ exports.getByUser =  async (req,res) => {
 
     try{
 
-        const id = req.params.userId
 
 
-        const resultUsuario =  await Usuario.findByPk(id)
-
-        if(!resultUsuario)throw new Error('no existe el usuario')
-
-
-        const result = await Ingreso.findAll({
-            include:[    {
-                model: Usuario,
-                as: 'usuario',
-                include: [{
-                    model: Persona,
-                    as: 'persona'
-                }]
-            },{
-                model: Reserva,
-                as: 'reserva',
-                include:[{
-                    model: Turno,
-                    as: 'turno',
-                    include:[{
-                        model : Espacio,
-                        as: 'espacio'
-                    }]
-                }]
-            }],
-            where: { usuarioId: id },
-            order: [['id', 'DESC']]
-        })
-
-        res.status(200).json(result)
+        res.status(200).json({message: 'en proceso'})
 
      }catch(error){
 
