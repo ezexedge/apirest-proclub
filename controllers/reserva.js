@@ -9,6 +9,10 @@ const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
+const Disciplina = require('../models/Disciplina')
+
+
 exports.getAll = async (req,res) => {
 
 
@@ -179,6 +183,9 @@ exports.getByEstado = async (req,res) => {
 
         const usuario = req.params.userId
         const estado = req.params.estado
+
+
+
       
 
         const usuarioResult = await Usuario.findOne({
@@ -191,13 +198,24 @@ exports.getByEstado = async (req,res) => {
         if(!usuarioResult) throw new Error('el usuario no existe')
 
         const result =  await Reservas.findAll({
-         
+
+          include:[{
+              model: RelDisciplinaXClub,
+              as: "disciplinaxclubId",
+              include:[{
+                model: Disciplina,
+                as: "disciplina"
+              }]
+          }],
            where:{
                usuarioId: usuario,
                estadoreservaId: estado,
                activo:1
            }
        })
+
+
+
 
 
         res.status(200).json(result)
