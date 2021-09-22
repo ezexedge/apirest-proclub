@@ -61,7 +61,7 @@ exports.getbyUserId = async (req,res) => {
         const usuario = req.params.usuario
       
 
-        const result = await Reservas.findOne({
+        const result = await Reservas.findAll({
             where:{
                 usuarioId: usuario,
                 activo: 1
