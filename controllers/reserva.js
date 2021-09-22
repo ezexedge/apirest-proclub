@@ -61,12 +61,14 @@ exports.getbyUserId = async (req,res) => {
         const usuario = req.params.usuario
       
 
-        const result = await Usuario.findOne({
+        const result = await Reservas.findOne({
             where:{
-                id: usuario,
+                usuarioId: usuario,
                 activo: 1
             }
         })
+
+        
 
 
 
@@ -236,5 +238,8 @@ exports.getBloqueados = async (req,res) => {
         
     }
 }
+
+
+
 
 
