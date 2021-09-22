@@ -3,6 +3,7 @@ const db = require('../config/db');
 const Usuario =  require('../models/Usuario')
 const EstadoReserva = require('../models/EstadoReserva')
 const Espacio = require('../models/Espacio')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 
 const Reserva = db.define('reserva', {
     id: {
@@ -48,6 +49,7 @@ const Reserva = db.define('reserva', {
 Reserva.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 Reserva.belongsTo(EstadoReserva,{as:"estadoreserva",foreignKey: 'estadoreservaId'})
 Reserva.belongsTo(Espacio,{as:"espacio",foreignKey: 'espacioId'})
+Reserva.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub",foreignKey: 'disciplinaxclubId'})
 
 
 
