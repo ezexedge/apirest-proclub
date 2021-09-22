@@ -201,7 +201,7 @@ exports.getByEstado = async (req,res) => {
 
           include:[{
               model: RelDisciplinaXClub,
-              as: "disciplinaxclubId",
+              as: "disciplinaxclub",
               include:[{
                 model: Disciplina,
                 as: "disciplina"
