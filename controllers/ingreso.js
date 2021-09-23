@@ -4,6 +4,8 @@ const Turno = require('../models/Turno')
 const Espacio = require('../models/Espacio')
 const Usuario =  require('../models/Usuario')
 const Persona = require('../models/Persona')
+const Rol = require('../models/rol')
+const ClubXUsuario = require('../models/ClubXUsuario')
 const moment = require('moment')
 exports.getAll =  async (req,res) => {
 
@@ -58,9 +60,40 @@ exports.crear =  async (req,res) => {
 
       const espacio = req.params.espacio
       const usuario = req.auth.userId
+      const manager = req.auth.manager
 
 
       const resultEspacio = await Espacio.findByPk(espacio)
+
+
+
+      const resultManagerExiste = await Usuario.findByPk(manager)
+
+
+      if(!resultManagerExiste)throw new Error('El usuario no existe')
+
+
+
+      const resultManager = await ClubXUsuario.findOne({
+          where: {
+              usuarioId: manager
+          }
+      })
+
+
+      if(!resultManager)throw new Error('El usuario no esta relacionado a un club')
+
+
+      const resultRol = await Rol.findOne({
+          where:{
+              id: resultManager.rolId
+          }
+      })
+
+
+
+      if(resultRol.nombre.toLowerCase() !== 'manager')throw new Error('El id de manager no corresponde a su rol')
+      
 
       if(!resultEspacio)throw new Error('El espacio no existe')
 
@@ -68,7 +101,7 @@ exports.crear =  async (req,res) => {
 
      
    
-        const result = await Ingreso.create({espacioId: espacio,usuarioId: usuario,hora:hora})
+         await Ingreso.create({espacioId: espacio,usuarioId: usuario,hora:hora,managerId:manager})
 
         res.status(200).json({message:'se creo  un ingreso'})
 
