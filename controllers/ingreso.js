@@ -190,8 +190,8 @@ exports.getFiltro =  async (req,res) => {
         console.log('..////////////////',desde,hasta,manager,espacio,usuario)
        
 
-        const desdeFilter =  desde !== 'null' || desde !== '' ?  `${desde} 00:00:00` : moment().weekday(-3).format("YYYY-MM-DD HH:mm:ss")
-        const hastaFilter =  hasta !== 'null' || hasta !== '' ? ` ${hasta} 00:00:00` : moment().format("YYYY-MM-DD HH:mm:ss")
+        const desdeFilter =  desde !== 'null' ?  `${desde} 00:00:00` : moment().weekday(-3).format("YYYY-MM-DD HH:mm:ss")
+        const hastaFilter =  hasta !== 'null' ? ` ${hasta} 00:00:00` : moment().format("YYYY-MM-DD HH:mm:ss")
 
 
 
@@ -205,17 +205,17 @@ exports.getFiltro =  async (req,res) => {
         })
 
 
-        if(espacio !== 'null' || espacio !== ''){
+        if(espacio !== 'null'){
             result = _.filter(result, {'espacioId': Number(espacio)})
       
         }
 
-        if(usuario !== 'null' || espacio !== ''){
+        if(usuario !== 'null'){
             result = _.filter(result, {'usuarioId': Number(usuario)})
            
         }
 
-        if(manager !== 'null' || espacio !== ''){
+        if(manager !== 'null'){
              
             result = _.filter(result, {'managerId': Number(manager)})
            
