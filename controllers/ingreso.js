@@ -7,7 +7,9 @@ const Persona = require('../models/Persona')
 const Rol = require('../models/rol')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const moment = require('moment')
-const { Op } = require("sequelize");
+const _ = require('lodash');
+
+const { Op, Sequelize } = require("sequelize");
 
 
 exports.getAll =  async (req,res) => {
@@ -185,28 +187,47 @@ exports.getFiltro =  async (req,res) => {
         const usuario = req.params.usuario
         const espacio = req.params.espacio
 
+        console.log('..////////////////',desde,hasta,manager,espacio,usuario)
+       
 
-        const whereUsuario = usuario === null ? {} : {usuarioId: usuario} 
+        const desdeFilter =  desde !== 'null' ?  `${desde} 00:00:00` : moment().weekday(-3).format("YYYY-MM-DD HH:mm:ss")
+        const hastaFilter =  hasta !== 'null' ? ` ${hasta} 00:00:00` : moment().format("YYYY-MM-DD HH:mm:ss")
 
-        console.log(whereUsuario)
 
-        const result = await Ingreso.findAll({
-            include:[
-                {
-                    model: Usuario,
-                    as: 'usuario',
-                    include: [{
-                        model: Persona,
-                        as: 'persona'
-                    }]
-                },
-                {
-                model: Espacio,
-                as: 'espacio'
-            }],
-            where: whereUsuario
+
+       let result = await Ingreso.findAll({
+            where: { 
+                fecha : { [Op.between] : [ `${desdeFilter}` , `${hastaFilter}` ]}
+               
+        },
+            order: [['id', 'DESC']]            
+            
         })
 
+
+        if(espacio !== 'null'){
+            result = _.filter(result, {'espacioId': Number(espacio)})
+      
+        }
+
+        if(usuario !== 'null'){
+            result = _.filter(result, {'usuarioId': Number(usuario)})
+           
+        }
+
+        if(manager !== 'null'){
+             
+            result = _.filter(result, {'managerId': Number(manager)})
+           
+        }
+
+      
+
+
+       
+        
+       
+   
         res.status(200).json(result)
 
      }catch(error){
