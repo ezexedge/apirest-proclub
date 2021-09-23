@@ -28,6 +28,8 @@ Ingreso.belongsTo(Espacio,{as:"espacio",foreignKey: 'espacioId'})
 
 Ingreso.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 
+Ingreso.belongsTo(Usuario,{as:"manager",foreignKey: 'managerId'})
+
 
 
 
