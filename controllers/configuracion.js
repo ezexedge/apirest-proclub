@@ -1,4 +1,5 @@
 const ConfiguracionDiasHs = require("../models/ConfiguracionDiasHs")
+const Espacio = require("../models/Espacio")
 
 
 
@@ -9,7 +10,13 @@ exports.getByEspacioId = async(req,res) => {
     
 
 
-        const result = await ConfiguracionDiasHs.findOne({
+        const resultEspacio = await Espacio.findByPk(id)
+
+
+        if(!resultEspacio)throw new Error('El espacio no existe')
+
+
+        const result = await ConfiguracionDiasHs.findAll({
             where: {
                 espacioId: id
             }
