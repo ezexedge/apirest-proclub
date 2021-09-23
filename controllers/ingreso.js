@@ -7,6 +7,9 @@ const Persona = require('../models/Persona')
 const Rol = require('../models/rol')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const moment = require('moment')
+const { Op } = require("sequelize");
+
+
 exports.getAll =  async (req,res) => {
 
     try{
@@ -183,7 +186,9 @@ exports.getFiltro =  async (req,res) => {
         const espacio = req.params.espacio
 
 
+        const whereUsuario = usuario === null ? {} : {usuarioId: usuario} 
 
+        console.log(whereUsuario)
 
         const result = await Ingreso.findAll({
             include:[
@@ -198,7 +203,8 @@ exports.getFiltro =  async (req,res) => {
                 {
                 model: Espacio,
                 as: 'espacio'
-            }]
+            }],
+            where: whereUsuario
         })
 
         res.status(200).json(result)

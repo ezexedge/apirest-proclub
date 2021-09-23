@@ -706,6 +706,40 @@
  *        example:
  *         encuesta: 1
  *         usuarios: []
+ *     Configuracion:
+ *        type: object
+ *        properties:
+ *         lunes:
+ *           type: integer
+ *         martes:
+ *            type: integer
+ *         miercoles:
+ *            type: integer
+ *         jueves: 
+ *            type: integer
+ *         viernes: 
+ *            type: integer
+ *         sabado:
+ *            type: integer
+ *         domingo:
+ *            type: integer
+ *         espacioId:
+ *            type: integer
+ *         desde:
+ *            type: string
+ *         hasta:
+ *            type: string
+ *        example:
+ *         lunes: 0
+ *         martes: 1
+ *         miercoles: 0
+ *         jueves: 0
+ *         viernes: 0
+ *         sabado: 0
+ *         domingo: 0
+ *         desde: "00:00:00"
+ *         hasta: "00:00:00"
+ *         espacioId: 205
  *         
  *             
  *         
@@ -3986,6 +4020,34 @@
  */
 
 
+
+                /**
+ * @swagger
+ * /api/configuracion/{espacio}:
+ *   get:
+ *     summary: get las configuraciones por espacio
+ *     tags: [Configuracion]
+ *     parameters:
+ *       - in : path
+ *         name: espacio
+ *         description: id de un espacio
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  de configuracion por espacio
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Configuracion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 
                 /**
  * @swagger
