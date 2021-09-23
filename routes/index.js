@@ -729,7 +729,7 @@ router.get('/ingreso/:id',authSignupControllers.requireSignin,ingresoControllers
 router.get('/ingreso/espacio/:espacio',authSignupControllers.requireSignin,ingresoControllers.getByEspacio)
 
 
-router.get('/ingreso-filtro/:espacio/:usuario/:manager/:desde/:hasta',ingresoControllers.getFiltro)
+router.get('/ingreso-filtro/:espacio?/:usuario?/:manager?/:desde?/:hasta?',ingresoControllers.getFiltro)
 
 
 

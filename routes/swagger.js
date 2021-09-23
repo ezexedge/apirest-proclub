@@ -667,15 +667,21 @@
  *           type: integer
  *         fecha:
  *            type: date
- *         reservaId:
- *            type: integer
  *         usuarioId:
  *            type: integer
+ *         espacioId:
+ *            type: integer
+ *         managerId:
+ *            type: integer
+ *         hora:
+ *            type: string
  *        example:
  *         id: 1
  *         fecha: 2021-08-06
- *         reservaId: 95
+ *         espacioId: 95
  *         usuarioId: 5
+ *         manager: 10
+ *         hora: "16:08:02"
  *     Signin:
  *        type: object
  *        properties:
@@ -4048,6 +4054,61 @@
  * 
  * 
  */
+
+
+  
+  /**
+ * @swagger
+ * /api/ingreso-filtro/{espacio}/{usuario}/{manager}/{desde}/{hasta}:
+ *   get:
+ *     summary: get de los estado de las reservas
+ *     tags: [Ingreso]
+ *     parameters:
+ *       - in : path
+ *         name: espacio
+ *         description: id de un espacio
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *       - in : path
+ *         name: usuario
+ *         description: id de un usuario
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *       - in : path
+ *         name: manager
+ *         description: id de un manager
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *       - in : path
+ *         name: desde
+ *         description: desde  formato  2021-06-15
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *       - in : path
+ *         name: hasta
+ *         description: hasta formato 2021-06-15
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *     responses:
+ *       200:
+ *         description:  get  ingreso de un usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Ingreso'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+
 
                 /**
  * @swagger
