@@ -4067,30 +4067,35 @@
  *       - in : path
  *         name: espacio
  *         description: id de un espacio
+ *         default: "null"
  *         schema:
  *           type: string
  *           defualt: "null"
  *       - in : path
  *         name: usuario
  *         description: id de un usuario
+ *         default: "null"
  *         schema:
  *           type: string
  *           defualt: "null"
  *       - in : path
  *         name: manager
  *         description: id de un manager
+ *         default: "null"
  *         schema:
  *           type: string
  *           defualt: "null"
  *       - in : path
  *         name: desde
  *         description: desde  formato  2021-06-15
+ *         default: "null"
  *         schema:
  *           type: string
  *           defualt: "null"
  *       - in : path
  *         name: hasta
  *         description: hasta formato 2021-06-15
+ *         default: "null"
  *         schema:
  *           type: string
  *           defualt: "null"
