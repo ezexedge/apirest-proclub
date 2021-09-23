@@ -60,7 +60,7 @@ exports.crear =  async (req,res) => {
 
       const espacio = req.params.espacio
       const usuario = req.auth.userId
-      const manager = req.auth.manager
+      const manager = req.params.manager
 
 
       const resultEspacio = await Espacio.findByPk(espacio)
@@ -156,6 +156,49 @@ exports.getByEspacio =  async (req,res) => {
             }],
             where: { espacioId: espacio },
             order: [['id', 'DESC']]
+        })
+
+        res.status(200).json(result)
+
+     }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+
+}
+
+
+
+
+exports.getFiltro =  async (req,res) => {
+
+    try{
+
+
+        const desde = req.params.desde
+        const hasta = req.params.hasta
+        const manager = req.params.manager
+        const usuario = req.params.usuario
+        const espacio = req.params.espacio
+
+
+
+
+        const result = await Ingreso.findAll({
+            include:[
+                {
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                },
+                {
+                model: Espacio,
+                as: 'espacio'
+            }]
         })
 
         res.status(200).json(result)

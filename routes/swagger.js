@@ -3927,7 +3927,7 @@
 
    /**
  * @swagger
- * /api/ingreso/{espacio}:
+ * /api/ingreso/crear/{espacio}/{manager}:
  *   post:
  *     summary: se crea un ingreso
  *     tags: [Ingreso]
@@ -3936,6 +3936,16 @@
  *        name: espacio
  *        type: number
  *        description: agregar id de un espacio
+ *        schema:
+ *          type: integer
+ *        required: true
+ *      - in: path
+ *        name: manager
+ *        type: number
+ *        description: agregar id de un manager
+ *        schema:
+ *          type: integer
+ *        required: true
  *     responses:
  *       200:
  *        description: OK
