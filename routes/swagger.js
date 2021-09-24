@@ -329,23 +329,35 @@
  *       properties:
  *        id:
  *          type: integer
- *        fecha:
- *          type: date
- *        turnoId:
+ *        fechaInico:
+ *          type: string
+ *        fechaFin:
+ *          type: string
+ *        espacioId:
  *          type: integer
  *        usuarioId:
  *          type: integer
+ *        disciplinaxclub:
+ *          type: integer
+ *        desde:
+ *          type: string
+ *        hasta:
+ *          type: string
  *        estadoreservaId:
  *          type: integer
  *        activo:
  *          type: integer
  *       example:
  *        id: 1
- *        fecha: 2021-06-24
+ *        fechaInicio: "2021-06-24"
+ *        fechaFin: "2021-06-24"
+ *        desde: "16:00:00"
+ *        hasta: "17:00:00"
  *        activo: 1
- *        turnoId: 1
+ *        espacioId: 1
  *        usuarioId: 35
  *        estadoreservaId: 1
+ *        disciplinaxclubId: 305    
  *     Turnos:
  *       type: object
  *       properties:
@@ -3829,9 +3841,6 @@
 
 
 
-
-
-
 /**
  * @swagger
  * /api/reserva:
@@ -3843,14 +3852,14 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Reserva'
+ *             $ref: '#/components/schemas/Reservas'
  *     responses:
  *       200:
  *         description: The post was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Reserva'
+ *               $ref: '#/components/schemas/Reservas'
  *       500:
  *         description: Some server error
  */
