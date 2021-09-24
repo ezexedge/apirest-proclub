@@ -4129,15 +4129,14 @@
  * /api/ingreso-filtro/{espacio}/{fecha}:
  *   get:
  *     summary: get filtro de reserva por espacioId y fecha
- *     tags: [Ingreso]
+ *     tags: [Reserva]
  *     parameters:
  *       - in : path
  *         name: espacio
  *         description: id de un espacio
- *         default: "null"
  *         schema:
  *           type: string
- *           defualt: "null"
+ *         required: true
  *       - in : path
  *         name: fecha
  *         description: ingresar una fecha 2021-06-15  o null por defecto

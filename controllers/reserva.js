@@ -282,7 +282,7 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
         const espacio = req.params.espacio
 
 
-        const fechaInicio = req.params.fechainicio
+        const fechaInicio = req.params.fecha
 
         const fechaFin = req.params.fechafin
 
@@ -297,6 +297,7 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
 
 
 
+        console.log('/////',fechaFilterInicio)
    
 
        let result =  await Reservas.findAll({
