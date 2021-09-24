@@ -694,7 +694,7 @@ router.get('/reserva/:id',authSignupControllers.requireSignin,reservaControllers
 
 
  
-router.get('/reserva/usuario/:usuario',reservaControllers.getbyUserId)
+router.get('/reserva/usuario/:usuario',authSignupControllers.requireSignin,reservaControllers.getbyUserId)
 
 
 

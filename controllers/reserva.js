@@ -99,13 +99,22 @@ exports.crear = async(req,res) => {
             }
         })
 
+
+
        
         if(!estado)throw new Error('el estado pendiente no existe en la base de datos')
 
  
+        const resultEspacio = await Espacio.findByPk(req.body.espacioId)
+ 
+        if(!resultEspacio)throw new Error('el espacio ingresado no existe')
+
+        const resultDisciplinaXClub = await RelDisciplinaXClub.findByPk(req.body.disciplinaxclubId)
+       
+        if(!resultDisciplinaXClub)throw new Error('el id de  disciplinaxclub no existe')
 
 
-        const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre  })
+        const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre ,espacioId: req.body.espacioId,disciplinaxclubId: req.body.disciplinaxclubId })
 
         
         res.status(200).json(result)
