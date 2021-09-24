@@ -4124,6 +4124,43 @@
  */   
 
 
+  /**
+ * @swagger
+ * /api/ingreso-filtro/{espacio}/{fecha}:
+ *   get:
+ *     summary: get filtro de reserva por espacioId y fecha
+ *     tags: [Ingreso]
+ *     parameters:
+ *       - in : path
+ *         name: espacio
+ *         description: id de un espacio
+ *         default: "null"
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *       - in : path
+ *         name: fecha
+ *         description: ingresar una fecha 2021-06-15  o null por defecto
+ *         default: "null"
+ *         schema:
+ *           type: string
+ *           defualt: "null"
+ *     responses:
+ *       200:
+ *         description:  get filtro de reservas por espacioId y fecha
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Reservas'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+
+
                 /**
  * @swagger
  * /api/reserva/usuario/estado/{userId}/{estado}:

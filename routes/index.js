@@ -692,7 +692,7 @@ router.get('/reserva',authSignupControllers.requireSignin,reservaControllers.get
 router.get('/reserva/:id',authSignupControllers.requireSignin,reservaControllers.getbyId)
 
 
-router.get('/reserva-filtro/:espacio/:fechainicio',reservaControllers.getFiltroXEspacioXDia)
+router.get('/reserva-filtro/:espacio/:fecha',reservaControllers.getFiltroXEspacioXDia)
 
 
 

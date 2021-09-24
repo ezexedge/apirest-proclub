@@ -288,11 +288,15 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
 
 
 
+
+        const resultEspacio = await Espacio.findByPk(espacio)
+
+        if(!resultEspacio)throw new Error('El id del espacio no existe')
+
         const fechaFilterInicio =  fechaInicio !== 'null' ? ` ${fechaInicio} 00:00:00` : moment().format("YYYY-MM-DD HH:mm:ss")
 
 
 
-        console.log('/////',fechaFilterInicio)
    
 
        let result =  await Reservas.findAll({
