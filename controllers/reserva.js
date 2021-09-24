@@ -11,6 +11,9 @@ const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
+const moment = require('moment')
+const { Op, Sequelize } = require("sequelize");
+const _ = require('lodash');
 
 
 exports.getAll = async (req,res) => {
@@ -270,3 +273,48 @@ exports.getBloqueados = async (req,res) => {
 
 
 
+exports.getFiltroXEspacioXDia = async (req,res) => {
+
+
+    try{
+
+        
+        const espacio = req.params.espacio
+
+
+        const fechaInicio = req.params.fechainicio
+
+        const fechaFin = req.params.fechafin
+
+
+
+        const fechaFilterInicio =  fechaInicio !== 'null' ? ` ${fechaInicio} 00:00:00` : moment().format("YYYY-MM-DD HH:mm:ss")
+
+
+
+        console.log('/////',fechaFilterInicio)
+   
+
+       let result =  await Reservas.findAll({
+        where: { 
+            fechaInicio : fechaFilterInicio
+           
+    },
+       order: [['id', 'DESC']]            
+            
+       })
+
+
+
+    result = _.filter(result,{'espacioId': Number(espacio)})
+
+
+
+
+        res.status(200).json(result)
+      
+    }catch(err){
+        res.status(400).json({error: err.message})
+        
+    }
+}
