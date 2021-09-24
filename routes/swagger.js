@@ -4126,7 +4126,7 @@
 
   /**
  * @swagger
- * /api/ingreso-filtro/{espacio}/{fecha}:
+ * /api/reserva-filtro/{espacio}/{fecha}:
  *   get:
  *     summary: get filtro de reserva por espacioId y fecha
  *     tags: [Reserva]
@@ -4143,7 +4143,6 @@
  *         default: "null"
  *         schema:
  *           type: string
- *           defualt: "null"
  *     responses:
  *       200:
  *         description:  get filtro de reservas por espacioId y fecha
