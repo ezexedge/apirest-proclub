@@ -31,3 +31,21 @@ exports.getByEspacioId = async(req,res) => {
 
     }
 }
+
+exports.eliminarConfiguracion = async(req,res) => {
+    try{
+
+       
+       const id = req.params.id
+
+       await ConfiguracionDiasHs.destroy({where:{id:id}})
+        
+
+       res.status(200).json({message: 'configuracion eliminada correctamente'})
+
+    }catch(error){
+
+       res.status(400).json({'message': error.message})
+
+    }
+}

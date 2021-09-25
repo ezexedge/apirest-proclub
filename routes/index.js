@@ -867,6 +867,8 @@ router.get('/filtro-usuarios/:club/:disxclub/:disxclubxdiv/:disciplinaxclubxpos'
 router.get('/configuracion/:espacio',authSignupControllers.requireSignin,configuaracionControllers.getByEspacioId)
 
 
+router.delete('/configuracion/:id',authSignupControllers.requireSignin,configuaracionControllers.eliminarConfiguracion)
+
 
 //guardar token
 router.put('/documento/club/usuario/:club/:usuario/:estado',authSignupControllers.requireSignin,documentoControllers.cambiarEstado)

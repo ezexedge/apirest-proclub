@@ -4065,6 +4065,33 @@
  */
 
 
+                /**
+ * @swagger
+ * /api/configuracion/{id}:
+ *   delete:
+ *     summary: delete de una configuracion por su id
+ *     tags: [Configuracion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una configuracion
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  delete de una configuracion
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Configuracion'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
   
   /**
  * @swagger
