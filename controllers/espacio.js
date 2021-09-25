@@ -192,6 +192,7 @@ exports.updateEspacio =  async (req,res) => {
         for(let val of config){
 
             const obj = {
+                pertenece: val.pertenece,
                 lunes: val.lunes,
                 martes: val.martes,
                 miercoles: val.miercoles,
@@ -208,6 +209,8 @@ exports.updateEspacio =  async (req,res) => {
     
     
          }
+
+         console.log('esto es toda la configuracion...../// ',arrConfiguracion)
          await ConfiguracionDiasHs.bulkCreate(arrConfiguracion)
     
     

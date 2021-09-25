@@ -14,10 +14,9 @@ const admin = require('firebase-admin')
 const RelPosXUsuarioXDivXDep  = require('../models/RelPosXUsarioXDiviXDep')
 exports.usuarioListado = async (req,res) =>{
 
-
     try {
         
-        
+       
       const club = req.params.club
         
       const result = await  ClubXusuario.findAll({

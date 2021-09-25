@@ -9,6 +9,7 @@ const ConfiguracionDiasHs = db.define('configuraciondiashs', {
         primaryKey: true
 
     },
+    pertenece: Sequelize.STRING,
     lunes:{
         type: Sequelize.INTEGER,
         defaultValue: 1,
