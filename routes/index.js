@@ -308,6 +308,8 @@ module.exports = function(){
     router.get('/posiciones/:club/:disciplina',authSignupControllers.requireSignin,posicionControllers.getPosicion)
     router.post('/posiciones/:club/:disciplina',authSignupControllers.requireSignin,posicionControllers.crearPosicion)
    
+    router.post('/posicion-admin/:club/:disciplina/:division',authSignupControllers.requireSignin,posicionControllers.crearPosicionAdmin)
+   
    
     router.put('/posiciones/:id',authSignupControllers.requireSignin,posicionControllers.modificarPosicion)
    

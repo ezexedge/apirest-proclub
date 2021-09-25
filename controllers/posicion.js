@@ -2,6 +2,10 @@ const Posicion = require('../models/Posicion')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Club  = require('../models/Club')
 const Disciplina = require('../models/Disciplina')
+const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
+const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+
 
 exports.getPosicion = async(req,res) => {
      try{
@@ -151,6 +155,49 @@ exports.eliminarPosicion = async(req,res) => {
 
 
        res.status(200).json({'message': 'eliminado correctamente'})
+
+    }catch(error){
+
+       res.status(400).json({'message': error.message})
+
+    }
+}
+
+
+exports.crearPosicionAdmin = async(req,res) => {
+    try{
+
+       const clubId = req.params.club
+       const disciplinaId = req.params.disciplina
+       const divisionId = req.params.division
+
+        const posiciones = req.body.posiciones
+
+
+        const resultDivision = await RelDisXClubXDiv.findByPk(divisionId)
+
+        if(!resultDivision)throw new Error('la division ingresada no existe')
+
+       const result = await RelDisciplinaXClub.findOne({where : {
+           clubId: clubId,
+           disciplinaId: disciplinaId
+       }})
+
+
+       if(!result)throw new  Error('la relacion discipplina x club no existe')
+       
+
+       for(let val of posiciones){
+
+        let resultPosicion = await RelDisciplinaXPos.create({nombre:  val.nombre ,disciplinaId: disciplinaId})
+        await  DisciplinaXClubXPos.create({disxclubId: result.id,disciplinaxposId:resultPosicion.id,disciplinaxclubxdivxId: divisionId })
+       }
+
+
+
+     
+
+       res.status(200).json(posicion)
 
     }catch(error){
 
