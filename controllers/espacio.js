@@ -150,7 +150,7 @@ exports.updateEspacio =  async (req,res) => {
 
         if(val.id){
 
-            await Reserva.update({desde:val.HoraInicio,hasta:val.HoraFin,nombre:val.nombre,fechaInicio:val.FechaInicio,fechaFin: val.FechaFin},{where:{id: val.id}})
+            await Reserva.update({desde:val.desde,hasta:val.hasta,nombre:val.nombre,fechaInicio:val.fechaInicio,fechaFin: val.fechaFin},{where:{id: val.id}})
 
         }
 
