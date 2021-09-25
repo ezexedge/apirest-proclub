@@ -160,10 +160,10 @@ exports.updateEspacio =  async (req,res) => {
                 usuarioId: req.auth.userId,
                 nombre: val.nombre !== '' || val.nombre !== null ? val.nombre : 'No ingreso nombre',
                 espacioId: id,
-                desde: val.HoraInicio,
-                hasta: val.HoraFin,
-                fechaInicio: val.FechaInicio,
-                fechaFin: val.FechaFin,
+                desde: val.desde,
+                hasta: val.hasta,
+                fechaInicio: val.fechaInicio,
+                fechaFin: val.fechaFin,
                 estadoreservaId: 1,
                 bloqueo: 1
              }
