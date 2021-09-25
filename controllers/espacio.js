@@ -186,11 +186,37 @@ exports.updateEspacio =  async (req,res) => {
 
 
 
+
      let arrConfiguracion  = []
     if(config.length > 0){
 
         for(let val of config){
 
+            if(val.id > 0){
+                await ConfiguracionDiasHs.update({
+                    pertenece: val.pertenece,
+                    lunes: val.lunes,
+                    martes: val.martes,
+                    miercoles: val.miercoles,
+                    jueves: val.jueves,
+                    viernes: val.viernes,
+                    sabado: val.sabado,
+                    domingo: val.domingo,
+                    desde: val.desde,
+                    hasta: val.hasta,
+                    espacioId: val.espacioI
+
+                },{where:{id: val.id}})
+            }
+
+        } 
+
+
+
+
+        for(let val of config){
+
+            if(val.id < 0){
             const obj = {
                 pertenece: val.pertenece,
                 lunes: val.lunes,
@@ -206,7 +232,7 @@ exports.updateEspacio =  async (req,res) => {
             }
     
             arrConfiguracion.push(obj)
-    
+        }
     
          }
 
