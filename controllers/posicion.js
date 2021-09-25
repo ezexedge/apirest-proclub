@@ -197,7 +197,7 @@ exports.crearPosicionAdmin = async(req,res) => {
 
      
 
-       res.status(200).json(posicion)
+       res.status(200).json({message: 'creado correctamente'})
 
     }catch(error){
 
