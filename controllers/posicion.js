@@ -143,18 +143,17 @@ exports.eliminarPosicion = async(req,res) => {
         const id = req.params.id
     
 
-       const result = Posicion.findByPk(id)
+       const result = await RelDisciplinaXPos.findByPk(id)
 
 
-       if(!result){
-           throw new  Error('la posicion no existe')
-       }
+       if(!result) throw new  Error('la posicion no existe')
+       
 
-      await Posicion.update({activo:  0 },{where: {id:id}})
+      await RelDisciplinaXPos.update({activo:  0 },{where: {id:id}})
       
 
 
-       res.status(200).json({'message': 'eliminado correctamente'})
+       res.status(200).json({message: 'eliminado correctamente'})
 
     }catch(error){
 

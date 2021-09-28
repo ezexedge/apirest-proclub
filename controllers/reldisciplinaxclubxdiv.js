@@ -70,9 +70,10 @@ exports.getId = async(req,res) => {
         ],
             where: {
                 disxclubId: result.disciplinaxclubId,
-                disciplinaxclubxdivxId: result.id
+                disciplinaxclubxdivxId: result.id,
+                
+
             },
-            activo: 1
         })
 
         let arr = []
@@ -110,7 +111,8 @@ exports.getByDisciplinaXClubId = async(req,res) => {
      const disciplinaxclub = await RelDisciplinaXClub.findOne({
          where: {
             clubId: club,
-            disciplinaId: disciplina
+            disciplinaId: disciplina,
+           
          }
      })
     if(!disciplinaxclub)throw new Error('el club y disciplina no existe o no coinciden')
