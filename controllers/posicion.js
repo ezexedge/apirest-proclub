@@ -191,11 +191,7 @@ exports.crearPosicionAdmin = async(req,res) => {
 
         let resultPosicion = await RelDisciplinaXPos.create({nombre:  val.nombre ,disciplinaId: disciplinaId})
         await  DisciplinaXClubXPos.create({disxclubId: result.id,disciplinaxposId:resultPosicion.id,disciplinaxclubxdivxId: divisionId })
-       }
-
-
-
-     
+       }     
 
        res.status(200).json({message: 'creado correctamente'})
 
