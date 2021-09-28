@@ -200,3 +200,55 @@ exports.crearPosicionAdmin = async(req,res) => {
 
     }
 }
+
+
+
+exports.getAllPosicionesByDivision = async(req,res) => {
+    try{
+
+        const disciplina = req.params.disciplina
+        const club = req.params.club
+    
+
+       const result = await RelDisciplinaXClub.findOne({
+           where:{
+               clubId: club,
+               disciplinaId: disciplina,
+               activo: 1
+           }
+       })
+
+
+
+
+       if(!result) throw new  Error('la relacion de disciplina x club no existe')
+       
+
+       const resultInfo = await DisciplinaXClubXPos({
+
+        include: [{
+            model: RelDisciplinaXPos,
+            as: 'disciplinaxpos',
+            where:{activo:1}
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disciplinaxclubxdiv'
+        }
+    ],
+        where: {
+            disxclubId: result.id,
+            activo: 1
+        }
+
+       })
+
+
+       res.status(200).json(resultInfo)
+
+    }catch(error){
+
+       res.status(400).json({'message': error.message})
+
+    }
+}
