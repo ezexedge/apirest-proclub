@@ -261,14 +261,25 @@ exports.crearDivisionXClubXDisciplina = async (req,res) => {
         if(!disciplina) throw new Error('La disiciplina no existe')
 
 
-         const result = await RelDisXClubXDiv.findOne({
+         const resultDivision = await RelDisXClubXDiv.findOne({
              where: {
                  nombre : nombre
              }
          })
 
 
-         if(result)throw new Error('ya existe una division con ese nombre')
+         if(resultDivision)throw new Error('ya existe una division con ese nombre')
+
+         let result = await RelDisciplinaXClub.findOne({
+            where: {    
+                clubId: clubId,
+                disciplinaId: disciplinaId,
+                activo: 1
+            }
+        })
+
+
+        if(!result)throw new Error('la relacion de disciplina con club no existe')
 
         let resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
 
