@@ -244,7 +244,23 @@ exports.getAllPosicionesByDivision = async(req,res) => {
        })
 
 
-       res.status(200).json(resultInfo)
+       let arr = []
+
+       for(let val of resultInfo){
+           if(val.disciplinaxclubxdivxId !== null && val.disciplinaxpos.activo === 1 ){
+            
+            let obj = {
+                id: val.disciplinaxpos.id ,
+                name: val.disciplinaxpos.nombre,
+                role: val.disciplinaxclubxdiv.nombre
+              }
+
+              arr.push(obj)
+
+           }
+       }
+
+       res.status(200).json(arr)
 
     }catch(error){
 
