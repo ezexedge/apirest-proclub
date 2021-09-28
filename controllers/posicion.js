@@ -224,7 +224,7 @@ exports.getAllPosicionesByDivision = async(req,res) => {
        if(!result)throw new Error('la relacion de disciplina x club no existe')
        
 
-       const resultInfo = await DisciplinaXClubXPos({
+       const resultInfo = await DisciplinaXClubXPos.findAll({
 
         include: [{
             model: RelDisciplinaXPos,
