@@ -2489,6 +2489,36 @@
  * 
  */  
 
+
+
+                          /**
+ * @swagger
+ * /api/notificacion-leida/{notificaion}:
+ *   get:
+ *     summary: get de una notificacion si es leida por su id
+ *     tags: [Notificacion]
+ *     parameters:
+ *       - in : path
+ *         name: notificacion
+ *         description: get id de una notificacion
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de una notificacion si es leida por su id
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 type: string
+ *                 example: {message: true}
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+
                           /**
  * @swagger
  * /api/notificacion/usuario/{userId}:

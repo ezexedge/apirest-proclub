@@ -437,6 +437,9 @@ module.exports = function(){
 
 
 
+    router.get('/notificacion-leida/:notificacion',authSignupControllers.requireSignin,notificacionControllers.getNotificacionLeida)
+   
+
 
     router.post('/notificacion',authSignupControllers.requireSignin,notificacionControllers.crear)
 

@@ -434,4 +434,37 @@ exports.getNotificacionVistas = async(req,res) => {
 
 
 
+exports.getNotificacionLeida = async(req,res) => {
+    try{
+
+       
+        const id = req.params.notificacion
+        const user = req.auth.userId
+
+        const notificacion = await Notificacion.findByPk(id)
+
+        if(!notificacion)throw new Error('La notificacion no existe')
+
+        const result = await NotificacionVistasXUsuarios.findOne({
+            where: {
+                usuarioId: user,
+                notificacionId: id
+            }
+        })
+
+        let respuesta = false
+        if(result){
+            respuesta = true
+        }
+        
+        res.status(200).json({message : respuesta})
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+
+
 
