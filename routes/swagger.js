@@ -2493,7 +2493,7 @@
 
                           /**
  * @swagger
- * /api/notificacion-leida/{notificaion}:
+ * /api/notificacion-leida/{notificacion}:
  *   get:
  *     summary: get de una notificacion si es leida por su id
  *     tags: [Notificacion]
