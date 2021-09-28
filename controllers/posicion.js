@@ -92,24 +92,28 @@ exports.modificarPosicion = async(req,res) => {
     try{
 
         const id = req.params.id
-       const {nombre} =  req.body
+       const nombre =  req.body.nombre
 
-       const result = Posicion.findByPk(id)
+       const result = await RelDisciplinaXPos.findOne({
+           where:{
+               id: id,
+               activo: 1
+           }
+       })
 
 
-       if(!result){
-           throw new  Error('la posicion no existe')
-       }
+       if(!result)throw new  Error('la posicion no existe')
 
-      await Posicion.update({nombre:  nombre },{where: {id:id}})
+
+      await RelDisciplinaXPos.update({nombre: nombre },{where: {id : result.id}})
       
 
 
-       res.status(200).json({'message': 'modificado correctamente'})
+       res.status(200).json({message: 'modificado correctamente'})
 
     }catch(error){
 
-       res.status(400).json({'message': error.message})
+       res.status(400).json({error: error.message})
 
     }
 }
