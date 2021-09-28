@@ -221,7 +221,7 @@ exports.getAllPosicionesByDivision = async(req,res) => {
 
 
 
-       if(!result) throw new  Error('la relacion de disciplina x club no existe')
+       if(!result)throw new Error('la relacion de disciplina x club no existe')
        
 
        const resultInfo = await DisciplinaXClubXPos({
@@ -248,7 +248,7 @@ exports.getAllPosicionesByDivision = async(req,res) => {
 
     }catch(error){
 
-       res.status(400).json({'message': error.message})
+       res.status(400).json({message: error.message})
 
     }
 }
