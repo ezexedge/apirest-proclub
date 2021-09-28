@@ -87,10 +87,19 @@ exports.getId = async(req,res) => {
             arr.push(val.disciplinaxpos)
         }
 
+        let arrFinal = []
+
+        for( let val of arr){
+
+            if(val.activo === 1){
+                arrFinal.push(val)
+            }
+
+        }
 
         const obj = {
             division: division,
-            posiciones: arr
+            posiciones: arrFinal
         }
 
         res.status(200).json(obj)
