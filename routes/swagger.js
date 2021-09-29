@@ -2090,7 +2090,7 @@
  * /api/div/{club}/{disciplina}:
  *   get:
  *     summary: get todas la divisiones de una disciplina
- *     tags: [Posicion]
+ *     tags: [Division]
  *     parameters:
  *       - in : path
  *         name: club
