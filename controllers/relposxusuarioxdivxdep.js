@@ -521,3 +521,71 @@ console.log('//////////////',deporte)
         res.status(400).json({'error': error.message})
     }
 }
+
+
+
+
+
+exports.getDeportes = async (req,res) => {
+    
+    try{
+
+        
+        const user = req.auth.userId
+        const club = req.params.club
+ 
+
+
+
+        const resultClubXUsuario = await ClubXUsuario.findOne({
+            where:{
+                clubId: club,
+                usuarioId: user,
+                activo: 1
+            }
+        })
+
+       
+
+
+
+
+
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub',
+                 include:[{
+                     model: Disciplina,
+                     as: 'disciplina'
+                 }]
+                
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos'
+             }]
+            }
+        ]
+        },{
+            where:{
+                clubxusuarioId: resultClubXUsuario
+            }
+        })
+
+     
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}

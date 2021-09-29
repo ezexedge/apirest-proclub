@@ -1771,6 +1771,33 @@
  * 
  * 
  */
+
+
+        /**
+ * @swagger
+ * /api/usuario-perfil/{club}:
+ *   get:
+ *     summary: get usuario by id
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get usuario by id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: usuario by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
    
           /**
  * @swagger

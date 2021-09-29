@@ -436,6 +436,9 @@ module.exports = function(){
     //notificacion
 
 
+    router.get('/usuario-perfil/:club',authSignupControllers.requireSignin,usuarioInformacionFinal.getDeportes)
+   
+
 
     router.get('/notificacion-leida/:notificacion',authSignupControllers.requireSignin,notificacionControllers.getNotificacionLeida)
    
