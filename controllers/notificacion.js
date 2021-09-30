@@ -185,7 +185,7 @@ exports.sendNotificacion = async (req,res) => {
             }
 
             console.log('el array',arr)
-            const destino  = await Destinatario.bulkCreate(arr,{ transaction: t })
+            const destino  = await Destinatario.bulkCreate(arr)
                 res.status(200).json({message: 'Encuesta creada'})
 
 
