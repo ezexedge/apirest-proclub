@@ -22,8 +22,12 @@ exports.signup = async(req,res)=>{
         const {email,nombre,apellido,password,deporte,club,documento} = req.body
         const result = await Persona.findOne({where:{correo:email}})
 
+
+        console.log('aca esta deporte', deporte)
+
         let disciplinaxclubFinal = null
-        if(deporte !== null || deporte !== ""){
+
+        if(deporte !== null || deporte !== '' || deporte !== 'null'){
 
             const disciplinaxclub = await RelDisciplinaXClub.findOne({where:{
                 clubId: club,
