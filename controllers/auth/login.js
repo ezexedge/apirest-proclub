@@ -61,7 +61,6 @@ exports.signup = async(req,res)=>{
           
              const clubxusuario =  await ClubXUsuario.create({ clubId: club, usuarioId: nuevoUsuario.id , activo: 1 , estadoId: pendiente.id,rolId: rol.id },{ transaction: t })
 
-             console.log(clubxusuario.id,disciplinaxclub.id)
 
                 if(disciplinaxclub && disciplinaxclub.id){
                 await RelUsuarioXDis.create({ clubxusuarioId: clubxusuario.id , disciplinaxclubId: disciplinaxclub.id },{transaction: t})
