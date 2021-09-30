@@ -591,3 +591,84 @@ exports.getDeportes = async (req,res) => {
         res.status(400).json({'error': error.message})
     }
 }
+
+
+
+
+
+
+
+exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
+    
+    try{
+
+        
+        const user = req.auth.userId
+        const club = req.params.club
+        const disciplina = req.params.disciplina
+        const  div = req.params.div
+        const pos = req.params.pos
+ 
+
+
+        //clubxusuario
+        const resultClubXUsuario = await ClubXUsuario.findOne({
+            where:{
+                clubId: club,
+                usuarioId: user,
+                activo: 1
+            }
+        })
+
+        if(!resultClubXUsuario)throw new Error('el usuario no esta realacionado con el club')
+
+       
+        const resultDisciplinaXClub = await RelDisciplinaXClub.findOne({
+            where:{
+                clubId: club,
+                disciplinaId: disciplina
+            }
+        })
+
+
+        if(!resultDisciplinaXClub)throw new Error('la disciplina no esta relacionada con el club')
+
+        //disxclubxdiv
+        const resultDisXClubXDiv = await RelDisXClubXDiv.findOne({
+            where: {
+                id: div            }
+        })
+
+        let divisionFinal = null
+
+        if(resultDisXClubXDiv && resultDisXClubXDiv.id){
+            divisionFinal = resultDisXClubXDiv.id
+        }
+
+        //disciplinaxclubxpos
+        const resultDisXClubXPos = await DisciplinaXClubXPos.findOne({
+            where:{
+                disciplinaxposId: pos
+            }
+        })
+
+        let posicionFinal = null
+        if(resultDisXClubXPos && resultDisXClubXPos.id){
+            posicionFinal = resultDisXClubXPos.id
+        }
+
+
+
+         
+
+
+         await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultClubXUsuario ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  })
+
+     
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
