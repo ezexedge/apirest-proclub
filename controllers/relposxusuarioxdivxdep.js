@@ -561,7 +561,8 @@ exports.getDeportes = async (req,res) => {
                  as: 'disciplinaxclub',
                  include:[{
                      model: Disciplina,
-                     as: 'disciplina'
+                     as: 'disciplina',
+                     where: {activo:1}
                  }]
                 
                 }]  
@@ -571,7 +572,8 @@ exports.getDeportes = async (req,res) => {
              as:   'disciplinaxclubxpos',
              include: [{
                  model: RelDisciplinaXPos,
-                 as: 'disciplinaxpos'
+                 as: 'disciplinaxpos',
+                 where: {activo:1}
              }]
             }
         ],
