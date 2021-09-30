@@ -119,7 +119,7 @@ module.exports = function(){
    //relacion  disciplina por club
 
 
-    router.get('/disciplina-club/:club',authSignupControllers.requireSignin,reldisciplinaxclubControllers.getDeporteXClub)
+    router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
 
 
     router.get('/disciplina-club/:club/:disciplina',authSignupControllers.requireSignin,reldisciplinaxclubControllers.getDeporteXClubById)
