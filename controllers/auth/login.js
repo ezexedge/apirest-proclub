@@ -22,18 +22,27 @@ exports.signup = async(req,res)=>{
         const {email,nombre,apellido,password,deporte,club,documento} = req.body
         const result = await Persona.findOne({where:{correo:email}})
 
-        const disciplinaxclub = await RelDisciplinaXClub.findOne({where:{
-            clubId: club,
-            disciplinaId: deporte
-        }})
+        let disciplinaxclubFinal = null
+        if(deporte !== null || deporte !== ""){
 
-        if(!disciplinaxclub){
-            throw new Error('El club con la disciplina no coincide')
+            const disciplinaxclub = await RelDisciplinaXClub.findOne({where:{
+                clubId: club,
+                disciplinaId: deporte
+            }})
+    
+            disciplinaxclubFinal = disciplinaxclub
+            
+            if(!disciplinaxclub){
+                throw new Error('El club con la disciplina no coincide')
+            }
+            
+
+
         }
 
+       
 
 
-        console.log(disciplinaxclub)        
         
         const rol = await Rol.findOne({where:{ nombre : 'socio' }})
 
@@ -60,15 +69,14 @@ exports.signup = async(req,res)=>{
           
               const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido,correo: email, tipoDocumentId: 1,  documento: documento },{ transaction: t })
             
-              const nuevoUsuario = await Usuario.create({  personaId: nuevaPersona.id , activo: 1 ,idFirebase: resultFirebase.uid ,  ultimoIngreso: disciplinaxclub.clubId  },{ transaction: t })
+              const nuevoUsuario = await Usuario.create({  personaId: nuevaPersona.id , activo: 1 ,idFirebase: resultFirebase.uid ,  ultimoIngreso: disciplinaxclubFinal!== null ?  disciplinaxclubFinal.clubId : disciplinaxclubFinal  },{ transaction: t })
           
              const clubxusuario =  await ClubXUsuario.create({ clubId: club, usuarioId: nuevoUsuario.id , activo: 1 , estadoId: pendiente.id,rolId: rol.id },{ transaction: t })
 
-             console.log(clubxusuario.id,disciplinaxclub.id)
 
-
-                await RelUsuarioXDis.create({ clubxusuarioId: clubxusuario.id , disciplinaxclubId: disciplinaxclub.id },{transaction: t})
-            
+               if(disciplinaxclubFinal !== null){
+                await RelUsuarioXDis.create({ clubxusuarioId: clubxusuario.id , disciplinaxclubId: disciplinaxclubFinal.id },{transaction: t})
+               }
 
                await t.commit();
 
