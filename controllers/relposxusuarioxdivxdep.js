@@ -574,8 +574,8 @@ exports.getDeportes = async (req,res) => {
                  as: 'disciplinaxpos'
              }]
             }
-        ]
-        },{
+        ],
+        
             where:{
                 clubxusuarioId: resultClubXUsuario
             }
