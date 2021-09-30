@@ -153,6 +153,8 @@ exports.sendNotificacion = async (req,res) => {
         const enviadoPor = req.auth.userId
         const {usuarios,encuesta}  = req.body
         
+
+        console.log('req bodyy',req.body)
         
         const encuestaExiste = await Encuesta.findOne({
             where: {id: encuesta}
@@ -182,6 +184,7 @@ exports.sendNotificacion = async (req,res) => {
                 
             }
 
+            console.log('el array',arr)
             const destino  = await Destinatario.bulkCreate(arr,{ transaction: t })
                 res.status(200).json({message: 'Encuesta creada'})
 
@@ -201,11 +204,13 @@ exports.sendNotificacion = async (req,res) => {
                 };
 
 
+                if(arrDevice.length > 0){
                 for(let val of arrDevice){
                     const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
                     console.log('estado de envio de notificacion',result)
             
                 }
+            }
         
       
 
