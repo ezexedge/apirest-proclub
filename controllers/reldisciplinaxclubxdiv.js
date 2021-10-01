@@ -215,7 +215,7 @@ exports.crear = async (req,res) => {
 
         }
 
-        if(!nombre || nombre === null || nombre === ''){
+        if( nombre !== null || nombre !== ''){
 
         let resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
 
