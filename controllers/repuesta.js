@@ -234,21 +234,47 @@ exports.getRespuestaDeUnaEncuestaXUsuarios = async(req,res) => {
         const encuesta = req.params.encuesta
         const usuario = req.auth.userId
 
-        const resultRespuestaPorUsuario = await RespuestaUsuario.findAll()
+        const resultRespuestaPorUsuario = await RespuestaUsuario.findAll({
+            include:[{
+                model: Respuesta,
+                as: 'respuesta'
+            }],
+            where:{
+               usuarioId:  usuario         
+            }
+        })
 
         const resultPregunta = await Pregunta.findAll()
 
 
-       const  preguntasFiltradas =   _.filter(resultPregunta,{encuestaId: encuesta})
 
-       
+       const  preguntasFiltradas =   _.filter(resultPregunta,{'encuestaId': Number(encuesta)})
 
 
+
+
+        let arr = []
+       for(let val of resultRespuestaPorUsuario){
+           
+           arr.push(val.respuesta)
+          
+       }
+
+
+        let arrFinal = []
+
+        for(let val of preguntasFiltradas){
+           const result =  _.filter(arr, { 'preguntaId': val.id });
+            if(result.length > 0){
+               arrFinal.push(...result)
+            }
+
+        }
 
 
 
         
-        res.status(200).json(preguntasFiltradas)
+        res.status(200).json(arrFinal)
 
     }catch(err){
         res.status(400).json({error: err.message})
