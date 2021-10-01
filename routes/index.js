@@ -594,7 +594,7 @@ router.get('/respuesta/pregunta/:pregunta',authSignupControllers.requireSignin,r
 router.get('/respuesta/:id',authSignupControllers.requireSignin,respuestaControllers.getById)
 
 
-router.post('/respuesta/usuario/:respuestaId',authSignupControllers.requireSignin,respuestaControllers.crearRespuestaUsuario)
+router.post('/respuesta/usuario',authSignupControllers.requireSignin,respuestaControllers.crearRespuestaUsuario)
 
 
 router.delete('/respuesta/usuario/:respuestaId',authSignupControllers.requireSignin,respuestaControllers.eliminarRespuestaUsuario)

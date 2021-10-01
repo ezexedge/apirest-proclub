@@ -1,6 +1,7 @@
 const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 const RespuestaUsuario = require('../models/RespuestaUsuario')
+const db = require('../config/db')
 
 exports.crear = async(req,res) => {
     try{
@@ -116,42 +117,60 @@ exports.modificar = async (req,res)=> {
 
 
 exports.crearRespuestaUsuario = async(req,res) => {
+
+
+    const t = await db.transaction()
+
+   
     try{
 
 
-        const respuesta =  req.params.respuestaId
+        const {respuesta} =  req.body
         const usuario = req.auth.userId
 
 
 
+        let arr = []
+        for(let val of respuesta){
 
-        const resultRespuesta = await Respuesta.findOne({
-            where: {
-                id: respuesta
-            }
-        })
+          let obj = {
+              usuarioId: usuario,
+              respuestaId: val.respuesta
+          }
 
-        if(!resultRespuesta)throw new Error('la respuesta no existe no existe')
-        const resultRespuestaUsuario  =  await RespuestaUsuario.findOne({
-            where:{
-                usuarioId: usuario,
-                respuestaId: respuesta
-            }
-        })
+          arr.push(obj)
+
+        }
+
+        await RespuestaUsuario.bulkCreate(arr,{transaction: t})
+
+        for(let val of respuesta){
+
+            const resultRespuesta =  awit Respuesta.findOne({
+                where:{
+                    id: val.respuesta
+                }
+            })
+
+      let contador = resultRespuesta.contadorDeRespuestas + 1
+        await  Respuesta.update({contadorDeRespuestas: contador  },{where: {id: resultRespuesta.id}, transaction: t })
 
 
-        if(resultRespuestaUsuario)throw new Error('el usuario ya selecciona la respuesta')
 
-        await RespuestaUsuario.create({usuarioId: usuario, respuestaId: respuesta})
+        }   
 
-        const contador = resultRespuesta.contadorDeRespuestas + 1
+      
 
-        await  Respuesta.update({contadorDeRespuestas: contador  },{where: {id: resultRespuesta.id}})
+   await t.commit();
+
 
         res.status(200).json({message: 'respuesta seleccionada correctamente'})
 
 
     }catch(err){
+
+            await t.rollback();
+
         res.status(400).json({error: err.message})
     }
 }
