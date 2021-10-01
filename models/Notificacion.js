@@ -41,7 +41,7 @@ const Notificacion = db.define('notificacion', {
 
 
 
-Notificacion.belongsTo(EstadoNotificacion,{as:"estadonotificacion",foreignKey: 'estadonotificacionId'})
+Notificacion.belongsTo(EstadoNotificacion,{as:"estadonotificacion",foreignKey: 'estadonotificacionId',defaultValue: 1})
 
 
 
