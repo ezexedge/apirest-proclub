@@ -590,6 +590,9 @@ router.post('/respuesta/pregunta/:pregunta',authSignupControllers.requireSignin,
 router.get('/respuesta/pregunta/:pregunta',authSignupControllers.requireSignin,respuestaControllers.getAll) 
 
 
+router.get('/respuesta-encuesta/:encuesta',authSignupControllers.requireSignin,respuestaControllers.getRespuestaDeUnaEncuestaXUsuarios) 
+
+
 
 router.get('/respuesta/:id',authSignupControllers.requireSignin,respuestaControllers.getById)
 

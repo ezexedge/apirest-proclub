@@ -2,6 +2,7 @@ const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 const RespuestaUsuario = require('../models/RespuestaUsuario')
 const db = require('../config/db')
+const _ = require('lodash')
 
 exports.crear = async(req,res) => {
     try{
@@ -223,6 +224,38 @@ exports.eliminarRespuestaUsuario = async (req,res)=> {
     }
 
 }
+
+
+
+
+exports.getRespuestaDeUnaEncuestaXUsuarios = async(req,res) => {
+    try{
+
+        const encuesta = req.params.encuesta
+        const usuario = req.auth.userId
+
+        const resultRespuestaPorUsuario = await RespuestaUsuario.findAll()
+
+        const resultPregunta = await Pregunta.findAll()
+
+
+       const  preguntasFiltradas =   _.filter(resultPregunta,{encuestaId: encuesta})
+
+       
+
+
+
+
+
+        
+        res.status(200).json(preguntasFiltradas)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
 
 
 //dd
