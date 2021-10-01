@@ -71,7 +71,7 @@ exports.getAll = async (req,res) => {
                 }   
             ],
             where:{
-                activo:1,
+                activo: 1
                 clubxusuarioId: result.id
             }
         })
