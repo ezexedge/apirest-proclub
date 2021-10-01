@@ -215,12 +215,13 @@ exports.crear = async (req,res) => {
 
         }
 
+        if(!nombre || nombre === null || nombre === ''){
 
         let resp = await RelDisXClubXDiv.create({ nombre: nombre, disciplinaxclubId: result.id })
 
         if(!resp)throw new Error('error al crear categoria')
 
-
+        
         let arr = []
 
         for(let val of posiciones){
@@ -242,7 +243,7 @@ exports.crear = async (req,res) => {
         
         
         await DisciplinaXClubXPos.bulkCreate(arr)
-
+        }
 
         res.status(200).json({message: 'creado correctamente'})
 
