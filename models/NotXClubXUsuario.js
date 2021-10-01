@@ -6,6 +6,7 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const Usuario = require('../models/Usuario')
 const EstadoNotificacion = require('../models/EstadoNotificacion')
 
+
 const NotXClubXUsuario = db.define('notxclubxusuario', {
     id: {
         type: Sequelize.INTEGER, 
@@ -27,7 +28,7 @@ const NotXClubXUsuario = db.define('notxclubxusuario', {
 NotXClubXUsuario.belongsTo(NotificacionXClub,{as:"club",foreignKey: 'notificacionxclubId'})
 NotXClubXUsuario.belongsTo(ClubXUsuario,{as:"clubxusuario",foreignKey: 'clubxusuarioId'})
 NotXClubXUsuario.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
-Notificacion.belongsTo(EstadoNotificacion,{as:"estadonotificacion",foreignKey: 'estadonotificacionId'})
+NotXClubXUsuario.belongsTo(EstadoNotificacion,{as:"estadonotificacion",foreignKey: 'estadonotificacionId'})
 
 
 module.exports = NotXClubXUsuario;
