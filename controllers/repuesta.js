@@ -228,12 +228,17 @@ exports.eliminarRespuestaUsuario = async (req,res)=> {
 
 
 
+
+
+//falta cargarlo en swagger y al de respuesta post
 exports.getRespuestaDeUnaEncuestaXUsuarios = async(req,res) => {
     try{
 
         const encuesta = req.params.encuesta
         const usuario = req.auth.userId
 
+
+//aca va la pregunta si la quiere agregar el gallego
         const resultRespuestaPorUsuario = await RespuestaUsuario.findAll({
             include:[{
                 model: Respuesta,
@@ -284,4 +289,4 @@ exports.getRespuestaDeUnaEncuestaXUsuarios = async(req,res) => {
 
 
 
-//dd
+//no doy massss

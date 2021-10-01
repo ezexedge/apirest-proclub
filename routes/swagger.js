@@ -758,7 +758,13 @@
  *         desde: "00:00:00"
  *         hasta: "00:00:00"
  *         espacioId: 205
- *         
+ *     RespuestaPost:
+ *        type: object
+ *        properties:
+ *         respuesta:
+ *            type: array
+ *        example:
+ *         respuesta: [{respuesta: 1},{respuesta: 120}]      
  *             
  *         
  *           
@@ -3110,7 +3116,7 @@
  */  
 
 
-
+///respuesta-encuesta/:encuesta
 
 
 
@@ -3285,32 +3291,23 @@
 
 
 
-                    /**
+     /**
  * @swagger
- * /api/respuesta/usuario/{respuestaId}:
+ * /api/respuesta/usuario:
  *   post:
- *     summary: el usuario selecciona una respuesta y se guarda junto su id
+ *     summary: agregar respuesta de encuesta
  *     tags: [Respuesta]
- *     parameters:
- *       - in : path
- *         name: respuestaId
- *         description: la respuestaId debe ser el id de una respuesta
- *         schema:
- *           type: integer
- *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RespuestaPost'
  *     responses:
  *       200:
- *         description:  post de una respuesta seleccionada por el usuario
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Respuesta'
+ *        description: creado correctamente
  *       400:
  *         description: post can not be found
- * 
- * 
  */
 
 
@@ -3341,6 +3338,37 @@
  * 
  * 
  */
+
+
+                    /**
+ * @swagger
+ * /api/respuesta-encuesta/{encuesta}:
+ *   get:
+ *     summary: get todas las respuesta de la encuesta
+ *     tags: [Respuesta]
+ *     parameters:
+ *       - in : path
+ *         name: encuesta
+ *         description: agregar el id de una encuesta
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de respuestas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Respuesta'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 
                     /**
  * @swagger
