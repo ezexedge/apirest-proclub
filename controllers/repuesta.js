@@ -125,7 +125,7 @@ exports.crearRespuestaUsuario = async(req,res) => {
     try{
 
 
-        const {respuesta} =  req.body
+        const respuesta =  req.body.respuesta
         const usuario = req.auth.userId
 
 
@@ -146,7 +146,7 @@ exports.crearRespuestaUsuario = async(req,res) => {
 
         for(let val of respuesta){
 
-            const resultRespuesta =  awit Respuesta.findOne({
+            const resultRespuesta =  await Respuesta.findOne({
                 where:{
                     id: val.respuesta
                 }
