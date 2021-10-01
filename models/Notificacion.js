@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
 const db = require('../config/db');
 const moment = require('moment')
-const EstadoNotificacion = require('../model/EstadoNotificacion')
+const EstadoNotificacion = require('../models/EstadoNotificacion')
 
 
 
