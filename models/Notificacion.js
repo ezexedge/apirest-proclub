@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
 const db = require('../config/db');
 const moment = require('moment')
-const EstadoNotificacion = require('../models/EstadoNotificacion')
 
 
 
@@ -41,7 +40,6 @@ const Notificacion = db.define('notificacion', {
 
 
 
-Notificacion.belongsTo(EstadoNotificacion,{as:"estadonotificacion",foreignKey: 'estadonotificacionId',defaultValue: 1})
 
 
 

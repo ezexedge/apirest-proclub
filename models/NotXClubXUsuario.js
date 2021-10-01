@@ -4,6 +4,7 @@ const db = require('../config/db');
 const NotificacionXClub = require('../models/NotificacionXClub')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const Usuario = require('../models/Usuario')
+const EstadoNotificacion = require('../models/EstadoNotificacion')
 
 const NotXClubXUsuario = db.define('notxclubxusuario', {
     id: {
@@ -26,6 +27,7 @@ const NotXClubXUsuario = db.define('notxclubxusuario', {
 NotXClubXUsuario.belongsTo(NotificacionXClub,{as:"club",foreignKey: 'notificacionxclubId'})
 NotXClubXUsuario.belongsTo(ClubXUsuario,{as:"clubxusuario",foreignKey: 'clubxusuarioId'})
 NotXClubXUsuario.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
+Notificacion.belongsTo(EstadoNotificacion,{as:"estadonotificacion",foreignKey: 'estadonotificacionId'})
 
 
 module.exports = NotXClubXUsuario;
