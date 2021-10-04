@@ -117,6 +117,8 @@ exports.crear = async(req,res) => {
         if(!resultDisciplinaXClub)throw new Error('el id de  disciplinaxclub no existe')
 
 
+
+        
         const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre ,espacioId: req.body.espacioId,disciplinaxclubId: req.body.disciplinaxclubId })
 
         

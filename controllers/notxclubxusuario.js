@@ -121,8 +121,13 @@ exports.getById = async (req,res) => {
 
         result.visto+=1
 
+
+
+
         await result.save()
        
+        
+        
         res.status(200).json(result)
 
 

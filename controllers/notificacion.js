@@ -52,6 +52,10 @@ exports.getById = async(req,res) => {
             }
         })
 
+
+
+        
+
         if(!result)throw new Error(`el id:${id} no existe`)
 
         const visto = await NotificacionVistasXUsuarios.findOne({

@@ -272,6 +272,9 @@ module.exports = function(){
     router.delete('/usuario/:club/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioEliminar)
     router.put('/usuario/:club/:usuario',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.ModificarPersona)
 
+    //usuartio desde superadmin
+    router.delete('/usuario-superadmin/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioEliminarSuperAdmin)
+  
    
     //auth
     router.post('/validate',authValidateControllers.validate)
