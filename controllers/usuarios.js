@@ -464,7 +464,7 @@ exports.usuarioEliminar = async (req, res) => {
         }
 
         const config = {
-          url: window.location.href + '/#/complete-registration',
+          url: 'http://localhost:3000/#/complete-registration',
           handleCodeInApp: true
       };
 
