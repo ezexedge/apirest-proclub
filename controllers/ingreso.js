@@ -127,7 +127,23 @@ exports.getByUser =  async (req,res) => {
 
 
 
-        res.status(200).json({message: 'en proceso'})
+        const usuario = req.auth.userId
+        
+        const result = await Ingreso.findAll({
+            inclue:[{
+                model: Espacio,
+                as: 'espacio'
+            },{
+                model: Usuario,
+                as: 'manager'
+            }
+        ],
+            where:{
+                usuarioId: usuario
+            }
+        })
+
+        res.status(200).json(result)
 
      }catch(error){
 
