@@ -127,7 +127,12 @@ exports.getByUser =  async (req,res) => {
 
 
 
-        const usuario = req.auth.userId
+        const usuario = req.params.userId
+
+
+        const resultUsuario = await Usuario.findByPk(usuario)
+
+        if(!resultUsuario)throw new Error('El usuario no existe')
         
         const result = await Ingreso.findAll({
             inclue:[{
