@@ -69,6 +69,10 @@ exports.getbyUserId = async (req,res) => {
       
 
         const result = await Reservas.findAll({
+            include:[{
+                model: Espacio,
+                as: 'espacio'
+            }],
             where:{
                 usuarioId: usuario,
                 activo: 1
