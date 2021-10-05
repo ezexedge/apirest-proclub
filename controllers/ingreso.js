@@ -135,7 +135,7 @@ exports.getByUser =  async (req,res) => {
         if(!resultUsuario)throw new Error('El usuario no existe')
         
         const result = await Ingreso.findAll({
-            inclue:[{
+            include:[{
                 model: Espacio,
                 as: 'espacio'
             },{
