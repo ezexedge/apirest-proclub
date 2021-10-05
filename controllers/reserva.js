@@ -10,6 +10,7 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
+const EstadoReserva = require('../models/EstadoReserva')
 const Disciplina = require('../models/Disciplina')
 const moment = require('moment')
 const { Op, Sequelize } = require("sequelize");
@@ -72,7 +73,12 @@ exports.getbyUserId = async (req,res) => {
             include:[{
                 model: Espacio,
                 as: 'espacio'
-            }],
+            },
+            {
+                model: EstadoReserva,
+                as: 'estadoreserva'
+            }
+        ],
             where:{
                 usuarioId: usuario,
                 activo: 1
