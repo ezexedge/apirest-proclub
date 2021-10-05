@@ -1,5 +1,4 @@
 const Reservas =  require('../models/Reservas')
-const EstadoReserva = require('../models/EstadoReserva')
 const Usuario = require('../models/Usuario')
 const Turno = require('../models/Turno')
 const QRCode = require('qrcode')
