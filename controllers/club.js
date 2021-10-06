@@ -461,3 +461,40 @@ exports.agregarAdministrador = async (req,res) => {
 
 
 }
+
+
+
+exports.eliminarAdministrador = async (req,res) => {
+  
+  const club = req.params.club
+  const usuario = req.params.usuario
+
+   try{
+
+      const result = await ClubXUsuario.findOne({
+        where:{
+          clubId: club,
+          usuarioId:usuario
+        }
+      })
+
+
+
+      if(!result){
+        throw new Error('los datos del club o el usuario son incorrectos')
+      }
+      
+     
+      
+  
+
+      await ClubXUsuario.update({ rolId : result.rolanteriorId, rolanteriorId: null },{ where: { id: result.id }})
+      
+      res.status(200).json({'message': 'usuario eliminado desde el admin'})
+
+   }catch(err){
+     res.status(400).json({'err' : err.message})
+   }
+
+
+}
