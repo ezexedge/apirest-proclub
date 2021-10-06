@@ -400,10 +400,10 @@ exports.clubEstadistica = async (req, res) => {
 
     
     let obj = {
-      usuarios: resultUsuarios,
-      deportes: resultDisciplinas,
-      turnos: resultTurnos,
-      notificaciones: resultNotificaciones
+      usuarios: resultUsuarios.count,
+      deportes: resultDisciplinas.count,
+      turnos: resultTurnos.count,
+      notificaciones: resultNotificaciones.count
     }
 
     res.status(200).json(obj)
