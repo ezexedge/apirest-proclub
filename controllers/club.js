@@ -442,7 +442,7 @@ exports.agregarAdministrador = async (req,res) => {
         throw new Error('los datos del club o el usuario son incorrectos')
       }
       
-      const resultRoles = await Rol.finOne({
+      const resultRoles = await Rol.findOne({
         where:{
           nombre: 'admin'
         }
