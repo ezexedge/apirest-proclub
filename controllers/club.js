@@ -8,6 +8,11 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const Pais = require('../models/Pais')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Provincia = require('../models/Provincia')
+const Usuario = require('../models/Usuario')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
+const Disciplina = require('../models/Disciplina')
+const Reserva = require('../models/Reservas')
+const NotXClubXUsuario = require('../models/NotXClubXUsuario')
 
 exports.clubTodos = async (req, res) => {
 
@@ -334,3 +339,79 @@ exports.estado = async (req,res) => {
 }
 
 
+
+
+
+
+exports.clubEstadistica = async (req, res) => {
+
+  try {
+    const id = req.params.club
+
+    const resultUsuarios = await ClubXusuario.findAndCountAll({
+      include:[{
+        model: Usuario,
+        as: 'usuario',
+        where:{
+          activo: 1
+        }
+      }],
+      where:{
+        clubId: id,
+        activo: 1
+      }
+    })
+
+
+    const resultDisciplinas = await RelDisciplinaXClub.findAndCountAll({
+       include:[{
+         model: Disciplina,
+         as: 'disciplina',
+         where:{
+           activo: 1
+         }
+       }],
+       where:{
+          clubId: id,
+          activo: 1
+       }
+    })
+
+    const resultTurnos = await Reserva.findAndCountAll({
+      include: [{
+        model: RelDisciplinaXClub,
+        as: 'disciplinaxclub',
+        where: {
+          clubId: id
+        }
+      }]
+    })
+
+    const resultNotificaciones = await NotXClubXUsuario.findAndCountAll({
+        include: [{
+          model: ClubXUsuario,
+          as: 'clubxusuario',
+          where:{
+            clubId: id
+          }
+        }]
+    })
+
+
+    
+    let obj = {
+      usuarios: resultUsuarios,
+      deportes: resultDisciplinas,
+      turnos: resultTurnos,
+      notificaciones: resultNotificaciones
+    }
+
+    res.status(200).json(obj)
+
+  } catch (err) {
+    console.log('errorr-----', err)
+    res.status(400).json(err)
+  
+  }
+
+}

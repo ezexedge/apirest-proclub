@@ -907,5 +907,14 @@ router.get('/notificaciones-enviadas-por',authSignupControllers.requireSignin,no
 
 router.get('/espacio/disciplina/:disciplina',authSignupControllers.requireSignin,espacioControllers.getEspacioByDisciplina)
 
+
+///estadisticas admin o superadmin
+
+router.get('/club-estadisticas/:club',clubControllers.clubEstadistica)
+
+
+
+
+
     return router
 }
