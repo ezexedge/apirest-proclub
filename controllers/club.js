@@ -451,7 +451,7 @@ exports.agregarAdministrador = async (req,res) => {
       if(!resultRoles)throw new Error('no contienes el rol admin en la base de datos')
 
 
-      await ClubXUsuario.update({ rolId : resultRoles.id, rolanteriorId:result.rol },{ where: { id: result.id }})
+      await ClubXUsuario.update({ rolId : resultRoles.id, rolanteriorId:result.rolId },{ where: { id: result.id }})
       
       res.status(200).json({'message': 'usuario agregado como admin'})
 
