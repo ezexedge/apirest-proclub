@@ -25,6 +25,7 @@ const ClubXusuario = db.define('clubxusuario', {
 
 ClubXusuario.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 ClubXusuario.belongsTo(Rol,{as:"rol",foreignKey: 'rolId'})
+ClubXusuario.belongsTo(Rol,{as:"rolanterior",foreignKey: 'rolanteriorId'})
 
 
 
