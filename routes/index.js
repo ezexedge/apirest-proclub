@@ -913,7 +913,8 @@ router.get('/espacio/disciplina/:disciplina',authSignupControllers.requireSignin
 router.get('/club-estadisticas/:club',clubControllers.clubEstadistica)
 
 
-
+router.put('/agregar-admin/:club/:usuario',authSignupControllers.requireSignin, clubControllers.agregarAdministrador)
+    
 
 
     return router

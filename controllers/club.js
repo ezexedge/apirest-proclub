@@ -13,6 +13,7 @@ const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
 const Reserva = require('../models/Reservas')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
+const Rol = require('../models/rol')
 
 exports.clubTodos = async (req, res) => {
 
@@ -413,5 +414,50 @@ exports.clubEstadistica = async (req, res) => {
     res.status(400).json(err)
   
   }
+
+}
+
+
+
+
+
+
+exports.agregarAdministrador = async (req,res) => {
+  
+  const club = req.params.club
+  const usuario = req.params.usuario
+
+   try{
+
+      const result = await ClubXUsuario.findOne({
+        where:{
+          clubId: club,
+          usuarioId:usuario
+        }
+      })
+
+
+
+      if(!result){
+        throw new Error('los datos del club o el usuario son incorrectos')
+      }
+      
+      const resultRoles = await Rol.finOne({
+        where:{
+          nombre: 'admin'
+        }
+      })
+      
+      if(!resultRoles)throw new Error('no contienes el rol admin en la base de datos')
+
+
+      await ClubXUsuario.update({ rolId : resultRoles.id, rolanteriorId:result.rol },{ where: { id: result.id }})
+      
+      res.status(200).json({'message': 'usuario agregado como admin'})
+
+   }catch(err){
+     res.status(400).json({'err' : err.message})
+   }
+
 
 }
