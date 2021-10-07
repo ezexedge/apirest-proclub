@@ -6,6 +6,8 @@ const ClubXusuario = require('../models/ClubXUsuario')
 const RelUsuarioXDis = require('../models/RelUsuarioXDis')
 const db = require('../config/db')
 const admin = require("firebase-admin")
+const firebase = require('../firebase')
+
 const Estados = require('../models/Estados')
 
 exports.personaTodos = async (req, res) => {
@@ -110,26 +112,44 @@ exports.crearPersona = async (req, res) => {
     }
 
 
+    const resp = await admin.auth().listUsers()
+
+    //console.log('respuestaaaaa',resp)
+
+    const encontrado = resp.users.find(obj => obj.email === correo)
+    
+    if(encontrado){
+       
+      throw new Error('El email esta registrado')
+    
+    }
+
+    const config = {
+      url: 'http://localhost:3000/#/complete-registration',
+      handleCodeInApp: true
+  };
+
+const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
+ //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
+    console.log('guardando respuesta',result)
+              
+
+
+ 
+
+
     const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia ,cp: cp },{ transaction: t })
 
     const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, direccionPersonaId: nuevaDireccion.id, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{ transaction: t })
   
     const nuevoUsuario = await Usuario.create({ personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
 
-    const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
-//ver luego el error
-  //   await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
+      await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
 
-    //await RelUsuarioXCatXDis.create({disxclubxcatId: categoria,clubxusuarioId:clubxusuarioId.id},{ transaction: t })
-    
 
-    /*  const rta = await admin.auth().createUser({
-        email: 'desarrollo@texdinamo.com',
-        password: 'admin123'                 
-      })
-      console.log(rta);
 
-      await admin.auth().setCustomUserClaims(rta.uid, { role: 'SuperAdmin' }) */
+
+
 
     await t.commit();
 

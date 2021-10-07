@@ -468,9 +468,9 @@ exports.usuarioEliminar = async (req, res) => {
           handleCodeInApp: true
       };
 
-     await firebase.default.auth().sendSignInLinkToEmail(correo,config)
+    const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
      //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
-        
+        console.log('guardando respuesta',result)
                   
 
 
