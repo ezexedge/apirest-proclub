@@ -193,7 +193,7 @@ const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config
 
 
 
-    await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultclubxusuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  })
+    await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultclubxusuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  },{ transaction: t })
 
 
 
