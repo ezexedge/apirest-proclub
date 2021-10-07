@@ -4,10 +4,13 @@ const Direccion = require('../models/Direccion')
 const TipoDocumento = require('../models/TipoDocumento')
 const ClubXusuario = require('../models/ClubXUsuario')
 const RelUsuarioXDis = require('../models/RelUsuarioXDis')
+const RelPosXUsarioXDiviXDep  = require('../models/RelPosXUsarioXDiviXDep')
+const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const db = require('../config/db')
 const admin = require("firebase-admin")
 const firebase = require('../firebase')
-
 const Estados = require('../models/Estados')
 
 exports.personaTodos = async (req, res) => {
@@ -86,7 +89,7 @@ exports.crearPersona = async (req, res) => {
 
 
     let valores = JSON.parse(req.body.data)
-    const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria  , cp} = valores
+    const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,division,posicion  , cp} = valores
 
      console.log('////////////ss',nombre,apellido,rol)
     let imagen
@@ -144,8 +147,53 @@ const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config
   
     const nuevoUsuario = await Usuario.create({ personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
 
-      await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+    const resultclubxusuario =   await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
 
+
+
+
+
+
+    const resultDisciplinaXClub = await RelDisciplinaXClub.findOne({
+      where:{
+          clubId: idClub,
+          disciplinaId: deporte
+      }
+  })
+
+
+  if(!resultDisciplinaXClub)throw new Error('la disciplina no esta relacionada con el club')
+
+  //disxclubxdiv
+  const resultDisXClubXDiv = await RelDisXClubXDiv.findOne({
+      where: {
+          id: division            }
+  })
+
+  let divisionFinal = null
+
+  if(resultDisXClubXDiv && resultDisXClubXDiv.id){
+      divisionFinal = resultDisXClubXDiv.id
+  }
+
+  //disciplinaxclubxpos
+  const resultDisXClubXPos = await DisciplinaXClubXPos.findOne({
+      where:{
+          disciplinaxposId: posicion
+      }
+  })
+
+  let posicionFinal = null
+  if(resultDisXClubXPos && resultDisXClubXPos.id){
+      posicionFinal = resultDisXClubXPos.id
+  }
+
+
+
+
+
+
+    await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultclubxusuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  })
 
 
 
