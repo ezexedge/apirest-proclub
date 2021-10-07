@@ -756,7 +756,7 @@ router.get('/ingreso-filtro/:espacio?/:usuario?/:manager?/:desde?/:hasta?',ingre
 router.post('/ingreso/crear/:espacio/:manager',authSignupControllers.requireSignin,ingresoControllers.crear)
 
 
-router.post('/usuario-perfil/deporte/:club/:disciplina/:div/:pos',authSignupControllers.requireSignin,usuarioInformacionFinal.crearDeportesEnUsuarioPerfil)
+router.post('/usuario-perfil/deporte/:userId/:club/:disciplina/:div/:pos',authSignupControllers.requireSignin,usuarioInformacionFinal.crearDeportesEnUsuarioPerfil)
 
 
 

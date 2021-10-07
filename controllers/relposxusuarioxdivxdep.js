@@ -599,7 +599,7 @@ exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
     try{
 
         
-        const user = req.auth.userId
+        const user = req.params.userId
         const club = req.params.club
         const disciplina = req.params.disciplina
         const  div = req.params.div
