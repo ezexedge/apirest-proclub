@@ -47,7 +47,7 @@ exports.signup = async(req,res)=>{
                 password: password                 
               })
 
-              console.log(resultFirebase)
+             
 
 
               const pendiente = await Estados.findOne({where:{ nombre : 'pendiente' }})
@@ -88,10 +88,17 @@ exports.signin = async (req,res)=>{
 
 
         const {email,password} = req.body
+
+
+        
+       
+
+        
+
         const resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
         console.log('tokken',resultFirebase)
         let token = ''
-        if(resultFirebase){
+        if(resultFirebase ){
 
             const persona = await Persona.findOne({where:{correo: email}})
 
@@ -135,14 +142,15 @@ exports.signin = async (req,res)=>{
                 throw new Error('no esta registrado')
             }
 
-            console.log(rol)
-
+        
              token = jwt.sign({userId: usuario.id , rol : rol.nombre , clubId: clubxusuario.clubId }, process.env.JWT_SECRET)
 
             res.cookie("t",token,{expire: new Date() + 9999 })
             
        
         }
+
+    
 
         res.status(200).json({token : token})
 

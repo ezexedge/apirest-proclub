@@ -531,7 +531,7 @@ exports.getDeportes = async (req,res) => {
     try{
 
         
-        const user = req.auth.userId
+        const user = req.params.userId
         const club = req.params.club
  
 
@@ -546,10 +546,6 @@ exports.getDeportes = async (req,res) => {
         })
 
        
-
-
-
-
 
         const result = await RelPosXUsarioXDiviXDep.findAll({
             include: [

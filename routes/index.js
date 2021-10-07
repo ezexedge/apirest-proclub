@@ -439,7 +439,7 @@ module.exports = function(){
     //notificacion
 
 
-    router.get('/usuario-perfil/:club',authSignupControllers.requireSignin,usuarioInformacionFinal.getDeportes)
+    router.get('/usuario-perfil/:club/:userId',authSignupControllers.requireSignin,usuarioInformacionFinal.getDeportes)
    
 
 
