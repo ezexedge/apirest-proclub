@@ -79,13 +79,13 @@ exports.updateDisciplina =  async (req,res) => {
 
     const id = req.params.id
 
-    const {nombre,descripcion,icono} = req.body
+    const {nombre} = req.body
 
     const result = await Disciplina.findByPk(id)
 
     if(result){
 
-        await Disciplina.update({nombre: nombre, descripcion: descripcion,icono: icono}, { where: { id: id }})
+        await Disciplina.update({nombre: nombre}, { where: { id: id }})
 
         res.status(200).json({'message': 'modificado correctamente'})    
     
