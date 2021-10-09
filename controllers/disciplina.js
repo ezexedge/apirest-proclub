@@ -5,7 +5,6 @@ const RelPosXUsuarioXDivXDep = require('../models/RelPosXUsarioXDiviXDep')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const Usuario = require('../models/Usuario')
 const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
-const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 
 exports.crearDisciplina =  async (req,res) => {
 
