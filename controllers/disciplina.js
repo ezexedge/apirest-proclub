@@ -182,7 +182,8 @@ exports.getEstadistica =  async (req,res) => {
                 model: RelDisciplinaXClub,
                 as: 'disciplinaxclub',
                where:{
-                disciplinaId: deporte
+                disciplinaId: deporte,
+                activo: 1
                }
             }]
         }
@@ -213,7 +214,8 @@ exports.getEstadistica =  async (req,res) => {
                 model: RelDisciplinaXClub,
                 as: 'disciplinaxclub',
                where:{
-                disciplinaId: deporte
+                disciplinaId: deporte,
+                activo: 1
                }
             }]
         }
