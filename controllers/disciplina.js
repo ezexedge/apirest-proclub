@@ -1,6 +1,11 @@
 const Disciplina = require('../models/Disciplina')
-
-
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
+const Club = require('../models/Club')
+const RelPosXUsuarioXDivXDep = require('../models/RelPosXUsarioXDiviXDep')
+const ClubXUsuario = require('../models/ClubXUsuario')
+const Usuario = require('../models/Usuario')
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 
 exports.crearDisciplina =  async (req,res) => {
 
@@ -127,5 +132,109 @@ exports.eliminarDisciplina =  async (req,res) => {
 
    res.status(400).json({'error': error.message})
      
+    }
+}
+
+
+
+
+exports.getEstadistica =  async (req,res) => {
+
+    try{
+
+    const deporte = req.params.deporte
+
+
+    const resultClub = await RelDisciplinaXClub.findAndCountAll({
+        include:[{
+            model: Club,
+            as: 'club',
+            where:{
+                activo: 1
+            }
+        }],
+        where: {
+            disciplinaId: deporte,
+            activo: 1
+          }
+    })
+
+
+    const resultSocios = await RelPosXUsuarioXDivXDep.findAndCountAll({
+        include:[{
+            model: ClubXUsuario,
+            as: 'clubxusuario',
+            where:{
+                activo: 1,
+                rolId: 3
+            },
+            include: [{
+                model: Usuario,
+                as: 'usuario',
+                where:{
+                    activo: 1
+                }
+            }]
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disxclubxdiv',
+            include: [{
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub',
+               where:{
+                disciplinaId: deporte
+               }
+            }]
+        }
+    ]
+    })
+
+
+    const resultManager = await RelPosXUsuarioXDivXDep.findAndCountAll({
+        include:[{
+            model: ClubXUsuario,
+            as: 'clubxusuario',
+            where:{
+                activo: 1,
+                rolId: 4
+            },
+            include: [{
+                model: Usuario,
+                as: 'usuario',
+                where:{
+                    activo: 1
+                }
+            }]
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disxclubxdiv',
+            include: [{
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub',
+               where:{
+                disciplinaId: deporte
+               }
+            }]
+        }
+    ]
+    })
+    
+
+
+    let obj = {
+        club: resultClub.count,
+        socios: resultSocios.count,
+        manager: resultManager.count
+    }
+
+    res.status(200).json(obj)    
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
     }
 }

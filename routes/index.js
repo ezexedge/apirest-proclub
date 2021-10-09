@@ -917,6 +917,7 @@ router.put('/agregar-admin/:club/:usuario',authSignupControllers.requireSignin, 
     
 router.delete('/eliminar-admin/:club/:usuario',authSignupControllers.requireSignin, clubControllers.eliminarAdministrador)
     
+router.get('/deporte-estadisticas/:deporte',disciplinaControllers.getEstadistica)
 
 
     return router
