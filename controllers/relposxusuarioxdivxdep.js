@@ -90,7 +90,10 @@ exports.filterPosicion = async (req,res) => {
                  as: 'disciplinaxpos'
              }]
             }
-        ]
+        ],
+        where:{
+            activo: 1
+        }
         })
 
 
@@ -170,7 +173,10 @@ exports.filterUsuario = async (req,res) => {
                  as: 'disciplinaxpos'
              }]
             }
-        ]
+        ],
+        where:{
+            activo:1
+        }
         })
 
      
@@ -308,7 +314,10 @@ exports.filterUsuarioPorClub = async (req,res) => {
                  as: 'disciplinaxpos'
              }]
             }
-        ]
+        ],
+        where:{
+            activo: 1
+        }
         })
 
 
@@ -365,7 +374,10 @@ console.log('//////////////',deporte)
              as: 'disciplinaxpos'
          }]
         }
-    ]
+    ],
+    where:{
+        activo: 1
+    }
     })
 
 
@@ -432,6 +444,9 @@ console.log('//////////////',deporte)
          }]
         }
     ],
+    where:{
+        activo: 1
+    }
 
 
     })
@@ -505,6 +520,9 @@ console.log('//////////////',deporte)
         }
     ],
 
+    where:{
+        activo: 1
+    }
 
     })
 
