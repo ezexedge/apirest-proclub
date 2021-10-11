@@ -589,7 +589,8 @@ exports.getDeportes = async (req,res) => {
         ],
         
             where:{
-                clubxusuarioId: resultClubXUsuario.id
+                clubxusuarioId: resultClubXUsuario.id,
+                activo: 1
             }
         })
 
