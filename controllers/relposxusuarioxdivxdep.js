@@ -696,6 +696,7 @@ exports.eliminarDeporteByUsuario = async (req,res) => {
         
         const user = req.params.usuario
         const club = req.params.club
+        const id =  req.param.id
  
 
 
@@ -708,25 +709,25 @@ exports.eliminarDeporteByUsuario = async (req,res) => {
             }
         })
 
-
+        if(!result)throw new Error('el usuario no esta relacionado al club')
 
         
-
-        const result = await RelPosXUsarioXDiviXDep.findOne({
+        const existe = await RelPosXUsarioXDiviXDep.findOne({
             where:{
-                clubxusuarioId: resultClubXUsuario.id
+                id: id
             }
         })
 
-        if(!result)throw new Error('el usuario no esta relacionado al club')
-
-
+        if(!existe)throw new Error('el deporte no esta relacionado al usuario')
+        
+        
 
          await RelPosXUsarioXDiviXDep.update({
              activo: 0
          },{
              where: {
-                clubxusuarioId: resultClubXUsuario.id
+                clubxusuarioId: resultClubXUsuario.id,
+                id: id
              }
          })
 

@@ -920,7 +920,7 @@ router.delete('/eliminar-admin/:club/:usuario',authSignupControllers.requireSign
     
 router.get('/deporte-estadisticas/:deporte',disciplinaControllers.getEstadistica)
 
-router.delete('/usuario-disciplina/:club/:usuario',authSignupControllers.requireSignin, usuarioInformacionFinal.eliminarDeporteByUsuario)
+router.delete('/usuario-disciplina/:club/:usuario/:id',authSignupControllers.requireSignin, usuarioInformacionFinal.eliminarDeporteByUsuario)
    
 
     return router
