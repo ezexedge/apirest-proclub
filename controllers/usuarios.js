@@ -102,7 +102,7 @@ exports.usuarioListado = async (req,res) =>{
 
           //val.deportesDeUsuario = resultFinal
           let obj = {
-            valorFinal: val,
+           val,
             deporteDeUsuario: resultFinal
           }
 
