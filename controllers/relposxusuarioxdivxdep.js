@@ -709,7 +709,7 @@ exports.eliminarDeporteByUsuario = async (req,res) => {
             }
         })
 
-        if(!result)throw new Error('el usuario no esta relacionado al club')
+        if(!resultClubXUsuario)throw new Error('el usuario no esta relacionado al club')
 
         
         const existe = await RelPosXUsarioXDiviXDep.findOne({
