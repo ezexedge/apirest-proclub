@@ -658,7 +658,7 @@ exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
          
 
 
-         await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultClubXUsuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  })
+         await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultClubXUsuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal, disciplinaxclubId: resultDisciplinaXClub.id })
 
      
 
