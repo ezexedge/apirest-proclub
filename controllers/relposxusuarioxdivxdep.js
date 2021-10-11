@@ -696,7 +696,7 @@ exports.eliminarDeporteByUsuario = async (req,res) => {
         
         const user = req.params.usuario
         const club = req.params.club
-        const id =  req.param.id
+        const id =  req.params.id
  
 
 
