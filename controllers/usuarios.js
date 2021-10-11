@@ -50,7 +50,7 @@ exports.usuarioListado = async (req,res) =>{
          order: [['id', 'DESC']]
        })
    
-
+      let arr = []
        if(result){
          
          for(let val of result){
@@ -100,8 +100,14 @@ exports.usuarioListado = async (req,res) =>{
       })
 
 
-          val.deportesDeUsuario = resultFinal
+          //val.deportesDeUsuario = resultFinal
+          let obj = {
+            valorFinal: val,
+            deporteDeUsuario: resultFinal
+          }
 
+
+        arr.push(obj)
 
           }
 
@@ -113,7 +119,7 @@ exports.usuarioListado = async (req,res) =>{
   
       
 
-      res.status(200).send(result)
+      res.status(200).send(arr)
     
   } catch (err) {
       res.status(400).json(err)
