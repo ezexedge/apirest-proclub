@@ -682,3 +682,58 @@ exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
         res.status(400).json({'error': error.message})
     }
 }
+
+
+
+
+
+
+
+exports.eliminarDeporteByUsuario = async (req,res) => {
+    
+    try{
+
+        
+        const user = req.params.usuario
+        const club = req.params.club
+ 
+
+
+
+        const resultClubXUsuario = await ClubXUsuario.findOne({
+            where:{
+                clubId: club,
+                usuarioId: user,
+                activo: 1
+            }
+        })
+
+
+
+        
+
+        const result = await RelPosXUsarioXDiviXDep.findOne({
+            where:{
+                clubxusuarioId: resultClubXUsuario.id
+            }
+        })
+
+        if(!result)throw new Error('el usuario no esta relacionado al club')
+
+
+
+         await RelPosXUsarioXDiviXDep.update({
+             activo: 0
+         },{
+             where: {
+                clubxusuarioId: resultClubXUsuario.id
+             }
+         })
+
+
+        res.status(200).json({message: 'modificado correcto'})
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}

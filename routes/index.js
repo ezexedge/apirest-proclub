@@ -45,7 +45,8 @@ const posicionxdisciplinaControllers = require('../controllers/reldisciplinaxpos
 const dashboardControllers = require('../controllers/dashboard')
 const usuarioInformacionFinal = require('../controllers/relposxusuarioxdivxdep')
 const tematicaControllers = require('../controllers/tematica')
-const disciplinaAdminControllers = require('../controllers/disciplinaxclubxpos')
+const disciplinaAdminControllers = require('../controllers/disciplinaxclubxpos');
+const RelPosXUsuarioXDivXDep = require('../models/RelPosXUsarioXDiviXDep');
 
 module.exports = function(){
 
@@ -919,6 +920,8 @@ router.delete('/eliminar-admin/:club/:usuario',authSignupControllers.requireSign
     
 router.get('/deporte-estadisticas/:deporte',disciplinaControllers.getEstadistica)
 
+router.delete('/usuario-disciplina/:club/:usuario',authSignupControllers.requireSignin, usuarioInformacionFinal.eliminarDeporteByUsuario)
+   
 
     return router
 }
