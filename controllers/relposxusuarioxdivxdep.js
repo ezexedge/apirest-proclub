@@ -549,6 +549,20 @@ exports.getDeportes = async (req,res) => {
 
         const result = await RelPosXUsarioXDiviXDep.findAll({
             include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    where: {
+                        activo: 1
+                    },
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina',
+                        where: {
+                            activo: 1
+                        }
+                    }]
+                },
             {
                 model: RelDisXClubXDiv,
                 as: 'disxclubxdiv',
