@@ -50,76 +50,12 @@ exports.usuarioListado = async (req,res) =>{
          order: [['id', 'DESC']]
        })
    
-      let arr = []
-       if(result){
-         
-         for(let val of result){
-
-          if(val.usuarioId !== null){
-
-            let resultClubXUsuario = await ClubXUsuario.findOne({
-              where:{
-                  clubId: club,
-                  usuarioId: val.usuarioId,
-                  activo: 1
-              }
-          })
-
-
-
-        const resultFinal = await RelPosXUsarioXDiviXDep.findAll({
-          include: [
-          {
-              model: RelDisXClubXDiv,
-              as: 'disxclubxdiv',
-              include:[{
-               model: RelDisciplinaXClub,
-               as: 'disciplinaxclub',
-               include:[{
-                   model: Disciplina,
-                   as: 'disciplina',
-                   where: {activo:1}
-               }]
-              
-              }]  
-          },
-          {
-           model: DisciplinaXClubXPos,
-           as:   'disciplinaxclubxpos',
-           include: [{
-               model: RelDisciplinaXPos,
-               as: 'disciplinaxpos',
-               where: {activo:1}
-           }]
-          }
-      ],
-      
-          where:{
-              clubxusuarioId: resultClubXUsuario.id
-          }
-      })
-
-
-          //val.deportesDeUsuario = resultFinal
-          let obj = {
-           val,
-            deporteDeUsuario: resultFinal
-          }
-
-
-        arr.push(obj)
-
-          }
-
-
-         }
-       }
       
       
   
       
 
-      res.status(200).send(arr)
+      res.status(200).send(result)
     
   } catch (err) {
       res.status(400).json(err)
