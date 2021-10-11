@@ -74,6 +74,14 @@ exports.getbyUserId = async (req,res) => {
                 as: 'espacio'
             },
             {
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub',
+                include:[{
+                    model: Disciplina,
+                    as: 'disciplina'
+                }]
+            },
+            {
                 model: EstadoReserva,
                 as: 'estadoreserva'
             }
