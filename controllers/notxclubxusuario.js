@@ -178,7 +178,14 @@ exports.getNotificacionByUser = async (req,res) => {
                     model: Notificacion,
                     as: 'notificacion'
                 }]
-                }   
+                },{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }  
             ],
             order: [['id', 'DESC']]
 
