@@ -96,6 +96,8 @@ exports.getByClub = async(req,res) => {
     try{
 
 
+        console.log('getbyclubb')
+
         const club = req.params.club
 
         const resultClub = await Club.findOne({
@@ -123,6 +125,8 @@ exports.getByClub = async(req,res) => {
 
 
         let resultClone = _.clone(result);
+
+        console.log('result clone',resultClone)
 
         if(result){
 
