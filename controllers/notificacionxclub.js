@@ -2,6 +2,7 @@ const Notificacion = require('../models/Notificacion')
 const Club = require('../models/Club')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const NotificacionXClub = require('../models/NotificacionXClub')
+const NotXClubXUsuario =  require('../models/NotXClubXUsuario')
 const Persona = require('../models/Persona')
 exports.crear = async(req,res) => {
     try{
@@ -118,6 +119,23 @@ exports.getByClub = async(req,res) => {
                 clubId: club
             }
         })
+
+
+        if(result){
+            for(let val of result){
+
+                const cantidad = await NotXClubXUsuario.findAndCountAll({
+                    where:{
+                        notificacionxclubId: val.id
+                    }
+                })
+
+                val.cantidadUsuario = cantidad.count
+
+
+            }
+        }
+
         res.status(200).json(result)
 
     }catch(err){
