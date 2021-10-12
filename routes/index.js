@@ -925,5 +925,8 @@ router.get('/deporte-estadisticas/:deporte',disciplinaControllers.getEstadistica
 router.delete('/usuario-disciplina/:club/:usuario/:id',authSignupControllers.requireSignin, usuarioInformacionFinal.eliminarDeporteByUsuario)
    
 
+router.put('/update-nombre/:id',authSignupControllers.requireSignin, espacioControllers.updateEspacioNombre)
+
+
     return router
 }
