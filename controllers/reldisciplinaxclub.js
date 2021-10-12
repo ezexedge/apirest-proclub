@@ -1,7 +1,8 @@
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Club = require('../models/Club')
 const Disciplina = require('../models/Disciplina')
-
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelPosXUsarioXDiviXDep = require('../models/RelPosXUsarioXDiviXDep')
 
 exports.getDeporteXClub = async (req,res)=> {
 
@@ -27,7 +28,51 @@ exports.getDeporteXClub = async (req,res)=> {
           }  
         })
 
-        res.status(200).json(result)
+
+        let arr = []
+        if(result){
+
+            for(let val of result){
+
+            
+
+
+                  
+
+                    const totalDivision = await RelDisXClubXDiv.findAndCountAll({
+                        where:{
+                            disciplinaxclubId: val.id
+                        }
+                    })
+
+                    const totalUsuarios = await RelPosXUsarioXDiviXDep.findAndCountAll({
+                        where:{
+                            disciplinaxclubId: val.id
+                        }
+                    })
+                    
+
+                    let obj = {
+                        activo: val.activo,
+                        clubId: val.clubId,
+                        disciplina: val.disciplina,
+                        disciplinaId: val.disciplinaId,
+                        id: val.id,
+                        cantidadDivision: totalDivision.count,
+                        cantitdadUsuarios: totalUsuarios.count
+                    }
+
+
+                    arr.push(obj)
+                
+
+
+            }
+
+        }
+
+
+        res.status(200).json(arr)
 
 
         
