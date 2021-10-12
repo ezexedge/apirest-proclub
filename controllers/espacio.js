@@ -505,3 +505,45 @@ exports.getEspacioByDisciplina =  async (req,res) => {
         
     }
 }
+
+
+//eliminarEspacioXDisciplina
+
+
+
+exports.eliminarEspacioXDisciplina=  async (req,res) => {
+ 
+
+    try{
+
+
+    
+        const id = req.params.espacioxdisciplinaxclubId
+    
+        const result = await EspacioXDisciplinaXClub.findOne({
+  
+            where: {
+                activo: 1,
+                id: id
+            }
+        })
+
+        if(result)throw new Error('el deporte ya se vinculado al espacio')
+        
+    
+
+        await  EspacioXDisciplinaXClub.update({activo: 0},{where: id })
+    
+        res.status(200).json({message: 'deporte eliminado'})    
+    
+    
+        }catch(error){
+    
+            res.status(400).json({'error': error.message})
+            
+        }
+ 
+ 
+
+
+}
