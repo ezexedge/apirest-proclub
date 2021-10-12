@@ -5,6 +5,7 @@ const Disciplina = require('../models/Disciplina')
 const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelPosXUsuarioXDivXDep  = require('../models/RelPosXUsarioXDiviXDep')
 
 
 exports.getPosicion = async(req,res) => {
@@ -252,11 +253,32 @@ exports.getAllPosicionesByDivision = async(req,res) => {
 
        for(let val of resultInfo){
            if(val.disciplinaxclubxdivxId !== null && val.disciplinaxpos.activo === 1 ){
+
+            
+
+            const cantidadPosicion =  await RelPosXUsuarioXDivXDep.findAndCountAll({
+                include:[{
+                    model: DisciplinaXClubXPos,
+                    as: 'disciplinaxclubxpos',
+                    where:{activo:1},
+                    include: [{
+                        model: RelDisciplinaXPos,
+                        as: 'disciplinaxpos',
+                        where:{
+                            activo:1,
+                            id: val.disciplinaxpos.id 
+                        }
+                    }]
+                }]
+            })
+
+
             
             let obj = {
                 id: val.disciplinaxpos.id ,
                 name: val.disciplinaxpos.nombre,
-                role: val.disciplinaxclubxdiv.nombre
+                role: val.disciplinaxclubxdiv.nombre,
+                cantidadUsuarios: cantidadPosicion.count
               }
 
               arr.push(obj)
