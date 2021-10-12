@@ -528,7 +528,7 @@ exports.eliminarEspacioXDisciplina=  async (req,res) => {
             }
         })
 
-        if(result)throw new Error('el deporte ya se vinculado al espacio')
+        if(!result)throw new Error('el deporte no esta vinculado a este espacio')
         
     
 
