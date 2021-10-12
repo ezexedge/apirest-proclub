@@ -41,13 +41,15 @@ exports.getDeporteXClub = async (req,res)=> {
 
                     const totalDivision = await RelDisXClubXDiv.findAndCountAll({
                         where:{
-                            disciplinaxclubId: val.id
+                            disciplinaxclubId: val.id,
+                            activo: 1
                         }
                     })
 
                     const totalUsuarios = await RelPosXUsarioXDiviXDep.findAndCountAll({
                         where:{
-                            disciplinaxclubId: val.id
+                            disciplinaxclubId: val.id,
+                            activo: 1
                         }
                     })
                     
