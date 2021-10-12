@@ -4,6 +4,7 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario =  require('../models/NotXClubXUsuario')
 const Persona = require('../models/Persona')
+const _ = require('lodash')
 exports.crear = async(req,res) => {
     try{
 
@@ -121,8 +122,13 @@ exports.getByClub = async(req,res) => {
         })
 
 
+        let resultClone = _.clone(result);
+
         if(result){
-            for(let val of result){
+
+
+
+            for(let val of resultClone){
 
                 const cantidad = await NotXClubXUsuario.findAndCountAll({
                     where:{
@@ -136,7 +142,7 @@ exports.getByClub = async(req,res) => {
             }
         }
 
-        res.status(200).json(result)
+        res.status(200).json(resultClone)
 
     }catch(err){
         res.status(400).json({error: err.message})
