@@ -532,7 +532,7 @@ exports.eliminarEspacioXDisciplina =  async (req,res) => {
         
     
 
-        await  EspacioXDisciplinaXClub.update({activo: 0},{where: id })
+        await  EspacioXDisciplinaXClub.update({activo: 0},{where: {id: id} })
     
         res.status(200).json({message: 'deporte eliminado'})    
     
