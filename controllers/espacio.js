@@ -82,7 +82,7 @@ exports.getEspacioByClubId =  async (req,res) => {
         const id = req.params.id
 
         const result = await Espacio.findOne({
-            where: {activo: 1, id: id}
+            where: {id: id}
         })
         
         
@@ -266,17 +266,19 @@ exports.eliminarEspacio =  async (req,res) => {
 
         const result = await Espacio.findByPk(id)
 
-        if(result){
+        if(!result)throw new Error('el espacio no existe.')
+
+      
             
             result.activo = 0
 
             await result.save()
+          
+          
             res.status(200).json({message: 'eliminado'})
           
             
-        }else{
-            throw new Error('El espacio no existe')
-        }
+       
 
     }catch(error){
 
@@ -297,7 +299,7 @@ exports.getEspacioByClubId =  async (req,res) => {
 
         const result = await Espacio.findAll({
             where: {
-            activo: 1,
+           
             clubId: club
 
                 },
