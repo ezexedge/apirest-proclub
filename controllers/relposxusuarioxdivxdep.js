@@ -652,16 +652,33 @@ exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
         if(!resultClubXUsuario)throw new Error('el usuario no esta realacionado con el club')
 
        
+
+
+
+
         const resultDisciplinaXClub = await RelDisciplinaXClub.findOne({
             where:{
                 clubId: club,
-                disciplinaId: disciplina
+                disciplinaId: disciplina,
+                activo: 1
             }
         })
 
 
         if(!resultDisciplinaXClub)throw new Error('la disciplina no esta relacionada con el club')
 
+  
+        
+        const validarSiExiste = await RelPosXUsarioXDiviXDep.findOne({
+            where:{
+                clubxusuarioId: resultClubXUsuario.id,
+                disciplinaxclubId: resultDisciplinaXClub.id
+            }
+        })
+  
+
+        if(validarSiExiste)throw new Error('El deporte ya esta agregado')
+  
         //disxclubxdiv
         const resultDisXClubXDiv = await RelDisXClubXDiv.findOne({
             where: {
