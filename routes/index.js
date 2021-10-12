@@ -652,7 +652,7 @@ router.get('/espacio/disciplina/:espacio/:club',authSignupControllers.requireSig
       
       router.post('/espacio/disciplina/:espacio/:disciplinaxclubId',authSignupControllers.requireSignin,espacioControllers.relacionarEspacioConDisciplinaXClub)
 
-      router.delete('/espacio/disciplina/:espacio/:disciplinaxclubId',authSignupControllers.requireSignin,espacioControllers.eliminarEspacioXDisciplina)
+      router.delete('/espacio/disciplina-espacio/:espacioxdisciplinaxclubId',authSignupControllers.requireSignin,espacioControllers.eliminarEspacioXDisciplina)
 
 
 
