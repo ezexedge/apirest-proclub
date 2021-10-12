@@ -128,6 +128,7 @@ exports.getByClub = async(req,res) => {
 
         console.log('result clone',resultClone)
 
+        let arr = []
         if(result){
 
 
@@ -140,13 +141,22 @@ exports.getByClub = async(req,res) => {
                     }
                 })
 
-                val.cantidadUsuario = cantidad.count
 
+                
+                let obj = {
+                    activo: val.activo,
+                    notificacion: val.notificacion,
+                    id: val.id,
+                    notificacionId: val.notificacionId,
+                    clubId: val.clubId,
+                    cantidad: cantidad.count
+                }
 
+                arr.push(obj)
             }
         }
 
-        res.status(200).json(resultClone)
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
