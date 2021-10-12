@@ -672,7 +672,8 @@ exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
         const validarSiExiste = await RelPosXUsarioXDiviXDep.findOne({
             where:{
                 clubxusuarioId: resultClubXUsuario.id,
-                disciplinaxclubId: resultDisciplinaXClub.id
+                disciplinaxclubId: resultDisciplinaXClub.id,
+                activo: 1
             }
         })
   
