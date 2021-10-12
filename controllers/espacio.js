@@ -511,14 +511,14 @@ exports.getEspacioByDisciplina =  async (req,res) => {
 
 
 
-exports.eliminarEspacioXDisciplina=  async (req,res) => {
+exports.eliminarEspacioXDisciplina =  async (req,res) => {
  
 
     try{
 
 
     
-        const id = req.params.espacioxdisciplinaxclubId
+        const id = req.params.id
     
         const result = await EspacioXDisciplinaXClub.findOne({
   
