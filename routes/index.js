@@ -496,7 +496,7 @@ module.exports = function(){
 
     
     router.get('/notificacion/usuario/:userId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
-    router.get('/notificacion/usuario/:club/:user',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
+    router.get('/notificacion/usuario/:club/:user',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUserByClub)
 
 
     

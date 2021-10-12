@@ -252,12 +252,12 @@ exports.getNotificacionByUserByClub = async (req,res) => {
         const user = req.params.user
         const club = req.params.club
 
-        const usuarioExiste =  await  Usuario.findByPk(user)
+        const usuarioExiste =  await  Usuario.findByPk(Number(user))
 
         if(!usuarioExiste)throw new Error('el usuario no existe')
 
 
-        const clubExiste = await Club.findByPk(club)
+        const clubExiste = await Club.findByPk(Number(club))
 
         if(!clubExiste)throw new Error('el club no existe')
 
