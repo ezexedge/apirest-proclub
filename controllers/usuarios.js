@@ -117,7 +117,7 @@ exports.usuarioById = async (req,res) =>{
         where: {
           usuarioId: usuarioParams,
           clubId: clubParams,
-          activo: 1
+         
         }
   });
         
