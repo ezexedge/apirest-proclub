@@ -828,7 +828,10 @@ exports.usuarioDeportes = async (req,res) => {
              }]
             }
            
-        ]
+        ],
+        where:{
+            activo: 1
+        }
         })
 
      
