@@ -785,6 +785,11 @@ exports.usuarioDeportes = async (req,res) => {
 
         const usuario = req.params.usuario
 
+
+        const existe = await Usuario.findByPk(usuario)
+
+        if(!existe)throw new Error('el usuario no existe')
+
         const result = await RelPosXUsarioXDiviXDep.findAll({
             include: [
                 {
