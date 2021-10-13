@@ -330,7 +330,7 @@ exports.getAllNotificacionUser = async (req,res) => {
         const user = req.params.user
       
 
-        const usuarioExiste =  await  Usuario.findByPk(Number(user))
+        const usuarioExiste =  await  Usuario.findByPk(user)
 
         if(!usuarioExiste)throw new Error('el usuario no existe')
 
