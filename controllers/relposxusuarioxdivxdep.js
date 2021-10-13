@@ -822,9 +822,7 @@ exports.usuarioDeportes = async (req,res) => {
             {
                 model: RelDisXClubXDiv,
                 as: 'disxclubxdiv',
-                where:{
-                    activo:1
-                },
+              
                 include:[{
                  model: RelDisciplinaXClub,
                  as: 'disciplinaxclub',
