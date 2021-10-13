@@ -785,7 +785,12 @@ exports.usuarioDeportes = async (req,res) => {
         const usuario = req.params.usuario
 
         const result = await RelPosXUsarioXDiviXDep.findAll({
-            include: [{
+            include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub'
+                },
+                {
                 model: ClubXUsuario,
                 as: 'clubxusuario',
                 include: [{
@@ -811,11 +816,8 @@ exports.usuarioDeportes = async (req,res) => {
                  model: RelDisciplinaXPos,
                  as: 'disciplinaxpos'
              }]
-            },
-            {
-                model: RelDisciplinaXClub,
-                as: 'disiciplinaxclub'
             }
+           
         ]
         })
 
