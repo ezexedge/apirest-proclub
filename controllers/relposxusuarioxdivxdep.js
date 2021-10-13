@@ -7,6 +7,7 @@ const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Usuario = require('../models/Usuario')
 const Persona = require('../models/Persona')
 const Disciplina = require('../models/Disciplina')
+const Club = require('../models/Club')
 exports.getAll = async (req,res) => {
     
     try{
@@ -788,7 +789,16 @@ exports.usuarioDeportes = async (req,res) => {
             include: [
                 {
                     model: RelDisciplinaXClub,
-                    as: 'disciplinaxclub'
+                    as: 'disciplinaxclub',
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina'
+                    },
+                    {
+                        model: Club,
+                        as: 'club'   
+                     }
+                ]
                 },
                 {
                 model: ClubXUsuario,
