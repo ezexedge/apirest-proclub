@@ -927,6 +927,8 @@ router.delete('/usuario-disciplina/:club/:usuario/:id',authSignupControllers.req
 
 router.put('/update-nombre/:id',authSignupControllers.requireSignin, espacioControllers.updateEspacioNombre)
 
-
+//superadmin
+router.get('/admin/deportes-usuario/:usuario',authSignupControllers.requireSignin, usuarioInformacionFinal.usuarioDeportes)
+  
     return router
 }

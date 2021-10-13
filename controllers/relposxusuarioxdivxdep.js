@@ -775,3 +775,55 @@ exports.eliminarDeporteByUsuario = async (req,res) => {
         res.status(400).json({'error': error.message})
     }
 }
+
+exports.usuarioDeportes = async (req,res) => {
+    
+    try{
+
+     
+
+        const usuario = req.params.usuario
+
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [{
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    where:{
+                        id: usuario
+                    }
+                }]
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub'
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos'
+             }]
+            },
+            {
+                model: RelDisciplinaXClub,
+                as: 'disiciplinaxclub'
+            }
+        ]
+        })
+
+     
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
