@@ -320,3 +320,79 @@ exports.getNotificacionByUserByClub = async (req,res) => {
 
     }
 }
+
+
+
+
+exports.getAllNotificacionUser = async (req,res) => {
+    try{
+
+        const user = req.params.user
+      
+
+        const usuarioExiste =  await  Usuario.findByPk(Number(user))
+
+        if(!usuarioExiste)throw new Error('el usuario no existe')
+
+
+  
+
+      
+        const resp =  await NotXClubXUsuario.findAll({
+            include:[
+                {
+                 model: ClubXUsuario,
+                 as: 'clubxusuario',
+                 where:{
+                     usuarioId: user
+                 },
+                include: [{
+                  model: Usuario,
+                  as: 'usuario',
+                  include: [{
+                      model: Persona,
+                      as: 'persona'
+                  }]
+                }]
+                },
+                {
+                model: NotificacionXClub,
+                as: 'club',
+                include:[{
+                    model: Notificacion,
+                    as: 'notificacion',
+                    where:{
+                        activo: 1
+                    }
+                }]
+                },{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }  
+            ],
+            where:{
+                activo: 1
+            },
+            order: [['id', 'DESC']]
+
+        })
+
+
+
+
+        res.status(200).json(resp)
+
+
+    }catch(err){
+
+        
+        res.status(400).json({error: err.message})
+
+    }
+}
+
+//getNotificacionByUserByClub
