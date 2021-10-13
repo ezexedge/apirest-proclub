@@ -790,15 +790,11 @@ exports.usuarioDeportes = async (req,res) => {
                 {
                     model: RelDisciplinaXClub,
                     as: 'disciplinaxclub',
-                    where:{
-                        activo: 1
-                    },
+                 
                     include: [{
                         model: Disciplina,
                         as: 'disciplina',
-                        where:{
-                            activo: 1
-                        }
+                     
                     },
                     {
                         model: Club,
@@ -826,17 +822,13 @@ exports.usuarioDeportes = async (req,res) => {
                 include:[{
                  model: RelDisciplinaXClub,
                  as: 'disciplinaxclub',
-                 where:{
-                     activo:1
-                 }
+         
                 }]  
             },
             {
              model: DisciplinaXClubXPos,
              as:   'disciplinaxclubxpos',
-             where: {
-                 activo:1
-             },
+             
              include: [{
                  model: RelDisciplinaXPos,
                  as: 'disciplinaxpos',
