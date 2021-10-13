@@ -790,9 +790,15 @@ exports.usuarioDeportes = async (req,res) => {
                 {
                     model: RelDisciplinaXClub,
                     as: 'disciplinaxclub',
+                    where:{
+                        activo: 1
+                    },
                     include: [{
                         model: Disciplina,
-                        as: 'disciplina'
+                        as: 'disciplina',
+                        where:{
+                            activo: 1
+                        }
                     },
                     {
                         model: Club,
@@ -814,17 +820,29 @@ exports.usuarioDeportes = async (req,res) => {
             {
                 model: RelDisXClubXDiv,
                 as: 'disxclubxdiv',
+                where:{
+                    activo:1
+                },
                 include:[{
                  model: RelDisciplinaXClub,
-                 as: 'disciplinaxclub'
+                 as: 'disciplinaxclub',
+                 where:{
+                     activo:1
+                 }
                 }]  
             },
             {
              model: DisciplinaXClubXPos,
              as:   'disciplinaxclubxpos',
+             where: {
+                 activo:1
+             },
              include: [{
                  model: RelDisciplinaXPos,
-                 as: 'disciplinaxpos'
+                 as: 'disciplinaxpos',
+                 where:{
+                     activo: 1
+                 }
              }]
             }
            
