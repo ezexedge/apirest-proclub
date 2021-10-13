@@ -117,7 +117,7 @@ exports.usuarioById = async (req,res) =>{
         where: {
           usuarioId: usuarioParams,
           clubId: clubParams,
-         
+          activo: 1
         }
   });
         
@@ -195,7 +195,7 @@ exports.usuarioEliminar = async (req, res) => {
         }],
         where:{
           id:id,
-          activo:1
+         
         }
       })
 
