@@ -805,12 +805,13 @@ exports.usuarioDeportes = async (req,res) => {
                 {
                 model: ClubXUsuario,
                 as: 'clubxusuario',
+                where:{
+                    id: usuario
+                },
                 include: [{
                     model: Usuario,
-                    as: 'usuario',
-                    where:{
-                        id: usuario
-                    }
+                    as: 'usuario'
+                  
                 }]
             },
             {
@@ -832,9 +833,7 @@ exports.usuarioDeportes = async (req,res) => {
              include: [{
                  model: RelDisciplinaXPos,
                  as: 'disciplinaxpos',
-                 where:{
-                     activo: 1
-                 }
+             
              }]
             }
            
