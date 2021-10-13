@@ -811,7 +811,7 @@ exports.usuarioDeportes = async (req,res) => {
                 model: ClubXUsuario,
                 as: 'clubxusuario',
                 where:{
-                    id: usuario
+                    usuarioId: usuario
                 },
                 include: [{
                     model: Usuario,
