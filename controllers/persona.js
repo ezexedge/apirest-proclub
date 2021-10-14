@@ -12,6 +12,7 @@ const db = require('../config/db')
 const admin = require("firebase-admin")
 const firebase = require('../firebase')
 const Estados = require('../models/Estados')
+const Rol = require('../models/rol')
 
 exports.personaTodos = async (req, res) => {
 
@@ -132,17 +133,33 @@ exports.crearPersona = async (req, res) => {
     //desarrollo
     //   url: 'http://localhost:3000/#/complete-registration',
 
-    const config = {
-      url: 'http://dev.texdinamo.com/klubo/#/complete-registration',
-      handleCodeInApp: true
-  };
-
-const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
- //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
-    console.log('guardando respuesta',result)
-              
 
 
+    const rolAdmin = await Rol.findOne({
+      where:{
+        id: rol
+      }
+    })
+
+    
+    if(rolAdmin.id === 2){
+
+      console.log('entro ----admin')
+      const config = {
+        url: 'http://dev.texdinamo.com/klubo/#/complete-registration',
+        handleCodeInApp: true
+    };
+  
+  const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
+   //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
+      console.log('guardando respuesta',result)
+                
+  
+  
+
+    }
+
+   
  
 
 
