@@ -17,7 +17,7 @@ exports.crearEspacio =  async (req,res) => {
     try{
 
 
-    const {nombre,image,descripcion,clubId,tiempoDeAnticipacion,maxReservasDia,maxReservasSem,maxReservasAno,deporte,intervaloEntreTurnos,DuracionDeTurnos} = JSON.parse(req.body.data)
+    const {nombre,image,descripcion,clubId,tiempoDeAnticipacion,maxReservasDia,maxReservasMes,maxReservasSem,maxReservasAno,deporte,intervaloEntreTurnos,DuracionDeTurnos} = JSON.parse(req.body.data)
     
     console.log( JSON.parse(req.body.data))
 
@@ -29,7 +29,7 @@ exports.crearEspacio =  async (req,res) => {
         //el let imagen lo vamos usar cuando migremos a digital ocean
 
 
-    const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,intervaloEntreTurnos: intervaloEntreTurnos,DuracionDeTurnos:DuracionDeTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem},{ transaction: t })
+    const result = await Espacio.create({nombre: nombre,image:image, descripcion: descripcion , clubId:clubId, estadoespacioId:1,tiempoDeAnticipacion: tiempoDeAnticipacion,intervaloEntreTurnos: intervaloEntreTurnos,DuracionDeTurnos:DuracionDeTurnos,maxReservasAno:maxReservasAno,maxReservasDia:maxReservasDia,maxReservasSem:maxReservasSem,maxReservasMes:maxReservasMes},{ transaction: t })
     
     await ConfiguracionDiasHs.create({espacioId:result.id},{ transaction: t })
     
