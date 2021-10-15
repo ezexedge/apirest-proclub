@@ -934,7 +934,7 @@ router.get('/admin/deportes-usuario/:usuario',authSignupControllers.requireSigni
   
 router.get('/espacio-reservas/:espacio',authSignupControllers.requireSignin, reservaControllers.getByEspacioId)
  
-router.put('/update-imagen/club/:id',espacioControllers.updateEspacioNombre)
+router.put('/update-imagen/club/:id',espacioControllers.updateImagen)
 
     return router
 }
