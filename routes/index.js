@@ -932,5 +932,7 @@ router.put('/update-nombre/:id',authSignupControllers.requireSignin, espacioCont
 //superadmin
 router.get('/admin/deportes-usuario/:usuario',authSignupControllers.requireSignin, usuarioInformacionFinal.usuarioDeportes)
   
+router.get('/espacio-reservas/:espacio',authSignupControllers.requireSignin, reservaControllers.getByEspacioId)
+  
     return router
 }

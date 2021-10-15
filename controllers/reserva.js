@@ -342,3 +342,37 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
         
     }
 }
+
+
+
+exports.getByEspacioId = async (req,res) => {
+
+
+    try{
+
+        
+        const espacio = req.params.espacio
+
+
+      
+       if(!espacio)throw new Error('el espacio no existe')
+
+        const result = await Reservas.findAll({
+            include:[{
+                model: Espacio,
+                as: 'espacio'
+            }],
+            where:{
+                espacioId: espacio
+            }
+        })
+
+
+
+        res.status(200).json(result)
+      
+    }catch(err){
+        res.status(400).json({error: err.message})
+        
+    }
+}
