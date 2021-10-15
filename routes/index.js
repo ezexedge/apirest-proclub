@@ -933,6 +933,8 @@ router.put('/update-nombre/:id',authSignupControllers.requireSignin, espacioCont
 router.get('/admin/deportes-usuario/:usuario',authSignupControllers.requireSignin, usuarioInformacionFinal.usuarioDeportes)
   
 router.get('/espacio-reservas/:espacio',authSignupControllers.requireSignin, reservaControllers.getByEspacioId)
-  
+ 
+router.put('/update-imagen/club/:id',authSignupControllers.requireSignin, espacioControllers.updateEspacioNombre)
+
     return router
 }

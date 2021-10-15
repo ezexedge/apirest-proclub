@@ -582,3 +582,38 @@ exports.updateEspacioNombre =  async (req,res) => {
         
     }
 }
+
+
+
+
+exports.updateImagen =  async (req,res) => {
+
+    try{
+
+    const id = req.params.id
+    
+
+    const {image} = req.body
+
+  
+
+    
+    const result = await Espacio.findByPk(id)
+
+    if(!result)throw new Error('el espacio no existe')
+
+    await Espacio.update({image:image}, { where: { id: id }})
+
+ 
+ 
+        res.status(200).json({'message': 'imagen modificado correctamente'})    
+    
+   
+
+
+    }catch(error){
+
+        res.status(400).json({'error': error.message})
+        
+    }
+}
