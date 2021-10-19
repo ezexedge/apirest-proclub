@@ -27,13 +27,10 @@ exports.signup = async(req,res)=>{
             disciplinaId: deporte
         }})
 
-        if(!disciplinaxclub){
-            throw new Error('El club con la disciplina no coincide')
-        }
+       
 
 
 
-        console.log(disciplinaxclub)        
         
         const rol = await Rol.findOne({where:{ nombre : 'socio' }})
 
@@ -50,7 +47,7 @@ exports.signup = async(req,res)=>{
                 password: password                 
               })
 
-              console.log(resultFirebase)
+             
 
 
               const pendiente = await Estados.findOne({where:{ nombre : 'pendiente' }})
@@ -60,15 +57,14 @@ exports.signup = async(req,res)=>{
           
               const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido,correo: email, tipoDocumentId: 1,  documento: documento },{ transaction: t })
             
-              const nuevoUsuario = await Usuario.create({  personaId: nuevaPersona.id , activo: 1 ,idFirebase: resultFirebase.uid ,  ultimoIngreso: disciplinaxclub.clubId  },{ transaction: t })
+              const nuevoUsuario = await Usuario.create({  personaId: nuevaPersona.id , activo: 1 ,idFirebase: resultFirebase.uid ,  ultimoIngreso: disciplinaxclub && disciplinaxclub.clubId ?  disciplinaxclub.clubId : null },{ transaction: t })
           
              const clubxusuario =  await ClubXUsuario.create({ clubId: club, usuarioId: nuevoUsuario.id , activo: 1 , estadoId: pendiente.id,rolId: rol.id },{ transaction: t })
 
-             console.log(clubxusuario.id,disciplinaxclub.id)
 
-
+                if(disciplinaxclub && disciplinaxclub.id){
                 await RelUsuarioXDis.create({ clubxusuarioId: clubxusuario.id , disciplinaxclubId: disciplinaxclub.id },{transaction: t})
-            
+                }
 
                await t.commit();
 
@@ -92,11 +88,17 @@ exports.signin = async (req,res)=>{
 
 
         const {email,password} = req.body
-        const resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
 
+
+        
+       
+
+        
+
+        const resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
         console.log('tokken',resultFirebase)
         let token = ''
-        if(resultFirebase){
+        if(resultFirebase ){
 
             const persona = await Persona.findOne({where:{correo: email}})
 
@@ -140,8 +142,7 @@ exports.signin = async (req,res)=>{
                 throw new Error('no esta registrado')
             }
 
-            console.log(rol)
-
+        
              token = jwt.sign({userId: usuario.id , rol : rol.nombre , clubId: clubxusuario.clubId }, process.env.JWT_SECRET)
 
             res.cookie("t",token,{expire: new Date() + 9999 })
@@ -149,13 +150,15 @@ exports.signin = async (req,res)=>{
        
         }
 
+    
+
         res.status(200).json({token : token})
 
         
 
 
     }catch(error){
-        res.status(400).json({'message': error.message})
+        res.status(400).json({'error': error.message})
     }
 }
 
@@ -279,6 +282,45 @@ exports.cambiarClave = async (req,res) => {
     }
 
 }
+
+
+exports.guardarToken = async (req,res) => {
+
+
+    try{
+
+        const {userId,firebaseToken} = req.body
+
+
+        
+
+        let valParse = Number(userId)
+        const usuario = await Usuario.findOne({
+            where: { id : valParse}
+        })
+
+        if(!usuario)throw new Error('el usuario no existe')
+
+        await Usuario.update({idDevice: firebaseToken }, {where: { id : userId }})
+
+
+
+        res.status(200).json({message: 'guardado correctamente'})
+
+
+    }catch(err){
+
+        console.log(err)
+        res.status(400).json({error : err.message})
+
+    }
+
+}
+
+
+
+
+
 
 exports.requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,

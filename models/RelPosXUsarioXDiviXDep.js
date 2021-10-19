@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const RelDisXClubXCat = require('./RelDisXClubXCat')
-
+const RelDisXClubXDiv = require('./RelDisXClubXDiv')
+const ClubXUsuario = require('./ClubXUsuario')
+const DisciplinaXClubXPos = require('./DisciplinaXClubXPos')
+const RelDisciplinaXClub = require('./RelDisciplinaXClub')
 const RelPosXUsuarioXDivXDep = db.define('relposxusuarioxdivxdep', {
     id: {
         type: Sequelize.INTEGER, 
@@ -9,7 +11,7 @@ const RelPosXUsuarioXDivXDep = db.define('relposxusuarioxdivxdep', {
         primaryKey: true
 
     },
-    nombre: Sequelize.STRING,
+   
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
@@ -19,7 +21,10 @@ const RelPosXUsuarioXDivXDep = db.define('relposxusuarioxdivxdep', {
 });
 
 
-RelPosXUsuarioXDivXDep.belongsTo(RelDisXClubXCat,{as:"disxclubxcat",foreignKey: 'disxclubxcatId'})
+RelPosXUsuarioXDivXDep.belongsTo(ClubXUsuario,{as:"clubxusuario", foreignKey: 'clubxusuarioId'})
+RelPosXUsuarioXDivXDep.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub", foreignKey: 'disciplinaxclubId'})
+RelPosXUsuarioXDivXDep.belongsTo(RelDisXClubXDiv,{as:"disxclubxdiv",foreignKey: 'disxclubxdivId'})
+RelPosXUsuarioXDivXDep.belongsTo(DisciplinaXClubXPos,{as:"disciplinaxclubxpos", foreignKey: 'disciplinaxclubxposId'})
 
 
 

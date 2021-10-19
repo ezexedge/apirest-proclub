@@ -16,6 +16,7 @@ const Destinatario = db.define('destinatario', {
 
 Destinatario.belongsTo(Encuesta,{as:"encuesta",foreignKey: 'encuestId'})
 Destinatario.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
+Destinatario.belongsTo(Usuario,{as:"enviadoPor",foreignKey: 'enviadoporId'})
 
 
 

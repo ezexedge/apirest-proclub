@@ -1,5 +1,5 @@
 const Encuesta = require('../models/Encuesta')
-
+const Destinatario = require('../models/Destinatario')
 exports.crear = async(req,res) => {
     try{
 
@@ -98,4 +98,59 @@ exports.modificar = async (req,res)=> {
 
     }
 
+}
+
+
+
+
+exports.getEnviadoPor = async(req,res) => {
+    try{
+
+        const usuario = req.auth.userId
+
+        const result = await Destinatario.findAll({
+            include:[{
+                model: Encuesta,
+                as: 'encuesta'
+            }],
+            where: {
+                enviadoporId: usuario
+            },
+            order: [['id', 'DESC']]
+
+        })
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+
+//getEncuestaPorUsuario
+
+
+
+exports.getEncuestaPorUsuario = async(req,res) => {
+    try{
+
+        const usuario = req.params.userId
+
+        const result = await Destinatario.findAll({
+            include:[{
+                model: Encuesta,
+                as: 'encuesta'
+            }],
+            where: {
+                usuarioId: usuario
+            },
+            order: [['id', 'DESC']]
+
+        })
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
 }

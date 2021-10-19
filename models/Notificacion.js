@@ -1,6 +1,10 @@
 const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
 const db = require('../config/db');
+const moment = require('moment')
+
+
+
 
 const Notificacion = db.define('notificacion', {
     id: {
@@ -14,11 +18,19 @@ const Notificacion = db.define('notificacion', {
     },
     descripcion: {
         type: Sequelize.STRING
+    },
+    descripcion_corta: {
+        type: Sequelize.STRING
     }
     ,
     fecha: {
-        type: Sequelize.STRING
+        type: Sequelize.DATEONLY,
+        defaultValue: new Date()
     },
+    hora:{
+        type: Sequelize.TIME
+    }
+    ,
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
@@ -27,4 +39,9 @@ const Notificacion = db.define('notificacion', {
 
 
 
+
+
+
+
 module.exports = Notificacion;
+

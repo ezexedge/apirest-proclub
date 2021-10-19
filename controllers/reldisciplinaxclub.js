@@ -1,7 +1,8 @@
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Club = require('../models/Club')
 const Disciplina = require('../models/Disciplina')
-
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelPosXUsarioXDiviXDep = require('../models/RelPosXUsarioXDiviXDep')
 
 exports.getDeporteXClub = async (req,res)=> {
 
@@ -11,7 +12,7 @@ exports.getDeporteXClub = async (req,res)=> {
 
         const resp = await Club.findByPk(club)
 
-        if(resp){
+        if(!resp)throw new Error('el club no existe')
 
 
         const result = await RelDisciplinaXClub.findAll({
@@ -27,13 +28,54 @@ exports.getDeporteXClub = async (req,res)=> {
           }  
         })
 
-        res.status(200).json(result)
 
-        }else{
+        let arr = []
+        if(result){
 
-            throw new Error('el club no existe')
+            for(let val of result){
+
+            
+
+
+                  
+
+                    const totalDivision = await RelDisXClubXDiv.findAndCountAll({
+                        where:{
+                            disciplinaxclubId: val.id,
+                            activo: 1
+                        }
+                    })
+
+                    const totalUsuarios = await RelPosXUsarioXDiviXDep.findAndCountAll({
+                        where:{
+                            disciplinaxclubId: val.id,
+                            activo: 1
+                        }
+                    })
+                    
+
+                    let obj = {
+                        activo: val.activo,
+                        clubId: val.clubId,
+                        disciplina: val.disciplina,
+                        disciplinaId: val.disciplinaId,
+                        id: val.id,
+                        cantidadDivision: totalDivision.count,
+                        cantitdadUsuarios: totalUsuarios.count
+                    }
+
+
+                    arr.push(obj)
+                
+
+
+            }
 
         }
+
+
+        res.status(200).json(arr)
+
 
         
 
@@ -97,24 +139,24 @@ exports.deleteDeporteXClub = async (req,res)=> {
         const club = req.params.club
         const disciplina = req.params.disciplina
 
-        const result = await RelDisciplinaXClub.findAll({
+        const result = await RelDisciplinaXClub.findOne({
             where: {
                 clubId: club,
-                disciplinaId: disciplina
+                disciplinaId: disciplina,
+                activo: 1
               }  
             })
 
-        if(result.length === 0){
+    
+        if(!result)throw new Error('El club o la disciplina no existe')
 
-            throw new Error('el club o la disciplina no existe')
+    
 
-        }else{
+            result.activo = 0
+            await result.save()
+            res.status(200).json({message: 'eliminado correctamente'})
 
-            result[0].activo = 0
-            await result[0].save()
-            res.status(200).json(result)
-
-        }
+        
     
         
 
@@ -130,8 +172,8 @@ exports.createDeporteXClub = async (req,res)=> {
 
     try{
 
-        const { club,disciplina } = req.body
-
+        const club = req.params.club
+        const disciplina = req.params.disciplina
 
         const resp = await RelDisciplinaXClub.findAll({
             where: {
@@ -142,6 +184,29 @@ exports.createDeporteXClub = async (req,res)=> {
 
         if(resp.length > 0){
             throw new Error('la disciplina ya se encuentra registrada')
+        }
+
+
+        const resultClub = await Club.findOne({
+            where:{
+                id: club,
+                activo: 1
+            }
+        })
+
+        if(!resultClub){
+            throw new Error('el id del club no existe')
+        }
+
+        const resultDisciplina = await Disciplina.findOne({
+            where:{
+                id: disciplina,
+                activo: 1
+            }
+        })
+
+        if(!resultDisciplina){
+            throw new Error('el id de disciplina no existe')
         }
 
 
@@ -158,3 +223,8 @@ exports.createDeporteXClub = async (req,res)=> {
     }
 
 }
+
+
+
+
+
