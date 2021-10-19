@@ -16,6 +16,10 @@ const ClubXusuario = db.define('clubxusuario', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 0
+    },
+    Estado:{
+        type: Sequelize.INTEGER,   
+        defaultValue: 1
     }
      
 });
@@ -25,7 +29,6 @@ const ClubXusuario = db.define('clubxusuario', {
 
 ClubXusuario.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 ClubXusuario.belongsTo(Rol,{as:"rol",foreignKey: 'rolId'})
-ClubXusuario.belongsTo(Rol,{as:"rolanterior",foreignKey: 'rolanteriorId'})
 
 
 

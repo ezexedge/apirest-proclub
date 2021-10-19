@@ -26,11 +26,12 @@ exports.direccionById = async (req,res) => {
 
         const result = await Direccion.findByPk(id)
 
-      if(!result)throw new Error('la direccion no existe')
-
-
-      res.status(200).json(result)
+        if(result.length === 0){
+            res.status(200).json(result)
        
+        }else{
+            throw new Error('el id no existe')
+        }
         
     }catch(error){
 

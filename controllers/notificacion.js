@@ -1,23 +1,14 @@
 const Notificacion = require('../models/Notificacion')
+const admin = require('firebase-admin')
 const  firebase  = require('./../firebase')
 const { getMessaging, getToken } = require("firebase/messaging")
 const fetch =  require('isomorphic-fetch')
 const RelUsuarioXDis = require('../models/RelUsuarioXDis')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
-const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const RelDisXClubXCat = require('../models/RelDisXClubXCat')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Destinatario = require('../models/Destinatario')
-const Usuario = require('../models/Usuario')
-const Persona = require('../models/Persona')
-const NotificacionXTematica = require('../models/NotificacionXTematica')
-const NotificacionXClub = require('../models/NotificacionXClub')
-const NotXClubXUsuario = require('../models/NotXClubXUsuario')
-const Encuesta = require('../models/Encuesta')
-const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
-const db = require('../config/db')
-const admin = require('firebase-admin')
-const moment = require('moment')
 
 exports.crear = async(req,res) => {
     try{
@@ -38,11 +29,6 @@ exports.crear = async(req,res) => {
 exports.getById = async(req,res) => {
     try{
 
-       
-        const currentUser = req.auth.userId
-
-
-
         const id = req.params.id
 
         const result = await Notificacion.findOne({
@@ -52,23 +38,8 @@ exports.getById = async(req,res) => {
             }
         })
 
-
-
-        
-
         if(!result)throw new Error(`el id:${id} no existe`)
 
-        const visto = await NotificacionVistasXUsuarios.findOne({
-            where: {
-                usuarioId: currentUser,
-                notificacionId: id
-            }
-        })
-
-        if(!visto){
-            await NotificacionVistasXUsuarios.create({ usuarioId: currentUser, notificacionId: id})
-        }
-        
         res.status(200).json(result)
 
     }catch(err){
@@ -76,17 +47,13 @@ exports.getById = async(req,res) => {
     }
 }
 
-
-
-
 exports.getAll = async(req,res) => {
     try{
 
         const result = await Notificacion.findAll({
             where: {
                 activo: 1
-            },
-            order: [['id', 'DESC']]
+            }
         })
         res.status(200).json(result)
 
@@ -147,81 +114,89 @@ exports.modificar = async (req,res)=> {
 
 exports.sendNotificacion = async (req,res) => {
 
-
-    const t = await db.transaction()
-
     try{
 
 
+        const val  = req.body
 
-        const enviadoPor = req.auth.userId
-        const {usuarios,encuesta}  = req.body
-        
+        let arr = []
 
-        console.log('req bodyy',req.body)
-        
-        const encuestaExiste = await Encuesta.findOne({
-            where: {id: encuesta}
-        })
 
-        if(!encuestaExiste)throw new Error('La encuesta no existe')
-//val
-       let arr = []
-        let arrDevice = []
+       for(let datos of val){
+            if(datos.club && datos.usuario){
+                throw new Error('debe elegir club o usuario')
+            }
+       }
 
-    
-            for(let usuario of usuarios){
-                
-                if(usuario.usuario.idDevice !== null && usuario.usuario.idDevice !== ''){
-                    arrDevice.push(usuario.usuario.idDevice)
-                }
+
+       if(val[0].club !== '' && val[0].disciplina !== ''){
+        for await(let valor of val){
             
+            const result = await RelDisciplinaXClub.findOne({
+                where:{
+                    activo:1,
+                    clubId: valor.club,
+                    disciplinaId: valor.disciplina 
+                }
+            })
+
+            
+            const resp = await RelUsuarioXDis.findAll({
+                include:[{
+                    model: ClubXusuario,
+                    as:'clubxusuario'
+                }],
+                where:{
+                    activo:1,
+                    disciplinaxclubId: result.id
+                }
+            })
+
+            
+
+
+            for(let usuario of resp){
+                //console.log(usuario.clubxusuario.usuarioId)
+                
                 let user = {
-                    encuestId: encuesta,
-                    usuarioId:  usuario.usuarioId,
-                    enviadoporId: enviadoPor
+                    encuestId: valor.encuesta,
+                    usuarioId:  usuario.clubxusuario.usuarioId
                 }
                 arr.push(user)
-            
+
                 
 
                 
             }
 
-            console.log('el array',arr)
             const destino  = await Destinatario.bulkCreate(arr)
-                res.status(200).json({message: 'Encuesta creada'})
+                res.status(200).json(destino)
 
 
-                const notification_options = {
-                    priority: "high",
-                    timeToLive: 60 * 60 * 24
-                };
-            
-            
-            
-                const message_notification = {
-                    notification: {
-                        title:  encuestaExiste.titulo ,
-                        body: encuestaExiste.descripcion
-                    }
-                };
+        }
+    }
 
+    if(val[0].usuario !== ''){
+            let arr = []
 
-                if(arrDevice.length > 0){
-                for(let val of arrDevice){
-                    const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
-                    console.log('estado de envio de notificacion',result)
-            
+            for(let valor of val){
+                let user = {
+                    usuarioId: valor.usuario,
+                    encuestId: valor.encuesta
                 }
+
+                arr.push(user)
             }
-        
+
+            const resp = await Destinatario.bulkCreate(arr)
+
+            res.status(200).json(resp)
+    } 
+
       
 
 
     }catch(err){
-
-        await t.rollback();
 
         res.status(400).json({error: err.message})
 
@@ -291,189 +266,3 @@ exports.getTokenFirebase = async (req,res)=>{
 }
 
 //'
-
-exports.crearSuperadmin = async(req,res) => {
-    
-    const t = await db.transaction()
-    try{
-
-     
-
-        const {notificacion,usuarios} = req.body
-
-
-
-        const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
-
-        
-
-        console.log('aqui notificacion',notificacion)
-        console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora},{ transaction: t })
-      
-        //  const result = await Notificacion.bulkCreate(req.body)
-
-        if(notificacion.tematica){
-        let arrTematica = []
-        if(notificacion.tematica.length > 0){
-            for(let val of notificacion.tematica){
-                let obj = {
-                    notificacionId: resultNotificacion.id,
-                    tematicaId: val.id
-                }
-
-                arrTematica.push(obj)
-            }
-        }
-        
-        await NotificacionXTematica.bulkCreate(arrTematica,{ transaction: t })
-     
-    }
-
-
-        let arrDevices = []
-
-        let arrFinal = []
-        let flag = 0
-        let result
-        for(let val of usuarios){
-        if(flag === 0){
-          result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id},{ transaction: t })
-         flag = 1
-        }
-        let obj = {
-            notificacionxclubId: result.id,
-            clubxusuarioId: val.id,
-            usuarioId: req.auth.userId
-        }
-
-
-        arrFinal.push(obj)
-
-        if(val.usuario !== null && val.usuario.idDevice !== null &&  val.usuario.idDevice !== '' ){
-            arrDevices.push(val.usuario.idDevice)
-        }
-
-    }
-
-
-    console.log('arrrfinal',arrFinal)
-
-
-    console.log('aca los iddevices',arrDevices)
-
-
-
-    
-
-    await NotXClubXUsuario.bulkCreate(arrFinal,{ transaction: t })
-      
-
-
-    const notification_options = {
-        priority: "high",
-        timeToLive: 60 * 60 * 24
-    };
-
-
-
-    const message_notification = {
-        notification: {
-            title:  notificacion.titulo ,
-            body: notificacion.descripcion
-        }
-    };
-
-    for(let val of  arrDevices) {
-
-       const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
-        console.log('estado de envio de notificacion',result)
-
-    }
-        
-
-
-      await t.commit();
-
-        res.status(200).json({message: 'enviadooo',notificacionId: resultNotificacion})
-
-
-    }catch(err){
-
-       await t.rollback();
-
-        res.status(400).json({error: err.message})
-    }
-}
-
-
-exports.getNotificacionVistas = async(req,res) => {
-    try{
-
-       
-        const id = req.params.id
-
-
-        const notificacion = await Notificacion.findByPk(id)
-
-        if(!notificacion)throw new Error('La notificacion no existe')
-
-        const result = await NotificacionVistasXUsuarios.findAll({
-            include : [{
-                model: Usuario,
-                as: 'usuario',
-                include: [{
-                    model: Persona,
-                    as: 'persona'
-                }]
-            }],
-            where: {
-                notificacionId : id
-            }
-        })
-
-        
-        
-        res.status(200).json(result)
-
-    }catch(err){
-        res.status(400).json({error: err.message})
-    }
-}
-
-
-
-exports.getNotificacionLeida = async(req,res) => {
-    try{
-
-       
-        const id = req.params.notificacion
-        const user = req.auth.userId
-
-        const notificacion = await Notificacion.findByPk(id)
-
-        if(!notificacion)throw new Error('La notificacion no existe')
-
-        const result = await NotificacionVistasXUsuarios.findOne({
-            where: {
-                usuarioId: user,
-                notificacionId: id
-            }
-        })
-
-        let respuesta = false
-        if(result){
-            respuesta = true
-        }
-        
-        res.status(200).json({message : respuesta})
-
-    }catch(err){
-        res.status(400).json({error: err.message})
-    }
-}
-
-
-
-
-

@@ -3,16 +3,9 @@ const Usuario = require('../models/Usuario')
 const Direccion = require('../models/Direccion')
 const TipoDocumento = require('../models/TipoDocumento')
 const ClubXusuario = require('../models/ClubXUsuario')
-const RelUsuarioXDis = require('../models/RelUsuarioXDis')
-const RelPosXUsarioXDiviXDep  = require('../models/RelPosXUsarioXDiviXDep')
-const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
-const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
-const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const db = require('../config/db')
 const admin = require("firebase-admin")
-const firebase = require('../firebase')
 const Estados = require('../models/Estados')
-const Rol = require('../models/rol')
 
 exports.personaTodos = async (req, res) => {
 
@@ -33,7 +26,6 @@ exports.personaById = async (req, res) => {
 
 
   try {
-
 
 
     const id = req.params.id
@@ -86,29 +78,17 @@ exports.crearPersona = async (req, res) => {
   try {
 
 
-  
+    if(!req.file) {
+      throw new Error('debe ingresar un avatar para el usuario')
+    }
 
 
     let valores = JSON.parse(req.body.data)
-    const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,division,posicion  , cp} = valores
+    const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion } = valores
 
-     console.log('////////////ss',nombre,apellido,rol)
-    let imagen
-    if(req.file) {
-     imagen = req.file.filename
-   
-    }else{
-      imagen = ''
-    }
-
-    
-    const resultCorreo = await Persona.findOne({
-      where: {correo: correo}
-    })
-
-
-    if(resultCorreo)throw new Error('el correo esta registrado ingrese otro')
-
+console.log(valores.idClub)
+    let imagen = req.file.filename
+    console.log(imagen)
 
     const aprobado = await Estados.findOne({where:{ nombre : 'aprobado' }})
     if(!aprobado){
@@ -116,110 +96,21 @@ exports.crearPersona = async (req, res) => {
     }
 
 
-    const resp = await admin.auth().listUsers()
-
-    //console.log('respuestaaaaa',resp)
-
-    const encontrado = resp.users.find(obj => obj.email === correo)
-    
-    if(encontrado){
-       
-      throw new Error('El email esta registrado')
-    
-    }
-
-    //produccion
-    //http://dev.texdinamo.com/klubo/
-    //desarrollo
-    //   url: 'http://localhost:3000/#/complete-registration',
-
-
-
-    const rolAdmin = await Rol.findOne({
-      where:{
-        id: rol
-      }
-    })
-
-    
-    if(rolAdmin.id === 2){
-
-      console.log('entro ----admin')
-      const config = {
-        url: 'http://dev.texdinamo.com/klubo/#/complete-registration',
-        handleCodeInApp: true
-    };
-  
-  const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
-   //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
-      console.log('guardando respuesta',result)
-                
-  
-  
-
-    }
-
-   
- 
-
-
-    const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia ,cp: cp },{ transaction: t })
+    const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{ transaction: t })
 
     const nuevaPersona = await Persona.create({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, direccionPersonaId: nuevaDireccion.id, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{ transaction: t })
   
-    const nuevoUsuario = await Usuario.create({ personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
+    const nuevoUsuario = await Usuario.create({ rolId: rol, personaId: nuevaPersona.id , activo: 1, ultimoIngreso: idClub },{ transaction: t })
 
-    const resultclubxusuario =   await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
+     await ClubXusuario.create({ clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: aprobado.id  },{ transaction: t })
 
+    /*  const rta = await admin.auth().createUser({
+        email: 'desarrollo@texdinamo.com',
+        password: 'admin123'                 
+      })
+      console.log(rta);
 
-
-
-
-
-    const resultDisciplinaXClub = await RelDisciplinaXClub.findOne({
-      where:{
-          clubId: idClub,
-          disciplinaId: deporte
-      }
-  })
-
-
-  if(!resultDisciplinaXClub)throw new Error('la disciplina no esta relacionada con el club')
-
-  //disxclubxdiv
-  const resultDisXClubXDiv = await RelDisXClubXDiv.findOne({
-      where: {
-          id: division            }
-  })
-
-  let divisionFinal = null
-
-  if(resultDisXClubXDiv && resultDisXClubXDiv.id){
-      divisionFinal = resultDisXClubXDiv.id
-  }
-
-  //disciplinaxclubxpos
-  const resultDisXClubXPos = await DisciplinaXClubXPos.findOne({
-      where:{
-          disciplinaxposId: posicion
-      }
-  })
-
-  let posicionFinal = null
-  if(resultDisXClubXPos && resultDisXClubXPos.id){
-      posicionFinal = resultDisXClubXPos.id
-  }
-
-
-
-
-
-
-    await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultclubxusuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  },{ transaction: t })
-
-
-
-
+      await admin.auth().setCustomUserClaims(rta.uid, { role: 'SuperAdmin' }) */
 
     await t.commit();
 
@@ -247,47 +138,66 @@ exports.ModificarPersona = async (req, res) => {
 
   try {
 
+    const clubParams = req.params.club
     const usuarioParams = req.params.usuario
   
-    const result = await Usuario.findByPk(usuarioParams)
-    if(!result)throw new Error('el usuario no existe')
+    const result = await ClubXusuario.findAll({
+      include: [
+        {
+          model: Usuario,
+          as: 'usuario',
+          include : [
+            {
+              model: Persona,
+              as: 'persona'
+            }
+          ]
+        }
+      ],
 
-    
+      where: {
+          usuarioId: usuarioParams,
+          clubId: clubParams
+        }  
+    })
 
-    const resultPersona = await Persona.findByPk(result.personaId)
+    if(result.length === 0){
+      throw new Error('el usuario no existe')
+    }
 
- 
-   
+console.log('sssssss',JSON.parse(req.body.data))
 
-console.log('resultpersona',resultPersona)
 
-let valores = JSON.parse(req.body.data)
 
-const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,    deporte,categoria } = valores
+    const { nombre, apellido, telefono, correo, fechaNacimiento, rol, numeroDocumento, tipoDocumento, sexo, direccion ,avatar } = JSON.parse(req.body.data)
     
     let imagen
     if(req.file) {
      imagen = req.file.filename
    
     }else{
-      imagen = resultPersona.avatar
+      imagen = avatar
     } 
     
-    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumentId, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento ,avatar : imagen },{where: {id: result.personaId},  transaction: t})
+    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, tipoDocumentId: tipoDocumento, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: numeroDocumento ,avatar : imagen },{where: {id: result[0].usuario.personaId},  transaction: t})
 
+  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia },{where: {id: result[0].usuario.persona.direccionPersonaId},  transaction: t})
 
-    if(resultPersona.direccionPersonaId === null){
-    const resultDireccion =   await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provinciaId , cp: direccion.cp },  {transaction: t})
-      await Persona.update({ direccionPersonaId: resultDireccion.id },{where: {id: result.personaId},  transaction: t})
-
-    }
-  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provinciaId , cp: direccion.cp },{where: {id: resultPersona.direccionPersonaId},  transaction: t})
-
+  await Usuario.update({ rolId: rol, personaId: result[0].usuario.personaId  },{ where: { id: result[0].usuarioId }, transaction: t })
    
 
+    /*  const rta = await admin.auth().createUser({
+        email: 'desarrollo@texdinamo.com',
+        password: 'admin123'                 
+      })
+      console.log(rta);
+
+      await admin.auth().setCustomUserClaims(rta.uid, { role: 'SuperAdmin' }) */
+
+   // res.status(200).json({ "message": 'agregado correctamente' })
 
    await t.commit();
- 
+
    res.status(200).json({ "message": "modificado con exito" })
 
   } catch (err) {

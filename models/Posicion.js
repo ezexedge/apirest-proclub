@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const  Disciplina = require('../models/Disciplina')
+const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
+
 const Posicion = db.define('posicion', {
     id: {
         type: Sequelize.INTEGER, 
@@ -18,9 +19,11 @@ const Posicion = db.define('posicion', {
 });
 
 
+Posicion.belongsTo(RelDisciplinaXClub,{as:"disciplinaxclub",foreignKey: 'disciplinaxclubId'})
 
 
 
-Posicion.belongsTo(Disciplina,{as:"disciplina",foreignKey: 'disciplinaId'})
+
+
 
 module.exports = Posicion;

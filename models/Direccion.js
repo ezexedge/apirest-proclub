@@ -13,7 +13,6 @@ const Direccion = db.define('direccion', {
     calle: Sequelize.STRING,
     numero: Sequelize.INTEGER,
     localidad: Sequelize.STRING,
-    cp: Sequelize.STRING
 
     
 });

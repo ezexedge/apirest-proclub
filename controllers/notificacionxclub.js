@@ -2,9 +2,7 @@ const Notificacion = require('../models/Notificacion')
 const Club = require('../models/Club')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const NotificacionXClub = require('../models/NotificacionXClub')
-const NotXClubXUsuario =  require('../models/NotXClubXUsuario')
 const Persona = require('../models/Persona')
-const _ = require('lodash')
 exports.crear = async(req,res) => {
     try{
 
@@ -96,8 +94,6 @@ exports.getByClub = async(req,res) => {
     try{
 
 
-        console.log('getbyclubb')
-
         const club = req.params.club
 
         const resultClub = await Club.findOne({
@@ -110,7 +106,15 @@ exports.getByClub = async(req,res) => {
         if(!resultClub) throw new Error('el club no existe')
 
         const result = await NotificacionXClub.findAll({
-            include: [
+            include: [{
+                model: Club,
+                as: 'club',
+                include: [{
+                    model: Persona,
+                    as: 'persona'
+                }]
+
+            },
             {
                 model: Notificacion,
                 as: 'notificacion'
@@ -122,41 +126,7 @@ exports.getByClub = async(req,res) => {
                 clubId: club
             }
         })
-
-
-        let resultClone = _.clone(result);
-
-        console.log('result clone',resultClone)
-
-        let arr = []
-        if(result){
-
-
-
-            for(let val of resultClone){
-
-                const cantidad = await NotXClubXUsuario.findAndCountAll({
-                    where:{
-                        notificacionxclubId: val.id
-                    }
-                })
-
-
-                
-                let obj = {
-                    activo: val.activo,
-                    notificacion: val.notificacion,
-                    id: val.id,
-                    notificacionId: val.notificacionId,
-                    clubId: val.clubId,
-                    cantidad: cantidad.count
-                }
-
-                arr.push(obj)
-            }
-        }
-
-        res.status(200).json(arr)
+        res.status(200).json(result)
 
     }catch(err){
         res.status(400).json({error: err.message})

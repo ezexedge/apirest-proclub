@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 const Encuesta = require('../models/Encuesta')
+
 const Pregunta = db.define('pregunta', {
     id: {
         type: Sequelize.INTEGER, 

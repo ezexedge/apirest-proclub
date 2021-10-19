@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const Provincia = require('../models/Provincia')
 const Pais = require('../models/Pais')
 const db = require('../config/db');
-const Usuario = require('../models/Usuario')
 
 const Encuesta = db.define('encuesta', {
     id: {
@@ -19,8 +18,6 @@ const Encuesta = db.define('encuesta', {
     }
     
 });
-
-
 
 
 

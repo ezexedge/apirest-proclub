@@ -1,7 +1,5 @@
 const Turno = require('../models/Turno')
 const EstadoTurno = require('../models/EstadoTurno')
-const Espacio = require('../models/Espacio')
-const moment = require('moment')
 
 exports.getById = async(req,res) => {
     try{
@@ -14,28 +12,8 @@ exports.getById = async(req,res) => {
                 activo: 1
             }
         })
+
         if(!result)throw new Error(`el id:${id} no existe`)
-
-        let date =   moment(new Date(`${result.fecha} ${result.horaHasta}:00`))
-        let now  = moment()
-        if (now > date) {
-                
-            console.log('inactivo')
-        const proceso =   await Turno.update({activo: 0}, { where: { id: result.id }})
-
-        if(proceso)throw new Error('el turno esta inactivo')
-        console.log('proceso',proceso)
-        } 
-
-
-
-
-   
-
-
-
-
-
 
         res.status(200).json(result)
 
@@ -52,38 +30,6 @@ exports.getAll = async(req,res) => {
                 activo: 1
             }
         })
-
-        for await (let val of result){
-
-          let date =   moment(new Date(`${val.fecha} ${val.horaHasta}:00`))
-           let now  = moment()
-
-            if (now > date) {
-                
-                console.log('inactivo')
-                await Turno.update({activo: 0}, { where: { id: val.id }})
-            } 
-        }
-
-
-
-                 
-
-        res.status(200).json(result)
-
-    }catch(err){
-        res.status(400).json({error: err.message})
-    }
-}
-
-exports.getAllInactivo = async(req,res) => {
-    try{
-
-        const result = await Turno.findAll({
-            where: {
-                activo: 0
-            }
-        })
         res.status(200).json(result)
 
     }catch(err){
@@ -96,12 +42,11 @@ exports.crear = async(req,res) =>{
     try{
 
 
-  
-        const espacio =  req.params.espacio
+        const estado = req.params.estado
 
         const { fecha,horaDesde,horaHasta,precio,cupo } = req.body
 
-        const resp = await Turno.create({fecha:fecha,horaDesde:horaDesde,horaHasta:horaHasta,precio:precio,cupo:cupo,estadoturnoId:1 , espacioId: espacio})
+        const resp = await Turno.create({fecha:fecha,horaDesde:horaDesde,horaHasta:horaHasta,precio:precio,cupo:cupo,estadoturnoId:estado})
 
         res.status(200).json(resp)
 
@@ -134,34 +79,5 @@ exports.eliminar = async (req,res) => {
     }catch(err){
         res.status(400).json({error: err.message})
         
-    }
-}
-
-
-//getByEspacioId
-
-
-
-exports.getByEspacioId = async(req,res) => {
-    try{
-
-
-        const espacio = req.params.espacio
-
-        const result = await Espacio.findByPk(espacio)
-
-        if(!result)throw new Error('el espacio no existe')
-                 
-        const resultTurno = await Turno.findAll({
-            where:{
-                activo: 1,
-                espacioId: espacio
-            }
-        })
-
-        res.status(200).json(resultTurno)
-
-    }catch(err){
-        res.status(400).json({error: err.message})
     }
 }

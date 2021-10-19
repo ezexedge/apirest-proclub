@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const EstadoTurno = require('./EstadoTurno')
 const db = require('../config/db');
-const Espacio =  require('./Espacio')
+
 const Turno = db.define('turno', {
     id: {
         type: Sequelize.INTEGER, 
@@ -39,7 +39,6 @@ const Turno = db.define('turno', {
 
 
 Turno.belongsTo(EstadoTurno,{as:"estadoturno",foreignKey: 'estadoturnoId'})
-Turno.belongsTo(Espacio,{as:"espacio",foreignKey: 'espacioId'})
 
 
 

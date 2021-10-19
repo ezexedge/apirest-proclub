@@ -12,7 +12,6 @@ const Disciplina = db.define('disciplina', {
     },
     nombre: Sequelize.STRING,
     descripcion: Sequelize.STRING,
-    icono: Sequelize.STRING,
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1

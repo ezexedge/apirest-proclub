@@ -26,9 +26,6 @@
     "direcciones" : "GET /direccion",
     "direcciones por id" : "GET /direccion/:id",
 
-
-    "get id usuario" : "GET /usuario/:id",
-    "todos los club que tiene un usuario": "GET /usuario/clubs/:usuario",
     "usuarios" : "GET /lista-usuarios",
     "eliminar usuario" : "DELETE /usuario/:club/usuario",
     "usuarios x club" : "GET /api/usuario/:club/:usuario",

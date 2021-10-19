@@ -17,69 +17,15 @@ const Espacio = db.define('espacio', {
     descripcion: {
         type: Sequelize.STRING
     },
-    maxReservasDia:  {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-    },
-    maxReservasMes:  {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-
-    },
-    maxReservasSem:  {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-
-    },
-    maxReservasAno:  {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-
-    },
-    intervaloEntreTurnos : {
-        type: Sequelize.TIME,
-        defaultValue: '00:00:00',
-
-
-    },
-    image: Sequelize.STRING,
-    tiempoDeAnticipacion: {
-        type: Sequelize.TIME,
-        defaultValue: '00:00:00',
-    },
-    DuracionDeTurnos: {
-        type: Sequelize.TIME,
-        defaultValue: '00:00:00',
-
-    },
-    valor:  {
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-
-    },
+    maxReservasDia: Sequelize.INTEGER,
+    maxReservasSem: Sequelize.INTEGER,
+    maxReservasAno: Sequelize.INTEGER,
+    horasPrevia: Sequelize.STRING,
+    tiempoDeAnticipacion: Sequelize.STRING,
+    tiempoDeCancelacion: Sequelize.STRING,
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
-    },
-    visibilidad:{
-        type: Sequelize.BOOLEAN
-    },
-    
-    multiplesReservasEnUnHorario: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    LimitarAUnSoloEventoAprobado:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0,
-    },
-    ProhibirMasDeUnaReservaPendiente: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
-    },
-    ReservaAmpliada:{
-        type: Sequelize.INTEGER,
-        defaultValue: 0
     }
 
     

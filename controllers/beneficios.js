@@ -10,46 +10,48 @@ const Persona = require('../models/Persona')
 
 
 
+
 exports.crear = async (req, res) => {
   
 
  
  
-  const t = await db.transaction()
-
-  try {
-
-    if(!req.file) {
-      throw new Error('debe ingresar una imagen')
+    const t = await db.transaction()
+  
+    try {
+  
+      if(!req.file) {
+        throw new Error('debe ingresar una imagen')
+      }
+  
+      const { nombre , descripcion , telefono , web ,instagram , correo , rubroId } = JSON.parse(req.body.data)
+     
+     
+  
+        
+        let imagen = req.file.filename
+        console.log(imagen)
+   
+  
+       await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : imagen },{ transaction: t })
+  
+     
+  
+      await t.commit();
+  
+      res.status(200).json({'message': 'beneficio creado'})
+  
+    } catch (err) {
+      console.log('error', err)
+  
+      await t.rollback();
+  
+      res.status(400).json({ "error": err.message })
+  
     }
-
-    const { nombre , descripcion , telefono , web ,instagram , correo , rubro } = JSON.parse(req.body.data)
-   
-   
-
-      
-      let imagen = req.file.filename
-      console.log(imagen)
- 
-
-     await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubro , pathImage : imagen },{ transaction: t })
-
-   
-
-    await t.commit();
-
-    res.status(200).json({'message': 'beneficio creado'})
-
-  } catch (err) {
-    console.log('error', err)
-
-    await t.rollback();
-
-    res.status(400).json({ "error": err.message })
-
+  
   }
 
-}
 
 
 
@@ -71,9 +73,8 @@ exports.crear = async (req, res) => {
       if(!result) throw new Error('el beneficio no existe')
 
 
-      const { nombre , descripcion , telefono , web ,instagram , correo , rubro } = JSON.parse(req.body.data)
-   
-    
+      const { nombre , descripcion , telefono , web ,instagram , correo , rubroId , pathImage} = JSON.parse(req.body.data)
+     
      
       let imagen
       if(req.file) {
@@ -84,7 +85,7 @@ exports.crear = async (req, res) => {
       } 
    
 
-      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubro , pathImage : imagen },{where: {id: result.id}, transaction: t })
+      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubroId , pathImage : imagen },{where: {id: result.id}, transaction: t })
   
     
       await t.commit();
@@ -240,7 +241,7 @@ exports.getBeneficioXClubByClub = async (req,res) => {
     const club = req.params.club
 
 
-    const resultClub =  await Club.findByPk(club)
+    const resultClub =  await Beneficios.findByPk(club)
 
     if(!resultClub)throw new Error('el id del club no existe')
 
@@ -275,60 +276,6 @@ exports.getBeneficioXClubByClub = async (req,res) => {
     res.status(400).json({error: err.message})
   }
 }
-
-
-
-exports.getBeneficioXClubXRubro = async (req,res) => {
-  try{
-
-    const club = req.params.club
-    
-
-    const rubro = req.params.rubro
-
-    const resultClub =  await Club.findByPk(club)
-
-    if(!resultClub)throw new Error('el id del club no existe')
-
-    const resultRubro =  await Rubro.findByPk(rubro)
-
-    if(!resultRubro)throw new Error('el id del rubro no existe')
-
-
-    const result = await BeneficioXClub.findAll({
-      include:[{
-        model : Club,
-        as: 'club'
-    },
-    {
-      model : Usuario,
-      as: 'usuario',
-      include:[{
-        model: Persona,
-        as: 'persona'
-      }]
-  },
-  {
-    model : Beneficios,
-    as: 'beneficio',
-    where: {rubroId: rubro}
-},
-
-  ],
-      where : {
-        activo: 1,
-        clubId: club
-      }
-    })
-
-    res.status(200).json(result)
-
-  }catch(err){
-    res.status(400).json({error: err.message})
-  }
-}
-
-
 
 exports.getBeneficioXClubByClubByUsario = async (req,res) => {
   try{

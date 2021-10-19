@@ -11,7 +11,6 @@ const Usuario = db.define('usuario', {
     },
     idFirebase: Sequelize.STRING
     ,
-    idDevice: Sequelize.STRING,
     ultimoIngreso: Sequelize.STRING,
     activo:{
         type: Sequelize.INTEGER,   
