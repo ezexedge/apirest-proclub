@@ -284,7 +284,7 @@ exports.clubEditar = async (req, res) => {
 
     //  await Persona.update({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono, correo: responsable.correo } , transaction: t })
 
-      await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia }, { where: { id: club.direccionId }, transaction: t })
+      await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provinciaId }, { where: { id: club.direccionId }, transaction: t })
 
       await Club.update({
         logo: logo, nombre: nombre, descripcion: descripcion, colorPrimario: colorPrimario,
