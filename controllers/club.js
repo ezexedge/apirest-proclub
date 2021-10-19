@@ -268,7 +268,7 @@ exports.clubEditar = async (req, res) => {
 
     const id = req.params.id
     
-    const { nombre, descripcion, logo, colorPrimario, colorTextoPrimario, colorSecundario, direccion, responsable  } = JSON.parse(req.body.data)
+    const { descripcion, nombre ,logo, colorPrimario, colorTextoPrimario, colorSecundario,colorTextoSecundario, direccion,  email , telefono , cuit ,instagram,facebook,twitter,nombre_visible , cp   } = JSON.parse(req.body.data)
 
     let imagen
     if(req.file) {
@@ -282,11 +282,15 @@ exports.clubEditar = async (req, res) => {
 
     if (club) {
 
-      await Persona.update({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono }, { where: { id: club.personaId } , transaction: t })
+    //  await Persona.update({ nombre: responsable.nombre, apellido: responsable.apellido, telefono: responsable.telefono, correo: responsable.correo } , transaction: t })
 
       await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia }, { where: { id: club.direccionId }, transaction: t })
 
-      await Club.update({ nombre: nombre, descripcion: descripcion, logo: imagen, colorPrimario: colorPrimario, colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario, direccionId: club.direccionId, personaId: club.personaId, activo: 1 }, { where: { id: club.id }, transaction: t })
+      await Club.update({
+        logo: logo, nombre: nombre, descripcion: descripcion, colorPrimario: colorPrimario,
+         colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
+         colorTextoSecundario: colorTextoSecundario , email: email
+    , telefono: telefono , cuit: cuit  ,instagram: instagram,facebook:facebook,twitter:twitter, nombre_visible: nombre_visible , cp: cp  }, { where: { id: club.id }, transaction: t })
 
 
     await t.commit();
@@ -498,3 +502,4 @@ exports.eliminarAdministrador = async (req,res) => {
 
 
 }
+
