@@ -17,7 +17,7 @@ const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
-
+const _ = require('lodash')
 exports.usuarioListado = async (req,res) =>{
 
     try {
@@ -51,11 +51,92 @@ exports.usuarioListado = async (req,res) =>{
        })
    
   
+       
+  
+       let arr = []
+       for(let val of result){
+
+       
+          
+          
+
+          const deportes = await RelPosXUsuarioXDivXDep.findAll({
+            include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    where:{
+                        activo:1
+                    },
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina',
+                        where:{
+                            activo: 1
+                        }
+                     
+                    },
+                    {
+                        model: Club,
+                        as: 'club',
+                        where:{
+                            activo: 1
+                        }   
+                     }
+                ]
+                },
+                {
+                model: ClubXusuario,
+                as: 'clubxusuario',
+                where:{
+                    id: val.id
+                },
+                include: [{
+                    model: Usuario,
+                    as: 'usuario'
+                  
+                }]
+            }
+           
+        ],
+        where:{
+            activo: 1
+        }
+        })
+
+        let arrDeportes = []
+        for(let val of deportes){
+          if(val && val.disciplinaxclub !== null && val.disciplinaxclub.disciplina !== null ){
+            arrDeportes.push(val.disciplinaxclub.disciplina.nombre)
+          }
+        }
+
+
+
+
+        let obj = {
+          id: val.id,
+          activo: val.activo,
+          clubId:val.clubId,
+          rolId: val.rolId,
+          rolanteriorId: val.rolanteriorId,
+          usuarioId: val.usuarioId,
+          estadoId: val.estadoId,
+          usuario: val.usuario,
+          rol: val.rol,
+          estado: val.estado,
+          deportes: arrDeportes
+        }
+
+        arr.push(obj)
+
+
+       }
       
   
       
 
-      res.status(200).json(result)
+      res.status(200).json(arr)
     
   } catch (err) {
       res.status(400).json(err)
@@ -912,3 +993,7 @@ exports.usuarioEliminar = async (req, res) => {
     }
   
   }
+
+
+
+

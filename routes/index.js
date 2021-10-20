@@ -252,8 +252,8 @@ module.exports = function(){
 
 
 
-
-    router.get('/lista-usuarios/:club',authSignupControllers.requireSignin, usuariosControllers.usuarioListado)
+//volver atras
+    router.get('/lista-usuarios/:club', usuariosControllers.usuarioListado)
 
 
 
