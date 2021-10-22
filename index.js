@@ -42,7 +42,10 @@ admin.initializeApp({
 
 
 
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}))
+
 app.use(morgan('dev'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
