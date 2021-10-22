@@ -42,9 +42,11 @@ admin.initializeApp({
 
 
 
-app.use(cors({
-  origin: '*'
-}))
+var corsOptions = {
+  origin: "https://nostalgic-bohr-142b8b.netlify.app"
+};
+
+app.use(cors(corsOptions));
 
 app.use(morgan('dev'))
 
