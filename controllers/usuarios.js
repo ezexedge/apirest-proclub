@@ -1031,3 +1031,38 @@ exports.usuarioEliminar = async (req, res) => {
   }
 
 
+
+
+
+
+  exports.getRolesByUser = async (req,res) =>{
+
+    let usuario = req.params.usuario
+ 
+    try {
+
+
+    const exist = Usuario.findOne({
+      where:{
+        id: usuario
+      }
+    })
+
+    if(!exist)throw new Error('el usuario no existe')
+
+    const result = await  ClubXusuario.findAll({
+      where:{ 
+        usuarioId: usuario
+       }
+    })
+        
+            
+      res.status(200).json(result)
+    
+  } catch (err) {
+
+    console.log('///////////////',err)
+      res.status(400).json({'error': err.message})
+  }
+  
+  }

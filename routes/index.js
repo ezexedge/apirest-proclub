@@ -277,6 +277,9 @@ module.exports = function(){
     router.delete('/usuario-superadmin/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioEliminarSuperAdmin)
   
     router.post('/usuario-superadmin/activo/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioActivoSuperAdmin)
+    
+    
+    router.get('/usuario-roles/:usuarios',authSignupControllers.requireSignin,usuariosControllers.getRolesByUser)
   
    
     //auth
