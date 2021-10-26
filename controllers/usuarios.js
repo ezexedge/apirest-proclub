@@ -1050,7 +1050,12 @@ exports.usuarioEliminar = async (req, res) => {
 
     if(!exist)throw new Error('el usuario no existe')
 
+
     const result = await  ClubXusuario.findAll({
+      include:[{
+        model: Rol,
+        as: 'rol'
+      }],
       where:{ 
         usuarioId: usuario
        }
