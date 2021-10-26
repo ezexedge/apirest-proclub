@@ -1055,7 +1055,12 @@ exports.usuarioEliminar = async (req, res) => {
       include:[{
         model: Rol,
         as: 'rol'
-      }],
+      },
+    {
+      model: Club,
+      as: 'club'
+    }
+    ],
       where:{ 
         usuarioId: usuario
        }
