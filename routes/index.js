@@ -276,6 +276,8 @@ module.exports = function(){
     //usuartio desde superadmin
     router.delete('/usuario-superadmin/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioEliminarSuperAdmin)
   
+    router.post('/usuario-superadmin/activo/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioActivoSuperAdmin)
+  
    
     //auth
     router.post('/validate',authValidateControllers.validate)

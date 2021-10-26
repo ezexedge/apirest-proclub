@@ -995,5 +995,39 @@ exports.usuarioEliminar = async (req, res) => {
   }
 
 
+  exports.usuarioActivoSuperAdmin = async (req, res) => {
+
+    try {
+      
+    const usuarioParams = req.params.usuario
+
+
+    const exist = await Usuario.findByPk(usuarioParams)
+
+    if(!exist)throw new Error('el usuario no existe')
+
+
+      const result = await ClubXusuario.findAll({
+        where: {
+            usuarioId: usuarioParams,
+          }  
+      })
+
+      if(result.length > 0){
+        await ClubXusuario.update({activo: 1},{where: {usuarioId: usuarioParams }})
+
+      }
+
+
+      await Usuario.update({activo: 1},{where: {id: usuarioParams}})
+  
+      res.status(200).json({message: 'activo correctamente'})
+  
+    } catch (err) {
+
+      res.status(400).json({'error': err.message})
+    }
+  
+  }
 
 
