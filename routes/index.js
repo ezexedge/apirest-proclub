@@ -279,7 +279,7 @@ module.exports = function(){
     router.post('/usuario-superadmin/activo/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioActivoSuperAdmin)
     
     
-    router.get('/usuario-roles/:usuarios',authSignupControllers.requireSignin,usuariosControllers.getRolesByUser)
+    router.get('/usuario-roles/:usuario',authSignupControllers.requireSignin,usuariosControllers.getRolesByUser)
   
    
     //auth
