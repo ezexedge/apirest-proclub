@@ -383,7 +383,7 @@ module.exports = function(){
 
 
 
-    router.get('/image/:img',authSignupControllers.requireSignin,imageControllers.getImage)
+    router.get('/image/:img',imageControllers.getImage)
 
 
    
