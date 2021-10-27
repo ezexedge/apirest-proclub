@@ -28,7 +28,7 @@
     }],
       servers: [
         {
-          url: "https://secure-temple-46604.herokuapp.com",
+          url: "https://api.klubo.club",
           description: "My API Documentation",
         },
       ],
