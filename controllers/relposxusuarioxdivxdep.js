@@ -921,6 +921,9 @@ exports.listaDeUsuariosXDeporte = async (req,res) => {
                         as: 'persona'
                     }]
                   
+                },{
+                    model: Rol,
+                    as: 'rol'
                 }]
             },
             {
