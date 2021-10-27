@@ -6,6 +6,8 @@ const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
 const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const RelPosXUsuarioXDivXDep  = require('../models/RelPosXUsarioXDiviXDep')
+const ClubXUsuario = require('../models/ClubXUsuario')
+const Usuario = require('../models/Usuario')
 
 
 exports.getPosicion = async(req,res) => {
