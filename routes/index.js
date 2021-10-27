@@ -174,6 +174,8 @@ module.exports = function(){
 
              router.put('/personas/update/:usuario',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.ModificarPersona)
     
+             router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.modificarImagenes)
+    
     
 
 

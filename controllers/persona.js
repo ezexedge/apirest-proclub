@@ -299,3 +299,54 @@ const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, docume
   }
 
 };
+
+exports.modificarImagenes = async (req, res) => {
+
+
+  const t = await db.transaction()
+
+  try {
+
+    const usuarioParams = req.params.usuario
+  
+    const result = await Usuario.findByPk(usuarioParams)
+    if(!result)throw new Error('el usuario no existe')
+
+    
+
+    const resultPersona = await Persona.findByPk(result.personaId)
+
+ 
+   
+
+console.log('resultpersona',resultPersona)
+
+
+    
+    let imagen
+    if(req.file) {
+     imagen = req.file.filename
+   
+    }else{
+      imagen = resultPersona.avatar
+    } 
+    
+    await Persona.update({ avatar : imagen },{where: {id: result.personaId},  transaction: t})
+
+
+ 
+
+
+   await t.commit();
+ 
+   res.status(200).json({ "message": "modificado con exito" })
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+    res.status(400).json({ "error": err.message })
+
+  }
+
+};
