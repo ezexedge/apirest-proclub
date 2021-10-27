@@ -291,7 +291,7 @@ module.exports = function(){
 
     router.post('/signup',authSignupControllers.signup)
 
-
+router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.listaDeUsuariosXDeporte)
 
 
 

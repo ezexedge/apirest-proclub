@@ -862,3 +862,90 @@ exports.usuarioDeportes = async (req,res) => {
         res.status(400).json({'error': error.message})
     }
 }
+
+
+
+exports.listaDeUsuariosXDeporte = async (req,res) => {
+    
+    try{
+
+     
+
+        const disciplina = req.params.disciplina
+
+
+        const existe = await Disciplina.findByPk(disciplina)
+
+        if(!existe)throw new Error('la disciplina no existe')
+
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    where:{
+                        activo:1
+                    },
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina',
+                        where:{
+                            id: disciplina,
+                            activo: 1
+                        }
+                     
+                    },
+                    {
+                        model: Club,
+                        as: 'club',
+                        where:{
+                            activo: 1
+                        }   
+                     }
+                ]
+                },
+                {
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                where:{
+                    activo: 1
+                },
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    where:{
+                        activo: 1
+                    },
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                  
+                }]
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+              
+            
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+        
+            }
+           
+        ],
+        where:{
+            activo: 1
+        }
+        })
+
+     
+
+        res.status(200).json(result)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
