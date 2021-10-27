@@ -35,12 +35,12 @@ const configuracionMulter = {
         if(error) {
             if(error instanceof multer.MulterError) {
                 if(error.code === 'LIMIT_FILE_SIZE') {
-                    res.status(400).json({message : 'El archivo es muy grande: Máximo 100kb '});
+                    res.status(400).json({error : 'El archivo es muy grande: Máximo 100kb '});
                 } else {
-                    res.status(400).json({message : error.message});
+                    res.status(400).json({error : error.message});
                 }
             } else {
-                res.status(400).json({ message: error.message});
+                res.status(400).json({ error: error.message});
             }
         }
          
