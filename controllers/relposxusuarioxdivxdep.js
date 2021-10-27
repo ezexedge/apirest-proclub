@@ -7,6 +7,7 @@ const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Usuario = require('../models/Usuario')
 const Persona = require('../models/Persona')
 const Disciplina = require('../models/Disciplina')
+const Rol = require('../models/rol')
 const Club = require('../models/Club')
 exports.getAll = async (req,res) => {
     
