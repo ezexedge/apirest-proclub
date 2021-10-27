@@ -269,11 +269,31 @@ exports.getAllPosicionesByDivision = async(req,res) => {
                             id: val.disciplinaxpos.id 
                         }
                     }]
-                }]
+                },
+
+                {
+                    model: ClubXUsuario,
+                    as: 'clubxusuario',
+                    where:{
+                        activo: 1
+                    },
+                    include: [{
+                        model: Usuario,
+                        as: 'usuario',
+                        where:{
+                            activo: 1
+                        }
+                      
+                    }]
+                }
+                    
+                
+
+                ]
             })
 
 
-            
+            console.log('aca las pociones',cantidadPosicion)
             let obj = {
                 id: val.disciplinaxpos.id ,
                 name: val.disciplinaxpos.nombre,
