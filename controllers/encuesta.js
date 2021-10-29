@@ -190,7 +190,7 @@ exports.getByClub = async(req,res) => {
 
             const resultDestinatario = await Destinatario.findOne({
                 where:{
-                    encuestaId: val.encuestaId
+                    encuestId: val.encuestaId
                 }
             })
 
