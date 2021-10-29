@@ -1,5 +1,7 @@
 const Encuesta = require('../models/Encuesta')
 const Destinatario = require('../models/Destinatario')
+const EncuestaXClub = require('../models/EncuestaXClub')
+const Club = require('../models/Club')
 exports.crear = async(req,res) => {
     try{
 
@@ -149,6 +151,65 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
         })
         res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+exports.getByClub = async(req,res) => {
+    try{
+
+        const club =  req.params.club
+
+        const clubExist = await Club.findOne({
+            where:{
+                id: club
+            }
+        })
+
+        if(!clubExist)throw new Error('El club no existe')
+
+
+
+        const result = await EncuestaXClub.findAll({
+            include: [{
+                model:  Encuesta,
+                as: 'encuesta'
+            }],
+            where: {
+                clubId: club
+            }
+        })
+
+
+        let arr = []
+        for(let val of result){
+
+
+            const resultDestinatario = await Destinatario.findOne({
+                where:{
+                    encuestaId: val.encuestaId
+                }
+            })
+
+            let obj = {
+                id: val.id,
+                encuestaId: val.encuestaId,
+                titulo: val.encuesta.titulo,
+                descripcion: val.encuesta.descripcion,
+                fecha: val.encuesta.fecha,
+                hora: val.encuesta.hora,
+                enviadoporId: resultDestinatario.enviadoporId
+            }
+            arr.push(obj)
+
+
+        }
+
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})

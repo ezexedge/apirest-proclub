@@ -506,9 +506,10 @@ exports.sendEncuesta = async (req,res) => {
         if(!clubExist)throw new Error('El club no existe')
 
 
+        const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
 
-        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1})
+        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
 
         for(let val of preguntasRespuesta){
 
@@ -626,8 +627,9 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
   
           console.log('req bodyy',req.body)
   
-  
-          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1})
+          const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
+
+          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
   
           for(let val of preguntasRespuesta){
   

@@ -16,7 +16,15 @@ const Encuesta = db.define('encuesta', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
+    },
+    fecha: {
+        type: Sequelize.DATEONLY,
+        defaultValue: new Date()
+    },
+    hora:{
+        type: Sequelize.TIME
     }
+    
     
 });
 
