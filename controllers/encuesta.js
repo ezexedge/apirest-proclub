@@ -210,7 +210,11 @@ exports.getByClub = async(req,res) => {
                 }
             })
 
-
+            let cantidadEnviados = await Destinatario.findAndCountAll({
+                where:{
+                    encuestId:val.encuestaId
+                }
+            })
 
 
             let obj = {
@@ -220,7 +224,8 @@ exports.getByClub = async(req,res) => {
                 descripcion: val.encuesta.descripcion,
                 fecha: val.encuesta.fecha,
                 hora: val.encuesta.hora,
-                enviadopor:  resultClubXUsuario.rol ?  resultClubXUsuario.rol.nombre : 'superadmin'
+                enviadopor:  resultClubXUsuario.rol ?  resultClubXUsuario.rol.nombre : 'superadmin',
+                cantidadEnviados: cantidadEnviados.count
             }
             arr.push(obj)
 
