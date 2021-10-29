@@ -556,7 +556,8 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
 
 
     router.post('/encuesta-post',authSignupControllers.requireSignin,notificacionControllers.sendNotificacion)
-    router.post('/encuesta-post-admin',authSignupControllers.requireSignin,notificacionControllers.sendEncuesta)
+    router.post('/encuesta-post-superadmin',authSignupControllers.requireSignin,notificacionControllers.sendEncuestaSuperadmin)
+    router.post('/encuesta-post-admin/:club',authSignupControllers.requireSignin,notificacionControllers.sendEncuesta)
 
      
     
