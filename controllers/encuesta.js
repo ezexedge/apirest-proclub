@@ -2,6 +2,9 @@ const Encuesta = require('../models/Encuesta')
 const Destinatario = require('../models/Destinatario')
 const EncuestaXClub = require('../models/EncuestaXClub')
 const Club = require('../models/Club')
+const ClubXusuario = require('../models/ClubXUsuario')
+const Rol = require('../models/rol')
+
 exports.crear = async(req,res) => {
     try{
 
@@ -189,10 +192,26 @@ exports.getByClub = async(req,res) => {
 
 
             const resultDestinatario = await Destinatario.findOne({
+
                 where:{
                     encuestId: val.encuestaId
                 }
             })
+
+
+            const resultClubXUsuario = await ClubXusuario.findOne({
+                include:[{
+                    model: Rol,
+                    as: 'rol'
+                }],
+                where:{
+                    usuarioId: resultDestinatario.enviadoporId,
+                    clubId: club
+                }
+            })
+
+
+
 
             let obj = {
                 id: val.id,
@@ -201,7 +220,7 @@ exports.getByClub = async(req,res) => {
                 descripcion: val.encuesta.descripcion,
                 fecha: val.encuesta.fecha,
                 hora: val.encuesta.hora,
-                enviadoporId: resultDestinatario.enviadoporId
+                enviadopor:  resultClubXUsuario.rol ?  resultClubXUsuario.rol.nombre : 'superadmin'
             }
             arr.push(obj)
 
