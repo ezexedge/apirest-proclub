@@ -4,6 +4,8 @@ const EncuestaXClub = require('../models/EncuestaXClub')
 const Club = require('../models/Club')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Rol = require('../models/rol')
+const Pregunta = require('../models/Pregunta')
+const Respuesta = require('../models/Respuesta')
 
 exports.crear = async(req,res) => {
     try{
@@ -231,6 +233,82 @@ exports.getByClub = async(req,res) => {
 
 
         }
+
+
+        res.status(200).json(arr)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+exports.getEncuestaPorUsuario = async(req,res) => {
+    try{
+
+        const usuario = req.params.userId
+
+        const result = await Destinatario.findAll({
+            include:[{
+                model: Encuesta,
+                as: 'encuesta'
+            }],
+            where: {
+                usuarioId: usuario
+            },
+            order: [['id', 'DESC']]
+
+        })
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+
+
+
+exports.getEncuesta = async(req,res) => {
+    try{
+
+      
+        const encuesta = req.params.encuesta
+
+        const encuestaExist = await Encuesta.findOne({
+            where:{
+                id: encuesta
+            }
+        })
+
+        if(!encuestaExist)throw new Error('la encuesta no existe')
+
+
+        const resultPregunta =  await Pregunta.findAll({
+            where:{
+                encuestaId: encuestaExist.id
+            }
+        })
+
+        const resultRespuesta =  await Respuesta.findAll({})
+
+        let arr = []
+        for(let val of resultPregunta){
+
+            const result = resultRespuesta.filter(valor => valor.preguntaId === val.id )
+
+            let obj = {
+                encuesta: encuestaExist,
+                pregunta: val,
+                respuesta: result
+            }
+
+            arr.push(obj)
+
+
+        }
+     
 
 
         res.status(200).json(arr)

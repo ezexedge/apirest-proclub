@@ -544,6 +544,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.get('/encuesta/usuario/:userId',authSignupControllers.requireSignin,encuestaControllers.getEncuestaPorUsuario)
 
     //encuesta
+    router.get('/encuesta-admin/:encuesta',encuestaControllers.getEncuesta)
 
 
     router.put('/encuesta/:id',authSignupControllers.requireSignin,encuestaControllers.modificar)
