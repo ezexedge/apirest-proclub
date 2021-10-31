@@ -291,6 +291,13 @@ exports.getEncuesta = async(req,res) => {
             }
         })
 
+        let cantidadEnviados = await Destinatario.findAndCountAll({
+            where:{
+                encuestId:encuesta
+            }
+        })
+
+
         const resultRespuesta =  await Respuesta.findAll({})
 
         let arr = []
@@ -301,7 +308,9 @@ exports.getEncuesta = async(req,res) => {
             let obj = {
                 encuesta: encuestaExist,
                 pregunta: val,
-                respuesta: result
+                respuesta: result,
+                cantidadEnviados: cantidadEnviados.count
+
             }
 
             arr.push(obj)
