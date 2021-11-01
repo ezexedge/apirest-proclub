@@ -570,7 +570,7 @@ exports.sendEncuesta = async (req,res) => {
                 res.status(200).json(resultEncuesta)
 
                 await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id})
-
+//dddd
 
                 const notification_options = {
                     priority: "high",
