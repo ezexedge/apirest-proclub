@@ -185,9 +185,10 @@ exports.getByClub = async(req,res) => {
             }],
             where: {
                 clubId: club
-            }
+            },
+            order: [['id', 'DESC']]
         })
-
+///aca
 
         let arr = []
         for(let val of result){
