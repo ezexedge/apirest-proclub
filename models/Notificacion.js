@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
+const Rol =  require('./rol')
 const db = require('../config/db');
 const moment = require('moment')
 
@@ -40,7 +41,7 @@ const Notificacion = db.define('notificacion', {
 
 
 
-
+Notificacion.belongsTo(Rol,{as:"rol",foreignKey: 'rolId'})
 
 
 module.exports = Notificacion;
