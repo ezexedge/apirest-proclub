@@ -88,6 +88,10 @@ exports.getAll = async(req,res) => {
     try{
 
         const result = await Notificacion.findAll({
+            include:[{
+                model: Rol,
+                as: 'rol'
+            }],
             where: {
                 activo: 1
             },
@@ -320,7 +324,7 @@ exports.crearSuperadmin = async(req,res) => {
         })
 
         let respuestaId = 1
-         
+
         if(!resultRol){
             respuestaId = 1
         }else{
