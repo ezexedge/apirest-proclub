@@ -14,6 +14,7 @@ const Respuesta = require('../models/Respuesta')
 const Club = require('../models/Club')
 const Usuario = require('../models/Usuario')
 const Persona = require('../models/Persona')
+const Rol  = require('../models/rol')
 const NotificacionXTematica = require('../models/NotificacionXTematica')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
@@ -303,17 +304,32 @@ exports.crearSuperadmin = async(req,res) => {
 
      
 
+        let rol =  req.auth.rol
+        
         const {notificacion,usuarios} = req.body
 
 
 
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
-        
+
+        const resultRol = await Rol.findOne({
+            where:{
+                nombre: rol
+            }
+        })
+
+        let respuestaId = 1
+         
+        if(!resultRol){
+            respuestaId = 1
+        }else{
+            respuestaId = resultRol.id
+        }
 
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora},{ transaction: t })
+        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora,rolId:respuestaId},{ transaction: t })
       
         //  const result = await Notificacion.bulkCreate(req.body)
 
