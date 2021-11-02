@@ -54,6 +54,14 @@ exports.getById = async(req,res) => {
         const id = req.params.id
 
         const result = await Notificacion.findOne({
+            include:[{
+                model: Usuario,
+                as: 'usuario',
+                include:[{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            }],
             where: {
                 id:id,
                 activo: 1
