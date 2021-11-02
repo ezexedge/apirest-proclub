@@ -284,6 +284,39 @@ exports.cambiarClave = async (req,res) => {
 }
 
 
+
+exports.leerNombre = async (req,res) => {
+
+
+    try{
+
+        const {email} = req.body
+
+
+        
+
+        const respuesta =  await Persona.findOne({
+            where:{
+                 correo: email
+            }
+        })
+
+        if(!respuesta)throw new Error('El usuario no se encuentra registrado')
+
+
+        res.status(200).json({message: `${respuesta.nombre} ${respuesta.apellido}` })
+        
+
+    }catch(err){
+
+        console.log(err)
+        res.status(400).json({error : err.message})
+
+    }
+
+}
+
+
 exports.guardarToken = async (req,res) => {
 
 

@@ -286,6 +286,10 @@ module.exports = function(){
    
     //auth
     router.post('/validate',authValidateControllers.validate)
+    
+    router.get('/validar-usuario',authSignupControllers.leerNombre)
+
+
 
 
 

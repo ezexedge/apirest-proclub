@@ -51,6 +51,11 @@ exports.getAll = async(req,res) => {
                 activo: 1
             }
         })
+
+
+      
+
+
         res.status(200).json(result)
 
     }catch(err){
