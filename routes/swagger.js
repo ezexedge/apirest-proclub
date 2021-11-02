@@ -2552,6 +2552,35 @@
  */  
 
 
+
+
+                          /**
+ * @swagger
+ * /api/validar-usuario/{email}:
+ *   get:
+ *     summary: get de nombre y apellido de un email
+ *     tags: [Auth]
+ *     parameters:
+ *       - in : path
+ *         name: email
+ *         description: email
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get de informacion de un usuario registrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 type: string
+ *                 example: {message: nombre apellido}
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
                           /**
  * @swagger
  * /api/notificacion/usuario/{userId}:
