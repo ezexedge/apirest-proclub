@@ -29,7 +29,10 @@ exports.crear = async(req,res) => {
 
         const {titulo,descripcion,fecha} = req.body
 
-        const result  =  await Notificacion.create({titulo:titulo,descripcion:descripcion,fecha:fecha})
+        let usuario =  req.auth.userId
+
+
+        const result  =  await Notificacion.create({titulo:titulo,descripcion:descripcion,fecha:fecha,usuarioId:usuario})
       //  const result = await Notificacion.bulkCreate(req.body)
 
         res.status(200).json(result)
@@ -61,7 +64,7 @@ exports.getById = async(req,res) => {
 
         
 
-        if(!result)throw new Error(`el id:${id} no existe`)
+        if(!result)throw new Error(`el id ${id} no existe`)
 
         const visto = await NotificacionVistasXUsuarios.findOne({
             where: {
@@ -342,7 +345,7 @@ exports.crearSuperadmin = async(req,res) => {
 
      
 
-        let rol =  req.auth.rol
+        let usuario =  req.auth.userId
         
         const {notificacion,usuarios} = req.body
 
@@ -351,23 +354,11 @@ exports.crearSuperadmin = async(req,res) => {
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
 
-        const resultRol = await Rol.findOne({
-            where:{
-                nombre: rol
-            }
-        })
-
-        let respuestaId = 1
-
-        if(!resultRol){
-            respuestaId = 1
-        }else{
-            respuestaId = resultRol.id
-        }
+       
 
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora,rolId:respuestaId},{ transaction: t })
+        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora,usuarioId:usuario},{ transaction: t })
       
         //  const result = await Notificacion.bulkCreate(req.body)
 
