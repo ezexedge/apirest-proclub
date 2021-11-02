@@ -290,7 +290,7 @@ exports.leerNombre = async (req,res) => {
 
     try{
 
-        const {email} = req.body
+       const email = req.params.email
 
 
         
