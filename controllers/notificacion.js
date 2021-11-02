@@ -69,23 +69,21 @@ exports.getById = async(req,res) => {
         })
 
 
-        let arr = []
-
-        for(let val of result){
+  
 
             let obj = {
-                id: val.id,
-                titulo: val.titulo,
-                descripcion: val.descripcion,
-                descripcion_corta: val.descripcion_corta,
-                fecha: val.fecha,
+                id: result.id,
+                titulo: result.titulo,
+                descripcion: result.descripcion,
+                descripcion_corta: result.descripcion_corta,
+                fecha: result.fecha,
                 hora: val.hora,
                 activo: val.activo,
-                enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
+                enviadoPor: `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`
             }
 
-            arr.push(obj)
-        }
+       
+        
         
 
         if(!result)throw new Error(`el id ${id} no existe`)
@@ -101,7 +99,7 @@ exports.getById = async(req,res) => {
             await NotificacionVistasXUsuarios.create({ usuarioId: currentUser, notificacionId: id})
         }
         
-        res.status(200).json(arr)
+        res.status(200).json(obj)
 
     }catch(err){
         res.status(400).json({error: err.message})
