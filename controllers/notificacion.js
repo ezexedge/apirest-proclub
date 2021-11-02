@@ -97,7 +97,41 @@ exports.getAll = async(req,res) => {
             },
             order: [['id', 'DESC']]
         })
-        res.status(200).json(result)
+
+
+
+        let arr = []
+        for(let val of result){
+
+
+
+            const resultCantidad = await NotXClubXUsuario.findAndCountAll({
+                include:[{
+                    model: NotificacionXClub,
+                    as: 'club',
+                    where:{
+                        notificacionId: val.id
+                    }
+                }]
+            })
+
+            let obj = {
+                activo: val.activo,
+                descripcion: val.descripcion,
+                descripcion_corta: val.descripcion_corta,
+                fecha: val.fecha,
+                hora: val.hora,
+                rol: val.rol ? val.rol : null,
+                rolId: val.rolId,
+                titulo: val.titulo,
+                cantidad: resultCantidad.count
+            }
+
+            arr.push(obj)
+
+        }
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
