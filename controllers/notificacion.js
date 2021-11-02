@@ -77,8 +77,8 @@ exports.getById = async(req,res) => {
                 descripcion: result.descripcion,
                 descripcion_corta: result.descripcion_corta,
                 fecha: result.fecha,
-                hora: val.hora,
-                activo: val.activo,
+                hora: result.hora,
+                activo: result.activo,
                 enviadoPor: `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`
             }
 
