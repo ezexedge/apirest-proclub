@@ -55,7 +55,7 @@ module.exports = function(){
 
 
 
-    router.get('/dashboard/:club/:user',authSignupControllers.requireSignin,dashboardControllers.getAll)
+    router.get('/dashboard/:club/:user',dashboardControllers.getAll)
 
 
     router.get('/clubs',clubControllers.clubTodos)

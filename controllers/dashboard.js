@@ -21,6 +21,7 @@ const BeneficioXClub = require('../models/BeneficioXClub')
 const Beneficios = require('../models/Beneficios')
 const Rubro = require('../models/Rubro')
 const Usuario = require('../models/Usuario')
+const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
 
 
 exports.getAll = async (req,res) => {
@@ -76,7 +77,24 @@ exports.getAll = async (req,res) => {
             }
         })
 
-       
+        
+        const notificacionesLeidas = await NotificacionVistasXUsuarios.findAll({
+            where:{
+                usuarioId: usuario
+            }
+        })
+
+
+        let arrResp = []
+        for(let val of resp){
+
+      
+            console.log('///////encontrado',notificacionesLeidas)
+        }
+
+
+
+       //ejecutar si funciona
 
     final.notificaciones = [...resp]
     

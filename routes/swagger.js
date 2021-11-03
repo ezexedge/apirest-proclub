@@ -764,7 +764,14 @@
  *         respuesta:
  *            type: array
  *        example:
- *         respuesta: [{respuesta: 1},{respuesta: 120}]      
+ *         respuesta: [{respuesta: 1},{respuesta: 120}]    
+ *     Email:
+ *        type: object
+ *        properties:
+ *         email:
+ *           type: string
+ *        example:
+ *         email: "ezeedge@gmail.com"
  *             
  *         
  *           
@@ -3338,6 +3345,28 @@
  *       400:
  *         description: post can not be found
  */
+
+
+     /**
+ * @swagger
+ * /api/reset-password:
+ *   post:
+ *     summary: reset password
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Email'
+ *     responses:
+ *       200:
+ *        description: revice su bandeja de entrada
+ *       400:
+ *         description: post can not be found
+ */
+
+
 
 
                     /**

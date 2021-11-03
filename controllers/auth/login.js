@@ -230,7 +230,7 @@ exports.resetPassword = async(req,res)=> {
          await firebase.auth().sendPasswordResetEmail(email);
 
 
-        res.status(200).json({'message': 'revise su bandeja de entrada'})
+        res.status(200).json({'message': 'revise su bandeja de entrada para cambiar su password'})
 
     }catch(error){
 
