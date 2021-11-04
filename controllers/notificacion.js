@@ -448,12 +448,21 @@ exports.crearSuperadmin = async(req,res) => {
 
 
 
+ 
+
+         
     const message_notification = {
         notification: {
-            title:  notificacion.titulo ,
-            body: notificacion.descripcion
+            title:  titulo ,
+            body: descripcion
+        },
+        data:{
+            idNoti: resultNotificacion.id
         }
-    };
+    }
+
+
+
 
     for(let val of  arrDevices) {
 
@@ -633,7 +642,7 @@ exports.sendEncuesta = async (req,res) => {
             }
 
             console.log('el array',arr)
-            const destino  = await Destinatario.bulkCreate(arr)
+                 await Destinatario.bulkCreate(arr)
                 res.status(200).json(resultEncuesta)
 
                 await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id})

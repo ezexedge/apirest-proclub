@@ -9,6 +9,8 @@ const Persona = require('../models/Persona')
 const Disciplina = require('../models/Disciplina')
 const Rol = require('../models/rol')
 const Club = require('../models/Club')
+const db = require('../config/db')
+
 exports.getAll = async (req,res) => {
     
     try{
@@ -630,6 +632,8 @@ exports.getDeportes = async (req,res) => {
 
 
 exports.crearDeportesEnUsuarioPerfil = async (req,res) => {
+    
+
     
     try{
 
