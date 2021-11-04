@@ -11,8 +11,8 @@ const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 exports.getDeportesXclub = async(req,res) => {
     try{
 
-        const usuario = req.auth.userId
-        const club =  req.auth.clubId
+        const usuario = req.params.usuario
+        const club =  req.params.club
 
         const clubxusuarioResp = await ClubXusuario.findOne({
             where:{

@@ -111,7 +111,7 @@ module.exports = function(){
 
 
 
-    router.get('/disciplina-usuario',authSignupControllers.requireSignin,usuarioXDisciplina.getDeportesXclub)
+    router.get('/disciplina-usuario/:club/:usuario',authSignupControllers.requireSignin,usuarioXDisciplina.getDeportesXclub)
 
 
 
