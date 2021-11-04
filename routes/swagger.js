@@ -4136,6 +4136,57 @@
 
  */  
 
+ 
+      /**
+ * @swagger
+ * /api/usuario-perfil/deporte/{userId}/{club}/{disciplina}/{div}/{pos}:
+ *   post:
+ *     summary: se crea un ingreso
+ *     tags: [Disciplina]
+ *     parameters:
+ *      - in: path
+ *        name: userId
+ *        type: number
+ *        description: agregar el id de un usuario
+ *        schema:
+ *          type: integer
+ *        required: true
+ *      - in: path
+ *        name: manager
+ *        type: number
+ *        description: agregar id  de un club
+ *        schema:
+ *          type: integer
+ *        required: true
+ *      - in: path
+ *        name: disciplina
+ *        type: number
+ *        description: agregar el id de una disciplina
+ *        schema:
+ *          type: integer
+ *        required: true
+ *      - in: path
+ *        name: div
+ *        type: number
+ *        description: agregar el id de una division
+ *        schema:
+ *          type: integer
+ *        required: true
+ *      - in: path
+ *        name: pos
+ *        type: number
+ *        description: agregar el id de una posicion
+ *        schema:
+ *          type: integer
+ *        required: true
+ *     responses:
+ *       200:
+ *        description: OK
+ *       400:
+ *         description: post can not be found
+
+ */  
+
 
 
 
