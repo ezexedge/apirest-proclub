@@ -448,18 +448,18 @@ exports.crearSuperadmin = async(req,res) => {
 
 
 
- 
-//Modificado
-         
     const message_notification = {
         notification: {
-            title:  titulo ,
-            body: descripcion
+            title:  notificacion.titulo ,
+            body: notificacion.descripcion
         },
         data:{
             idNoti: resultNotificacion.id
         }
-    }
+    };
+
+         
+  
 
 
 
