@@ -447,6 +447,8 @@ exports.crearSuperadmin = async(req,res) => {
     };
 
 
+    let idString = resultNotificacion.id
+    let idModificado = idString.toString()
 
     const message_notification = {
         notification: {
@@ -454,7 +456,7 @@ exports.crearSuperadmin = async(req,res) => {
             body: notificacion.descripcion
         },
         data:{
-            idNoti: resultNotificacion.id
+            idNoti: idModificado
         }
     };
 
