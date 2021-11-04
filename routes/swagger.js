@@ -1151,31 +1151,6 @@
  * 
  */  
 
-/**
- * @swagger
- * /api/disciplina-usuario/{id}:
- *   get:
- *     summary: get de las disciplina que tiene un usuario que pertenece a un club (clubxusuarioId)
- *     tags: [Disciplina]
- *     parameters:
- *       - in : path
- *         name: id
- *         description: agregar el id del ClubXUsuario
- *         schema:
- *           type: integer
- *         required: true
- *     responses:
- *       200:
- *         description: estado by its id
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RelUsuarioXDis'
- *       400:
- *         description: post can not be found
- * 
- * 
- */
 
 /**
  * @swagger

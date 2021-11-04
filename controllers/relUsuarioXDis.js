@@ -1,29 +1,56 @@
 const RelUsuarioXDis = require('../models/RelUsuarioXDis')
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disciplina = require('../models/Disciplina')
-
+const ClubXusuario = require('../models/ClubXUsuario')
+const RelPosXUsarioXDiviXDep = require('../models/RelPosXUsarioXDiviXDep')
+const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
+const DisciplinaXClubXPos = require('../models/DisciplinaXClubXPos')
+const RelDisciplinaXPos = require('../models/RelDisciplinaXPos')
 
 //trae todo los deportes que tiene el id del usuario en el id de un club
 exports.getDeportesXclub = async(req,res) => {
     try{
 
-        const id = req.params.id
-        
-        const result = await RelUsuarioXDis.findAll({
-            include : [{
-                model:  RelDisciplinaXClub,
-                as: 'disciplinaxclub',
-                include: [{
-                    model: Disciplina,
-                    as: 'disciplina'
-                }]
-            }],
+        const usuario = req.auth.userId
+        const club =  req.auth.clubId
+
+        const clubxusuarioResp = await ClubXusuario.findOne({
             where:{
-                clubxusuarioId: id,
-                activo:1
-              }
+                activo: 1,
+                clubId: club,
+                usuarioId: usuario
+            }
         })
 
+
+        if(!clubxusuarioResp)throw new Error('no hay relacion entre usuario y club')
+
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    where: {
+                        activo: 1
+                    },
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina',
+                        where: {
+                            activo: 1
+                        }
+                    }]
+                }
+        ],
+        
+            where:{
+                clubxusuarioId: clubxusuarioResp.id,
+                activo: 1
+            }
+        })
+        
+        
+        
         res.status(200).json(result)
 
     }catch(error){
@@ -32,6 +59,8 @@ exports.getDeportesXclub = async(req,res) => {
 
     }
 }
+
+
 
 
 exports.getAll = async (req,res) => {
@@ -51,3 +80,55 @@ exports.getAll = async (req,res) => {
         console.log(error)
     }
 }
+
+
+/*
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    where: {
+                        activo: 1
+                    },
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina',
+                        where: {
+                            activo: 1
+                        }
+                    }]
+                },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub',
+                 include:[{
+                     model: Disciplina,
+                     as: 'disciplina',
+                     where: {activo:1}
+                 }]
+                
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos',
+                 where: {activo:1}
+             }]
+            }
+        ],
+        
+            where:{
+                clubxusuarioId: resultClubXUsuario.id,
+                activo: 1
+            }
+        })
+
+
+*/

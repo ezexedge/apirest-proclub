@@ -111,14 +111,11 @@ module.exports = function(){
 
 
 
-    router.get('/disciplina-usuario/:id',authSignupControllers.requireSignin,usuarioXDisciplina.getDeportesXclub)
+    router.get('/disciplina-usuario',authSignupControllers.requireSignin,usuarioXDisciplina.getDeportesXclub)
 
 
 
-    router.get('/disciplina-usuario',authSignupControllers.requireSignin,usuarioXDisciplina.getAll)
-
-   //relacion  disciplina por club
-
+  
 
     router.get('/disciplina-club/:club',reldisciplinaxclubControllers.getDeporteXClub)
 
