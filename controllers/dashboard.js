@@ -61,6 +61,10 @@ exports.getAll = async (req,res) => {
         if(!result)throw new Error('el usuario no existe o no existe en el club')
 
         
+
+        const resultVisto = await NotificacionVistasXUsuarios.findAll({})
+
+
         const resp =  await NotXClubXUsuario.findAll({
             include:[{
                 model: NotificacionXClub,
@@ -77,26 +81,29 @@ exports.getAll = async (req,res) => {
             }
         })
 
-        
-        const notificacionesLeidas = await NotificacionVistasXUsuarios.findAll({
-            where:{
-                usuarioId: usuario
-            }
-        })
 
-
-        let arrResp = []
+        let arrNoVistas = []
         for(let val of resp){
 
+            let encontrado = _.find(resultVisto, { 'usuarioId': Number(usuario), 'notificacionId': val.club.notificacion.id });
+            //    console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
+  
+              //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
+             
+                if(!encontrado){
+                   arrNoVistas.push(val)
+                }
       
-            console.log('///////encontrado',notificacionesLeidas)
+
+
         }
 
 
 
-       //ejecutar si funciona
 
-    final.notificaciones = [...resp]
+
+
+    final.notificaciones = [...arrNoVistas]
     
 
     //RelDisciplinaXClub

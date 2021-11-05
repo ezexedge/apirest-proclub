@@ -2498,7 +2498,7 @@
  *     parameters:
  *       - in : path
  *         name: id
- *         description: get id de un rubro
+ *         description: agregar id de una notificacion
  *         schema:
  *           type: integer
  *         required: true
