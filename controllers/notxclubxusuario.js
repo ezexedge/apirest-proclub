@@ -560,3 +560,115 @@ exports.getNotificacionNoLeidos = async (req,res) => {
 
     }
 }
+
+
+
+
+exports.getNotificacionesLeidas = async (req,res) => {
+    try{
+
+        const user = req.params.userId
+       
+
+        const usuarioExiste =  await  Usuario.findByPk(user)
+
+        if(!usuarioExiste)throw new Error('el usuario no existe')
+
+
+        const resultVisto = await NotificacionVistasXUsuarios.findAll({})
+
+
+        
+
+        console.log('array visto',resultVisto)
+
+      
+        const resp =  await NotXClubXUsuario.findAll({
+            include:[
+                {
+                 model: ClubXUsuario,
+                 as: 'clubxusuario',
+                include: [{
+                  model: Usuario,
+                  as: 'usuario',
+                  where:{id: user},
+                  include: [{
+                      model: Persona,
+                      as: 'persona'
+                  }]
+                }]
+                },
+                {
+                model: NotificacionXClub,
+                as: 'club',
+                include:[{
+                    model: Notificacion,
+                    as: 'notificacion'
+                }]
+                },{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }  
+            ],
+            order: [['id', 'DESC']]
+
+        })
+
+
+
+        let arr = []
+
+  
+        for (let val of resp){
+
+
+
+          
+            let encontrado = _.find(resultVisto, { 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id });
+          //    console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
+
+            //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
+              if(encontrado){
+           
+
+                let obj = {
+                    id: val.id,
+                    activo: val.activo,
+                    clubxusuario: val.clubxusuario,
+                    notificacionxclubId: val.notificacionxclubId,
+                    clubxusuarioId: val.clubxusuarioId,
+                    usuarioId: val.usuarioId,
+                    notificacion: val.club.notificacion,
+                   enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
+    
+                }
+    
+                arr.push(obj)
+
+
+
+
+              }
+    
+  
+    
+
+    
+
+
+        }
+
+        res.status(200).json(arr)
+
+
+    }catch(err){
+
+        
+        res.status(400).json({error: err.message})
+
+    }
+}
