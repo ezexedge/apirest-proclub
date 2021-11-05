@@ -506,9 +506,9 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.get('/notificacion/usuario/:userId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
     
     //getNotificacionNoLeidos
-    router.get('/notificaciones-no-leidos/:userId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionNoLeidos)
+    router.get('/notificaciones-no-leidos/:userId/:club',notxclubxusuario.getNotificacionNoLeidos)
     
-    router.get('/notificaciones-leidas/:userId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionesLeidas)
+    router.get('/notificaciones-leidas/:userId/:club',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionesLeidas)
     
     
     router.get('/notificacion/usuario/:club/:user',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUserByClub)
