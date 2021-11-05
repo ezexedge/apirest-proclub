@@ -14,6 +14,7 @@ const Disciplina = require('../models/Disciplina')
 const moment = require('moment')
 const { Op, Sequelize } = require("sequelize");
 const _ = require('lodash');
+const Club = require('../models/Club')
 
 
 exports.getAll = async (req,res) => {
@@ -364,6 +365,54 @@ exports.getByEspacioId = async (req,res) => {
             }],
             where:{
                 espacioId: espacio
+            }
+        })
+
+
+
+        res.status(200).json(result)
+      
+    }catch(err){
+        res.status(400).json({error: err.message})
+        
+    }
+}
+
+
+
+
+
+exports.getByEspacioByClub = async (req,res) => {
+
+
+    try{
+
+        
+        const club = req.params.club
+
+
+    const resultClub = await Club.findOne({
+        where:{
+            id: club
+        }
+    })
+       if(!resultClub)throw new Error('el club no existe')
+
+        const result = await Reservas.findAll({
+            include:[{
+                model: Espacio,
+                as: 'espacio'
+            },
+            {
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub',
+                where:{
+                    clubId: club
+                }
+            }
+        ],
+            where:{
+            activo: 1
             }
         })
 
