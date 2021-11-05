@@ -503,7 +503,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     ///este es el nuevo enppoint
 
     
-    router.get('/notificacion/usuario/:userId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
+    router.get('/notificacion/usuario/:userId',notxclubxusuario.getNotificacionByUser)
     router.get('/notificacion/usuario/:club/:user',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUserByClub)
 
     router.get('/notificacion-all/usuario/:user',authSignupControllers.requireSignin,notxclubxusuario.getAllNotificacionUser)

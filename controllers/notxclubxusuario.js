@@ -4,7 +4,9 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const Persona = require('../models/Persona')
 const NotXClubXUsuario = require('../models/NotXClubXUsuario')
+const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
 const Usuario = require('../models/Usuario')
+const _ = require('lodash')
 exports.crear = async (req,res)=> {
 
     try{
@@ -155,6 +157,13 @@ exports.getNotificacionByUser = async (req,res) => {
         if(!usuarioExiste)throw new Error('el usuario no existe')
 
 
+        const resultVisto = await NotificacionVistasXUsuarios.findAll({})
+
+
+        
+
+        console.log('array visto',resultVisto)
+
       
         const resp =  await NotXClubXUsuario.findAll({
             include:[
@@ -195,7 +204,25 @@ exports.getNotificacionByUser = async (req,res) => {
 
         let arr = []
 
-        for(let val of resp){
+  
+        for (let val of resp){
+
+
+
+          
+            let encontrado = _.find(resultVisto, { 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id });
+          //    console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
+
+            //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
+              let leido 
+              if(encontrado){
+                  leido = 1
+              }else{
+                  leido = 0
+              }
+    
+  
+    
 
             let obj = {
                 id: val.id,
@@ -205,7 +232,8 @@ exports.getNotificacionByUser = async (req,res) => {
                 clubxusuarioId: val.clubxusuarioId,
                 usuarioId: val.usuarioId,
                 notificacion: val.club.notificacion,
-                enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
+                leido: leido,
+               enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
 
             }
 
