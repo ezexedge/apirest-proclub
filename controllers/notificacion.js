@@ -113,10 +113,7 @@ exports.getAll = async(req,res) => {
     try{
 
         const result = await Notificacion.findAll({
-            include:[{
-                model: Rol,
-                as: 'rol'
-            }],
+         
             where: {
                 activo: 1
             },
