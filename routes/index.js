@@ -810,6 +810,9 @@ router.get('/turno',authSignupControllers.requireSignin,turnoControllers.getAll)
 router.get('/turno/:espacio',authSignupControllers.requireSignin,turnoControllers.getByEspacioId)
 
 
+router.get('/turno/club/:club',authSignupControllers.requireSignin,reservaControllers.getByEspacioByClub)
+
+
 
 
 router.get('/turno-inactivo',authSignupControllers.requireSignin,turnoControllers.getAllInactivo)

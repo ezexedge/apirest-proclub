@@ -4050,6 +4050,35 @@
  * 
  */
 
+
+                /**
+ * @swagger
+ * /api/turno/club/{club}:
+ *   get:
+ *     summary: get ingreso  by id
+ *     tags: [Turno]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get  ingreso by id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Turnos'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
                 /**
  * @swagger
  * /api/ingreso/{id}:
