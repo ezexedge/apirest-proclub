@@ -22,6 +22,7 @@ const Beneficios = require('../models/Beneficios')
 const Rubro = require('../models/Rubro')
 const Usuario = require('../models/Usuario')
 const NotificacionVistasXUsuarios = require('../models/NotificacionVistasXUsuarios')
+const _ = require('lodash')
 
 
 exports.getAll = async (req,res) => {
