@@ -476,10 +476,12 @@ exports.getNotificacionNoLeidos = async (req,res) => {
                 {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
+                 where:{
+                    usuarioId: user
+                },
                 include: [{
                   model: Usuario,
                   as: 'usuario',
-                  where:{id: user},
                   include: [{
                       model: Persona,
                       as: 'persona'
@@ -588,10 +590,12 @@ exports.getNotificacionesLeidas = async (req,res) => {
                 {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
+                 where:{
+                     usuarioId: user
+                 },
                 include: [{
                   model: Usuario,
                   as: 'usuario',
-                  where:{id: user},
                   include: [{
                       model: Persona,
                       as: 'persona'
@@ -619,6 +623,7 @@ exports.getNotificacionesLeidas = async (req,res) => {
         })
 
 
+        console.log('respuestaaaa',resp)
 
         let arr = []
 
@@ -629,11 +634,11 @@ exports.getNotificacionesLeidas = async (req,res) => {
 
           
             let encontrado = _.find(resultVisto, { 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id });
-          //    console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
-
+              console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
             //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
               if(encontrado){
-           
+                console.log('encontradooo')
+
 
                 let obj = {
                     id: val.id,
@@ -651,6 +656,9 @@ exports.getNotificacionesLeidas = async (req,res) => {
 
 
 
+
+              }else{
+                console.log(' nooo encontradooo')
 
               }
     
