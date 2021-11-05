@@ -62,6 +62,7 @@ exports.getAll = async (req,res) => {
         if(!result)throw new Error('el usuario no existe o no existe en el club')
 
         
+        console.log('clubxxx',result)
 
         const resultVisto = await NotificacionVistasXUsuarios.findAll({})
 
@@ -83,11 +84,13 @@ exports.getAll = async (req,res) => {
         })
 
 
+        console.log('eeeee',resp)
+
         let arrNoVistas = []
         for(let val of resp){
 
             let encontrado = _.find(resultVisto, { 'usuarioId': Number(usuario), 'notificacionId': val.club.notificacion.id });
-            //    console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
+                console.log({ 'usuarioId': Number(usuario), 'notificacionId': val.club.notificacion.id })
   
               //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
              

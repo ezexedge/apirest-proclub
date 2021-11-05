@@ -170,10 +170,12 @@ exports.getNotificacionByUser = async (req,res) => {
                 {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
+                 where:{
+                     usuarioId: user
+                 },
                 include: [{
                   model: Usuario,
                   as: 'usuario',
-                  where:{id: user},
                   include: [{
                       model: Persona,
                       as: 'persona'
