@@ -383,6 +383,7 @@ exports.getAllNotificacionUser = async (req,res) => {
         if(!usuarioExiste)throw new Error('el usuario no existe')
 
 
+  
 
       
         const resp =  await NotXClubXUsuario.findAll({
@@ -455,7 +456,7 @@ exports.getNotificacionNoLeidos = async (req,res) => {
     try{
 
         const user = req.params.userId
-       const club = req.params.club
+       
 
         const usuarioExiste =  await  Usuario.findByPk(user)
 
@@ -464,16 +465,6 @@ exports.getNotificacionNoLeidos = async (req,res) => {
 
         const resultVisto = await NotificacionVistasXUsuarios.findAll({})
 
-
-        const resultClubxusuario = await ClubXUsuario.findOne({
-            where:{
-                usuarioId: user,
-                clubId: club
-            }
-        })
-
-
-        if(!resultClubxusuario)throw new Error('el club y el usuario no estan realcionados')
 
         
 
@@ -485,12 +476,10 @@ exports.getNotificacionNoLeidos = async (req,res) => {
                 {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
-                 where:{
-                     id: resultClubxusuario.id
-                 },
                 include: [{
                   model: Usuario,
                   as: 'usuario',
+                  where:{id: user},
                   include: [{
                       model: Persona,
                       as: 'persona'
@@ -575,11 +564,11 @@ exports.getNotificacionNoLeidos = async (req,res) => {
 
 
 
-exports.getNotificacionesLeidas = async (req,res) => {
+exports.getNotificacionesLeidas = async (req,res) => { 
     try{
 
         const user = req.params.userId
-        const club = req.params.club
+       
 
         const usuarioExiste =  await  Usuario.findByPk(user)
 
@@ -589,18 +578,9 @@ exports.getNotificacionesLeidas = async (req,res) => {
         const resultVisto = await NotificacionVistasXUsuarios.findAll({})
 
 
-        const resultClubxusuario = await ClubXUsuario.findOne({
-            where:{
-                usuarioId: user,
-                clubId: club
-            }
-        })
-
-
-        if(!resultClubxusuario)throw new Error('el club y el usuario no estan realcionados')
-
         
 
+        console.log('array visto',resultVisto)
 
       
         const resp =  await NotXClubXUsuario.findAll({
@@ -608,9 +588,6 @@ exports.getNotificacionesLeidas = async (req,res) => {
                 {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
-                 where:{
-                    id: resultClubxusuario.id
-                },
                 include: [{
                   model: Usuario,
                   as: 'usuario',
@@ -666,7 +643,7 @@ exports.getNotificacionesLeidas = async (req,res) => {
                     clubxusuarioId: val.clubxusuarioId,
                     usuarioId: val.usuarioId,
                     notificacion: val.club.notificacion,
-           //        enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
+                   enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
     
                 }
     
