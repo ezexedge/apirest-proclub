@@ -266,7 +266,7 @@ exports.getByClub = async(req,res) => {
                 }
             })
 
-
+//agregar el enviado por luego
             let obj = {
                 id: val.id,
                 encuestaId: val.encuestaId,
