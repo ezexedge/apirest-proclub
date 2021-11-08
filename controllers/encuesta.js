@@ -258,16 +258,7 @@ exports.getByClub = async(req,res) => {
             })
 
 
-            const resultClubXUsuario = await ClubXusuario.findOne({
-                include:[{
-                    model: Rol,
-                    as: 'rol'
-                }],
-                where:{
-                    usuarioId: resultDestinatario.enviadoporId,
-                    clubId: club
-                }
-            })
+       
 
             let cantidadEnviados = await Destinatario.findAndCountAll({
                 where:{
@@ -283,7 +274,6 @@ exports.getByClub = async(req,res) => {
                 descripcion: val.encuesta.descripcion,
                 fecha: val.encuesta.fecha,
                 hora: val.encuesta.hora,
-                enviadopor:  resultClubXUsuario.rol ?  resultClubXUsuario.rol.nombre : 'superadmin',
                 cantidadEnviados: cantidadEnviados.count
             }
             arr.push(obj)
