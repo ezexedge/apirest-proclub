@@ -1319,6 +1319,13 @@
 
  */
 
+
+
+
+
+
+
+
     /**
  * @swagger
  * /api/pais/{id}:
@@ -1344,6 +1351,31 @@
  * 
  * 
  */
+
+
+
+    /**
+ * @swagger
+ * /api/image/{img}:
+ *   get:
+ *     summary: get de una imagen
+ *     tags: [Persona]
+ *     parameters:
+ *       - in : path
+ *         name: img
+ *         description: nombre de una imagen ejemplo: dB-dgsxXa.png
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: OK
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
 
         /**
  * @swagger
