@@ -1525,6 +1525,36 @@
  */
     
     
+
+
+
+/**
+ * @swagger
+ * /api/personas/update/image/{usuario}:
+ *   put:
+ *     summary: update de imagen de perfil
+ *     tags: [Persona]
+ *     parameters:
+ *       - in : path
+ *         name: usuario
+ *         description: id de usuario
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *     responses:
+ *       200:
+ *        description: OK
+ *       500:
+ *         description: Some server error
+ */
+
+
   /**
  * @swagger
  * /api/tipo-documento:
