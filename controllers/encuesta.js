@@ -211,7 +211,7 @@ exports.getEncuestaPorUsuario = async(req,res) => {
         }
 
 
-        res.status(200).json({message:'pepa'})
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
@@ -300,34 +300,6 @@ exports.getByClub = async(req,res) => {
 }
 
 
-exports.getEncuestaPorUsuario = async(req,res) => {
-    try{
-
-        const usuario = req.params.userId
-
-        const result = await Destinatario.findAll({
-            include:[{
-                model: Encuesta,
-                as: 'encuesta'
-            }],
-            where: {
-                usuarioId: usuario
-            },
-            order: [['id', 'DESC']]
-
-        })
-
-
-
-
-       
-
-        res.status(200).json(result)
-
-    }catch(err){
-        res.status(400).json({error: err.message})
-    }
-}
 
 
 
