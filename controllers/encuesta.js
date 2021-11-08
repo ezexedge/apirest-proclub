@@ -6,7 +6,7 @@ const ClubXusuario = require('../models/ClubXUsuario')
 const Rol = require('../models/rol')
 const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
-
+const RespuestaUsuario = require('../models/RespuestaUsuario')
 exports.crear = async(req,res) => {
     try{
 
@@ -160,7 +160,58 @@ exports.getEncuestaPorUsuario = async(req,res) => {
             order: [['id', 'DESC']]
 
         })
-        res.status(200).json(result)
+
+
+
+        let arr = []
+
+
+        for(let val of result){
+
+
+            const resultRespuesta =  await RespuestaUsuario.findOne({
+                where:{
+                    usuarioId: val.usuarioId,
+                    encuestaId: val.encuestId
+                }
+            })
+
+
+
+            if(resultRespuesta){
+
+                let obj = {
+                    id: val.id,
+                    encuestId: val.encuestId,
+                    usuarioId: val.usuarioId,
+                    enviadoporId: val.enviadoporId,
+                    encuesta: val.encuesta,
+                    respondida: 1
+                }
+
+                arr.push(obj)
+
+            }else{
+                let obj = {
+                    id: val.id,
+                    encuestId: val.encuestId,
+                    usuarioId: val.usuarioId,
+                    enviadoporId: val.enviadoporId,
+                    encuesta: val.encuesta,
+                    respondida: 0
+                }
+
+                arr.push(obj)
+            }
+            
+          
+
+
+
+        }
+
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
@@ -265,6 +316,12 @@ exports.getEncuestaPorUsuario = async(req,res) => {
             order: [['id', 'DESC']]
 
         })
+
+
+
+
+       
+
         res.status(200).json(result)
 
     }catch(err){

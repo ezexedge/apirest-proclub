@@ -134,14 +134,39 @@ exports.crearRespuestaUsuario = async(req,res) => {
         let arr = []
         for(let val of respuesta){
 
+
+          let resultRespuesta = await Respuesta.findOne({
+              where:{
+                  id: val.respuesta
+              }
+          }) 
+
+          let resultPregunta = await Pregunta.findOne({
+              where:{
+                  id: resultRespuesta.preguntaId
+              }
+          })
+
+
+
+
+      
+
+
+
           let obj = {
               usuarioId: usuario,
-              respuestaId: val.respuesta
-          }
+              respuestaId: val.respuesta,
+              encuestaId: resultPregunta.encuestaId
+
+            }
 
           arr.push(obj)
 
         }
+
+
+
 
         await RespuestaUsuario.bulkCreate(arr,{transaction: t})
 

@@ -293,36 +293,6 @@ exports.sendNotificacion = async (req,res) => {
     }
    
 
-        /*
-        var notification = {
-            'title' : 'es un texto',
-            'text' : 'es un texto 2'
-        }
-
-        var fcm_tokens = []
-
-        var notification_body = {
-            'notificacion': notification,
-            'registration_ids': fcm_tokens
-        }
-
-        fetch('',{
-            'method':'POST',
-            'headers': {
-                'Authorization':'key='+'AAAAgPqhk9E:APA91bEfXPb41WxXUAdH1o16PlS2NoUvnWPFup4qgW72vI6ZoC0bRKDp1N8KUny_VCMRFry-_4sz9z2sd5MrgnVhUBOaWX8LX4LZDQXgvO9CDTnvwcLkab8y95fovD7RqMbgIxffgGUR',
-                'Content-Type':'application/json'
-            },
-            'body': JSON.stringify(notification_body)
-
-        }).then(()=>{
-            res.status(200).send('notificacion enviada')
-        }).catch((err) =>{
-            res.status(400).send(err.message)
-      
-        })
- 
-
-    */
 }
 
 
