@@ -617,19 +617,28 @@ exports.sendEncuesta = async (req,res) => {
                 await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id})
 //dddd
 
-                const notification_options = {
-                    priority: "high",
-                    timeToLive: 60 * 60 * 24
-                };
-            
-            
-            
-                const message_notification = {
-                    notification: {
-                        title:  titulo ,
-                        body: descripcion
-                    }
-                };
+
+
+
+                    const notification_options = {
+                        priority: "high",
+                        timeToLive: 60 * 60 * 24
+                    };
+
+
+                    let idString = resultEncuesta.id
+                    let idModificado = idString.toString()
+
+                    const message_notification = {
+                        notification: {
+                            title: titulo ,
+                            body: descripcion
+                        },
+                        data:{
+                            idEncuesta: idModificado
+                        }
+                    };
+
 
 
                 if(arrDevice.length > 0){
@@ -731,24 +740,28 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
               }
   
               console.log('el array',arr)
-              const destino  = await Destinatario.bulkCreate(arr)
+               await Destinatario.bulkCreate(arr)
                   res.status(200).json({message: 'Encuesta creada'})
   
-  
                   const notification_options = {
-                      priority: "high",
-                      timeToLive: 60 * 60 * 24
-                  };
-              
-              
-              
-                  const message_notification = {
-                      notification: {
-                          title:  titulo ,
-                          body: descripcion
-                      }
-                  };
-  
+                    priority: "high",
+                    timeToLive: 60 * 60 * 24
+                };
+
+
+                let idString = resultEncuesta.id
+                let idModificado = idString.toString()
+
+                const message_notification = {
+                    notification: {
+                        title: titulo ,
+                        body: descripcion
+                    },
+                    data:{
+                        idEncuesta: idModificado
+                    }
+                };
+
   
                   if(arrDevice.length > 0){
                   for(let val of arrDevice){
