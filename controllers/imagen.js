@@ -5,7 +5,7 @@ const path = require('path')
 
 const configuracionMulter = {
     //100kb
-    limits : { fileSize : 10000 },
+    limits : { fileSize :  5 * 1024 * 1024 },
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, __dirname+'../../uploads/');
@@ -35,7 +35,7 @@ const configuracionMulter = {
         if(error) {
             if(error instanceof multer.MulterError) {
                 if(error.code === 'LIMIT_FILE_SIZE') {
-                    res.status(400).json({error : 'El archivo es muy grande: Máximo 100kb '});
+                    res.status(400).json({error : 'El archivo es muy grande: Máximo 5MB '});
                 } else {
                     res.status(400).json({error : error.message});
                 }
