@@ -171,7 +171,7 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
             const resultRespuesta =  await RespuestaUsuario.findOne({
                 where:{
-                    usuarioId: val.usuarioId,
+                    usuarioId:  usuario,
                     encuestaId: val.encuestId
                 }
             })
@@ -211,7 +211,7 @@ exports.getEncuestaPorUsuario = async(req,res) => {
         }
 
 
-        res.status(200).json(arr)
+        res.status(200).json({message:'pepa'})
 
     }catch(err){
         res.status(400).json({error: err.message})
