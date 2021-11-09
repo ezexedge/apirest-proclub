@@ -142,7 +142,7 @@ exports.getEnviadoPor = async(req,res) => {
 
 //getEncuestaPorUsuario
 
-
+//aa
 
 exports.getEncuestaPorUsuario = async(req,res) => {
     try{
