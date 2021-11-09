@@ -376,7 +376,7 @@ exports.ModificarPerfilPersona = async (req, res) => {
 
 
 
-const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, direccion,    deporte,categoria } = valores
+const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, direccion,    deporte,categoria } = req.body
     
  
     await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento},{where: {id: persona},  transaction: t})
