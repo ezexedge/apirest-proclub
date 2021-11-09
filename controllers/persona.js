@@ -379,7 +379,7 @@ exports.ModificarPerfilPersona = async (req, res) => {
 const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, direccion,    deporte,categoria } = req.body
     
  
-    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento},{where: {id: persona},  transaction: t})
+    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, fechaNacimiento: fechaNacimiento, documento: documento},{where: {id: persona},  transaction: t})
 
 
     if(resultPersona.direccionPersonaId === null){
