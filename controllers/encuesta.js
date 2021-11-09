@@ -142,7 +142,7 @@ exports.getEnviadoPor = async(req,res) => {
 
 //getEncuestaPorUsuario
 
-//aa
+
 
 exports.getEncuestaPorUsuario = async(req,res) => {
     try{
@@ -163,9 +163,9 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
 
 
-       // let arr = []
+        let arr = []
 
-/*
+
         for(let val of result){
 
 
@@ -209,9 +209,9 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
 
         }
-*/
 
-        res.status(200).json(result)
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
