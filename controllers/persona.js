@@ -350,3 +350,58 @@ console.log('resultpersona',resultPersona)
   }
 
 };
+
+
+
+
+
+exports.ModificarPerfilPersona = async (req, res) => {
+
+
+  const t = await db.transaction()
+
+  try {
+
+    const persona = req.params.persona
+
+    const resultPersona = await Persona.findOne({
+    where:{
+      id: persona
+    }
+    })
+
+ 
+    if(!resultPersona)throw new Error('La persona no existe')
+   
+
+
+
+const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, direccion,    deporte,categoria } = valores
+    
+ 
+    await Persona.update({ nombre: nombre, apellido: apellido, telefono: telefono, correo: correo, sexo: sexo, fechaNacimiento: fechaNacimiento, documento: documento},{where: {id: persona},  transaction: t})
+
+
+    if(resultPersona.direccionPersonaId === null){
+    const resultDireccion =   await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad },  {transaction: t})
+      await Persona.update({ direccionPersonaId: resultDireccion.id },{where: {id: persona},  transaction: t})
+
+    }
+  await Direccion.update({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad },{where: {id: resultPersona.direccionPersonaId},  transaction: t})
+
+   
+
+
+   await t.commit();
+ 
+   res.status(200).json({ "message": "modificado con exito" })
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+    res.status(400).json({ "error": err.message })
+
+  }
+
+};
