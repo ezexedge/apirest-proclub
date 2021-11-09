@@ -118,11 +118,7 @@ exports.getByClub = async(req,res) => {
             include: [
             {
                 model: Notificacion,
-                as: 'notificacion',
-                include:[{
-                    model: Rol,
-                    as: 'rol'
-                }]
+                as: 'notificacion'
             },
            
         ],
