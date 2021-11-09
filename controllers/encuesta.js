@@ -163,9 +163,9 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
 
 
-        let arr = []
+       // let arr = []
 
-
+/*
         for(let val of result){
 
 
@@ -209,9 +209,9 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
 
         }
+*/
 
-
-        res.status(200).json(arr)
+        res.status(200).json(result)
 
     }catch(err){
         res.status(400).json({error: err.message})
