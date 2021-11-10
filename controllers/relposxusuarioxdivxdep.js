@@ -441,11 +441,8 @@ exports.filterUsuarioPorClubPorDeporte = async (req,res) => {
       for(let val of result){
 
 
-        const encontrado = result.find(valor => valor.clubxusuario.id === val.clubxusuario.id)
-
-        if(!encontrado){
             arr.push(val.clubxusuario)
-        }
+        
 
 
        
