@@ -364,7 +364,6 @@ console.log('//////////////',deporte)
         {
             model: RelDisXClubXDiv,
             as: 'disxclubxdiv',
-            where: {disciplinaxclubId: deporte},
             include:[{
              model: RelDisciplinaXClub,
              as: 'disciplinaxclub'
@@ -377,10 +376,13 @@ console.log('//////////////',deporte)
              model: RelDisciplinaXPos,
              as: 'disciplinaxpos'
          }]
+        },{
+            model: RelDisciplinaXClub,
+            as: 'disciplinaxclub', 
         }
     ],
     where:{
-        activo: 1
+        disciplinaxclubId: deporte
     }
     })
 

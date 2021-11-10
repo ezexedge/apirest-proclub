@@ -552,7 +552,7 @@ exports.sendEncuesta = async (req,res) => {
 
 
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
-
+//
 
         const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
 
