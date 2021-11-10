@@ -81,3 +81,45 @@ exports.crear = async (req,res) => {
 
 }
 
+
+
+exports.eliminar = async (req,res) => {
+
+
+    try {
+
+        
+        const id =  req.params.id
+
+
+        const existeRubro =  await Rubro.findOne({
+            where:{
+                id: id
+            }
+        })
+
+
+
+
+        if(!existeRubro)throw new Error('el rubro existe')
+
+
+       await  Rubro.destroy({
+           where:{
+               id: id
+           }
+       })
+
+
+            res.status(200).json({message: 'eliminado correctamente'})
+
+
+        
+    }catch(err){
+
+        res.status(400).json({'error': err.message})
+
+    }
+
+}
+
