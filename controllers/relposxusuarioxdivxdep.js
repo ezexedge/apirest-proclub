@@ -474,51 +474,55 @@ exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
 
     let result 
 
-    if(Number(division) === -1){
 
 
-        result = await RelPosXUsarioXDiviXDep.findAll({
+
+
+        
+    if(Number(division) === -1 && Number(deporte) === -1){
+
+
+        console.log('//////////////',deporte)
+         result = await RelPosXUsarioXDiviXDep.findAll({
+        include: [{
+            model: ClubXUsuario,
+            as: 'clubxusuario',
+            where: {clubId: id},
             include: [{
-                model: ClubXUsuario,
-                as: 'clubxusuario',
-                where: {clubId: id},
+                model: Usuario,
+                as: 'usuario',
                 include: [{
-                    model: Usuario,
-                    as: 'usuario',
-                    include: [{
-                        model: Persona,
-                        as: 'persona'
-                    }]
+                    model: Persona,
+                    as: 'persona'
                 }]
-            },
-            {
-                model: RelDisXClubXDiv,
-                as: 'disxclubxdiv',
-                where: {disciplinaxclubId: deporte},
-                include:[{
-                 model: RelDisciplinaXClub,
-                 as: 'disciplinaxclub'
-                }]  
-            },
-            {
-             model: DisciplinaXClubXPos,
-             as:   'disciplinaxclubxpos',
-             include: [{
-                 model: RelDisciplinaXPos,
-                 as: 'disciplinaxpos'
-             }]
-            }
-        ],
-        where:{
-            activo: 1
+            }]
+        },
+        {
+            model: RelDisXClubXDiv,
+            as: 'disxclubxdiv',
+            include:[{
+             model: RelDisciplinaXClub,
+             as: 'disciplinaxclub'
+            }]  
+        },
+        {
+         model: DisciplinaXClubXPos,
+         as:   'disciplinaxclubxpos',
+         include: [{
+             model: RelDisciplinaXPos,
+             as: 'disciplinaxpos'
+         }]
         }
+    ],
+    where:{
+        activo: 1
+    }
+
+
+    })
     
-    
-        })
 
-
-
-    }else{
+}else{
 
 
         console.log('//////////////',deporte)
