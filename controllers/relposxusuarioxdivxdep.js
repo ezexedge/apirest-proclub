@@ -10,6 +10,7 @@ const Disciplina = require('../models/Disciplina')
 const Rol = require('../models/rol')
 const Club = require('../models/Club')
 const db = require('../config/db')
+const _ = require('lodash')
 
 exports.getAll = async (req,res) => {
     
@@ -440,15 +441,16 @@ exports.filterUsuarioPorClubPorDeporte = async (req,res) => {
     let arr = []
       for(let val of result){
 
-
-        
-
-
         arr.push(val.clubxusuario)
       }
 
 
-        res.status(200).json(arr)
+    
+      let resultFinal = _.uniqBy(arr,'id')
+
+
+
+        res.status(200).json(resultFinal)
 
     }catch(error){
         res.status(400).json({'error': error.message})
