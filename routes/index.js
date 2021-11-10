@@ -416,6 +416,8 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     //rubros
 
 
+    router.post('/rubro',authSignupControllers.requireSignin,rubroControllers.crear)
+
 
     router.get('/rubro',authSignupControllers.requireSignin,rubroControllers.getAll)
 
