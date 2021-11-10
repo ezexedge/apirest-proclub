@@ -544,7 +544,6 @@ exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
         {
             model: RelDisXClubXDiv,
             as: 'disxclubxdiv',
-            where: {disciplinaxclubId: deporte},
             include:[{
              model: RelDisciplinaXClub,
              as: 'disciplinaxclub'
@@ -588,8 +587,11 @@ exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
 
 
 
+    let resultFinal = _.uniqBy(arr,'id')
 
-        res.status(200).json(arr)
+
+
+        res.status(200).json(resultFinal)
 
     }catch(error){
         res.status(400).json({'error': error.message})
