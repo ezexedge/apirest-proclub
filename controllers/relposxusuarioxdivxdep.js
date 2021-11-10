@@ -346,46 +346,95 @@ exports.filterUsuarioPorClubPorDeporte = async (req,res) => {
     const id = req.params.club
     const deporte = req.params.disxclub
 
-console.log('//////////////',deporte)
-    const result = await RelPosXUsarioXDiviXDep.findAll({
-        include: [{
-            model: ClubXUsuario,
-            as: 'clubxusuario',
-            where: {clubId: id},
+    
+    let result
+
+    if(Number(deporte) === -1 ){
+
+         result = await RelPosXUsarioXDiviXDep.findAll({
             include: [{
-                model: Usuario,
-                as: 'usuario',
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                where: {clubId: id},
                 include: [{
-                    model: Persona,
-                    as: 'persona'
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
                 }]
-            }]
-        },
-        {
-            model: RelDisXClubXDiv,
-            as: 'disxclubxdiv',
-            include:[{
-             model: RelDisciplinaXClub,
-             as: 'disciplinaxclub'
-            }]  
-        },
-        {
-         model: DisciplinaXClubXPos,
-         as:   'disciplinaxclubxpos',
-         include: [{
-             model: RelDisciplinaXPos,
-             as: 'disciplinaxpos'
-         }]
-        },{
-            model: RelDisciplinaXClub,
-            as: 'disciplinaxclub', 
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub'
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos'
+             }]
+            },{
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub', 
+            }
+        ],
+        where:{
+            activo: 1
         }
-    ],
-    where:{
-        activo: 1,
-        disciplinaxclubId: deporte
+        })
+
+
+    }else{
+
+         result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [{
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                where: {clubId: id},
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub'
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos'
+             }]
+            },{
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub', 
+            }
+        ],
+        where:{
+            activo: 1,
+            disciplinaxclubId: deporte
+        }
+        })
+
     }
-    })
+
 
 
     let arr = []
@@ -417,8 +466,57 @@ exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
     const deporte = req.params.disxclub
     const division = req.params.disxclubxdiv
 
-console.log('//////////////',deporte)
-    const result = await RelPosXUsarioXDiviXDep.findAll({
+    let result 
+
+    if(Number(division) === -1){
+
+
+        result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [{
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                where: {clubId: id},
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+                where: {disciplinaxclubId: deporte},
+                include:[{
+                 model: RelDisciplinaXClub,
+                 as: 'disciplinaxclub'
+                }]  
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+             include: [{
+                 model: RelDisciplinaXPos,
+                 as: 'disciplinaxpos'
+             }]
+            }
+        ],
+        where:{
+            activo: 1
+        }
+    
+    
+        })
+
+
+
+    }else{
+
+
+        console.log('//////////////',deporte)
+         result = await RelPosXUsarioXDiviXDep.findAll({
         where:{disxclubxdivId:division},
         include: [{
             model: ClubXUsuario,
@@ -457,6 +555,20 @@ console.log('//////////////',deporte)
 
 
     })
+    
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
     let arr = []
     for(let val of result){
