@@ -417,7 +417,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.delete('/rubro',authSignupControllers.requireSignin,rubroControllers.eliminar)
 
 
-    router.post('/rubro',authSignupControllers.requireSignin,rubroControllers.crear)
+    router.post('/rubro/:id',authSignupControllers.requireSignin,rubroControllers.crear)
 
 
     router.get('/rubro',authSignupControllers.requireSignin,rubroControllers.getAll)
