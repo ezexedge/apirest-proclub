@@ -382,6 +382,7 @@ console.log('//////////////',deporte)
         }
     ],
     where:{
+        activo: 1,
         disciplinaxclubId: deporte
     }
     })
