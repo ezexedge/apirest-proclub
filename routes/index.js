@@ -414,10 +414,10 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.get('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.getById)
 
     //rubros
-    router.delete('/rubro',authSignupControllers.requireSignin,rubroControllers.eliminar)
+    router.delete('/rubro/:id',authSignupControllers.requireSignin,rubroControllers.eliminar)
 
 
-    router.post('/rubro/:id',authSignupControllers.requireSignin,rubroControllers.crear)
+    router.post('/rubro',authSignupControllers.requireSignin,rubroControllers.crear)
 
 
     router.get('/rubro',authSignupControllers.requireSignin,rubroControllers.getAll)
