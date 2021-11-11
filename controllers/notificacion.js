@@ -432,7 +432,7 @@ exports.crearSuperadmin = async(req,res) => {
 
 
 
-
+    console.log('aaaaarrr====',arrDevices)
     for(let val of  arrDevices) {
 
        const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
@@ -647,6 +647,8 @@ exports.sendEncuesta = async (req,res) => {
 
 
 
+
+                console.log('arr------------',arrDevice)
                 if(arrDevice.length > 0){
                 for(let val of arrDevice){
                     const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
