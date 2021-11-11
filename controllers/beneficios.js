@@ -160,6 +160,10 @@ exports.crear = async (req, res) => {
 
 
         let resultRubros = await RubroXBeneficio.findAll({
+          include:[{
+            model: Rubro,
+            as: 'rubro'
+          }],
           where:{
             beneficioId: val.id
           }
@@ -178,7 +182,7 @@ exports.crear = async (req, res) => {
           rubro: resultRubros
         }
 
-        
+
         arr.push(obj)
         
 
