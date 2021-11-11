@@ -631,13 +631,19 @@ exports.sendEncuesta = async (req,res) => {
 
                     const message_notification = {
                         notification: {
-                            title: titulo ,
-                            body: descripcion
+                            title: resultEncuesta.titulo ,
+                            body: resultEncuesta.descripcion
                         },
                         data:{
-                            idEncuesta: idModificado
+                            idNoti: idModificado
                         }
                     };
+
+
+
+
+
+    
 
 
 
@@ -754,14 +760,13 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
 
                 const message_notification = {
                     notification: {
-                        title: titulo ,
-                        body: descripcion
+                        title: resultEncuesta.titulo ,
+                        body: resultEncuesta.descripcion
                     },
                     data:{
-                        idEncuesta: idModificado
+                        idNoti: idModificado
                     }
                 };
-
   
                   if(arrDevice.length > 0){
                   for(let val of arrDevice){
