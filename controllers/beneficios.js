@@ -153,7 +153,40 @@ exports.crear = async (req, res) => {
         order: [['id', 'DESC']]
       })
 
-      res.status(200).json(result)
+
+
+      let arr = []
+      for(let val of result){
+
+
+        let resultRubros = await RubroXBeneficio.findAll({
+          where:{
+            beneficioId: val.id
+          }
+        })
+
+        let  obj = {
+          id: val.id,
+          nombre: val.nombre,
+          descripcion: val.descripcion,
+          telefono: val.telefono,
+          web: val.web,
+          instagram: val.instagram,
+          correo: val.correo,
+          pathImage: val.pathImage,
+          activo: val.activo,
+          rubro: resultRubros
+        }
+
+        
+        arr.push(obj)
+        
+
+      }
+
+      
+
+      res.status(200).json(arr)
 
     }catch(err){
 
