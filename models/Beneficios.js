@@ -39,7 +39,6 @@ Persona.belongsTo(TipoDocumento,{as:"tipoDocument"}) */
 /* Direccion.hasOne(Persona,{as:"direccionPersona"})
 
 TipoDocumento.hasOne(Persona,{as:"tipoDocument"}) */
-Beneficios.belongsTo(Rubro,{as:"rubro",foreignKey: 'rubroId'})
 
 
 module.exports = Beneficios;

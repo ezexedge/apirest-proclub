@@ -7,7 +7,7 @@ const BeneficioXClub = require('../models/BeneficioXClub')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Persona = require('../models/Persona')
-
+const RubroXBeneficio = require('../models/RubroXBeneficio')
 
 
 exports.crear = async (req, res) => {
@@ -32,9 +32,17 @@ exports.crear = async (req, res) => {
       console.log(imagen)
  
 
-     await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubro , pathImage : imagen },{ transaction: t })
+    const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : imagen },{ transaction: t })
 
-   
+     if(rubro.length > 0 ){
+
+      for(let val of rubro){
+          await RubroXBeneficio.create({beneficioId: resultBeneficio.id , rubroId: val })
+      }
+
+     }
+     
+  
 
     await t.commit();
 
