@@ -11,7 +11,7 @@ exports.getRubroByBeneficio = async (req,res) => {
 
 
         
-        const resultBeneficio = await Beneficios.findByOne({
+        const resultBeneficio = await Beneficios.findOne({
             where:{
                 id: beneficio
             }
