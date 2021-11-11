@@ -529,7 +529,7 @@ exports.getNotificacionLeida = async(req,res) => {
 exports.sendEncuesta = async (req,res) => {
 
 
-  //  const t = await db.transaction()
+    const t = await db.transaction()
 
     try{
 
@@ -554,13 +554,13 @@ exports.sendEncuesta = async (req,res) => {
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 //
 
-        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
+        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora},{ transaction: t })
 
         for(let val of preguntasRespuesta){
 
             if(val.respuestas.length > 0){
                 
-                const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1})
+                const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1},{ transaction: t })
 
                     let arr = []
 
@@ -574,7 +574,7 @@ exports.sendEncuesta = async (req,res) => {
                     }
 
                     //bulkcreate de la respuesta
-                     await Respuesta.bulkCreate(arr)
+                     await Respuesta.bulkCreate(arr,{ transaction: t })
 
 
 
@@ -611,10 +611,10 @@ exports.sendEncuesta = async (req,res) => {
             }
 
             console.log('el array',arr)
-                 await Destinatario.bulkCreate(arr)
+                 await Destinatario.bulkCreate(arr,{ transaction: t })
                 res.status(200).json(resultEncuesta)
 
-                await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id})
+                await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id},{ transaction: t })
 //dddd
 
 
@@ -689,13 +689,13 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
   
           const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
-          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
+          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora},{ transaction: t })
   
           for(let val of preguntasRespuesta){
   
               if(val.respuestas.length > 0){
                   
-                  const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1})
+                  const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1},{ transaction: t })
   
                       let arr = []
   
@@ -709,7 +709,7 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
                       }
   
                       //bulkcreate de la respuesta
-                       await Respuesta.bulkCreate(arr)
+                       await Respuesta.bulkCreate(arr,{ transaction: t })
   
   
   
@@ -746,7 +746,7 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
               }
   
               console.log('el array',arr)
-               await Destinatario.bulkCreate(arr)
+               await Destinatario.bulkCreate(arr,{ transaction: t })
                   res.status(200).json({message: 'Encuesta creada'})
   
                   const notification_options = {
