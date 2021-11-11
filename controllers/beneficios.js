@@ -8,7 +8,7 @@ const ClubXUsuario = require('../models/ClubXUsuario')
 const ClubXusuario = require('../models/ClubXUsuario')
 const Persona = require('../models/Persona')
 const RubroXBeneficio = require('../models/RubroXBeneficio')
-
+const _ = require('lodash')
 
 exports.crear = async (req, res) => {
   
@@ -176,12 +176,6 @@ exports.crear = async (req, res) => {
       const id =  req.params.id
 
       const result = await Beneficios.findOne({
-        include: [
-          {
-          model: Rubro,
-          as: 'rubro'
-          }
-        ],
         where: {
           activo : 1,
           id: id
@@ -189,9 +183,15 @@ exports.crear = async (req, res) => {
       })
 
 
+      let copia =   _.clone(result)
+
+
+       
+
+
     if(!result)throw new Error('el beneficio no existe')
 
-    res.status(200).json(result)
+    res.status(200).json(copia)
 
     }catch(err){
 
