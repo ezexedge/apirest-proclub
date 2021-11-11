@@ -41,7 +41,7 @@ exports.crear = async (req, res) => {
       }
 
      }
-     
+     //ss
   
 
     await t.commit();
