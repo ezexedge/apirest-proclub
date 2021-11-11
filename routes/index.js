@@ -47,7 +47,7 @@ const usuarioInformacionFinal = require('../controllers/relposxusuarioxdivxdep')
 const tematicaControllers = require('../controllers/tematica')
 const disciplinaAdminControllers = require('../controllers/disciplinaxclubxpos');
 const RelPosXUsuarioXDivXDep = require('../models/RelPosXUsarioXDiviXDep');
-
+const rubroxbeneficioControllers = require('../controllers/rubroxbeneficio')
 module.exports = function(){
 
 
@@ -409,6 +409,10 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.delete('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.eliminar)
 
     router.get('/beneficios',authSignupControllers.requireSignin,beneficiosControllers.getAll)
+
+
+    //getRubroByBeneficio
+    router.get('/beneficios/rubro/:beneficios',authSignupControllers.requireSignin,rubroxbeneficioControllers.getRubroByBeneficio)
 
 
     router.get('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.getById)
