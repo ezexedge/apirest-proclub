@@ -7,7 +7,7 @@ exports.getRubroByBeneficio = async (req,res) => {
 
     try {
 
-        const beneficio = req.params.beneficio
+        const beneficio = req.params.beneficios
 
 
         
