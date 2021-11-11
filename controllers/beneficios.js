@@ -146,12 +146,7 @@ exports.crear = async (req, res) => {
     try {
 
       const result =  await Beneficios.findAll({
-        include: [
-          {
-          model: Rubro,
-          as: 'rubro'
-          }
-        ],
+
         where: {
           activo: 1
         },
