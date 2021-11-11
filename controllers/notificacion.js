@@ -635,7 +635,7 @@ exports.sendEncuesta = async (req,res) => {
                             body: resultEncuesta.descripcion
                         },
                         data:{
-                            idNoti: idModificado
+                            idEncuesta: idModificado
                         }
                     };
 
@@ -764,7 +764,7 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
                         body: resultEncuesta.descripcion
                     },
                     data:{
-                        idNoti: idModificado
+                        idEncuesta: idModificado
                     }
                 };
   
