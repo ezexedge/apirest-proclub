@@ -37,7 +37,7 @@ exports.crear = async (req, res) => {
      if(rubro.length > 0 ){
 
       for(let val of rubro){
-          await RubroXBeneficio.create({beneficioId: resultBeneficio.id , rubroId: val })
+          await RubroXBeneficio.create({beneficioId: resultBeneficio.id , rubroId: val },{ transaction: t })
       }
 
      }
