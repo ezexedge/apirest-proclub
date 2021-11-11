@@ -138,6 +138,7 @@ exports.getAll = async(req,res) => {
             })
 
             let obj = {
+                id: val.id,
                 activo: val.activo,
                 descripcion: val.descripcion,
                 descripcion_corta: val.descripcion_corta,
