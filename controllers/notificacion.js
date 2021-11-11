@@ -254,23 +254,32 @@ exports.sendNotificacion = async (req,res) => {
             }
 
             console.log('el array',arr)
-            const destino  = await Destinatario.bulkCreate(arr)
+            const destino  = await Destinatario.bulkCreate(arr,{ transaction: t })
                 res.status(200).json({message: 'Encuesta creada'})
 
+
+          
 
                 const notification_options = {
                     priority: "high",
                     timeToLive: 60 * 60 * 24
                 };
-            
-            
-            
+
+
+                let idString = encuestaExiste.id
+                let idModificado = idString.toString()
+
                 const message_notification = {
                     notification: {
                         title:  encuestaExiste.titulo ,
                         body: encuestaExiste.descripcion
+                    },
+                    data:{
+                        idEncuesta: idModificado
                     }
                 };
+
+
 
 
                 if(arrDevice.length > 0){
