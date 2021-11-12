@@ -13,7 +13,7 @@ const Beneficios = db.define('beneficios', {
         type: Sequelize.STRING
     },
     descripcion: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1234) 
     }
     ,
     telefono: {
