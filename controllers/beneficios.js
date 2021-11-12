@@ -214,14 +214,27 @@ exports.crear = async (req, res) => {
         }
       })
 
+      if(!result)throw new Error('el beneficio no existe')
+
+
+
+      let resultRubros = await RubroXBeneficio.findAll({
+        include:[{
+          model: Rubro,
+          as: 'rubro'
+        }],
+        where:{
+          beneficioId: val.id
+        }
+      })
+
 
       let copia =   _.clone(result)
 
-
+      copia.rubro = resultRubros
        
 
 
-    if(!result)throw new Error('el beneficio no existe')
 
     res.status(200).json(copia)
 
