@@ -224,19 +224,28 @@ exports.crear = async (req, res) => {
           as: 'rubro'
         }],
         where:{
-          beneficioId: val.id
+          beneficioId: result.id
         }
       })
 
 
-      let copia =   _.clone(result)
-
-      copia.rubro = resultRubros
+      let obj = {
+        id: result.id,
+        nombre: result.nombre,
+        descripcion: result.descripcion,
+        telefono: result.telefono,
+        web: result.web,
+        instagram: result.instagram,
+        correo: result.correo,
+        pathImage: result.pathImage,
+        activo: result.activo,
+        rubro: resultRubros
+      }
        
 
 
 
-    res.status(200).json(copia)
+    res.status(200).json(obj)
 
     }catch(err){
 
