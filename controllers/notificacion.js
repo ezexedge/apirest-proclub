@@ -137,6 +137,25 @@ exports.getAll = async(req,res) => {
                 }]
             })
 
+
+            const resultNotificacion = await Notificacion.findOne({
+                include:[{
+                    model: Usuario,
+                    as: 'usuario',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }],
+                where: {
+                    id: val.id,
+                    activo: 1
+                }
+            })
+    
+
+
+
             let obj = {
                 id: val.id,
                 activo: val.activo,
@@ -147,7 +166,9 @@ exports.getAll = async(req,res) => {
                 rol: val.rol ? val.rol : null,
                 rolId: val.rolId,
                 titulo: val.titulo,
-                cantidad: resultCantidad.count
+                cantidad: resultCantidad.count,
+                enviadoPor: `${resultNotificacion.usuario.persona.nombre} ${resultNotificacion.usuario.persona.apellido}`
+
             }
 
             arr.push(obj)
