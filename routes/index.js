@@ -408,7 +408,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.eliminar)
 
-    router.get('/beneficios/page/:page',authSignupControllers.requireSignin,beneficiosControllers.getAll)
+    router.get('/page/beneficios/:page',authSignupControllers.requireSignin,beneficiosControllers.getAll)
 
 
     //getRubroByBeneficio
