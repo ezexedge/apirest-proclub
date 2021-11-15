@@ -165,7 +165,8 @@ exports.crear = async (req, res) => {
         offset: offset,
         $sort: { id: 1 },
         where: {
-          activo: 1
+          activo: 1,
+          pertenece_superadmin: 1
         },
         order: [['id', 'DESC']]
       })
