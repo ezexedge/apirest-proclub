@@ -402,7 +402,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
 
 
 
-    router.post('/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crear)
+    router.post('/superadmin/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crear)
 
 
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)

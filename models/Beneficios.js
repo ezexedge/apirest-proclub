@@ -30,6 +30,9 @@ const Beneficios = db.define('beneficios', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
+    },
+    pertenece_superadmin:{
+        type: Sequelize.INTEGER
     }
 });
 
