@@ -150,7 +150,12 @@ exports.crear = async (req, res) => {
 
 
 
-      const cantidad = await Beneficios.findAndCountAll()
+      const cantidad = await Beneficios.findAndCountAll({
+        where: {
+          activo: 1,
+          pertenece_superadmin: 1
+        }
+      })
 
       let page = Number(req.params.page)
 
