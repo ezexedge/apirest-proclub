@@ -402,13 +402,13 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
 
 
 
-    router.post('/superadmin/beneficios/:page',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crear)
+    router.post('/superadmin/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crear)
 
 
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.eliminar)
 
-    router.get('/beneficios',authSignupControllers.requireSignin,beneficiosControllers.getAll)
+    router.get('/beneficios/:pages',authSignupControllers.requireSignin,beneficiosControllers.getAll)
 
 
     //getRubroByBeneficio
