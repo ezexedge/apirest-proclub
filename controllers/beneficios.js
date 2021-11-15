@@ -179,7 +179,8 @@ exports.crear = async (req, res) => {
           correo: val.correo,
           pathImage: val.pathImage,
           activo: val.activo,
-          rubro: resultRubros
+          rubro: resultRubros,
+          pertenece_superadmin: val.pertenece_superadmin
         }
 
 
