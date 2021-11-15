@@ -144,14 +144,34 @@ exports.crear = async (req, res) => {
 
 
     try {
+    
+      let limit = 2
+      let offset = 0 
+
+
+
+      const cantidad = await Beneficios.findAndCountAll()
+
+      let page = Number(req.params.page)
+
+      let pages = Math.ceil(cantidad.count / limit)
+
+      offset = limit * (page - 1)
+
+
 
       const result =  await Beneficios.findAll({
-
+        limit: limit,
+        offset: offset,
+        $sort: { id: 1 },
         where: {
           activo: 1
         },
         order: [['id', 'DESC']]
       })
+
+
+
 
 
 
@@ -191,7 +211,10 @@ exports.crear = async (req, res) => {
 
       
 
-      res.status(200).json(arr)
+
+
+
+      res.status(200).json({'result': arr,'count': cantidad.count,'pages':pages})
 
     }catch(err){
 
