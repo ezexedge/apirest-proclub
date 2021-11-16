@@ -39,7 +39,7 @@ const Beneficios = db.define('beneficios', {
         defaultValue: literal('CURRENT_TIMESTAMP'),
     }
 });
-
+//sss
 
 /* Persona.belongsTo(Direccion,{as:"direccionPersona"})
 Persona.belongsTo(TipoDocumento,{as:"tipoDocument"}) */
