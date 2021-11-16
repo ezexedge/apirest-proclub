@@ -5,7 +5,7 @@ const path = require('path')
 
 const configuracionMulter = {
     //100kb
-    limits : { fileSize :  5 * 1024 * 1024 },
+    limits : { fileSize :  4 * 1024 * 1024 },
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, __dirname+'../../uploads/');

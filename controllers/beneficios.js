@@ -116,19 +116,22 @@ exports.crear = async (req, res) => {
 
       const id = req.params.id
 
-      const result = await Beneficios.findByPk(id)
+      const result = await Beneficios.findOne({
+        where:{
+          id: id,
+          activo: 1
+        }
+      })
 
-      if(result){
-          
-          result.activo = 0
+      if(!result)throw new Error('el beneficio no existe')
 
-          await result.save()
-          res.status(200).json(result)
-        
+
+
+      await Beneficios.update({activo: 0},{where:{id:id}})
+
+      res.stauts(200).json({'message': 'beneficio eliminado'})
           
-      }else{
-          throw new Error('El beneficio no existe')
-      }
+         
 
   }catch(error){
 
