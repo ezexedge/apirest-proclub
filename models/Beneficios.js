@@ -35,7 +35,8 @@ const Beneficios = db.define('beneficios', {
         type: Sequelize.INTEGER
     },
     created:{
-        type: Sequelize.DATE    }
+        type: Sequelize.DATE
+        }
 });
 //ssssss
 

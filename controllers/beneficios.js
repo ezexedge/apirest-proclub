@@ -32,7 +32,7 @@ exports.crear = async (req, res) => {
       console.log(imagen)
  
 
-    const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : imagen , pertenece_superadmin: 1},{ transaction: t })
+    const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : imagen , pertenece_superadmin: 1, created: new Date()},{ transaction: t })
 
      if(rubro.length > 0 ){
 
