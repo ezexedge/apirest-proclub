@@ -33,6 +33,10 @@ const Beneficios = db.define('beneficios', {
     },
     pertenece_superadmin:{
         type: Sequelize.INTEGER
+    },
+    created:{
+        type: Sequelize.DATE,
+        defaultValue: literal('CURRENT_TIMESTAMP'),
     }
 });
 

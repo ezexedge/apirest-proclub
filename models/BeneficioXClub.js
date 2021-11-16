@@ -14,7 +14,8 @@ const BeneficioXClub = db.define('beneficioxclub', {
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
-    }
+    },
+ 
 });
 
 
