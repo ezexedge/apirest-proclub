@@ -129,7 +129,7 @@ exports.crear = async (req, res) => {
 
       await Beneficios.update({activo: 0},{where:{id:id}})
 
-      res.stauts(200).json({'message': 'beneficio eliminado'})
+      res.status(200).json({'message': 'beneficio eliminado'})
           
          
 
