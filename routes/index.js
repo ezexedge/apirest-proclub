@@ -413,7 +413,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.get('/page/info/:page',authSignupControllers.requireSignin,infoutilControllers.getAll)
     router.get('/info/:id',authSignupControllers.requireSignin,infoutilControllers.getById)
     router.delete('/info/:id',authSignupControllers.requireSignin,infoutilControllers.eliminar)
-
+//sss
 
 
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)
