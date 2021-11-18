@@ -49,6 +49,7 @@ const disciplinaAdminControllers = require('../controllers/disciplinaxclubxpos')
 const RelPosXUsuarioXDivXDep = require('../models/RelPosXUsarioXDiviXDep');
 const rubroxbeneficioControllers = require('../controllers/rubroxbeneficio')
 const infoutilControllers = require('../controllers/InfoUtil')
+const categoriaControllers = require('../controllers/categoria')
 module.exports = function(){
 
 
@@ -408,6 +409,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.post('/superadmin/info',authSignupControllers.requireSignin,imageControllers.subirArchivos,infoutilControllers.crear)
 
 
+
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.eliminar)
 
@@ -435,7 +437,24 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.get('/rubro/:id',authSignupControllers.requireSignin,rubroControllers.getById)
 
 
+
+    //categoria
+    router.delete('/categoria/:id',authSignupControllers.requireSignin,categoriaControllers.eliminar)
+
+
+    router.post('/categoria',authSignupControllers.requireSignin,categoriaControllers.crear)
+
+
+    router.get('/categoria',authSignupControllers.requireSignin,categoriaControllers.getAll)
+
+
+
+
+    router.get('/categoria/:id',authSignupControllers.requireSignin,categoriaControllers.getById)
+
+
     //beneficio x club
+
 
 
 
