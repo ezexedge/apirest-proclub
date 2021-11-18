@@ -203,3 +203,38 @@ exports.getById  = async (req,res) => {
   }
 }
 //sss
+
+
+
+
+exports.eliminar = async(req,res) => {
+
+  try{
+
+    const id = req.params.id
+
+    const result = await InfoUtil.findOne({
+      where:{
+        id: id,
+        activo: 1
+      }
+    })
+
+    if(!result)throw new Error('la info no existe')
+
+
+
+    await InfoUtil.update({activo: 0},{where:{id:id}})
+
+    res.status(200).json({'message': 'info util eliminado'})
+        
+       
+
+}catch(error){
+
+
+res.status(400).json({'error': error.message})
+ 
+}
+
+}
