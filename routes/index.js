@@ -411,6 +411,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.post('/superadmin/info',authSignupControllers.requireSignin,imageControllers.subirArchivos,infoutilControllers.crear)
     
     router.get('/page/info/:page',authSignupControllers.requireSignin,infoutilControllers.getAll)
+    router.get('/info/:id',authSignupControllers.requireSignin,infoutilControllers.getById)
 
 
 
