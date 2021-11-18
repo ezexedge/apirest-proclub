@@ -10,6 +10,7 @@ const ClubXusuario = require('../models/ClubXUsuario')
 const Persona = require('../models/Persona')
 const RubroXBeneficio = require('../models/RubroXBeneficio')
 const CategoriaXInfo = require('../models/CategoriaXInfo')
+const Categoria= require('../models/Categoria')
 
 const _ = require('lodash')
 
@@ -57,6 +58,96 @@ exports.crear = async (req, res) => {
     await t.rollback();
 
     res.status(400).json({ "error": err.message })
+
+  }
+
+}
+
+
+
+
+exports.getAll = async (req,res) => {
+
+
+
+  try {
+  
+    let limit = 2
+    let offset = 0 
+
+
+
+    const cantidad = await InfoUtil.findAndCountAll({
+      where: {
+        activo: 1,
+        pertenece_superadmin: 1
+      }
+    })
+
+    let page = Number(req.params.page)
+
+    let pages = Math.ceil(cantidad.count / limit)
+
+    offset = limit * (page - 1)
+
+
+
+    const result =  await InfoUtil.findAll({
+      limit: limit,
+      offset: offset,
+      $sort: { id: 1 },
+      where: {
+        activo: 1,
+        pertenece_superadmin: 1
+      },
+      order: [['id', 'DESC']]
+    })
+
+
+
+
+
+
+    let arr = []
+    for(let val of result){
+
+
+      let resultCategoria = await CategoriaXInfo.findAll({
+        include:[{
+          model: Categoria,
+          as: 'categoria'
+        }],
+        where:{
+          infoutilId: val.id
+        }
+      })
+
+      let  obj = {
+        id: val.id,
+        nombre: val.nombre,
+        descripcion: val.descripcion,
+        pathImage: val.pathImage,
+        activo: val.activo,
+        pertenece_superadmin: val.pertenece_superadmin,
+        categoria: resultCategoria
+      }
+
+
+      arr.push(obj)
+      
+
+    }
+
+    
+
+
+
+
+    res.status(200).json({'result': arr,'count': cantidad.count,'pages':pages})
+
+  }catch(err){
+
+    res.status(400).json({error : err.message})
 
   }
 
