@@ -74,7 +74,13 @@ exports.crear = async (req, res) => {
       const beneficiosId = req.params.id
 
 
-      const result = await Beneficios.findByPk(beneficiosId)
+      const result = await Beneficios.findOne({
+        where:{
+          id: beneficiosId
+        }
+      })
+
+
 
       if(!result) throw new Error('el beneficio no existe')
 
@@ -88,13 +94,15 @@ exports.crear = async (req, res) => {
        imagen = req.file.filename
      
       }else{
-        imagen = pathImage
+        imagen = result.pathImage
       } 
    
 
-      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, rubroId: rubro , pathImage : imagen },{where: {id: result.id}, transaction: t })
+      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo  , pathImage : imagen },{where: {id: result.id}, transaction: t })
   
     
+   
+
       await t.commit();
   
       res.status(200).json({'message': 'beneficio modificado'})
