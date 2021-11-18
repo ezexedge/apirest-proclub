@@ -152,3 +152,53 @@ exports.getAll = async (req,res) => {
   }
 
 }
+
+
+exports.getById  = async (req,res) => {
+
+  try{
+
+    const id =  req.params.id
+
+    const result = await InfoUtil.findOne({
+      where: {
+        activo : 1,
+        id: id
+      }
+    })
+
+    if(!result)throw new Error('la info util no existe')
+
+
+
+    let resultRubros = await CategoriaXInfo.findAll({
+      include:[{
+        model: Categoria,
+        as: 'categoria'
+      }],
+      where:{
+        infoutilId: result.id
+      }
+    })
+
+
+    let obj = {
+      id: result.id,
+    titulo: result.titulo,
+      descripcion: result.descripcion,
+      pathImage: result.pathImage,
+      activo: result.activo,
+      rubro: resultRubros
+    }
+     
+
+
+
+  res.status(200).json(obj)
+
+  }catch(err){
+
+    res.status(400).json({error : err.message})
+
+  }
+}
