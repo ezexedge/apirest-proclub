@@ -66,7 +66,7 @@ exports.crear = async (req,res) => {
         if(existeRubro)throw new Error('la categoria existe')
 
 
-       await  Rubro.create({nombre:nombre})
+       await  Categoria.create({nombre:nombre})
 
 
             res.status(200).json({message: 'creado correctamente'})
@@ -104,7 +104,7 @@ exports.eliminar = async (req,res) => {
         if(!existeRubro)throw new Error('la categoria existe')
 
 
-       await  Rubro.destroy({
+       await  Categoria.destroy({
            where:{
                id: id
            }
