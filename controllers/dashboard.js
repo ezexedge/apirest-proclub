@@ -150,7 +150,7 @@ exports.getAll = async (req,res) => {
 
     final.turnos = [...resultReservas]
 
-
+/*
     const resultBeneficios = await BeneficioXClub.findAll({
         include:[  {
             model : Beneficios,
@@ -166,9 +166,9 @@ exports.getAll = async (req,res) => {
         }
     })
 
-    
+    */
 
-    final.beneficios = [...resultBeneficios]
+    final.beneficios = []
 
 
 
