@@ -220,7 +220,7 @@ exports.eliminar = async(req,res) => {
       }
     })
 
-    if(!result)throw new Error('la info no existe')
+    if(!result)throw new Error('la informacion no existe')
 
 
 
