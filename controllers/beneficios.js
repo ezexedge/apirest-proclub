@@ -118,10 +118,7 @@ exports.crear = async (req, res) => {
             }
         },{ transaction: t })
 
-         
-
-
-       
+               
 
 
         }
@@ -131,7 +128,7 @@ exports.crear = async (req, res) => {
         for(let val of rubro){
 
           await RubroXBeneficio.create({beneficioId: beneficiosId, rubroId: val.id },{ transaction: t })
-
+//sss
       
 
         }
