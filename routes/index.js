@@ -414,7 +414,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     router.get('/info/:id',authSignupControllers.requireSignin,infoutilControllers.getById)
     router.delete('/info/:id',authSignupControllers.requireSignin,infoutilControllers.eliminar)
 //sss
-router.put('/info/:id',authSignupControllers.requireSignin,infoutilControllers.editar)
+router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,infoutilControllers.editar)
    
 
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)
