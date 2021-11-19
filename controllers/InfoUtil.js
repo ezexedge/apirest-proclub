@@ -238,3 +238,95 @@ res.status(400).json({'error': error.message})
 }
 
 }
+
+
+exports.editar = async (req, res) => {
+  
+
+ 
+ 
+  const t = await db.transaction()
+
+  try {
+
+
+    const infoId = req.params.id
+
+
+    const result = await InfoUtil.findOne({
+      where:{
+        id: infoId
+      }
+    })
+
+
+
+    if(!result) throw new Error('la info util no existe')
+
+
+    const { titulo , descripcion , rubro } = JSON.parse(req.body.data)
+ 
+  
+   
+    let imagen
+    if(req.file) {
+     imagen = req.file.filename
+   
+    }else{
+      imagen = result.pathImage
+    } 
+ 
+
+    await InfoUtil.update({ titulo: titulo, descripcion: descripcion,pathImage : imagen },{where: {id: result.id}, transaction: t })
+    
+
+    if( rubro.length > 0){
+
+      const result = await  CategoriaXInfo.findAll({
+        where:{
+          infoutilId:infoId
+        }
+      })
+
+
+      for(let val2 of result){
+
+        await  CategoriaXInfo.destroy({
+          where:{
+              id: val2.id
+          }
+      },{ transaction: t })
+
+             
+
+
+      }
+
+
+
+      for(let val of rubro){
+
+        await CategoriaXInfo.create({infoutilId: infoId, categoriaId: val },{ transaction: t })
+//sss
+    
+
+      }
+     
+    }
+  
+ 
+
+    await t.commit();
+
+    res.status(200).json({'message': 'beneficio modificado'})
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+
+    res.status(400).json({ "error": err.message })
+
+  }
+
+}
