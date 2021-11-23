@@ -381,6 +381,15 @@ exports.getBeneficioXClubByClub = async (req,res) => {
 
     if(!resultClub)throw new Error('el id del club no existe')
 
+    /*
+
+    const  resultRubro =  await RubroXBeneficio.findAll({
+      where:{
+        beneficioId: 
+      }
+    })
+   */
+   
     const result = await BeneficioXClub.findAll({
       include:[
     
@@ -396,7 +405,38 @@ exports.getBeneficioXClubByClub = async (req,res) => {
       }
     })
 
-    res.status(200).json(result)
+
+    let arr = []
+    for(let val of result){
+
+      const  resultRubro =  await RubroXBeneficio.findAll({
+        include:[{
+          model: Rubro,
+          as: 'rubro'
+        }],
+        where:{
+          beneficioId: val.beneficioId
+        }
+      })
+
+
+      let obj = {
+
+    id: val.id,
+    activo: val.activo,
+    clubId: val.clubId,
+    usuarioId: val.usuarioId,
+    beneficioId: val.beneficioId,
+    beneficio: val.beneficio,
+    rubro: resultRubro ? resultRubro : []
+      }
+
+
+      arr.push(obj)
+
+    }
+
+    res.status(200).json(arr)
 
   }catch(err){
     res.status(400).json({error: err.message})
