@@ -304,7 +304,13 @@ exports.leerNombre = async (req,res) => {
         if(!respuesta)throw new Error('El usuario no se encuentra registrado')
 
 
-        res.status(200).json({message: `${respuesta.nombre} ${respuesta.apellido}` })
+
+      
+
+        res.status(200).json({
+            avatar: respuesta.avatar,
+            nombre: `${respuesta.nombre} ${respuesta.apellido}` 
+        })
         
 
     }catch(err){
