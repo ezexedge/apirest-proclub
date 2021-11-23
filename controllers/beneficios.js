@@ -382,18 +382,8 @@ exports.getBeneficioXClubByClub = async (req,res) => {
     if(!resultClub)throw new Error('el id del club no existe')
 
     const result = await BeneficioXClub.findAll({
-      include:[{
-        model : Club,
-        as: 'club'
-    },
-    {
-      model : Usuario,
-      as: 'usuario',
-      include:[{
-        model: Persona,
-        as: 'persona'
-      }]
-  },
+      include:[
+    
   {
     model : Beneficios,
     as: 'beneficio'
