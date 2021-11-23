@@ -2313,12 +2313,20 @@
 
 
 
+
                     /**
  * @swagger
- * /api/beneficios:
+ * /api/page/beneficios/{page}:
  *   get:
  *     summary: get all beneficios
  *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: page
+ *         description: numero de una pagina 
+ *         schema:
+ *           type: integer
+ *         required: true
  *     responses:
  *       200:
  *         description:  get all beneficios
@@ -2333,6 +2341,7 @@
  * 
  * 
  */
+     
 
 
 
@@ -2467,69 +2476,10 @@
  * 
  */
 
-                       /**
- * @swagger
- * /api/beneficios/club/usuario/{club}/{usuario}:
- *   get:
- *     summary: get beneficios de un usuario que pertenece a un club
- *     tags: [Beneficios]
- *     parameters:
- *       - in : path
- *         name: club
- *         description: get beneficios by clubId
- *       - in : path
- *         name: usuario
- *         description: get beneficios by usuarioId
- *         schema:
- *           type: integer
- *         required: true
- *     responses:
- *       200:
- *         description:  get beneficios x club
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Beneficios'
- *       400:
- *         description: post can not be found
- * 
- * 
- */ 
 
 
-                        /**
- * @swagger
- * /api/beneficios/club/rubro/{club}/{rubro}:
- *   get:
- *     summary: get beneficio por rubro que tenga un club
- *     tags: [Beneficios]
- *     parameters:
- *       - in : path
- *         name: club
- *         description: get beneficios by clubId
- *       - in : path
- *         name: rubro
- *         description: get beneficios by rubro
- *         schema:
- *           type: integer
- *         required: true
- *     responses:
- *       200:
- *         description:  get beneficios x club x rubro
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Beneficios'
- *       400:
- *         description: post can not be found
- * 
- * 
- */   
-    
+
+
 /**
  * @swagger
  * /api/notificacion/crear:
