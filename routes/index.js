@@ -424,7 +424,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
 
     //getRubroByBeneficio
-    router.get('/beneficios/rubro/:beneficios',authSignupControllers.requireSignin,rubroxbeneficioControllers.getRubroByBeneficio)
+    router.get('/beneficios/rubro/:rubro',authSignupControllers.requireSignin,rubroxbeneficioControllers.getBeneficioByRubro)
 
 
     router.get('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.getById)

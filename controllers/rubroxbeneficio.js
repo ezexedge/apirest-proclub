@@ -2,31 +2,35 @@ const RubroXBeneficio = require('../models/RubroXBeneficio')
 const Beneficios = require('../models/Beneficios')
 const Rubro = require('../models/Rubro')
 
-exports.getRubroByBeneficio = async (req,res) => {
+exports.getBeneficioByRubro = async (req,res) => {
 
 
     try {
 
-        const beneficio = req.params.beneficios
+        const rubro = req.params.rubro
 
 
         
-        const resultBeneficio = await Beneficios.findOne({
+        const resultRubro = await Rubro.findOne({
             where:{
-                id: beneficio
+                id: rubro
             }
         })
 
-        if(!resultBeneficio)throw new Error('el beneficio no existe')
+        if(!resultRubro)throw new Error('El rubro no existe')
+
 
 
         const result = await RubroXBeneficio.findAll({
             include:[{
-                model: Rubro,
-                as: 'rubro'
+                model: Beneficios,
+                as: 'beneficio',
+                where:{
+                    activo:1
+                }
             }],
             where:{
-                beneficioId: beneficio
+                rubroId:rubro
             }
         })
 

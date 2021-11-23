@@ -289,7 +289,7 @@ exports.crear = async (req, res) => {
         }
       })
 
-      if(!result)throw new Error('el beneficio no existe')
+      if(!result)throw new Error('el beneficio no existe o fue eliminado')
 
 
 

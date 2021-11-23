@@ -2339,26 +2339,26 @@
 
                     /**
  * @swagger
- * /api/beneficios/rubro/{beneficios}:
+ * /api/beneficios/rubro/{rubro}:
  *   get:
- *     summary: get de todos los rubros que tiene el beneficio
+ *     summary: get de los beneficios by id rubro
  *     tags: [Beneficios]
  *     parameters:
  *       - in : path
- *         name: beneficios
- *         description: id de beneficios
+ *         name: rubro
+ *         description: id de un rubro
  *         schema:
  *           type: integer
  *         required: true
  *     responses:
  *       200:
- *         description:  get all rubro
+ *         description:  get beneficios by rubro
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Rubros'
+ *                 $ref: '#/components/schemas/Beneficios'
  *       400:
  *         description: post can not be found
  * 
