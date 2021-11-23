@@ -395,7 +395,10 @@ exports.getBeneficioXClubByClub = async (req,res) => {
     
   {
     model : Beneficios,
-    as: 'beneficio'
+    as: 'beneficio',
+    where:{
+      activo: 1
+    }
 },
 
   ],
