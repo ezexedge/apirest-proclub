@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const Rubro = require('./Rubro')
 const Beneficios = require('./Beneficios')
+
 const db = require('../config/db');
+const Club = require('./Club');
 
 
 const RubroXBeneficio = db.define('rubroxbeneficio', {
@@ -10,6 +12,9 @@ const RubroXBeneficio = db.define('rubroxbeneficio', {
         autoIncrement: true,
         primaryKey: true
 
+    },
+    pertenece_superadmin:{
+        type: Sequelize.INTEGER
     }
      
 });
@@ -20,6 +25,10 @@ const RubroXBeneficio = db.define('rubroxbeneficio', {
 RubroXBeneficio.belongsTo(Rubro,{as:"rubro",foreignKey: 'rubroId'})
 
 RubroXBeneficio.belongsTo(Beneficios,{as:"beneficio",foreignKey: 'beneficioId'})
+
+RubroXBeneficio.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
+
+
 
 
 
