@@ -141,8 +141,8 @@ exports.getAll = async (req,res) => {
                 as: 'disciplinaxclub',
                 where:{
                     clubId: club
+                
                 }
-                }]
             },
             {
                 model: Espacio,
