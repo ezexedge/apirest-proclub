@@ -137,6 +137,14 @@ exports.getAll = async (req,res) => {
 
             },
             {
+                model: RelDisciplinaXClub,
+                as: 'disciplinaxclub',
+                where:{
+                    clubId: club
+                }
+                }]
+            },
+            {
                 model: Espacio,
                 as: 'espacio'
             }
