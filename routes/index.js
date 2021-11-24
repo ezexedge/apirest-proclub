@@ -179,7 +179,10 @@ module.exports = function(){
     
 //ModificarPerfilPersona
 
-             router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.modificarImagenes)
+router.put('/espacio/update/image/:espacio',imageControllers.subirArchivos,espacioControllers.modificarImagenes)
+    
+          
+router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.modificarImagenes)
     
     
 

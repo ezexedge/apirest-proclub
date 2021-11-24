@@ -8,6 +8,7 @@ const ConfiguracionDiasHs = require('../models/ConfiguracionDiasHs')
 const RelDisiciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disiciplina = require('../models/Disciplina')
 const Reserva = require('../models/Reservas')
+const Beneficios = require('../models/Beneficios')
 exports.crearEspacio =  async (req,res) => {
  
  
@@ -617,3 +618,62 @@ exports.updateImagen =  async (req,res) => {
         
     }
 }
+
+
+
+
+
+
+
+exports.modificarImagenes = async (req, res) => {
+
+
+  const t = await db.transaction()
+
+  try {
+
+    const usuarioParams = req.params.espacio
+  
+
+
+
+    const result  = await Espacio.findOne({
+        where:{
+            id: usuarioParams,
+            activo:1
+        }
+    })
+
+    if(!result)throw new Error('el espacio no existe')
+
+
+
+    
+    let imagen
+    if(req.file) {
+     imagen = req.file.filename
+   
+    }else{
+      imagen = result.image
+    } 
+    
+    await Espacio.update({ image : imagen },{where: {id: result.id},  transaction: t})
+
+
+ 
+
+
+   await t.commit();
+ 
+   res.status(200).json({ "message": "modificado con exito" })
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+    res.status(400).json({ "error": err.message })
+
+  }
+
+};
+
