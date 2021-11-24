@@ -605,3 +605,55 @@ res.status(400).json({'error': error.message})
 
 
 
+
+
+exports.crearAdmin = async (req, res) => {
+  
+
+ 
+ 
+  const t = await db.transaction()
+
+  try {
+
+    if(!req.file) {
+      throw new Error('debe ingresar una imagen')
+    }
+
+    const { nombre , descripcion , telefono , web ,instagram , correo , rubro } = JSON.parse(req.body.data)
+   
+   
+
+      
+      let imagen = req.file.filename
+      console.log(imagen)
+ 
+
+    const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : imagen , pertenece_superadmin: 0, created: new Date()},{ transaction: t })
+
+    await BeneficioXClub.create({activo:1,clubId:req.auth.clubId,beneficioId:resultBeneficio.id},{ transaction: t })
+
+     if(rubro.length > 0 ){
+
+      for(let val of rubro){
+          await RubroXBeneficio.create({beneficioId: resultBeneficio.id , rubroId: val },{ transaction: t })
+      }
+
+     }
+     //ss
+  
+
+    await t.commit();
+
+    res.status(200).json({'message': 'beneficio creado'})
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+
+    res.status(400).json({ "error": err.message })
+
+  }
+
+}

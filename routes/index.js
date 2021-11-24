@@ -408,6 +408,9 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
 
 
     router.post('/superadmin/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crear)
+    
+    router.post('/admin/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crearAdmin)
+
 
 
 
