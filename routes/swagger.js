@@ -2031,6 +2031,20 @@
  */
 
 
+        /**
+ * @swagger
+ * /api/signout:
+ *   post:
+ *     summary: Cerrar sesion
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *        description: OK
+ *       400:
+ *         description: post can not be found
+ */
+
+
     /**
  * @swagger
  * /api/actualizar-token-firebase:
