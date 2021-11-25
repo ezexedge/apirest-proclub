@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
+const Club = require('./Club');
 
 const InfoUtil = db.define('infoutil', {
     id: {
@@ -28,6 +29,9 @@ const InfoUtil = db.define('infoutil', {
         type: Sequelize.DATE
         }
 });
+
+
+InfoUtil.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 
 
 module.exports = InfoUtil;
