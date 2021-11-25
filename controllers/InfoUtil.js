@@ -65,6 +65,61 @@ exports.crear = async (req, res) => {
 
 
 
+exports.crearAdmin = async (req, res) => {
+  
+
+ 
+ 
+  const t = await db.transaction()
+
+
+  try {
+
+
+    const clubId = req.params.club
+
+    if(!req.file) {
+      throw new Error('debe ingresar una imagen')
+    }
+
+    const { titulo, descripcion , categoria } = JSON.parse(req.body.data)
+   
+   
+
+      
+      let imagen = req.file.filename
+      console.log(imagen)
+ 
+
+    const resultInfoUtil = await InfoUtil.create({ titulo: titulo, descripcion: descripcion,pathImage:imagen, pertenece_superadmin: 0,clubId:clubId, created: new Date()},{ transaction: t })
+
+     if(categoria.length > 0 ){
+
+      for(let val of categoria){
+          await CategoriaXInfo.create({infoutilId: resultInfoUtil.id , categoriaId: val },{ transaction: t })
+      }
+
+     }
+     //ss
+  
+
+    await t.commit();
+
+    res.status(200).json({'message': 'informacion util creada'})
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+
+    res.status(400).json({ "error": err.message })
+
+  }
+
+}
+
+
+
 
 exports.getAll = async (req,res) => {
 
