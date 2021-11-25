@@ -358,6 +358,39 @@ exports.guardarToken = async (req,res) => {
 
 
 
+exports.signout = (req,res) =>{
+
+
+    const usuario = req.auth.userId
+
+    const resultUsuario = await Usuario.findOne({
+        where:{
+            id: usuario
+        }
+    })
+
+
+    if(!resultUsuario)throw new Error('el usuario no existe')
+
+    
+    await Usuario.update({idDevice: null},{where: { id: usuario }})
+
+
+	res.clearCookie("t")
+
+
+
+
+	return res.json({message: "signout success!"})
+}
+
+
+exports.requireSignin = expressJwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"], // added later
+    userProperty: "auth",
+  });
+
 
 
 

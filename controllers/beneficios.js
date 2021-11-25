@@ -374,6 +374,14 @@ exports.crearBeneficioXClub  = async (req,res) => {
 exports.getBeneficioXClubByClub = async (req,res) => {
   try{
 
+
+
+    let limit = 2
+    let offset = 0 
+
+
+
+
     const club = req.params.club
 
 
@@ -381,16 +389,34 @@ exports.getBeneficioXClubByClub = async (req,res) => {
 
     if(!resultClub)throw new Error('el id del club no existe')
 
-    /*
-
-    const  resultRubro =  await RubroXBeneficio.findAll({
-      where:{
-        beneficioId: 
+   
+    const cantidad = await BeneficioXClub.findAndCountAll({
+      include:[{
+        model: Beneficios,
+        as: "beneficio",
+        where:{
+          activo:1
+        }
+      }],
+      where: {
+        clubId: club
       }
     })
-   */
-   
+
+
+
+    let page = Number(req.params.page)
+
+    let pages = Math.ceil(cantidad.count / limit)
+
+    offset = limit * (page - 1)    
+
+
+
     const result = await BeneficioXClub.findAll({
+      limit: limit,
+      offset: offset,
+      $sort: { id: 1 },
       include:[
     
   {
@@ -405,8 +431,15 @@ exports.getBeneficioXClubByClub = async (req,res) => {
       where : {
         activo: 1,
         clubId: club
-      }
+      },
+      order: [['id', 'DESC']]
+
     })
+
+
+
+
+
 
 
     let arr = []
@@ -439,7 +472,7 @@ exports.getBeneficioXClubByClub = async (req,res) => {
 
     }
 
-    res.status(200).json(arr)
+    res.status(200).json({'result': arr,'count': cantidad.count,'pages':pages})
 
   }catch(err){
     res.status(400).json({error: err.message})

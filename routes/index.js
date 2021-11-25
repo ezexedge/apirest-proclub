@@ -408,7 +408,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
 
 
     router.post('/superadmin/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crear)
-    
+
     router.post('/admin/beneficios',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.crearAdmin)
 
 
@@ -480,7 +480,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
 //cambios
 
-    router.get('/beneficios/club/:club',authSignupControllers.requireSignin,beneficiosControllers.getBeneficioXClubByClub)
+    router.get('/beneficios/club/:club/:page',authSignupControllers.requireSignin,beneficiosControllers.getBeneficioXClubByClub)
 
 
     router.get('/beneficios/club/usuario/:club/:usuario',authSignupControllers.requireSignin,beneficiosControllers.getBeneficioXClubByClubByUsario)
