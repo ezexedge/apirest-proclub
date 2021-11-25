@@ -358,7 +358,7 @@ exports.guardarToken = async (req,res) => {
 
 
 
-exports.signout = (req,res) =>{
+exports.signout = async (req,res) =>{
 
 
     const usuario = req.auth.userId
@@ -372,7 +372,7 @@ exports.signout = (req,res) =>{
 
     if(!resultUsuario)throw new Error('el usuario no existe')
 
-    
+
     await Usuario.update({idDevice: null},{where: { id: usuario }})
 
 
