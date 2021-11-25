@@ -303,6 +303,9 @@ router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin
 
     router.post('/signup',authSignupControllers.signup)
 
+    router.post('/signout',authSignupControllers.requireSignin,authSignupControllers.signout)
+
+
 router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.listaDeUsuariosXDeporte)
 
 
