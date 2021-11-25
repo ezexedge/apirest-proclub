@@ -30,7 +30,7 @@ const InfoUtil = db.define('infoutil', {
         }
 });
 
-
+//ssss
 InfoUtil.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 
 
