@@ -274,7 +274,7 @@ exports.getByClub = async (req,res) => {
       let  obj = {
         id: val.id,
         nombre: val.nombre,
-        titulo: va.titulo,
+        titulo: val.titulo,
         descripcion: val.descripcion,
         pathImage: val.pathImage,
         activo: val.activo,
