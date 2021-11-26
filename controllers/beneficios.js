@@ -26,6 +26,7 @@ exports.crear = async (req, res) => {
     const { nombre , descripcion , telefono , web ,instagram , correo , rubro } = JSON.parse(req.body.data)
    
    
+    if(rubro.length === 0) throw new Error('Es obligatorio seleccionar al menos 1 rubro')
 
       
       let imagen = req.file.filename
@@ -656,6 +657,8 @@ exports.crearAdmin = async (req, res) => {
     const { nombre , descripcion , telefono , web ,instagram , correo , rubro } = JSON.parse(req.body.data)
    
    
+
+    if(rubro.length === 0) throw new Error('Es obligatorio seleccionar al menos 1 rubro')
 
       
       let imagen = req.file.filename
