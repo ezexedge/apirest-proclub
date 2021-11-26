@@ -31,7 +31,7 @@ exports.crear = async (req, res) => {
    
    
 
-    if(categoria.length > 0 )throw new Error('Debe seleccionar al menos una categoria')
+    if(categoria.length === 0 )throw new Error('Debe seleccionar al menos una categoria')
 
       
       let imagen = req.file.filename
@@ -88,7 +88,7 @@ exports.crearAdmin = async (req, res) => {
    
    
 
-    if(categoria.length > 0 )throw new Error('Debe seleccionar al menos una categoria')
+    if(categoria.length === 0 )throw new Error('Debe seleccionar al menos una categoria')
       
       let imagen = req.file.filename
       console.log(imagen)
