@@ -424,7 +424,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     
 
     router.get('/page/info/:page',authSignupControllers.requireSignin,infoutilControllers.getAll)
-    
+    //sss
     router.get('/page/info/:club/:page',authSignupControllers.requireSignin,infoutilControllers.getByClub)
     
     
