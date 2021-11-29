@@ -361,6 +361,8 @@ exports.guardarToken = async (req,res) => {
 exports.signout = async (req,res) =>{
 
 
+
+    try{
     const usuario = req.auth.userId
 
     const resultUsuario = await Usuario.findOne({
@@ -381,7 +383,12 @@ exports.signout = async (req,res) =>{
 
 
 
-	return res.json({message: "signout success!"})
+      res.status(200).json({message: "signout success!"})
+
+    }catch(err){
+        console.log(err)
+        res.status(400).json({error : err.message})
+    }
 }
 
 
