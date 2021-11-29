@@ -50,6 +50,7 @@ const RelPosXUsuarioXDivXDep = require('../models/RelPosXUsarioXDiviXDep');
 const rubroxbeneficioControllers = require('../controllers/rubroxbeneficio')
 const infoutilControllers = require('../controllers/InfoUtil')
 const categoriaControllers = require('../controllers/categoria')
+const categoriaDocumentoControllers = require('../controllers/categoriaDocumentacion')
 module.exports = function(){
 
 
@@ -475,6 +476,23 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
 
     router.get('/categoria/:id',authSignupControllers.requireSignin,categoriaControllers.getById)
+
+
+
+    ///categoria x documento
+    router.delete('/categoria-documento/:id',authSignupControllers.requireSignin,categoriaDocumentoControllers.eliminar)
+
+
+    router.post('/categoria-documento',authSignupControllers.requireSignin,categoriaDocumentoControllers.crear)
+
+
+    router.get('/categoria-documento',authSignupControllers.requireSignin,categoriaDocumentoControllers.getAll)
+
+
+
+
+    router.get('/categoria-documento/:id',authSignupControllers.requireSignin,categoriaDocumentoControllers.getById)
+
 
 
     //beneficio x club

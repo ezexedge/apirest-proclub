@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
 const ClubXUsuario = require('./ClubXUsuario')
-const EstadoDocumento = require('./EstadoDocumento')
 
 const Documentacion = db.define('documentacion', {
     id: {
@@ -10,6 +9,8 @@ const Documentacion = db.define('documentacion', {
         primaryKey: true
 
     },
+
+
     pathFile: {
         type: Sequelize.STRING
     },
@@ -27,7 +28,6 @@ const Documentacion = db.define('documentacion', {
 
 
 Documentacion.belongsTo(ClubXUsuario,{as:"clubxusuario",foreignKey: 'clubxusuarioId'})
-Documentacion.belongsTo(EstadoDocumento,{as:"estadodocumento",foreignKey: 'estadodocumentoId'})
 
 
 module.exports = Documentacion;
