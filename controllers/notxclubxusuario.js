@@ -216,30 +216,34 @@ exports.getNotificacionByUser = async (req,res) => {
           //    console.log({ 'usuarioId': Number(user), 'notificacionId': val.club.notificacion.id })
 
             //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
-              let leido 
+            //  let leido 
               if(encontrado){
-                  leido = 1
-              }else{
-                  leido = 0
-              }
+
+
+                let obj = {
+                    id: val.id,
+                    activo: val.activo,
+                    clubxusuario: val.clubxusuario,
+                    notificacionxclubId: val.notificacionxclubId,
+                    clubxusuarioId: val.clubxusuarioId,
+                    usuarioId: val.usuarioId,
+                    notificacion: val.club.notificacion,
+//                    leido: leido,
+                   enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
+    
+                }
+    
+                arr.push(obj)
+               
+             
+             
+             
+                }
     
   
     
 
-            let obj = {
-                id: val.id,
-                activo: val.activo,
-                clubxusuario: val.clubxusuario,
-                notificacionxclubId: val.notificacionxclubId,
-                clubxusuarioId: val.clubxusuarioId,
-                usuarioId: val.usuarioId,
-                notificacion: val.club.notificacion,
-                leido: leido,
-               enviadoPor: `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`
-
-            }
-
-            arr.push(obj)
+ 
 
 
         }
