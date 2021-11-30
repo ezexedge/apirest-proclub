@@ -217,7 +217,7 @@ exports.getNotificacionByUser = async (req,res) => {
 
             //  let encontrado = _.find(resultVisto, function(o) { return o.usuarioId === Number(user) && o.notificacionId ===  val.club.notificacion.id ; });
             //  let leido 
-              if(encontrado){
+              if(!encontrado){
 
 
                 let obj = {
