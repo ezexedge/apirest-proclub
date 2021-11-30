@@ -2698,15 +2698,13 @@
  *     summary: get notificaciones del usuario
  *     tags: [Notificacion]
  *     parameters:
+*     parameters:
  *       - in : path
  *         name: userId
- *         description: get id de un usuario
- *         schema:
- *           type: integer
- *         required: true
+ *         description:  id de un usuario
  *       - in : path
  *         name: clubId
- *         description: get id de un club
+ *         description: id de un club
  *         schema:
  *           type: integer
  *         required: true
