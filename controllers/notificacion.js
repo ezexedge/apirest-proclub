@@ -231,7 +231,7 @@ exports.modificar = async (req,res)=> {
 
 }
 
-
+//envio de encuesta
 exports.sendNotificacion = async (req,res) => {
 
 
@@ -357,7 +357,7 @@ exports.getTokenFirebase = async (req,res)=>{
 }
 
 //'
-
+//envio de notificaciones
 exports.crearSuperadmin = async(req,res) => {
     
     const t = await db.transaction()
@@ -410,14 +410,25 @@ exports.crearSuperadmin = async(req,res) => {
           result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id},{ transaction: t })
          flag = 1
         }
-        let obj = {
-            notificacionxclubId: result.id,
-            clubxusuarioId: val.id,
-            usuarioId: req.auth.userId
+
+
+
+        if(req.auth.userId !== val.usuarioId){
+            
+            let obj = {
+                notificacionxclubId: result.id,
+                clubxusuarioId: val.id,
+                usuarioId: req.auth.userId
+            }
+    
+    
+            arrFinal.push(obj)
+
         }
 
+     
 
-        arrFinal.push(obj)
+
 
         if(val.usuario !== null && val.usuario.idDevice !== null &&  val.usuario.idDevice !== '' ){
             arrDevices.push(val.usuario.idDevice)
