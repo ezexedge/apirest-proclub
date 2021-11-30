@@ -413,8 +413,8 @@ exports.crearSuperadmin = async(req,res) => {
 
 
 
-        if(req.auth.userId !== val.usuarioId){
-            
+        if( val.usuarioId !== req.auth.userId){
+
             let obj = {
                 notificacionxclubId: result.id,
                 clubxusuarioId: val.id,
@@ -424,15 +424,19 @@ exports.crearSuperadmin = async(req,res) => {
     
             arrFinal.push(obj)
 
+
+
+            if(val.usuario !== null && val.usuario.idDevice !== null &&  val.usuario.idDevice !== '' ){
+                arrDevices.push(val.usuario.idDevice)
+            }
+
         }
 
      
 
 
 
-        if(val.usuario !== null && val.usuario.idDevice !== null &&  val.usuario.idDevice !== '' ){
-            arrDevices.push(val.usuario.idDevice)
-        }
+      
 
     }
 
