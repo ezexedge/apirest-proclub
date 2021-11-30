@@ -150,12 +150,19 @@ exports.getNotificacionByUser = async (req,res) => {
     try{
 
         const user = req.params.userId
-       
+        const club = req.params.clubId
+
 
         const usuarioExiste =  await  Usuario.findByPk(user)
 
         if(!usuarioExiste)throw new Error('el usuario no existe')
 
+
+        const clubExiste =  await  Club.findByPk(club)
+
+        if(!clubExiste)throw new Error('el club no existe')
+
+        
 
         const resultVisto = await NotificacionVistasXUsuarios.findAll({})
 
@@ -171,7 +178,8 @@ exports.getNotificacionByUser = async (req,res) => {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
                  where:{
-                     usuarioId: user
+                     usuarioId: user,
+                     clubId:club
                  },
                 include: [{
                   model: Usuario,

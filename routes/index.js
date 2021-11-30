@@ -580,7 +580,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     ///este es el nuevo enppoint
 
     
-    router.get('/notificacion/usuario/:userId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
+    router.get('/notificacion/usuario/club/:userId/:clubId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
     
     //getNotificacionNoLeidos
     router.get('/notificaciones-no-leidos/:userId',notxclubxusuario.getNotificacionNoLeidos)

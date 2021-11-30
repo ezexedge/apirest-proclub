@@ -2693,7 +2693,7 @@
 
                           /**
  * @swagger
- * /api/notificacion/usuario/{userId}:
+ * /api/notificacion/usuario/{userId}/{clubId}:
  *   get:
  *     summary: get notificaciones del usuario
  *     tags: [Notificacion]
@@ -2701,6 +2701,12 @@
  *       - in : path
  *         name: userId
  *         description: get id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: clubId
+ *         description: get id de un club
  *         schema:
  *           type: integer
  *         required: true
