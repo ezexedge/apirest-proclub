@@ -332,7 +332,7 @@ console.log('resultpersona',resultPersona)
     } 
     
     
-    
+    //https://api.klubo.club/api/image/
     await Persona.update({ avatar : `https://api.klubo.club/api/image/${imagen}` },{where: {id: result.personaId},  transaction: t})
 
 

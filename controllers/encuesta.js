@@ -148,6 +148,7 @@ exports.getEncuestaPorUsuario = async(req,res) => {
     try{
 
         const usuario = req.params.userId
+        const club = req.params.clubId
 
         const result = await Destinatario.findAll({
             include:[{
@@ -178,30 +179,18 @@ exports.getEncuestaPorUsuario = async(req,res) => {
 
 
 
-            if(resultRespuesta){
+            if(!resultRespuesta){
 
                 let obj = {
                     id: val.id,
                     encuestId: val.encuestId,
                     usuarioId: val.usuarioId,
                     enviadoporId: val.enviadoporId,
-                    encuesta: val.encuesta,
-                    respondida: 1
+                    encuesta: val.encuesta
                 }
 
                 arr.push(obj)
 
-            }else{
-                let obj = {
-                    id: val.id,
-                    encuestId: val.encuestId,
-                    usuarioId: val.usuarioId,
-                    enviadoporId: val.enviadoporId,
-                    encuesta: val.encuesta,
-                    respondida: 0
-                }
-
-                arr.push(obj)
             }
             
           

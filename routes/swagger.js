@@ -2579,7 +2579,7 @@
 
                           /**
  * @swagger
- * /api/notificaciones-no-leidos/{userId}:
+ * /api/notificaciones-no-leidos/{userId}/{clubId}:
  *   get:
  *     summary: get id 
  *     tags: [Notificacion]
@@ -2587,6 +2587,12 @@
  *       - in : path
  *         name: userId
  *         description: agregar id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: clubId
+ *         description: agregar id de un club
  *         schema:
  *           type: integer
  *         required: true

@@ -583,7 +583,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.get('/notificacion/usuario/club/:userId/:clubId',authSignupControllers.requireSignin,notxclubxusuario.getNotificacionByUser)
     
     //getNotificacionNoLeidos
-    router.get('/notificaciones-no-leidos/:userId',notxclubxusuario.getNotificacionNoLeidos)
+    router.get('/notificaciones-no-leidos/:userId/:clubId',notxclubxusuario.getNotificacionNoLeidos)
     
     router.get('/notificaciones-leidas/:userId',notxclubxusuario.getNotificacionesLeidas)
     

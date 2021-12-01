@@ -470,6 +470,8 @@ exports.getNotificacionNoLeidos = async (req,res) => {
     try{
 
         const user = req.params.userId
+
+        const club = req.params.clubId
        
 
         const usuarioExiste =  await  Usuario.findByPk(user)
@@ -491,7 +493,8 @@ exports.getNotificacionNoLeidos = async (req,res) => {
                  model: ClubXUsuario,
                  as: 'clubxusuario',
                  where:{
-                    usuarioId: user
+                    usuarioId: user,
+                    clubId: club
                 },
                 include: [{
                   model: Usuario,
