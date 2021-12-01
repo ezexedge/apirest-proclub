@@ -67,6 +67,9 @@ exports.getbyUserId = async (req,res) => {
     try{
 
         const usuario = req.params.usuario
+
+
+        const club =  req.params.club
       
 
         const result = await Reservas.findAll({
@@ -77,6 +80,9 @@ exports.getbyUserId = async (req,res) => {
             {
                 model: RelDisciplinaXClub,
                 as: 'disciplinaxclub',
+                where:{
+                    clubId:club
+                },
                 include:[{
                     model: Disciplina,
                     as: 'disciplina'

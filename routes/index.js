@@ -815,7 +815,7 @@ router.get('/reserva-filtro/:espacio/:fecha',reservaControllers.getFiltroXEspaci
 
 
  
-router.get('/reserva/usuario/:usuario',authSignupControllers.requireSignin,reservaControllers.getbyUserId)
+router.get('/reserva/usuario/:usuario/:club',authSignupControllers.requireSignin,reservaControllers.getbyUserId)
 
 
 
