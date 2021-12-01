@@ -4053,14 +4053,20 @@
 
                         /**
  * @swagger
- * /api/reserva/usuario/{usuario}:
+ * /api/reserva/usuario/club/{usuario}/{club}:
  *   get:
  *     summary: get reservas que tiene un usuario realizadas
  *     tags: [Reserva]
  *     parameters:
  *       - in : path
  *         name: usuario
- *         description:  usuarioId
+ *         description:  id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: club
+ *         description:  id de un club
  *         schema:
  *           type: integer
  *         required: true
