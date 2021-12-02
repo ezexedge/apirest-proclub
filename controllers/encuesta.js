@@ -7,12 +7,21 @@ const Rol = require('../models/rol')
 const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 const RespuestaUsuario = require('../models/RespuestaUsuario')
+const moment = require('moment')
+
+
 exports.crear = async(req,res) => {
     try{
 
 
-        const result  =  await Encuesta.create(req.body)
-      //  const result = await Notificacion.bulkCreate(req.body)
+
+        const {titulo,descripcion} = req.body
+
+        const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
+
+
+        const result  =  await Encuesta.create({titulo: titulo,descripcion:descripcion,hora:hora })
+
 
         res.status(200).json(result)
 
