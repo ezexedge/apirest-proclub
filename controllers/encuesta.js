@@ -205,7 +205,8 @@ exports.getEncuestaPorUsuario = async(req,res) => {
                 as: 'encuesta'
             }],
             where: {
-                usuarioId: usuario
+                usuarioId: usuario,
+                clubId: club
             },
             order: [['id', 'DESC']]
 
@@ -234,6 +235,7 @@ exports.getEncuestaPorUsuario = async(req,res) => {
                     id: val.id,
                     encuestId: val.encuestId,
                     usuarioId: val.usuarioId,
+                    clubId: val.clubId,
                     enviadoporId: val.enviadoporId,
                     encuesta: val.encuesta
                 }

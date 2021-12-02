@@ -3199,7 +3199,7 @@
 
                              /**
  * @swagger
- * /api/encuesta/usuario/{userId}:
+ * /api/encuesta/usuario/{userId}/{clubId}:
  *   get:
  *     summary: get de las encuesta recibidas por un usuario
  *     tags: [Encuesta]
@@ -3207,6 +3207,12 @@
  *       - in : path
  *         name: userId
  *         description: userId id del usuario 
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: clubId
+ *         description: clubId id de un club 
  *         schema:
  *           type: integer
  *         required: true
