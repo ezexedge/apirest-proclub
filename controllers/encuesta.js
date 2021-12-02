@@ -199,6 +199,25 @@ exports.getEncuestaPorUsuario = async(req,res) => {
         const usuario = req.params.userId
         const club = req.params.clubId
 
+
+        const usuarioExiste = await Usuario.findOne({
+            where:{
+                id: Number(usuario)
+            }
+        })
+
+        if(!usuarioExiste)throw new Error('El usuario no existe')
+
+
+       const clubExiste =  await Club.findOne({
+           where: {
+               id: Number(club)
+           }
+       })
+
+    if(!clubExiste)throw new Error('el club no existe')
+
+
         const result = await Destinatario.findAll({
             include:[{
                 model: Encuesta,
