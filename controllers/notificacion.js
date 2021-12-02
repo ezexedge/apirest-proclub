@@ -664,35 +664,42 @@ exports.sendEncuesta = async (req,res) => {
   
   
   
-  
-                      const notification_options = {
-                          priority: "high",
-                          timeToLive: 60 * 60 * 24
-                      };
-  
-  
-                      let idString = resultEncuesta.id
-                      let idModificado = idString.toString()
-  
-                      const message_notification = {
-                          notification: {
-                              title: titulo ,
-                              body: descripcion
-                          },
-                          data:{
-                              idEncuesta: idModificado
-                          }
-                      };
-  
-  
-  
-                  if(arrDevice.length > 0){
-                  for(let val of arrDevice){
-                      const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
-                      console.log('estado de envio de notificacion',result)
-              
-                  }
-              }
+  const notification_options = {
+    priority: "high",
+    timeToLive: 60 * 60 * 24
+};
+
+
+let idString = resultEncuesta.id
+let idModificado = idString.toString()
+
+const message_notification = {
+    notification: {
+        title: resultEncuesta.titulo ,
+        body: resultEncuesta.descripcion
+    },
+    data:{
+        idEncuesta: idModificado
+    }
+};
+
+
+
+
+
+
+
+
+
+
+console.log('arr------------',arrDevice)
+if(arrDevice.length > 0){
+for(let val of arrDevice){
+const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
+console.log('estado de envio de notificacion',result)
+
+}
+}
           
               res.status(200).json({'message': 'encuesta creada'})
 
