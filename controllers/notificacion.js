@@ -579,7 +579,7 @@ exports.getNotificacionLeida = async(req,res) => {
 exports.sendEncuesta = async (req,res) => {
 
 
-    const t = await db.transaction()
+   // const t = await db.transaction()
 
     try{
 
@@ -604,13 +604,13 @@ exports.sendEncuesta = async (req,res) => {
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 //
 
-        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora},{ transaction: t })
+        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
 
         for(let val of preguntasRespuesta){
 
             if(val.respuestas.length > 0){
                 
-                const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1},{ transaction: t })
+                const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1})
 
                     let arr = []
 
@@ -624,7 +624,7 @@ exports.sendEncuesta = async (req,res) => {
                     }
 
                     //bulkcreate de la respuesta
-                     await Respuesta.bulkCreate(arr,{ transaction: t })
+                     await Respuesta.bulkCreate(arr)
 
 
 
@@ -652,7 +652,7 @@ exports.sendEncuesta = async (req,res) => {
                     encuestId: resultEncuesta.id,
                     usuarioId:  usuario.usuarioId,
                     enviadoporId: enviadoPor,
-                    clubId: usuario.clubId
+                    clubId: club
                 }
                 arr.push(user)
             
@@ -662,7 +662,7 @@ exports.sendEncuesta = async (req,res) => {
             }
 
             console.log('el array',arr)
-                 await Destinatario.bulkCreate(arr,{ transaction: t })
+                 await Destinatario.bulkCreate(arr)
 
 //dddd
 
