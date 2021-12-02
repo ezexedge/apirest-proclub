@@ -668,7 +668,7 @@ exports.sendEncuesta = async (req,res) => {
 
 
 
-
+/*
                     const notification_options = {
                         priority: "high",
                         timeToLive: 60 * 60 * 24
@@ -706,7 +706,7 @@ exports.sendEncuesta = async (req,res) => {
                 }
             }
         
-        
+        */
             res.status(200).json({'message': 'encuesta creado'})
 
 
