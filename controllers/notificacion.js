@@ -280,7 +280,7 @@ exports.sendNotificacion = async (req,res) => {
                  await Destinatario.bulkCreate(arr,{ transaction: t })
 
 
-          /*
+          
 
                 const notification_options = {
                     priority: "high",
@@ -311,7 +311,8 @@ exports.sendNotificacion = async (req,res) => {
             
                 }
             }
-*/
+
+
             res.status(200).json({message: 'Encuesta creada'})
 
         
@@ -650,7 +651,8 @@ exports.sendEncuesta = async (req,res) => {
                 let user = {
                     encuestId: resultEncuesta.id,
                     usuarioId:  usuario.usuarioId,
-                    enviadoporId: enviadoPor
+                    enviadoporId: enviadoPor,
+                    clubId: usuario.clubId
                 }
                 arr.push(user)
             
@@ -662,11 +664,10 @@ exports.sendEncuesta = async (req,res) => {
             console.log('el array',arr)
                  await Destinatario.bulkCreate(arr,{ transaction: t })
 
-                await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id},{ transaction: t })
 //dddd
 
 
-
+/*
 
                     const notification_options = {
                         priority: "high",
@@ -705,6 +706,7 @@ exports.sendEncuesta = async (req,res) => {
                 }
             }
         
+            */
             res.status(200).json({'message': 'encuesta creado'})
 
 
