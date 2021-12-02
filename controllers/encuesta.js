@@ -161,7 +161,17 @@ exports.getEnviadoPor = async(req,res) => {
             const encontrado = arr.find(user => user.encuestId === val.encuestId && Number(usuario) === val.enviadoporId);
             
             if(!encontrado){
-              arr.push(val)
+
+                let obj = {
+                    id: val.id,
+                    encuestId: val.encuestId,
+                    enviadoporId: val.enviadoporId,
+                    clubId: val.clubId,
+                    encuesta: val.encuesta
+                }
+
+
+              arr.push(obj)
             }
             
     }
