@@ -7,6 +7,7 @@ const Rol = require('../models/rol')
 const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 const RespuestaUsuario = require('../models/RespuestaUsuario')
+const Usuario = require('../models/Usuario')
 const moment = require('moment')
 const _ = require('lodash')
 
@@ -132,7 +133,7 @@ exports.getEnviadoPor = async(req,res) => {
 
 
 
-        const existeUsuario =  await usuario.findOne({
+        const existeUsuario =  await Usuario.findOne({
             where:{
                 id: usuario
             }
