@@ -699,7 +699,7 @@ const result = await admin.messaging().sendToDevice(val, message_notification, n
 console.log('estado de envio de notificacion',result)
 
 }
-}
+}//sss
           
               res.status(200).json({'message': 'encuesta creada'})
 
