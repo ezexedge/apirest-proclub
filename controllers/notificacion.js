@@ -266,8 +266,7 @@ exports.sendNotificacion = async (req,res) => {
                 let user = {
                     encuestId: encuesta,
                     usuarioId:  usuario.usuarioId,
-                    enviadoporId: enviadoPor,
-                    clubId: usuario.clubId
+                    enviadoporId: enviadoPor
                 }
                 arr.push(user)
             
@@ -277,7 +276,8 @@ exports.sendNotificacion = async (req,res) => {
             }
 
             console.log('el array',arr)
-                 await Destinatario.bulkCreate(arr,{ transaction: t })
+             await Destinatario.bulkCreate(arr,{ transaction: t })
+                res.status(200).json({message: 'Encuesta creada'})
 
 
           
@@ -311,10 +311,6 @@ exports.sendNotificacion = async (req,res) => {
             
                 }
             }
-
-
-            res.status(200).json({message: 'Encuesta creada'})
-
         
       
 
@@ -651,8 +647,7 @@ exports.sendEncuesta = async (req,res) => {
                 let user = {
                     encuestId: resultEncuesta.id,
                     usuarioId:  usuario.usuarioId,
-                    enviadoporId: enviadoPor,
-                    clubId: usuario.clubId
+                    enviadoporId: enviadoPor
                 }
                 arr.push(user)
             
@@ -664,11 +659,12 @@ exports.sendEncuesta = async (req,res) => {
             console.log('el array',arr)
                  await Destinatario.bulkCreate(arr,{ transaction: t })
 
+                await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id},{ transaction: t })
 //dddd
 
 
 
-/*
+
                     const notification_options = {
                         priority: "high",
                         timeToLive: 60 * 60 * 24
@@ -706,7 +702,6 @@ exports.sendEncuesta = async (req,res) => {
                 }
             }
         
-        */
             res.status(200).json({'message': 'encuesta creado'})
 
 
@@ -728,7 +723,7 @@ exports.sendEncuesta = async (req,res) => {
 exports.sendEncuestaSuperadmin = async (req,res) => {
 
 
-      const t = await db.transaction()
+  const t = await db.transaction()
   
       try{
   
