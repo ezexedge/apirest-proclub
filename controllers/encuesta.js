@@ -8,6 +8,7 @@ const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 const RespuestaUsuario = require('../models/RespuestaUsuario')
 const moment = require('moment')
+const _ = require('lodash')
 
 
 exports.crear = async(req,res) => {
@@ -130,6 +131,16 @@ exports.getEnviadoPor = async(req,res) => {
         const usuario = req.params.userId
 
 
+
+        const existeUsuario =  await usuario.findOne({
+            where:{
+                id: usuario
+            }
+        })
+
+        if(!existeUsuario)throw new Error('el usuario no existe')
+
+
         const result = await Destinatario.findAll({
             include:[{
                 model: Encuesta,
@@ -141,7 +152,25 @@ exports.getEnviadoPor = async(req,res) => {
             order: [['id', 'DESC']]
 
         })
-        res.status(200).json(result)
+
+
+        let arr = []
+        for(let val of result){
+
+
+            let encontrado = _.find(arr, { 'envidoporId': Number(usuario), 'encuestId': val.encuestId });
+
+            if(!encontrado){
+                arr.push(val)
+            }
+
+        }
+        
+
+
+
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
