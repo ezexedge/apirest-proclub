@@ -3086,10 +3086,17 @@
   
                                /**
  * @swagger
- * /api/encuesta-enviada-por:
+ * /api/encuesta-enviada-por/{userId}:
  *   get:
  *     summary: get all de las encuestas que fueron enviadas por un usuario que inicio sesion
  *     tags: [Encuesta]
+ *     parameters:
+ *       - in : path
+ *         name: userId
+ *         description: id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
  *     responses:
  *       200:
  *         description:  get all encuesta enviadas por un usuario

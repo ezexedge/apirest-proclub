@@ -127,7 +127,8 @@ exports.modificar = async (req,res)=> {
 exports.getEnviadoPor = async(req,res) => {
     try{
 
-        const usuario = req.auth.userId
+        const usuario = req.params.userId
+
 
         const result = await Destinatario.findAll({
             include:[{
@@ -135,7 +136,7 @@ exports.getEnviadoPor = async(req,res) => {
                 as: 'encuesta'
             }],
             where: {
-                enviadoporId: usuario
+                enviadoporId: Number(usuario)
             },
             order: [['id', 'DESC']]
 

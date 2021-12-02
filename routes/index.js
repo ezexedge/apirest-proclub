@@ -625,7 +625,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
     router.get('/encuesta/:id',authSignupControllers.requireSignin,encuestaControllers.getById)
 
-    router.get('/encuesta-enviada-por',authSignupControllers.requireSignin,encuestaControllers.getEnviadoPor)
+    router.get('/encuesta-enviada-por/:userId',authSignupControllers.requireSignin,encuestaControllers.getEnviadoPor)
     router.get('/encuesta/usuario/:userId',authSignupControllers.requireSignin,encuestaControllers.getEncuestaPorUsuario)
 
     //encuesta
