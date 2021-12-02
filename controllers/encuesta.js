@@ -158,14 +158,13 @@ exports.getEnviadoPor = async(req,res) => {
         let arr = []
         for(let val of result){
 
-
-            let encontrado = _.find(arr, { 'envidoporId': Number(usuario), 'encuestId': val.encuestId });
-
+            const encontrado = arr.find(user => user.encuestId === val.encuestId && Number(usuario) === val.enviadoporId);
+            
             if(!encontrado){
-                arr.push(val)
+              arr.push(val)
             }
-
-        }
+            
+    }
         
 
 
