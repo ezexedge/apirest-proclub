@@ -571,65 +571,144 @@ exports.getNotificacionLeida = async(req,res) => {
 
 
 
-
 exports.sendEncuesta = async (req,res) => {
 
 
-    const t = await db.transaction()
-
-    try{
-
-
-        const club = req.params.club
-        const enviadoPor = req.auth.userId
-        const {titulo,descripcion,preguntasRespuesta,usuarios}  = req.body
+    //  const t = await db.transaction()
+  
+      try{
+  
+  
+          const club = req.params.club
+          const enviadoPor = req.auth.userId
+          const {titulo,descripcion,preguntasRespuesta,usuarios}  = req.body
+          
+  
+          console.log('req bodyy',req.body)
+  
+  
+          const clubExist = Club.findOne({
+              where: {
+                  id: club
+              }
+          })
+  
+          if(!clubExist)throw new Error('El club no existe')
+  
+  
+          const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
+  //
+  
+          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
+  
+          for(let val of preguntasRespuesta){
+  
+              if(val.respuestas.length > 0){
+                  
+                  const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1})
+  
+                      let arr = []
+  
+                      for(let val2 of val.respuestas){
+                          let obj = {
+                              titulo: val2.pregunta,
+                              activo:1,
+                              preguntaId: resultPregunta.id
+                          }
+                          arr.push(obj)
+                      }
+  
+                      //bulkcreate de la respuesta
+                       await Respuesta.bulkCreate(arr)
+  
+  
+  
+             
+              }
+  
+  
+          }
+  
+  
+  
+   
+  //val
+         let arr = []
+          let arrDevice = []
+  
+      
+              for(let usuario of usuarios){
+                  
+                  if(usuario.usuario.idDevice !== null && usuario.usuario.idDevice !== ''){
+                      arrDevice.push(usuario.usuario.idDevice)
+                  }
+              
+                  let user = {
+                      encuestId: resultEncuesta.id,
+                      usuarioId:  usuario.usuarioId,
+                      enviadoporId: enviadoPor
+                  }
+                  arr.push(user)
+              
+                  
+  
+                  
+              }
+  
+              console.log('el array',arr)
+                   await Destinatario.bulkCreate(arr)
+                  res.status(200).json(resultEncuesta)
+  
+                  await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id})
+  //dddd
+  
+  
+  
+  
+                      const notification_options = {
+                          priority: "high",
+                          timeToLive: 60 * 60 * 24
+                      };
+  
+  
+                      let idString = resultEncuesta.id
+                      let idModificado = idString.toString()
+  
+                      const message_notification = {
+                          notification: {
+                              title: titulo ,
+                              body: descripcion
+                          },
+                          data:{
+                              idEncuesta: idModificado
+                          }
+                      };
+  
+  
+  
+                  if(arrDevice.length > 0){
+                  for(let val of arrDevice){
+                      const result = await admin.messaging().sendToDevice(val, message_notification, notification_options)
+                      console.log('estado de envio de notificacion',result)
+              
+                  }
+              }
+          
         
-
-        console.log('req bodyy',req.body)
-
-
-        const clubExist = Club.findOne({
-            where: {
-                id: club
-            }
-        })
-
-        if(!clubExist)throw new Error('El club no existe')
-
-
-        const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
-//
-
-        const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora},{ transaction: t })
-
-        for(let val of preguntasRespuesta){
-
-            if(val.respuestas.length > 0){
-                
-                const resultPregunta  =  await Pregunta.create({titulo: val.pregunta , encuestaId: resultEncuesta.id,activo: 1},{ transaction: t })
-
-                    let arr = []
-
-                    for(let val2 of val.respuestas){
-                        let obj = {
-                            titulo: val2.pregunta,
-                            activo:1,
-                            preguntaId: resultPregunta.id
-                        }
-                        arr.push(obj)
-                    }
-
-                    //bulkcreate de la respuesta
-                     await Respuesta.bulkCreate(arr,{ transaction: t })
-
-
-
-           
-            }
-
-
-        }
-
+  
+  
+      }catch(err){
+  
+       //   await t.rollback();
+  
+          res.status(400).json({error: err.message})
+  
+      }
+     
+  
+  
+  }
+  
 
 
  
