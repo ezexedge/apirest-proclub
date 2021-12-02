@@ -658,9 +658,7 @@ exports.sendEncuesta = async (req,res) => {
   
               console.log('el array',arr)
                    await Destinatario.bulkCreate(arr)
-                  res.status(200).json(resultEncuesta)
   
-                  await EncuestaXClub.create({clubId:club,encuestaId: resultEncuesta.id})
   //dddd
   
   
@@ -695,7 +693,8 @@ exports.sendEncuesta = async (req,res) => {
                   }
               }
           
-        
+              res.status(200).json({'message': 'encuesta creada'})
+
   
   
       }catch(err){
