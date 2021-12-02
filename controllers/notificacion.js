@@ -647,7 +647,8 @@ exports.sendEncuesta = async (req,res) => {
                   let user = {
                       encuestId: resultEncuesta.id,
                       usuarioId:  usuario.usuarioId,
-                      enviadoporId: enviadoPor
+                      enviadoporId: enviadoPor,
+                      clubId: club
                   }
                   arr.push(user)
               
