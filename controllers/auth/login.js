@@ -308,7 +308,7 @@ exports.leerNombre = async (req,res) => {
       
 
         res.status(200).json({
-            avatar: `https://api.klubo.club/api/image/${respuesta.avatar}`,
+            avatar: respuesta.avatar,
             nombre: `${respuesta.nombre} ${respuesta.apellido}` 
         })
         
