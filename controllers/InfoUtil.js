@@ -341,7 +341,7 @@ exports.getById  = async (req,res) => {
       descripcion: result.descripcion,
       pathImage: result.pathImage,
       activo: result.activo,
-      rubro: resultRubros
+      categoria: resultRubros
     }
      
 
