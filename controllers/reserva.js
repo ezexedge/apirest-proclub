@@ -95,7 +95,8 @@ exports.getbyUserId = async (req,res) => {
         ],
             where:{
                 usuarioId: usuario,
-                activo: 1
+                activo: 1,
+                estadoreservaId:1
             }
         })
 
