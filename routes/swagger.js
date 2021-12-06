@@ -3157,14 +3157,20 @@
   
                                /**
  * @swagger
- * /api/encuesta-enviada-por/{userId}:
+ * /api/encuesta-enviada-por/{userId}/{clubId}:
  *   get:
- *     summary: get all de las encuestas que fueron enviadas por un usuario que inicio sesion
+ *     summary: get all encuesta enviada por un usuario de un club
  *     tags: [Encuesta]
  *     parameters:
  *       - in : path
  *         name: userId
  *         description: id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: clubId
+ *         description: id de un club
  *         schema:
  *           type: integer
  *         required: true

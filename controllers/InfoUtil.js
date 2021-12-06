@@ -483,3 +483,56 @@ exports.editar = async (req, res) => {
   }
 
 }
+
+
+
+
+exports.getInfoXClubXRubro = async (req,res) => {
+  try{
+
+    const club = req.params.club
+    
+
+    const categoria = req.params.categoria
+
+    const resultClub =  await Club.findByPk(club)
+
+    if(!resultClub)throw new Error('el id del club no existe')
+
+    const resultCategoria =  await Categoria.findByPk(categoria)
+
+    if(!resultCategoria)throw new Error('el id de la categoria no existe')
+
+
+    const result = await CategoriaXInfo.findAll({
+      include:[{
+        model : Club,
+        as: 'club'
+    },
+    {
+      model : Usuario,
+      as: 'usuario',
+      include:[{
+        model: Persona,
+        as: 'persona'
+      }]
+  },
+  {
+    model : Beneficios,
+    as: 'beneficio',
+    where: {rubroId: rubro}
+},
+
+  ],
+      where : {
+        activo: 1,
+        clubId: club
+      }
+    })
+
+    res.status(200).json(result)
+
+  }catch(err){
+    res.status(400).json({error: err.message})
+  }
+}

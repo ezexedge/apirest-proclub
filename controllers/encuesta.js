@@ -130,6 +130,7 @@ exports.getEnviadoPor = async(req,res) => {
     try{
 
         const usuario = req.params.userId
+        const club =  req.params.clubId
 
 
 
@@ -148,7 +149,8 @@ exports.getEnviadoPor = async(req,res) => {
                 as: 'encuesta'
             }],
             where: {
-                enviadoporId: Number(usuario)
+                enviadoporId: Number(usuario),
+                clubId:club
             },
             order: [['id', 'DESC']]
 
