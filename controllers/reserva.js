@@ -167,9 +167,8 @@ exports.eliminar = async (req,res) => {
 
         if(!result)throw new Error(`el id:${id} no existe`)
 
-        result.activo = 0
+        await Reservas.destroy({where: id })
 
-        await result.save()
         res.status(200).json({message: 'eliminado'})
       
 
