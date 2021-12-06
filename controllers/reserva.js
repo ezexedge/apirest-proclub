@@ -341,7 +341,7 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
 
 
 
-    result = _.filter(result,{'espacioId': Number(espacio),'estadoreservaId': 2 ,activo: 1})
+    result = _.filter(result,{'espacioId': Number(espacio)})
 
 
 
