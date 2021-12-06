@@ -2464,7 +2464,7 @@
 
                     /**
  * @swagger
- * /api/beneficios/club/{club}:
+ * /api/beneficios/club/{club}/{page}:
  *   get:
  *     summary: get beneficios de un club
  *     tags: [Beneficios]
@@ -2472,6 +2472,12 @@
  *       - in : path
  *         name: club
  *         description: get beneficios by clubId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: page
+ *         description: numero de una pagina
  *         schema:
  *           type: integer
  *         required: true
