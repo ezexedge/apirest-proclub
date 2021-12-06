@@ -4169,6 +4169,42 @@
  * 
  */   
 
+
+
+                        /**
+ * @swagger
+ * /api/beneficio/club/rubro/{club}/{rubro}:
+ *   get:
+ *     summary: get de beneficios por rubro de un club
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description:  id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: rubro
+ *         description:  id de un rubro
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  reservar x usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+
     /**
  * @swagger
  * /api/reserva/{id}/{estado}:
