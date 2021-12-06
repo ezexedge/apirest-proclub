@@ -328,8 +328,11 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
    
 
        let result =  await Reservas.findAll({
+
         where: { 
-            fechaInicio : fechaFilterInicio
+            fechaInicio : fechaFilterInicio,
+            activo: 1,
+            estadoreservaId:2
            
     },
        order: [['id', 'DESC']]            
