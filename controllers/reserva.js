@@ -199,10 +199,10 @@ exports.modificiarEstado = async (req,res) => {
 
         if(!result)throw new Error(`el id:${id} no existe`)
 
-        result.estadoreservaId = estado
 
-        await result.save()
-        res.status(200).json({message: 'estado modificado'})
+        await Reservas.destroy({where: id })
+
+            res.status(200).json({message: 'eliminado correctamente'})
       
 
 
