@@ -167,7 +167,7 @@ exports.eliminar = async (req,res) => {
 
         if(!result)throw new Error(`el id:${id} no existe`)
 
-        await Reservas.destroy({where: id })
+        await Reservas.destroy({where: {id: id} })
 
         res.status(200).json({message: 'eliminado'})
       
@@ -199,7 +199,7 @@ exports.modificiarEstado = async (req,res) => {
         if(!result)throw new Error(`el id:${id} no existe`)
 
 
-        await Reservas.destroy({where: id })
+        await Reservas.destroy({where: {id : id} })
 
             res.status(200).json({message: 'eliminado correctamente'})
       
