@@ -2499,6 +2499,71 @@
 
 
 
+                    //info util
+
+                                        /**
+ * @swagger
+ * /api/page/info/{club}/{page}:
+ *   get:
+ *     summary: get beneficios de un club
+ *     tags: [Info]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: get beneficios by clubId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: page
+ *         description: numero de una pagina
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get beneficios x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+                          /**
+ * @swagger
+ * /api/info/{id}:
+ *   get:
+ *     summary: get id 
+ *     tags: [Info]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: agregar id de una informacion util
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id de una info util
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Notificaciones'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+
+
 
 /**
  * @swagger
