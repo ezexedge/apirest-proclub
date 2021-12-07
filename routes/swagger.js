@@ -2468,7 +2468,7 @@
  * /api/categoria/{id}:
  *   get:
  *     summary: get id 
- *     tags: [Cateogira]
+ *     tags: [Categoria]
  *     parameters:
  *       - in : path
  *         name: id
@@ -2508,7 +2508,7 @@
  * 
  */  
 
-                                                                
+
                     /**
  * @swagger
  * /api/beneficios/club/{club}/{page}:
