@@ -4211,6 +4211,41 @@
  * 
  */   
 
+
+                                                /**
+ * @swagger
+ * /api/info/club/categoria/{club}/{categoria}:
+ *   get:
+ *     summary: get info de un club por la categoria
+ *     tags: [Info]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description:  id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: categoria
+ *         description:  id de una categoria
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  reservar x usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */   
+
     /**
  * @swagger
  * /api/reserva/{id}/{estado}:

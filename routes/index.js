@@ -428,7 +428,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
     //sss
     router.get('/page/info/:club/:page',authSignupControllers.requireSignin,infoutilControllers.getByClub)
     
-        router.get('/info/club/rubro/:club/:rubro',authSignupControllers.requireSignin,infoutilControllers.getInfoXClubXCategoria)
+        router.get('/info/club/categoria/:club/:categoria',authSignupControllers.requireSignin,infoutilControllers.getInfoXClubXCategoria)
 
     
     router.get('/info/:id',authSignupControllers.requireSignin,infoutilControllers.getById)
