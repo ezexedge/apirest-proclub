@@ -26,7 +26,7 @@ exports.getById = async (req,res) => {
 
 
 
-        const result = await Categoria.findByOne({
+        const result = await Categoria.findOne({
             where:{
                 id: id
             }
