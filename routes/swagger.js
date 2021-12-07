@@ -2462,6 +2462,53 @@
  * 
  */  
 
+
+                                           /**
+ * @swagger
+ * /api/categoria/{id}:
+ *   get:
+ *     summary: get id 
+ *     tags: [Cateogira]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: get id de una categoria
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get id by rubro
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Rubros'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+                                                                /**
+ * @swagger
+ * /api/categoria:
+ *   get:
+ *     summary: get de todas las categorias
+ *     tags: [Categoria]
+ *     responses:
+ *       200:
+ *         description:  get id by rubro
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Rubros'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+
+                                                                
                     /**
  * @swagger
  * /api/beneficios/club/{club}/{page}:
