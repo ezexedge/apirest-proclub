@@ -693,3 +693,113 @@ exports.crearAdmin = async (req, res) => {
   }
 
 }
+
+
+exports.buscador = async (req,res) => {
+  try{
+
+
+
+
+
+
+
+    const club = req.params.club
+    const buscar = req.params.buscar
+
+
+
+
+
+    const resultClub =  await Club.findByPk(club)
+
+    if(!resultClub)throw new Error('el id del club no existe')
+
+   
+
+
+
+
+    const result = await BeneficioXClub.findAll({
+
+      include:[
+    
+  {
+    model : Beneficios,
+    as: 'beneficio',
+    where:{
+      activo: 1
+    }
+},
+
+  ],
+      where : {
+        activo: 1,
+        clubId: club
+      },
+      order: [['id', 'DESC']]
+
+    })
+
+
+    let arrFiltrado = []
+    for(let val of result){
+        for(let val2 in val.beneficio){
+          if(typeof val.beneficio[val2] === 'string'){
+              if(val.beneficio[val2].toLowerCase() === buscar.toLowerCase()){
+                
+                let result = arrFiltrado.find(valores => valores.id === val.id)
+                console.log('ee',result)
+                if(!result){
+                arrFiltrado.push(val)
+    
+                }
+    
+    
+              }
+            
+          }
+        }
+    }
+
+
+
+
+
+
+    let arr = []
+    for(let val of arrFiltrado){
+
+      const  resultRubro =  await RubroXBeneficio.findAll({
+        include:[{
+          model: Rubro,
+          as: 'rubro'
+        }],
+        where:{
+          beneficioId: val.beneficioId
+        }
+      })
+
+
+      let obj = {
+
+    id: val.id,
+    activo: val.activo,
+    clubId: val.clubId,
+    usuarioId: val.usuarioId,
+    beneficioId: val.beneficioId,
+    beneficio: val.beneficio,
+    rubro: resultRubro ? resultRubro : []
+      }
+
+
+      arr.push(obj)
+
+    }
+
+    res.status(200).json(arr)
+
+  }catch(err){
+    res.status(400).json({error: err.message})
+  }
+}

@@ -440,8 +440,9 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.put('/beneficios/:id',authSignupControllers.requireSignin,imageControllers.subirArchivos,beneficiosControllers.editar)
     router.delete('/beneficios/:id',authSignupControllers.requireSignin,beneficiosControllers.eliminar)
 
-    router.get('/page/beneficios/:page',authSignupControllers.requireSignin,beneficiosControllers.getAll)
+    router.get('/page/beneficios/:page',beneficiosControllers.getAll)
 
+    router.get('/beneficios/:club/:buscar',beneficiosControllers.buscador)
 
     //getRubroByBeneficio
     router.get('/beneficios/rubro/:rubro',authSignupControllers.requireSignin,rubroxbeneficioControllers.getBeneficioByRubro)
