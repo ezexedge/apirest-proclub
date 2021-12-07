@@ -487,7 +487,7 @@ exports.editar = async (req, res) => {
 
 
 
-exports.getInfoXClubXRubro = async (req,res) => {
+exports.getInfoXClubXCategoria = async (req,res) => {
   try{
 
     const club = req.params.club
@@ -518,9 +518,9 @@ exports.getInfoXClubXRubro = async (req,res) => {
       }]
   },
   {
-    model : Beneficios,
-    as: 'beneficio',
-    where: {rubroId: rubro}
+    model : InfoUtil,
+    as: 'infoutil',
+    where: {categoriaId: categoria}
 },
 
   ],
