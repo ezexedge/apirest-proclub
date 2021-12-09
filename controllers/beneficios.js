@@ -710,7 +710,6 @@ exports.buscador = async (req,res) => {
 
 
 
-
     const resultClub =  await Club.findByPk(club)
 
     if(!resultClub)throw new Error('el id del club no existe')
@@ -742,62 +741,45 @@ exports.buscador = async (req,res) => {
     })
 
 
-    let arrFiltrado = []
-    for(let val of result){
+    let  parsiado =  JSON.parse(JSON.stringify(result))
+
+
+    let arrFinal = []
+    for(let val of parsiado){
+      let arr = []
+
+
         for(let val2 in val.beneficio){
-          if(typeof val.beneficio[val2] === 'string'){
-              if(val.beneficio[val2].toLowerCase() === buscar.toLowerCase()){
-                
-                let result = arrFiltrado.find(valores => valores.id === val.id)
-                console.log('ee',result)
-                if(!result){
-                arrFiltrado.push(val)
-    
-                }
-    
-    
-              }
-            
-          }
+
+          arr.push(val.beneficio[val2])
+
+        if(typeof val.beneficio[val2] === 'string'){
+
+
+                  if(val.beneficio[val2].toLowerCase().includes(buscar.toLowerCase()) === true){
+
+                    let encontrado = arrFinal.find(valor => valor.id === val.id)
+
+                    if(!encontrado){
+                      arrFinal.push(val)
+                    }
+
+                  }
+
+           
         }
+
+
+
+        }
+
+        
+
+
     }
 
 
-
-
-
-
-    let arr = []
-    for(let val of arrFiltrado){
-
-      const  resultRubro =  await RubroXBeneficio.findAll({
-        include:[{
-          model: Rubro,
-          as: 'rubro'
-        }],
-        where:{
-          beneficioId: val.beneficioId
-        }
-      })
-
-
-      let obj = {
-
-    id: val.id,
-    activo: val.activo,
-    clubId: val.clubId,
-    usuarioId: val.usuarioId,
-    beneficioId: val.beneficioId,
-    beneficio: val.beneficio,
-    rubro: resultRubro ? resultRubro : []
-      }
-
-
-      arr.push(obj)
-
-    }
-
-    res.status(200).json(arr)
+    res.status(200).json(arrFinal)
 
   }catch(err){
     res.status(400).json({error: err.message})

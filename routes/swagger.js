@@ -2583,6 +2583,41 @@
  */
 
 
+
+
+                                        /**
+ * @swagger
+ * /api/buscar-info/{club}/{buscar}:
+ *   get:
+ *     summary: buscar info de un club
+ *     tags: [Info]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: buscar
+ *         description: en buscar ingresar un texto que desee buscar
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get beneficios x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
                           /**
  * @swagger
  * /api/info/{id}:
@@ -4293,6 +4328,40 @@
  * 
  */   
 
+                                                /**
+ * @swagger
+ * /api/buscar-beneficios/{club}/{buscar}:
+ *   get:
+ *     summary: get info de un club por la categoria
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description:  id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: buscar
+ *         description:  ingresar un texto de lo que quieras buscar
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  reservar x usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */  
+                                                
     /**
  * @swagger
  * /api/reserva/{id}/{estado}:

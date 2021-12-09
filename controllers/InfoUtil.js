@@ -536,3 +536,84 @@ exports.getInfoXClubXCategoria = async (req,res) => {
     res.status(400).json({error: err.message})
   }
 }
+
+
+
+exports.buscador = async (req,res) => {
+  try{
+
+
+
+
+
+
+
+    const club = req.params.club
+    const buscar = req.params.buscar
+
+
+
+
+    const resultClub =  await Club.findByPk(club)
+
+    if(!resultClub)throw new Error('el id del club no existe')
+
+   
+
+
+
+
+    const result = await InfoUtil.findAll({
+
+
+      where : {
+        activo: 1,
+        clubId: club
+      },
+      order: [['id', 'DESC']]
+
+    })
+
+
+    let  parsiado =  JSON.parse(JSON.stringify(result))
+
+
+    let arrFinal = []
+    for(let val of parsiado){
+
+
+        for(let val2 in val){
+
+
+        if(typeof val[val2] === 'string'){
+
+
+                  if(val[val2].toLowerCase().includes(buscar.toLowerCase()) === true){
+
+                    let encontrado = arrFinal.find(valor => valor.id === val.id)
+
+                    if(!encontrado){
+                      arrFinal.push(val)
+                    }
+
+                  }
+
+           
+        }
+
+
+
+        }
+
+        
+
+
+    }
+
+
+    res.status(200).json(arrFinal)
+
+  }catch(err){
+    res.status(400).json({error: err.message})
+  }
+}

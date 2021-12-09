@@ -423,6 +423,7 @@ router.get('/disciplina/listado-usuarios/:disciplina',usuarioInformacionFinal.li
 
     router.post('/admin/info/:club',authSignupControllers.requireSignin,imageControllers.subirArchivos,infoutilControllers.crearAdmin)
     
+    router.get('/buscar-info/:club/:buscar',infoutilControllers.buscador)
 
     router.get('/page/info/:page',authSignupControllers.requireSignin,infoutilControllers.getAll)
     //sss
@@ -442,7 +443,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
     router.get('/page/beneficios/:page',beneficiosControllers.getAll)
 
-    router.get('/beneficios/:club/:buscar',beneficiosControllers.buscador)
+    router.get('/buscar-beneficios/:club/:buscar',beneficiosControllers.buscador)
 
     //getRubroByBeneficio
     router.get('/beneficios/rubro/:rubro',authSignupControllers.requireSignin,rubroxbeneficioControllers.getBeneficioByRubro)
