@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
+const Club = require('../models/Club')
 
 const CategoriaDocumentacion = db.define('categoriadocumentacion', {
     id: {
@@ -15,6 +16,7 @@ const CategoriaDocumentacion = db.define('categoriadocumentacion', {
 
 
 
+Categoria.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 
 
 
