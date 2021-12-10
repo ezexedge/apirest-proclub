@@ -23,7 +23,8 @@ exports.crear = async(req,res) => {
 
        const documentacionExist = await Documentacion.findOne({
            where:{
-            clubxusuarioId: result.id
+            usuarioId:usuario,
+            clubId: club
            }
        })
 

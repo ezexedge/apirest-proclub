@@ -1,9 +1,11 @@
 const Sequelize = require('sequelize');
-const Encuesta = require('./Encuesta')
 const Usuario = require('./Usuario')
 const db = require('../config/db');
 const SolicitudDocumento = require('./SolicitudDocumento');
-const ClubXusuario = require('./ClubXUsuario');
+const Club = require('./Club');
+const Documentacion = require('./Documentacion');
+
+
 
 const DestinatarioDocumentacion = db.define('destinatariodocumentacion', {
     id: {
@@ -17,7 +19,9 @@ const DestinatarioDocumentacion = db.define('destinatariodocumentacion', {
 
 
 DestinatarioDocumentacion.belongsTo(SolicitudDocumento,{as:"solicituddocumento",foreignKey: 'solicituddocumentoId'})
-DestinatarioDocumentacion.belongsTo(ClubXusuario,{as:"clubxusuario",foreignKey: 'clubxusuarioId'})
+DestinatarioDocumentacion.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
+DestinatarioDocumentacion.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
+DestinatarioDocumentacion.belongsTo(Documentacion,{as:"documentacion",foreignKey: 'documentacionId'})
 
 
 

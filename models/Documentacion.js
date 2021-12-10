@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/db');
-const Club = require('./Club')
-const Usuario = require('./Usuario')
+
 
 const Documentacion = db.define('documentacion', {
     id: {
@@ -27,9 +26,6 @@ const Documentacion = db.define('documentacion', {
     }
 });
 
-
-Documentacion.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
-Documentacion.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 
 
 module.exports = Documentacion;
