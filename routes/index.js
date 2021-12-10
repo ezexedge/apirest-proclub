@@ -51,6 +51,7 @@ const rubroxbeneficioControllers = require('../controllers/rubroxbeneficio')
 const infoutilControllers = require('../controllers/InfoUtil')
 const categoriaControllers = require('../controllers/categoria')
 const categoriaDocumentoControllers = require('../controllers/categoriaDocumentacion')
+const solicitudControllers = require('../controllers/solicitudDocumentacion')
 module.exports = function(){
 
 
@@ -524,6 +525,10 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     
 
     //getBeneficioXClubXRubro
+
+
+    //documentacion
+    router.post('/documentacion/crear',authSignupControllers.requireSignin,solicitudControllers.crearSolicitud)
 
 
     //notificacion

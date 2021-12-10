@@ -1,3 +1,8 @@
+const SolicitudDocumento = require("../models/SolicitudDocumento")
+const moment = require('moment')
+const DestinatarioDocumentacion = require("../models/DestinatarioDocumentacion")
+const admin = require('firebase-admin')
+
 exports.crearSolicitud = async(req,res) => {
     
     const t = await db.transaction()
@@ -18,36 +23,18 @@ exports.crearSolicitud = async(req,res) => {
 
         console.log('aqui notificacion',notificacion)
         console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await Notificacion.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,descripcion_corta:notificacion.descripcion_corta,hora:hora,usuarioId:usuario},{ transaction: t })
+        const resultNotificacion  =  await SolicitudDocumento.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,hora:hora,enviadoporId:usuario},{ transaction: t })
       
-        //  const result = await Notificacion.bulkCreate(req.body)
-
-        if(notificacion.tematica){
-        let arrTematica = []
-        if(notificacion.tematica.length > 0){
-            for(let val of notificacion.tematica){
-                let obj = {
-                    notificacionId: resultNotificacion.id,
-                    tematicaId: val.id
-                }
-
-                arrTematica.push(obj)
-            }
-        }
-        
-        await NotificacionXTematica.bulkCreate(arrTematica,{ transaction: t })
-     
-    }
+  
 
 
         let arrDevices = []
 
-        let arrFinal = []
         let flag = 0
         let result
         for(let val of usuarios){
         if(flag === 0){
-          result = await NotificacionXClub.create({clubId: val.clubId,notificacionId: resultNotificacion.id},{ transaction: t })
+          result = await DestinatarioDocumentacion.create({solicituddocumentoId: resultNotificacion.id,clubId: val.clubId,usuarioId:val.usuarioId,documentacionId:null,estadodocumentacionId:3},{ transaction: t })
          flag = 1
         }
 
@@ -55,15 +42,7 @@ exports.crearSolicitud = async(req,res) => {
 
         if( val.usuarioId !== req.auth.userId){
 
-            let obj = {
-                notificacionxclubId: result.id,
-                clubxusuarioId: val.id,
-                usuarioId: req.auth.userId
-            }
-    
-    
-            arrFinal.push(obj)
-
+     
 
 
             if(val.usuario !== null && val.usuario.idDevice !== null &&  val.usuario.idDevice !== '' ){
@@ -81,16 +60,7 @@ exports.crearSolicitud = async(req,res) => {
     }
 
 
-    console.log('arrrfinal',arrFinal)
-
-
-    console.log('aca los iddevices',arrDevices)
-
-
-
-    
-
-    await NotXClubXUsuario.bulkCreate(arrFinal,{ transaction: t })
+ 
       
 
 
@@ -100,8 +70,8 @@ exports.crearSolicitud = async(req,res) => {
     };
 
 
-    let idString = resultNotificacion.id
-    let idModificado = idString.toString()
+  //  let idString = resultNotificacion.id
+   // let idModificado = idString.toString()
 
     const message_notification = {
         notification: {
@@ -109,7 +79,9 @@ exports.crearSolicitud = async(req,res) => {
             body: notificacion.descripcion
         },
         data:{
-            idNoti: idModificado
+            idNoti: 'prueba'
+
+           // idNoti: idModificado
         }
     };
 
@@ -130,7 +102,7 @@ exports.crearSolicitud = async(req,res) => {
 
       await t.commit();
 
-        res.status(200).json({message: 'enviadooo',notificacionId: resultNotificacion})
+        res.status(200).json({message: 'enviadooo'})
 
 
     }catch(err){
