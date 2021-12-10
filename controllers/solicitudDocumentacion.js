@@ -119,7 +119,6 @@ exports.crearSolicitud = async(req,res) => {
 
 exports.cargarDocumento = async(req,res) => {
     
-    const t = await db.transaction()
     try{
 
      
@@ -143,20 +142,19 @@ exports.cargarDocumento = async(req,res) => {
 
           if(!solicitudExist)throw new Error('la solicitud no existe')
 
-          const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/image/${imagen}`},{ transaction: t })
+          const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/image/${imagen}`})
           
 
-          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id},{ where: { solicituddocumentoId: idSolicitud} },{ transaction: t })
+          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id},{ where: { solicituddocumentoId: idSolicitud} })
 
 
-      await t.commit();
-
+     
         res.status(200).json({message: 'enviadooo'})
 
 
     }catch(err){
 
-       await t.rollback();
+   ;
 
         res.status(400).json({error: err.message})
     }
