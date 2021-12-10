@@ -38,9 +38,6 @@ const SolicitudDocumento = db.define('solicitudDocumento', {
 });
 
 
-SolicitudDocumento.belongsTo( Documentacion,{as:"documentacion",foreignKey: 'documentacionId'})
-
-SolicitudDocumento.belongsTo(EstadoDocumento,{as:"estadodocumento",foreignKey: 'estadodocumentoId'})
 
 
 
