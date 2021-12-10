@@ -2,6 +2,7 @@ const SolicitudDocumento = require("../models/SolicitudDocumento")
 const moment = require('moment')
 const DestinatarioDocumentacion = require("../models/DestinatarioDocumentacion")
 const admin = require('firebase-admin')
+const db = require('../config/db')
 
 exports.crearSolicitud = async(req,res) => {
     
