@@ -4,6 +4,7 @@ const db = require('../config/db');
 const SolicitudDocumento = require('./SolicitudDocumento');
 const Club = require('./Club');
 const Documentacion = require('./Documentacion');
+const EstadoDocumento = require('./EstadoDocumento');
 
 
 
@@ -22,6 +23,7 @@ DestinatarioDocumentacion.belongsTo(SolicitudDocumento,{as:"solicituddocumento",
 DestinatarioDocumentacion.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 DestinatarioDocumentacion.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 DestinatarioDocumentacion.belongsTo(Documentacion,{as:"documentacion",foreignKey: 'documentacionId'})
+DestinatarioDocumentacion.belongsTo(EstadoDocumento,{as:"estadodocumentacion",foreignKey: 'estadodocumentacionId'})
 
 
 
