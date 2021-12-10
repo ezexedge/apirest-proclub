@@ -16,7 +16,7 @@ const CategoriaDocumentacion = db.define('categoriadocumentacion', {
 
 
 
-Categoria.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
+CategoriaDocumentacion.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 
 
 
