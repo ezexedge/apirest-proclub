@@ -124,7 +124,7 @@ exports.cargarDocumento = async(req,res) => {
 
      
 
-        let idSolicitud = req.param.solicitud
+        let idSolicitud = req.params.solicitud
         
 
 
