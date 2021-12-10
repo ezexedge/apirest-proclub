@@ -4,6 +4,7 @@ const db = require('../config/db');
 const Documentacion = require('../models/Documentacion')
 const moment = require('moment');
 const EstadoDocumento = require('./EstadoDocumento');
+const Usuario = require('./Usuario');
 
 
 
@@ -38,6 +39,8 @@ const SolicitudDocumento = db.define('solicitudDocumento', {
 });
 
 
+
+SolicitudDocumento.belongsTo(Usuario,{as:"enviadopor",foreignKey: 'enviadoporId'})
 
 
 
