@@ -530,6 +530,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     //documentacion
     router.post('/documentacion/crear',authSignupControllers.requireSignin,solicitudControllers.crearSolicitud)
 
+    router.post('/documentacion/upload/:solicitud',authSignupControllers.requireSignin,imageControllers.subirArchivos,solicitudControllers.cargarDocumento)
 
     //notificacion
 

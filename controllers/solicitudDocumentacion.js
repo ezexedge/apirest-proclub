@@ -3,6 +3,7 @@ const moment = require('moment')
 const DestinatarioDocumentacion = require("../models/DestinatarioDocumentacion")
 const admin = require('firebase-admin')
 const db = require('../config/db')
+const Documentacion = require('../models/Documentacion')
 
 exports.crearSolicitud = async(req,res) => {
     
@@ -80,7 +81,7 @@ exports.crearSolicitud = async(req,res) => {
             body: notificacion.descripcion
         },
         data:{
-            idNoti: 'prueba'
+            idSolicitud: 'prueba'
 
            // idNoti: idModificado
         }
@@ -99,6 +100,53 @@ exports.crearSolicitud = async(req,res) => {
 
     }
         
+
+
+      await t.commit();
+
+        res.status(200).json({message: 'enviadooo'})
+
+
+    }catch(err){
+
+       await t.rollback();
+
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+
+exports.cargarDocumento = async(req,res) => {
+    
+    const t = await db.transaction()
+    try{
+
+     
+
+        let idSolicitud = req.param.solicitud
+        
+
+
+        if(!req.file)throw new Error('La imagen es obligatoria')
+
+
+
+          let imagen = req.file.filename
+
+
+          const solicitudExist = await SolicitudDocumento.findOne({
+              where:{
+                  id: idSolicitud
+              }
+          })
+
+          if(!solicitudExist)throw new Error('la solicitud no existe')
+
+          const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/image/${imagen}`},{ transaction: t })
+          
+
+          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id},{ where: { solicituddocumentoId: idSolicitud },{ transaction: t })
 
 
       await t.commit();
