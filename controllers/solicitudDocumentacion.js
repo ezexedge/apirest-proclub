@@ -146,7 +146,7 @@ exports.cargarDocumento = async(req,res) => {
           const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/image/${imagen}`},{ transaction: t })
           
 
-          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id},{ where: { solicituddocumentoId: idSolicitud },{ transaction: t })
+          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id},{ where: { solicituddocumentoId: idSolicitud} },{ transaction: t })
 
 
       await t.commit();
