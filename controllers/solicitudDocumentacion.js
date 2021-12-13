@@ -339,3 +339,96 @@ exports.getEstados = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+
+
+
+exports.aprobado = async(req,res) => {
+    try{
+
+
+   const solicitud = req.params.solicitud
+   const usuario =  req.params.usuario
+    
+
+
+   const usuarioExist =  await Usuario.findOne({
+    where:{
+        id: usuario
+    }
+})
+
+
+if(!usuarioExist)throw new Error('el usuario no existe')
+
+
+
+
+
+    const documentacionExist =  await DestinatarioDocumentacion.findOne({
+        where:{
+            solicituddocumentoId: solicitud,
+            usuarioId:usuario
+        }
+    })
+
+    if(!documentacionExist)throw new Error('la documentacion no existe')
+
+
+    
+
+
+         await DestinatarioDocumentacion.update({estadodocumentacionId: 3},{ where: { solicituddocumentoId: solicitud , usuarioId: usuario } })
+
+        res.status(200).json({message: 'aprobado'})
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
+exports.rechazado = async(req,res) => {
+    try{
+
+
+   const solicitud = req.params.solicitud
+   const usuario =  req.params.usuario
+    
+
+
+   const usuarioExist =  await Usuario.findOne({
+    where:{
+        id: usuario
+    }
+})
+
+
+if(!usuarioExist)throw new Error('el usuario no existe')
+
+
+
+
+
+    const documentacionExist =  await DestinatarioDocumentacion.findOne({
+        where:{
+            solicituddocumentoId: solicitud,
+            usuarioId:usuario
+        }
+    })
+
+    if(!documentacionExist)throw new Error('la documentacion no existe')
+
+
+    
+
+
+         await DestinatarioDocumentacion.update({estadodocumentacionId: 1},{ where: { solicituddocumentoId: solicitud , usuarioId: usuario } })
+
+        res.status(200).json({message: 'rechazado'})
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}

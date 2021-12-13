@@ -1841,6 +1841,53 @@
  *        description: OK
 
  */  
+
+///documentacion/rechazado/:usuario/:solicitud
+
+
+     /**
+ * @swagger
+ * /api/documentacion/aprobado/{usuario}/{solicitud}:
+ *   put:
+ *     summary: put de aprobar documento
+ *     tags: [Documentacion]
+ *     parameters:
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un usuario existente.
+ *      - in: path
+ *        name: solicitud
+ *        type: number
+ *        description: agregar el id de una solicitud
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
+     /**
+ * @swagger
+ * /api/documentacion/rechazado/{usuario}/{solicitud}:
+ *   put:
+ *     summary: put de rechazar documento
+ *     tags: [Documentacion]
+ *     parameters:
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un usuario existente.
+ *      - in: path
+ *        name: solicitud
+ *        type: number
+ *        description: agregar el id de una solicitud
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
+
      ///documentacion/solicitud/:id
 
       /**
