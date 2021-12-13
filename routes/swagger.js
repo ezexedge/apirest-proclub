@@ -1792,7 +1792,7 @@
      /**
  * @swagger
  * /api/documentacion/estado/{club}/{usuario}/{estado}:
- *   post:
+ *   get:
  *     summary: get de las solicitudes de dociumentacion segun por el estado
  *     tags: [Documentacion]
  *     parameters:
