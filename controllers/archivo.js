@@ -7,7 +7,7 @@ const configuracionMulter = {
     limits : { fileSize : 5 * 1024 * 1024 },
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, __dirname+'../../archivos/');
+            cb(null, __dirname+'../../uploads/');
         },
         filename: (req, file, cb) => {
           
@@ -53,5 +53,8 @@ const configuracionMulter = {
     res.sendFile(path.join(__dirname, `../archivos/${id}`));
   }
   
+
+
+
 
 
