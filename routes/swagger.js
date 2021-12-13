@@ -1786,6 +1786,35 @@
 
  */
 
+
+ ///documentacion/estado/:club/:usuario/:estado
+
+     /**
+ * @swagger
+ * /api/documentacion/estado/{club}/{usuario}/{estado}:
+ *   post:
+ *     summary: get de las solicitudes de dociumentacion segun por el estado
+ *     tags: [Documentacion]
+ *     parameters:
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un usuario existente.
+ *      - in: path
+ *        name: club
+ *        type: number
+ *        description: agregar el id de un club existente 
+ *      - in: path
+ *        name: estado
+ *        type: number
+ *        description: agregar el id de un estado
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
+
      /**
  * @swagger
  * /api/agregar-club/{usuario}/{club}:
