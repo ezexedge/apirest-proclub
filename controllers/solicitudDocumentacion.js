@@ -185,6 +185,8 @@ exports.getByEstado = async(req,res) => {
             }
         })
 
+        
+
         res.status(200).json(respuesta)
 
     }catch(err){
