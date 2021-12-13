@@ -5,6 +5,7 @@ const admin = require('firebase-admin')
 const db = require('../config/db')
 const Documentacion = require('../models/Documentacion')
 const EstadoDocumento = require("../models/EstadoDocumento")
+const Usuario = require("../models/Usuario")
 
 
 exports.crearSolicitud = async(req,res) => {
