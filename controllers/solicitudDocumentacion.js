@@ -185,7 +185,11 @@ exports.getByEstado = async(req,res) => {
                 as: 'solicituddocumento',
                 include:[{
                     model: Usuario,
-                    as: 'enviadopor'
+                    as: 'enviadopor',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
                 }]
             }
         ],
