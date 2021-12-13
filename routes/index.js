@@ -531,7 +531,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.post('/documentacion/crear',authSignupControllers.requireSignin,solicitudControllers.crearSolicitud)
 
     router.post('/documentacion/upload/:solicitud',authSignupControllers.requireSignin,imageControllers.subirArchivos,solicitudControllers.cargarDocumento)
-    router.post('/documentacion/estado/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
+    router.get('/documentacion/estado/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
 
     //notificacion
 
