@@ -1614,7 +1614,7 @@
 
                 /**
  * @swagger
- * /api/documentacion/{nombre}:
+ * /api/documento/{nombre}:
  *   get:
  *     summary: get de un documento
  *     tags: [Documentacion]
