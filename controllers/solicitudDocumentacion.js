@@ -7,6 +7,7 @@ const Documentacion = require('../models/Documentacion')
 const EstadoDocumento = require("../models/EstadoDocumento")
 const Usuario = require("../models/Usuario")
 const Persona = require("../models/Persona")
+const Club = require('../models/Club')
 
 
 exports.crearSolicitud = async(req,res) => {
@@ -180,6 +181,7 @@ exports.getByEstado = async(req,res) => {
 
         const espacio = req.params.estado
         const club = req.params.club
+        const usuario =  req.params.usuario
 
         const result = await EstadoDocumento.findOne({
             where:{
@@ -190,6 +192,24 @@ exports.getByEstado = async(req,res) => {
     
     
         if(!result) throw new Error('el estado ingresado no existe')
+
+        const usuarioExist =  await Usuario.findOne({
+            where:{
+                id: usuario
+            }
+        })
+
+
+        if(!usuarioExist)throw new Error('el usuario no existe')
+
+
+        const clubExist =  await Club.findOne({
+            where:{
+                id:club
+            }
+        })
+
+        if(!clubExist)throw new Error('el club no existe')
 
 
         const respuesta  = await DestinatarioDocumentacion.findAll({
@@ -208,7 +228,8 @@ exports.getByEstado = async(req,res) => {
         ],
             where:{
                 clubId: club,
-                estadodocumentacionId: espacio
+                estadodocumentacionId: espacio,
+                usuarioId: usuario
             }
         })
 
