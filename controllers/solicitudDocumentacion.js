@@ -145,6 +145,17 @@ exports.cargarDocumento = async(req,res) => {
 
           if(!solicitudExist)throw new Error('la solicitud no existe')
 
+          
+
+          const usuarioExist = await Usuario.findOne({
+              where:{
+                  id: usuario
+              }
+          })
+
+
+          if(!usuarioExist)throw new Error('el usuario no existe')
+
           const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/documento/${imagen}`})
           
 
