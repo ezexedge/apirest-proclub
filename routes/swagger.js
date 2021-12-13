@@ -1656,11 +1656,9 @@
  *           schema:
  *             type: object
  *             properties:
- *              imagen:
+ *              documentacion:
  *                type: string
  *                format: binary
- *              data:
- *                type: object
  *     responses:
  *       200:
  *         description: persona by its id
