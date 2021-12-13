@@ -235,3 +235,33 @@ exports.getSolicitudById = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+exports.eliminarDocumento = async(req,res) => {
+    try{
+
+
+   const solicitud = req.params.solicitud
+    const club = req.params.club
+    const usuario =  req.params.usuario
+
+
+    const documentacionExist =  await DestinatarioDocumentacion.findOne({
+        where:{
+            solicituddocumentoId: solicitud,
+            clubId: club,
+            usuarioId: usuario
+        }
+    })
+
+    if(!documentacionExist)throw new Error('la documentacion no existe')
+
+
+         await DestinatarioDocumentacion.update({documentacionId:null ,estadodocumentacionId: 1})
+
+        res.status(200).json(resultExist)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
