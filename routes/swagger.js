@@ -1587,23 +1587,7 @@
  */
 
 
-  /**
- * @swagger
- * /api/tipo-documento:
- *   get:
- *     summary: get de todos los tipo de documento
- *     tags: [TipoDocumento]
- *     responses:
- *       200:
- *         description: get all tipo de documento
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/TipoDocumento'
 
- */
 
 
 
@@ -1621,6 +1605,33 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/TipoDocumento'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+                /**
+ * @swagger
+ * /api/documentacion/{nombre}:
+ *   get:
+ *     summary: get de un documento
+ *     tags: [Documentacion]
+ *     parameters:
+ *       - in : path
+ *         name: nombre
+ *         description: ejemplo de nombre-->    Veq0U4Ksg.pdf
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: tipo direccion by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Direccion'
  *       400:
  *         description: post can not be found
  * 
