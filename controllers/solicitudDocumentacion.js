@@ -4,6 +4,8 @@ const DestinatarioDocumentacion = require("../models/DestinatarioDocumentacion")
 const admin = require('firebase-admin')
 const db = require('../config/db')
 const Documentacion = require('../models/Documentacion')
+const EstadoDocumento = require("../models/EstadoDocumento")
+
 
 exports.crearSolicitud = async(req,res) => {
     
@@ -154,6 +156,38 @@ exports.cargarDocumento = async(req,res) => {
 
    ;
 
+        res.status(400).json({error: err.message})
+    }
+}
+
+exports.getByEstado = async(req,res) => {
+    try{
+
+
+        const espacio = req.params.estado
+        const club = req.params.club
+
+        const result = await EstadoDocumento.findOne({
+            where:{
+                id: espacio
+            }
+        })
+
+    
+    
+        if(!result) throw new Error('el estado ingresado no existe')
+
+
+        const respuesta  = await DestinatarioDocumentacion.findAll({
+            where:{
+                clubId: club,
+                estadodocumentacionId: espacio
+            }
+        })
+
+        res.status(200).json(respuesta)
+
+    }catch(err){
         res.status(400).json({error: err.message})
     }
 }
