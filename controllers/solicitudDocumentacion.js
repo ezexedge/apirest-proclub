@@ -14,7 +14,7 @@ exports.crearSolicitud = async(req,res) => {
 
         let usuario =  req.auth.userId
         
-        const {notificacion,usuarios} = req.body
+        const {solicitud,usuarios} = req.body
 
 
 
@@ -23,9 +23,7 @@ exports.crearSolicitud = async(req,res) => {
 
        
 
-        console.log('aqui notificacion',notificacion)
-        console.log('aquii usuarios',usuarios)
-        const resultNotificacion  =  await SolicitudDocumento.create({titulo:notificacion.titulo,descripcion:notificacion.descripcion,hora:hora,enviadoporId:usuario},{ transaction: t })
+        const resultNotificacion  =  await SolicitudDocumento.create({titulo:solicitud.titulo,descripcion:solicitud.descripcion,hora:hora,enviadoporId:usuario},{ transaction: t })
       
   
 
@@ -36,7 +34,7 @@ exports.crearSolicitud = async(req,res) => {
         let result
         for(let val of usuarios){
         if(flag === 0){
-          result = await DestinatarioDocumentacion.create({solicituddocumentoId: resultNotificacion.id,clubId: val.clubId,usuarioId:val.usuarioId,documentacionId:null,estadodocumentacionId:3},{ transaction: t })
+          result = await DestinatarioDocumentacion.create({solicituddocumentoId: resultNotificacion.id,clubId: val.clubId,usuarioId:val.usuarioId,documentacionId:null,estadodocumentacionId:1},{ transaction: t })
          flag = 1
         }
 
@@ -77,8 +75,8 @@ exports.crearSolicitud = async(req,res) => {
 
     const message_notification = {
         notification: {
-            title:  notificacion.titulo ,
-            body: notificacion.descripcion
+            title:  solicitud.titulo ,
+            body: solicitud.descripcion
         },
         data:{
             idSolicitud: 'prueba'
@@ -145,7 +143,7 @@ exports.cargarDocumento = async(req,res) => {
           const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/image/${imagen}`})
           
 
-          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id},{ where: { solicituddocumentoId: idSolicitud} })
+          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud} })
 
 
      
