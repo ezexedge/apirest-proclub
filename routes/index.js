@@ -532,6 +532,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
     router.post('/documentacion/upload/:solicitud',authSignupControllers.requireSignin,imageControllers.subirArchivos,solicitudControllers.cargarDocumento)
     router.get('/documentacion/estado/:club/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
+    router.get('/documentacion/solicitud/:id',authSignupControllers.requireSignin,solicitudControllers.getSolicitudById)
 
     //notificacion
 

@@ -209,3 +209,29 @@ exports.getByEstado = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+
+exports.getSolicitudById = async(req,res) => {
+    try{
+
+
+   const id = req.params.id
+
+
+   const resultExist =  await SolicitudDocumento.findOne({
+       where:{
+           id: id
+       }
+   })
+        
+   
+
+   if(!resultExist)throw new Error('el documento no existe')
+
+        res.status(200).json(resultExist)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
