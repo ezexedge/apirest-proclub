@@ -1642,7 +1642,7 @@
 
                             /**
  * @swagger
- * /api/documentacion/upload/{solicitud}:
+ * /api/documentacion/upload/{solicitud}/{usuario}:
  *   post:
  *     summary: cargar documento de una solicitud
  *     tags: [Documentacion]
@@ -1650,6 +1650,9 @@
  *       - in : path
  *         name: solicitud
  *         description: id de una solicitud
+ *       - in : path
+ *         name: usuario
+ *         description: id de un usuario
  *     requestBody:
  *       content:
  *         multipart/form-data:

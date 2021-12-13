@@ -126,6 +126,7 @@ exports.cargarDocumento = async(req,res) => {
      
 
         let idSolicitud = req.params.solicitud
+        let usuario =  req.params.usuario
         
 
 
@@ -147,7 +148,7 @@ exports.cargarDocumento = async(req,res) => {
           const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/documento/${imagen}`})
           
 
-          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud} })
+          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud ,usuarioId: usuario} })
 
 
      
