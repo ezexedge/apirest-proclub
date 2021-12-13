@@ -242,15 +242,12 @@ exports.eliminarDocumento = async(req,res) => {
 
 
    const solicitud = req.params.solicitud
-    const club = req.params.club
-    const usuario =  req.params.usuario
+    
 
 
     const documentacionExist =  await DestinatarioDocumentacion.findOne({
         where:{
             solicituddocumentoId: solicitud,
-            clubId: club,
-            usuarioId: usuario
         }
     })
 
@@ -259,7 +256,7 @@ exports.eliminarDocumento = async(req,res) => {
 
          await DestinatarioDocumentacion.update({documentacionId:null ,estadodocumentacionId: 1})
 
-        res.status(200).json(resultExist)
+        res.status(200).json({message: 'documento eliminado'})
 
     }catch(err){
         res.status(400).json({error: err.message})

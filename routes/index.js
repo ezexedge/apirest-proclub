@@ -534,7 +534,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.get('/documentacion/estado/:club/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
     router.get('/documentacion/solicitud/:id',authSignupControllers.requireSignin,solicitudControllers.getSolicitudById)
     router.get('/documento/:nombre',archivoControllers.getArchivo)
-    router.delete('/documentacion/:club/:usuario/:solicitud',authSignupControllers.requireSignin,solicitudControllers.eliminarDocumento)
+    router.delete('/documentacion/eliminar/:solicitud',authSignupControllers.requireSignin,solicitudControllers.eliminarDocumento)
 
     //notificacion
 
