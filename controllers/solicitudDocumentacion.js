@@ -200,6 +200,7 @@ exports.getByEstado = async(req,res) => {
             }
         })
 
+        /*
         let obj = {
         id: respuesta.id,
         solicituddocumentoId: respuesta.solicituddocumentoId,
@@ -213,8 +214,8 @@ exports.getByEstado = async(req,res) => {
         hora: respuesta.solicituddocumento.hora,
         enviadoPor: `${respuesta.enviadopor.persona.nombre} ${respuesta.enviadopor.persona.apellido}`
         }
-
-        res.status(200).json(obj)
+*/
+        res.status(200).json(respuesta)
 
     }catch(err){
         res.status(400).json({error: err.message})
