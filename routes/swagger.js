@@ -1815,6 +1815,60 @@
  */  
 
 
+//documentacion/eliminar/:club/:usuario/:solicitud
+
+     /**
+ * @swagger
+ * /api/documentacion/eliminar/{club}/{usuario}/{solicitud}:
+ *   delete:
+ *     summary: get de las solicitudes de dociumentacion segun por el estado
+ *     tags: [Documentacion]
+ *     parameters:
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un usuario existente.
+ *      - in: path
+ *        name: club
+ *        type: number
+ *        description: agregar el id de un club existente 
+ *      - in: path
+ *        name: solicitud
+ *        type: number
+ *        description: agregar el id de una solicitud
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+     ///documentacion/solicitud/:id
+
+      /**
+ * @swagger
+ * /api/documentacion/solicitud/{id}:
+ *   get:
+ *     summary: get de una solicitud por su id
+ *     tags: [Documentacion]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id de una solicitud
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: usuario by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
      /**
  * @swagger
  * /api/agregar-club/{usuario}/{club}:

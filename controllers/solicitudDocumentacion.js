@@ -275,7 +275,29 @@ exports.eliminarDocumento = async(req,res) => {
 
 
    const solicitud = req.params.solicitud
+   const usuario =  req.params.usuario
+   const club = req.params.club
     
+
+
+   const usuarioExist =  await Usuario.findOne({
+    where:{
+        id: usuario
+    }
+})
+
+
+if(!usuarioExist)throw new Error('el usuario no existe')
+
+
+const clubExist =  await Club.findOne({
+    where:{
+        id:club
+    }
+})
+
+if(!clubExist)throw new Error('el club no existe')
+
 
 
     const documentacionExist =  await DestinatarioDocumentacion.findOne({
@@ -287,7 +309,10 @@ exports.eliminarDocumento = async(req,res) => {
     if(!documentacionExist)throw new Error('la documentacion no existe')
 
 
-         await DestinatarioDocumentacion.update({documentacionId:null ,estadodocumentacionId: 1},{ where: { solicituddocumentoId: solicitud} })
+    
+
+
+         await DestinatarioDocumentacion.update({documentacionId:null ,estadodocumentacionId: 1},{ where: { solicituddocumentoId: solicitud , usuarioId: usuario , clubId: club} })
 
         res.status(200).json({message: 'documento eliminado'})
 
