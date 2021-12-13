@@ -1638,6 +1638,43 @@
  * 
  */
 
+                ///documentacion/upload/:solicitud
+
+                            /**
+ * @swagger
+ * /api/documentacion/upload/{solicitud}:
+ *   post:
+ *     summary: cargar documento de una solicitud
+ *     tags: [Documentacion]
+ *     parameters:
+ *       - in : path
+ *         name: solicitud
+ *         description: id de una solicitud
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              imagen:
+ *                type: string
+ *                format: binary
+ *              data:
+ *                type: object
+ *     responses:
+ *       200:
+ *         description: persona by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/PersonaModificar'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
 
   /**
  * @swagger
