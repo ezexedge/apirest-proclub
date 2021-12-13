@@ -6,6 +6,7 @@ const db = require('../config/db')
 const Documentacion = require('../models/Documentacion')
 const EstadoDocumento = require("../models/EstadoDocumento")
 const Usuario = require("../models/Usuario")
+const Persona = require("../models/Persona")
 
 
 exports.crearSolicitud = async(req,res) => {
