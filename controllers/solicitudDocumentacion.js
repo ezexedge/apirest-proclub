@@ -179,6 +179,15 @@ exports.getByEstado = async(req,res) => {
 
 
         const respuesta  = await DestinatarioDocumentacion.findAll({
+            include:[{
+                model: SolicitudDocumento,
+                as: 'solicituddocumento',
+                include:[{
+                    model: Usuario,
+                    as: 'enviadopor'
+                }]
+            }
+        ],
             where:{
                 clubId: club,
                 estadodocumentacionId: espacio
