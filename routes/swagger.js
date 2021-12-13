@@ -1605,19 +1605,15 @@
 
  */
 
+
+
+
         /**
  * @swagger
- * /api/tipo-documento/{id}:
+ * /api/documentacion/estados:
  *   get:
- *     summary: get tipo documento by id
- *     tags: [TipoDocumento]
- *     parameters:
- *       - in : path
- *         name: id
- *         description: get tipo documento by id
- *         schema:
- *           type: integer
- *         required: true
+ *     summary: estados de documentacion
+ *     tags: [Documentacion]
  *     responses:
  *       200:
  *         description: tipo documento by its id
@@ -5129,62 +5125,7 @@
  * 
  */
    
-                                      /**
- * @swagger
- * /api/documento/{club}/{usuario}:
- *    post:
- *     summary: get archivo by id
- *     tags: [Documento <---falta terminar]
- * 
- */
 
-
-                                      /**
- * @swagger
- * /api/documento/club/{club}:
- *    get:
- *     summary: get archivo by id
- *     tags: [Documento <---falta terminar]
- * 
- */
-                                   /**
- * @swagger
- * /api/documento/club/usuario/{club}/{usuario}:
- *    put:
- *     summary: get archivo by id
- *     tags: [Documento <---falta terminar]
- * 
- */
-
-
-                                      /**
- * @swagger
- * /api/documento/club/usuario/{club}/{usuario}:
- *    get:
- *     summary: get archivo by id
- *     tags: [Documento <---falta terminar]
- * 
- */
-
-                                      /**
- * @swagger
- * /api/documento/club/usuario/{club}/{usuario}:
- *    delete:
- *     summary: get archivo by id
- *     tags: [Documento <---falta terminar]
- * 
- */
-
-
-
-                                      /**
- * @swagger
- * /api/documento/club/usuario/{club}/{usuario}/{estado}:
- *    put:
- *     summary: get archivo by id
- *     tags: [Documento <---falta terminar]
- * 
- */
 
 
 
