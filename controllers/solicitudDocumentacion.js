@@ -208,10 +208,7 @@ exports.getByEstado = async(req,res) => {
         usuarioId: respuesta.usuarioId,
         documentacionId: respuesta.documentacionId,
         estadodocumentacionId: respuesta.estadodocumentacionId,
-        titulo: respuesta.solicituddocumento.titulo,
-        descripcion: respuesta.solicituddocumento.descripcion,
-        fecha: respuesta.solicituddocumento.fecha,
-        hora: respuesta.solicituddocumento.hora,
+        titulo: respuesta.solicituddocumento,
         enviadoPor: `${respuesta.solicituddocumento.enviadopor.persona.nombre} ${respuesta.solicituddocumento.enviadopor.persona.apellido}`
         }
 
