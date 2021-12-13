@@ -1656,7 +1656,7 @@
  *           schema:
  *             type: object
  *             properties:
- *              documentacion:
+ *              documento:
  *                type: string
  *                format: binary
  *     responses:
