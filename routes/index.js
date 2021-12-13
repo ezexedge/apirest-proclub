@@ -530,9 +530,10 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     //documentacion
     router.post('/documentacion/crear',authSignupControllers.requireSignin,solicitudControllers.crearSolicitud)
 
-    router.post('/documentacion/upload/:solicitud',authSignupControllers.requireSignin,imageControllers.subirArchivos,solicitudControllers.cargarDocumento)
+    router.post('/documentacion/upload/:solicitud',authSignupControllers.requireSignin,archivoControllers.subirArchivos,solicitudControllers.cargarDocumento)
     router.get('/documentacion/estado/:club/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
     router.get('/documentacion/solicitud/:id',authSignupControllers.requireSignin,solicitudControllers.getSolicitudById)
+    router.get('/documento/:nombre',archivoControllers.getArchivo)
 
     //notificacion
 
@@ -957,7 +958,6 @@ router.put('/documento/club/usuario/:club/:usuario',authSignupControllers.requir
 
 router.get('/documento/club/usuario/:club/:usuario',authSignupControllers.requireSignin,documentoControllers.getAllByClubByUser)
 
-router.get('/documento/:nombre',imageControllers.getDocumento)
 
 
 router.delete('/documento/club/usuario/:club/:usuario',authSignupControllers.requireSignin,documentoControllers.eliminar)

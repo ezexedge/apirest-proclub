@@ -144,7 +144,7 @@ exports.cargarDocumento = async(req,res) => {
 
           if(!solicitudExist)throw new Error('la solicitud no existe')
 
-          const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/image/${imagen}`})
+          const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/documento/${imagen}`})
           
 
           await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud} })
