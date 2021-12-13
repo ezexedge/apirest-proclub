@@ -957,6 +957,7 @@ router.put('/documento/club/usuario/:club/:usuario',authSignupControllers.requir
 
 router.get('/documento/club/usuario/:club/:usuario',authSignupControllers.requireSignin,documentoControllers.getAllByClubByUser)
 
+router.get('/documento/:nombre',imageControllers.getDocumento)
 
 
 router.delete('/documento/club/usuario/:club/:usuario',authSignupControllers.requireSignin,documentoControllers.eliminar)

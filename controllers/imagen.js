@@ -54,3 +54,9 @@ const configuracionMulter = {
     res.sendFile(path.join(__dirname, `../uploads/${img}`));
   }
   
+
+  exports.getDocumento =  (req,res) => {
+    let img = req.params.nombre
+    res.sendFile(path.join(__dirname, `../uploads/${img}`));
+  }
+  
