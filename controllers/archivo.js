@@ -50,7 +50,7 @@ const configuracionMulter = {
   
   exports.getArchivo =  (req,res) => {
     let id = req.params.nombre
-    res.sendFile(path.join(__dirname, `../archivos/${id}`));
+    res.sendFile(path.join(__dirname, `../uploads/${id}`));
   }
   
 
