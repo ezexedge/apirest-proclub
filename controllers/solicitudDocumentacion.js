@@ -247,14 +247,14 @@ exports.eliminarDocumento = async(req,res) => {
 
     const documentacionExist =  await DestinatarioDocumentacion.findOne({
         where:{
-            solicituddocumentoId: solicitud,
+            solicituddocumentoId: solicitud
         }
     })
 
     if(!documentacionExist)throw new Error('la documentacion no existe')
 
 
-         await DestinatarioDocumentacion.update({documentacionId:null ,estadodocumentacionId: 1})
+         await DestinatarioDocumentacion.update({documentacionId:null ,estadodocumentacionId: 1},{ where: { solicituddocumentoId: solicitud} })
 
         res.status(200).json({message: 'documento eliminado'})
 
