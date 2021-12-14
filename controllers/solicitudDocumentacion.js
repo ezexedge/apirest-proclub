@@ -397,15 +397,22 @@ if(!clubExist)throw new Error('el club no existe')
            }
        })
 
+
+       await SolicitudXDocumentos.destroy({
+           where:{
+            documentacionId : documento
+           }
+       })
+
     
-        const totalDocumentos = await SolicitudXDocumentos.findAll({
+        const totalDocumentos = await SolicitudXDocumentos.findAndCountAll({
             where:{
                 solicituddocumentoId: solicitud,
                 usuarioId: usuario
             }
         })
 
-        if(totalDocumentos.length === 0){
+        if(totalDocumentos.count === 0){
             await DestinatarioDocumentacion.update({estadodocumentacionId: 1},{ where: { solicituddocumentoId: solicitud , usuarioId: usuario , clubId: club} })
 
         }
