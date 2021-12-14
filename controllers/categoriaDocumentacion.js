@@ -11,7 +11,7 @@ exports.getAll = async (req,res) => {
         
         const result =   await CategoriaDocumentacion.findAll({
             where:{
-                id: club
+                clubId: club
             }
         }) 
       
