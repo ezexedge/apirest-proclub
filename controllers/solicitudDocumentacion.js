@@ -302,9 +302,6 @@ exports.getSolicitudById = async(req,res) => {
                as: 'persona'
            }]
        },{
-           model: Documentacion,
-           as: 'documentacion'
-       },{
            model: EstadoDocumento,
            as: 'estadodocumentacion'
        }],
