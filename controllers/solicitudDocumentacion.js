@@ -290,6 +290,12 @@ exports.getSolicitudById = async(req,res) => {
                model: Persona,
                as: 'persona'
            }]
+       },{
+           model: Documentacion,
+           as: 'documentacion'
+       },{
+           model: EstadoDocumento,
+           as: 'estadodocumentacion'
        }],
        where:{
         solicituddocumentoId: solicitud,
@@ -301,8 +307,14 @@ exports.getSolicitudById = async(req,res) => {
 
 
    let obj = {
-       titulo : result && result.solicituddocumento &&  result.solicituddocumento.titulo
-   }
+       titulo : result && result.solicituddocumento &&  result.solicituddocumento.titulo,
+       decripcion: result && result.solicituddocumento && result.solicituddocumento.descripcion,
+       fecha: result && result.solicituddocumento && result.solicituddocumento.fecha,
+       hora: result && result.solicituddocumento && result.solicituddocumento.hora,
+       enviadopor: result && result.solicituddocumento && result.solicituddocumento.enviadopor && result.solicituddocumento.enviadopor.persona && `${result.solicituddocumento.enviadopor.persona.nombre} ${result.solicituddocumento.enviadopor.persona.apellido}`,
+       categoria : result && result.solicituddocumento && result.solicituddocumento.categoriadocumento && result.solicituddocumento.categoriadocumento.nombre,
+       documentacionDe: result && result.usuario && result.usuario.persona && `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`
+    }
 
 
    
