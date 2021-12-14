@@ -140,7 +140,7 @@ exports.cargarDocumento = async(req,res) => {
         let idSolicitud = req.params.solicitud
         let usuario =  req.params.usuario
   
-        
+        //ss
         console.log('filleee',req)
 /*
 
