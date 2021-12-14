@@ -151,7 +151,6 @@ exports.cargarDocumento = async(req,res) => {
 
 
 
-          let imagen = req.file.filename
 
 
           const solicitudExist = await SolicitudDocumento.findOne({
