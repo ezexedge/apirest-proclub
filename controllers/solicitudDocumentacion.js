@@ -381,6 +381,15 @@ if(!clubExist)throw new Error('el club no existe')
 
 
 
+    const resultDocumento = await Documentacion.findOne({
+        where: {
+            id: documento
+        }
+    })
+
+    if(!resultDocumento)throw new Error('la documentacion no existe')
+
+
 
        await Documentacion.destroy({
            where:{
