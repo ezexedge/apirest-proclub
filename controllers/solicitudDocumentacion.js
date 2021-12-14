@@ -39,7 +39,7 @@ exports.crearSolicitud = async(req,res) => {
 
        
 
-        const resultNotificacion  =  await SolicitudDocumento.create({titulo:solicitud.titulo,descripcion:solicitud.descripcion,hora:hora,enviadoporId:usuario},{ transaction: t })
+        const resultNotificacion  =  await SolicitudDocumento.create({titulo:solicitud.titulo,descripcion:solicitud.descripcion,hora:hora,enviadoporId:usuario,categoriadocumentoId: categoria},{ transaction: t })
       
   
 
