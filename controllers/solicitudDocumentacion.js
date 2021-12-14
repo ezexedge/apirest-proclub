@@ -313,12 +313,15 @@ exports.getSolicitudById = async(req,res) => {
        hora: result && result.solicituddocumento && result.solicituddocumento.hora,
        enviadopor: result && result.solicituddocumento && result.solicituddocumento.enviadopor && result.solicituddocumento.enviadopor.persona && `${result.solicituddocumento.enviadopor.persona.nombre} ${result.solicituddocumento.enviadopor.persona.apellido}`,
        categoria : result && result.solicituddocumento && result.solicituddocumento.categoriadocumento && result.solicituddocumento.categoriadocumento.nombre,
-       documentacionDe: result && result.usuario && result.usuario.persona && `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`
+       documentacionDe: result && result.usuario && result.usuario.persona && `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`,
+       estadoDocumentacion: result && result.estadodocumentacion && result.estadodocumentacion.nombre,
+       documentacion: result && result.documentacion && result.documentacion.pathFile,
+       documentacionFecha: result && result.documentacion && result.documentacion.fechaSubido
     }
 
 
    
-     res.status(200).json(result)
+     res.status(200).json(obj)
 
     }catch(err){
         res.status(400).json({error: err.message})
