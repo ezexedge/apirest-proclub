@@ -306,7 +306,7 @@ exports.getSolicitudById = async(req,res) => {
 
 
    
-     res.status(200).json(obj)
+     res.status(200).json(result)
 
     }catch(err){
         res.status(400).json({error: err.message})
