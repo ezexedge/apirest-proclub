@@ -283,6 +283,13 @@ exports.getSolicitudById = async(req,res) => {
                model: CategoriaDocumentacion,
                as: 'categoriadocumento'
            }]
+       },{
+           model: Usuario,
+           as: 'usuario',
+           include:[{
+               model: Persona,
+               as: 'persona'
+           }]
        }],
        where:{
         solicituddocumentoId: solicitud,
@@ -290,6 +297,8 @@ exports.getSolicitudById = async(req,res) => {
         usuarioId: usuario
        }
    })
+
+
 
 
    
