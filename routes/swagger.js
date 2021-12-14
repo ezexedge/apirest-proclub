@@ -1888,6 +1888,33 @@
  */  
 
 
+
+      /**
+ * @swagger
+ * /api/categoria-documento/{club}:
+ *   get:
+ *     summary: categoria de documentacion by clubid
+ *     tags: [Documentacion]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: usuario by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Usuario'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
      ///documentacion/solicitud/:id
 
       /**
