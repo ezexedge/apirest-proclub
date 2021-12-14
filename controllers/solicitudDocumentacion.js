@@ -398,9 +398,17 @@ if(!clubExist)throw new Error('el club no existe')
        })
 
 
-       await SolicitudXDocumentos.destroy({
+
+
+     const encontrado =   await SolicitudXDocumentos.findOne({
            where:{
             documentacionId : documento
+           }
+       })
+
+       await SolicitudXDocumentos.destroy({
+           where:{
+               id: encontrado.id
            }
        })
 
