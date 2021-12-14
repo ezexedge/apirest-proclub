@@ -1819,7 +1819,7 @@
 
      /**
  * @swagger
- * /api/documentacion/eliminar/{club}/{usuario}/{solicitud}:
+ * /api/documentacion/eliminar/{club}/{usuario}/{solicitud}/{documento}:
  *   delete:
  *     summary: get de las solicitudes de dociumentacion segun por el estado
  *     tags: [Documentacion]
@@ -1832,6 +1832,10 @@
  *        name: club
  *        type: number
  *        description: agregar el id de un club existente 
+ *      - in: path
+ *        name: documento
+ *        type: number
+ *        description: agregar el id de un documento
  *      - in: path
  *        name: solicitud
  *        type: number
