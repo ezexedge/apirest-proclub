@@ -38,13 +38,5 @@ const options = {
   };
 
 
-  const ui = SwaggerUIBundle({
-    url: "http://your.server.com/swagger.json",
   
-    requestInterceptor: (req) => {
-      req.headers.Authorization = "Bearer xxxxxxx"
-      return req
-    }
-  })
-
   module.exports = options
