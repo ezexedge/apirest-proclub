@@ -260,20 +260,29 @@ exports.getSolicitudById = async(req,res) => {
     try{
 
 
-   const id = req.params.id
+   const club = req.params.club
+   const usuario = req.params.usuario
+   const solicitud = req.params.solicitud
 
 
-   const resultExist =  await SolicitudDocumento.findOne({
+
+
+
+   const result =  await DestinatarioDocumentacion.findOne({
+       include:[{
+           model: SolicitudDocumento,
+           as: 'solicituddocumento'
+       }],
        where:{
-           id: id
+        solicituddocumentoId: solicitud,
+        clubId: club,
+        usuarioId: usuario
        }
    })
-        
+
+
    
-
-   if(!resultExist)throw new Error('el documento no existe')
-
-        res.status(200).json(resultExist)
+     res.status(200).json(result)
 
     }catch(err){
         res.status(400).json({error: err.message})
