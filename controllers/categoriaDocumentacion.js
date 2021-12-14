@@ -6,8 +6,14 @@ exports.getAll = async (req,res) => {
 
     try {
 
+
+        const club = req.params.club
         
-        const result =   await CategoriaDocumentacion.findAll() 
+        const result =   await CategoriaDocumentacion.findAll({
+            where:{
+                id: club
+            }
+        }) 
       
         res.status(200).json(result)
       
@@ -53,6 +59,8 @@ exports.crear = async (req,res) => {
 
     try {
 
+
+        const club = req.params.club
         
         const  {nombre} = req.body
 
@@ -67,7 +75,7 @@ exports.crear = async (req,res) => {
         if(existeRubro)throw new Error('la categoria existe')
 
 
-       await  CategoriaDocumentacion.create({nombre:nombre})
+       await  CategoriaDocumentacion.create({nombre:nombre,clubId:club})
 
 
             res.status(200).json({message: 'creado correctamente'})

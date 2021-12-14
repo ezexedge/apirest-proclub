@@ -488,10 +488,10 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.delete('/categoria-documento/:id',authSignupControllers.requireSignin,categoriaDocumentoControllers.eliminar)
 
 
-    router.post('/categoria-documento',authSignupControllers.requireSignin,categoriaDocumentoControllers.crear)
+    router.post('/categoria-documento/:club',authSignupControllers.requireSignin,categoriaDocumentoControllers.crear)
 
 
-    router.get('/categoria-documento',authSignupControllers.requireSignin,categoriaDocumentoControllers.getAll)
+    router.get('/categoria-documento/:club',authSignupControllers.requireSignin,categoriaDocumentoControllers.getAll)
 
 
 
