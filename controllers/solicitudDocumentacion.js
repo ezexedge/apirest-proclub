@@ -139,8 +139,10 @@ exports.cargarDocumento = async(req,res) => {
 
         let idSolicitud = req.params.solicitud
         let usuario =  req.params.usuario
+  
         
-
+        console.log('filleee',req)
+/*
 
         if(!req.file)throw new Error('La imagen es obligatoria')
 
@@ -173,7 +175,7 @@ exports.cargarDocumento = async(req,res) => {
 
           await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud ,usuarioId: usuario} })
 
-
+*/
      
         res.status(200).json({message: 'enviadooo'})
 

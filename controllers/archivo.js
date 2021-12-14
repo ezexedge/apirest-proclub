@@ -25,7 +25,7 @@ const configuracionMulter = {
     
   }
   
-  const upload = multer(configuracionMulter).single('documento');
+  const upload = multer(configuracionMulter).array('documento',12)
   
   exports.subirArchivos = (req, res, next) => {
       upload(req, res, function(error) {
