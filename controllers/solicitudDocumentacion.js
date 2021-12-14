@@ -24,7 +24,7 @@ exports.crearSolicitud = async(req,res) => {
         const {solicitud,usuarios,categoria} = req.body
 
 
-
+/*
         const categoriaExist = await CategoriaDocumentacion.findOne({
             where:{
                 id: categoria
@@ -33,7 +33,7 @@ exports.crearSolicitud = async(req,res) => {
 
         if(!categoriaExist)throw new Error('la categoria no existe')
 
-
+*/
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
 
