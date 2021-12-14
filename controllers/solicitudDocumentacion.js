@@ -145,8 +145,8 @@ exports.cargarDocumento = async(req,res) => {
         
         console.log('filleee',req)
 
-/*
-        if(!req.file)throw new Error('La imagen es obligatoria')
+
+        if(!req.files)throw new Error('debe cargar un archivo')
 
 
 
@@ -172,11 +172,19 @@ exports.cargarDocumento = async(req,res) => {
 
           if(!usuarioExist)throw new Error('el usuario no existe')
 
-          const resultDocumento = await Documentacion.create({pathFile: `https://api.klubo.club/api/documento/${imagen}`})
+
+          for(let val of req.files){
+
+            let resultDocumento = await Documentacion.create({ titulo:val.originalname ,pathFile: `https://api.klubo.club/api/documento/${val.filename}`})
+
+
+          }
+
           
 
           await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud ,usuarioId: usuario} })
-*/
+
+
      
         res.status(200).json({message: 'enviadooo'})
 
