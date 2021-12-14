@@ -1833,13 +1833,13 @@
  *        type: number
  *        description: agregar el id de un club existente 
  *      - in: path
- *        name: documento
- *        type: number
- *        description: agregar el id de un documento
- *      - in: path
  *        name: solicitud
  *        type: number
  *        description: agregar el id de una solicitud
+ *      - in: path
+ *        name: documento
+ *        type: number
+ *        description: agregar el id de un documento
  *     responses:
  *       200:
  *        description: OK
