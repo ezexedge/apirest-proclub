@@ -1919,13 +1919,25 @@
 
       /**
  * @swagger
- * /api/documentacion/solicitud/{id}:
+ * /api/documentacion/solicitud/{club}/{usuario}/{solicitud}:
  *   get:
  *     summary: get de una solicitud por su id
  *     tags: [Documentacion]
  *     parameters:
  *       - in : path
- *         name: id
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: usuario
+ *         description: id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : path
+ *         name: solicitud
  *         description: id de una solicitud
  *         schema:
  *           type: integer
