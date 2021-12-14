@@ -300,9 +300,13 @@ exports.getSolicitudById = async(req,res) => {
 
 
 
+   let obj = {
+       titulo : result && result.solicituddocumento &&  result.solicituddocumento.titulo
+   }
+
 
    
-     res.status(200).json(result)
+     res.status(200).json(obj)
 
     }catch(err){
         res.status(400).json({error: err.message})
