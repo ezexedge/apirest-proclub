@@ -271,7 +271,18 @@ exports.getSolicitudById = async(req,res) => {
    const result =  await DestinatarioDocumentacion.findOne({
        include:[{
            model: SolicitudDocumento,
-           as: 'solicituddocumento'
+           as: 'solicituddocumento',
+           include:[{
+               model: Usuario,
+               as: 'enviadopor',
+               include:[{
+                   model: Persona,
+                   as: 'persona'
+               }]
+           },{
+               model: CategoriaDocumentacion,
+               as: 'categoriadocumento'
+           }]
        }],
        where:{
         solicituddocumentoId: solicitud,
