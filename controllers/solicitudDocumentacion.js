@@ -8,6 +8,8 @@ const EstadoDocumento = require("../models/EstadoDocumento")
 const Usuario = require("../models/Usuario")
 const Persona = require("../models/Persona")
 const Club = require('../models/Club')
+const Categoria = require("../models/Categoria")
+const CategoriaDocumentacion = require("../models/CategoriaDocumentacion")
 
 
 exports.crearSolicitud = async(req,res) => {
@@ -19,8 +21,17 @@ exports.crearSolicitud = async(req,res) => {
 
         let usuario =  req.auth.userId
         
-        const {solicitud,usuarios} = req.body
+        const {solicitud,usuarios,categoria} = req.body
 
+
+
+        const categoriaExist = await CategoriaDocumentacion.findOne({
+            where:{
+                id: categoria
+            }
+        })
+
+        if(!categoriaExist)throw new Error('la categoria no existe')
 
 
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')

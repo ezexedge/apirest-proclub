@@ -5,6 +5,7 @@ const Documentacion = require('../models/Documentacion')
 const moment = require('moment');
 const EstadoDocumento = require('./EstadoDocumento');
 const Usuario = require('./Usuario');
+const CategoriaDocumentacion = require('./CategoriaDocumentacion');
 
 
 
@@ -41,6 +42,7 @@ const SolicitudDocumento = db.define('solicitudDocumento', {
 
 
 SolicitudDocumento.belongsTo(Usuario,{as:"enviadopor",foreignKey: 'enviadoporId'})
+SolicitudDocumento.belongsTo(CategoriaDocumentacion,{as:"categoriadocumento",foreignKey: 'categoriadocumentoId'})
 
 
 
