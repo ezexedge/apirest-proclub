@@ -391,33 +391,19 @@ if(!clubExist)throw new Error('el club no existe')
 
 
 
+    await SolicitudXDocumentos.destroy({
+        where:{
+            documentoId: documento
+        }
+    })
+
+
        await Documentacion.destroy({
            where:{
                id: documento
            }
        })
 
-
-
-
-     const encontrado =   await SolicitudXDocumentos.findOne({
-           where:{
-            documentacionId : documento
-           }
-       })
-
-
-       if(encontrado){
-
-        await SolicitudXDocumentos.destroy({
-            where:{
-                id: encontrado.id
-            }
-        })
-     
-    }
-
-     
 
     
         const totalDocumentos = await SolicitudXDocumentos.findAndCountAll({
