@@ -393,7 +393,7 @@ if(!clubExist)throw new Error('el club no existe')
 
     await SolicitudXDocumentos.destroy({
         where:{
-            documentoId: documento
+            documentacionId: documento
         }
     })
 
