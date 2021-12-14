@@ -10,6 +10,7 @@ const Persona = require("../models/Persona")
 const Club = require('../models/Club')
 const Categoria = require("../models/Categoria")
 const CategoriaDocumentacion = require("../models/CategoriaDocumentacion")
+const SolicitudXDocumentos = require("../models/SolicitudXDocumentos")
 
 
 exports.crearSolicitud = async(req,res) => {
@@ -176,13 +177,13 @@ exports.cargarDocumento = async(req,res) => {
           for(let val of req.files){
 
             let resultDocumento = await Documentacion.create({ titulo:val.originalname ,pathFile: `https://api.klubo.club/api/documento/${val.filename}`})
-
+            await SolicitudXDocumentos.create({solicituddocumentoId: idSolicitud, documentacionId: resultDocumento.id , usuarioId: usuario })
 
           }
 
           
 
-          await DestinatarioDocumentacion.update({documentacionId:resultDocumento.id,estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud ,usuarioId: usuario} })
+          await DestinatarioDocumentacion.update({estadodocumentacionId:2},{ where: { solicituddocumentoId: idSolicitud ,usuarioId: usuario} })
 
 
      
