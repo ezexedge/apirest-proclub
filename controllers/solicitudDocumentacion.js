@@ -21,25 +21,25 @@ exports.crearSolicitud = async(req,res) => {
 
         let usuario =  req.auth.userId
         
-        const {solicitud,usuarios,categoria} = req.body
+        const {solicitud,usuarios} = req.body
 
 
-/*
+
         const categoriaExist = await CategoriaDocumentacion.findOne({
             where:{
-                id: categoria
+                id: solicitud.categoria
             }
         })
 
         if(!categoriaExist)throw new Error('la categoria no existe')
 
-*/
+
         const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
 
        
 
-        const resultNotificacion  =  await SolicitudDocumento.create({titulo:solicitud.titulo,descripcion:solicitud.descripcion,hora:hora,enviadoporId:usuario,categoriadocumentoId: categoria},{ transaction: t })
+        const resultNotificacion  =  await SolicitudDocumento.create({titulo:solicitud.titulo,descripcion:solicitud.descripcion,hora:hora,enviadoporId:usuario,categoriadocumentoId: solicitud.categoria},{ transaction: t })
       
   
 
