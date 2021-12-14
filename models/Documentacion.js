@@ -10,7 +10,9 @@ const Documentacion = db.define('documentacion', {
 
     },
 
-
+    titulo: {
+        type: Sequelize.STRING
+    },
     pathFile: {
         type: Sequelize.STRING
     },
