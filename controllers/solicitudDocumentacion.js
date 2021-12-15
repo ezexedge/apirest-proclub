@@ -608,7 +608,11 @@ exports.getEnviadasByEstado = async(req,res) => {
                 }]
             },{
                 model: Usuario,
-                as: 'usuario'
+                as: 'usuario',
+                include:[{
+                    model: Persona,
+                    as: 'persona'
+                }]
             },{
                 model: EstadoDocumento,
                 as: 'estadodocumentacion'
@@ -634,7 +638,7 @@ exports.getEnviadasByEstado = async(req,res) => {
                 descripcion: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.descripcion,
                 fecha: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.fecha,
                 hora: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.hora,
-                enviadoA:  respuesta1 && respuesta1.usuario && `${respuesta1.usuario.nombre} ${respuesta1.usuario.apellido}`,
+                enviadoA:  respuesta1 && respuesta1.usuario && respuesta1.usuario.persona && `${respuesta1.usuario.persona.nombre} ${respuesta1.usuario.persona.apellido}`,
                 estado: respuesta1 && respuesta1.estadodocumentacion && respuesta1.estadodocumentacion.nombre
     
             }   
