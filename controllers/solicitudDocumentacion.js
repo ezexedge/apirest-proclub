@@ -623,16 +623,22 @@ exports.getEnviadasByEstado = async(req,res) => {
 
 
         let obj  = {
+            id: respuesta.id,
+            solicituddocumentoId: respuesta.solicituddocumentoId,
+            clubId: respuesta.clubId,
+            usuarioId: respuesta.usuarioId,
+            estadodocumentacionId: respuesta.estadodocumentacionId,
             titulo: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.titulo,
             descripcion: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.descripcion,
             fecha: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.fecha,
-            hora: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.hora
+            hora: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.hora,
+            enviadoA:  respuesta && respuesta.usuario && `${respuesta.usuario.nombre} ${respuesta.usuario.apellido}`,
+            estado: respuesta && respuesta.estadodocumentacion && respuesta.estadodocumentacion.nombre
 
         }   
-        console.log(obj)
    
 
-        res.status(200).json(respuesta)
+        res.status(200).json(obj)
 
     }catch(err){
         res.status(400).json({error: err.message})
