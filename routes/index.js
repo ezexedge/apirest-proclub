@@ -532,6 +532,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
     router.post('/documentacion/upload/:solicitud/:usuario',authSignupControllers.requireSignin,archivoControllers.subirArchivos,solicitudControllers.cargarDocumento)
     router.get('/documentacion/estado/:club/:usuario/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
+    router.get('/documentacion-enviadas/estado/:club/:usuario/:estado',authSignupControllers.requireSignin,solicitudControllers.getEnviadasByEstado)
     router.get('/documentacion/solicitud/:club/:usuario/:solicitud',authSignupControllers.requireSignin,solicitudControllers.getSolicitudById)
     router.get('/documentacion/estados',authSignupControllers.requireSignin,solicitudControllers.getEstados)
     

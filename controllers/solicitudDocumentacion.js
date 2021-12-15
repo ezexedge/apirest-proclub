@@ -551,3 +551,75 @@ if(!usuarioExist)throw new Error('el usuario no existe')
         res.status(400).json({error: err.message})
     }
 }
+
+
+
+exports.getEnviadasByEstado = async(req,res) => {
+    try{
+
+
+        const espacio = req.params.estado
+        const club = req.params.club
+        const usuario =  req.params.usuario
+
+        const result = await EstadoDocumento.findOne({
+            where:{
+                id: espacio
+            }
+        })
+
+    
+    
+        if(!result) throw new Error('el estado ingresado no existe')
+
+        const usuarioExist =  await Usuario.findOne({
+            where:{
+                id: usuario
+            }
+        })
+
+
+        if(!usuarioExist)throw new Error('el usuario no existe')
+
+
+        const clubExist =  await Club.findOne({
+            where:{
+                id:club
+            }
+        })
+
+        if(!clubExist)throw new Error('el club no existe')
+
+
+        const respuesta  = await DestinatarioDocumentacion.findAll({
+            include:[{
+                model: SolicitudDocumento,
+                as: 'solicituddocumento',
+                include:[{
+                    model: Usuario,
+                    as: 'enviadopor',
+                    where:{
+                        id: usuario
+                    },
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
+            }
+        ],
+            where:{
+                clubId: club,
+                estadodocumentacionId: espacio,
+            }
+        })
+
+        
+   
+
+        res.status(200).json(respuesta)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
