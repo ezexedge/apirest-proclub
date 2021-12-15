@@ -621,24 +621,32 @@ exports.getEnviadasByEstado = async(req,res) => {
         })
 
 
+        let arr = []
+        for(let respuesta1 of respuesta){
 
-        let obj  = {
-            id: respuesta.id,
-            solicituddocumentoId: respuesta.solicituddocumentoId,
-            clubId: respuesta.clubId,
-            usuarioId: respuesta.usuarioId,
-            estadodocumentacionId: respuesta.estadodocumentacionId,
-            titulo: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.titulo,
-            descripcion: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.descripcion,
-            fecha: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.fecha,
-            hora: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.hora,
-            enviadoA:  respuesta && respuesta.usuario && `${respuesta.usuario.nombre} ${respuesta.usuario.apellido}`,
-            estado: respuesta && respuesta.estadodocumentacion && respuesta.estadodocumentacion.nombre
+            let obj  = {
+                id: respuesta1.id,
+                solicituddocumentoId: respuesta1.solicituddocumentoId,
+                clubId: respuesta1.clubId,
+                usuarioId: respuesta1.usuarioId,
+                estadodocumentacionId: respuesta1.estadodocumentacionId,
+                titulo: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.titulo,
+                descripcion: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.descripcion,
+                fecha: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.fecha,
+                hora: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.hora,
+                enviadoA:  respuesta1 && respuesta1.usuario && `${respuesta1.usuario.nombre} ${respuesta1.usuario.apellido}`,
+                estado: respuesta1 && respuesta1.estadodocumentacion && respuesta1.estadodocumentacion.nombre
+    
+            }   
+            arr.push(obj)
 
-        }   
+        }
+
+
+   
    
 
-        res.status(200).json(obj)
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
