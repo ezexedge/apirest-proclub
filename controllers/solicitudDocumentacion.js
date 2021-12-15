@@ -606,6 +606,12 @@ exports.getEnviadasByEstado = async(req,res) => {
                         as: 'persona'
                     }]
                 }]
+            },{
+                model: Usuario,
+                as: 'usuario'
+            },{
+                model: EstadoDocumento,
+                as: 'estadodocumentacion'
             }
         ],
             where:{
@@ -614,7 +620,16 @@ exports.getEnviadasByEstado = async(req,res) => {
             }
         })
 
-        
+
+
+        let obj  = {
+            titulo: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.titulo,
+            descripcion: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.descripcion,
+            fecha: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.fecha,
+            hora: respuesta && respuesta.solicituddocumento && respuesta.solicituddocumento.hora
+
+        }   
+        console.log(obj)
    
 
         res.status(200).json(respuesta)
