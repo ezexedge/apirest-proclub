@@ -205,9 +205,6 @@ exports.getByEstado = async(req,res) => {
         const club = req.params.club
         const usuario =  req.params.usuario
 
-
-        console.log('sssss')
-
         const result = await EstadoDocumento.findOne({
             where:{
                 id: espacio
@@ -238,87 +235,28 @@ exports.getByEstado = async(req,res) => {
 
 
         
-let respuesta 
 
-        if(Number(espacio) !== 3){
-            respuesta  = await DestinatarioDocumentacion.findAll({
+
+        const respuesta  = await DestinatarioDocumentacion.findAll({
+            include:[{
+                model: SolicitudDocumento,
+                as: 'solicituddocumento',
                 include:[{
-                    model: SolicitudDocumento,
-                    as: 'solicituddocumento',
+                    model: Usuario,
+                    as: 'enviadopor',
                     include:[{
-                        model: Usuario,
-                        as: 'enviadopor',
-                        include:[{
-                            model: Persona,
-                            as: 'persona'
-                        }]
+                        model: Persona,
+                        as: 'persona'
                     }]
-                }
-            ],
-                where:{
-                    clubId: club,
-                    estadodocumentacionId: espacio,
-                    usuarioId: usuario
-                }
-            })
-
-        }
-        
-        if(Number(espacio)  === 3){
-
-            let result = await DestinatarioDocumentacion.findAll({
-                include:[{
-                    model: SolicitudDocumento,
-                    as: 'solicituddocumento',
-                    include:[{
-                        model: Usuario,
-                        as: 'enviadopor',
-                        include:[{
-                            model: Persona,
-                            as: 'persona'
-                        }]
-                    }]
-                }
-            ],
-                where:{
-                    clubId: club,
-                    usuarioId: usuario
-                }
-            })
-
-
-            console.log('s=====',result)
-            let arr = []
-
-             for(let val of result){
-
-                let obj = {
-                    solicituddocumentoId: val.solicituddocumentoId,
-                    clubId: val.clubId,
-                    usuarioId: val.usuarioId,
-                    estadodocumentacionId: val.estadodocumentacionId,
-                    titulo: val && val.solicituddocumento &&  val.solicituddocumento.titulo,
-                    descripcion:  val && val.solicituddocumento &&  val.solicituddocumento.descripcion,
-                    fecha:  val && val.solicituddocumento &&  val.solicituddocumento.fecha,
-                    hora:  val && val.solicituddocumento &&  val.solicituddocumento.hora,
-                    enviadoPor: val && val.solicituddocumento && val.solicituddocumento.enviadopor && val.solicituddocumento.enviadopor.persona && val.solicituddocumento.enviadopor.persona.nombre && val.solicituddocumento.enviadopor.apellido 
-                }
-
-                let encontrado =  arr.find(valor => valor.solicituddocumentoId === val.solicituddocumentoId)
-                console.log('encontradoooo',encontrado)
-                if(!encontrado){
-              
-
-                }
-                arr.push(obj)  
-
-             }
-
-             respuesta = arr
-
-        }
-
-
+                }]
+            }
+        ],
+            where:{
+                clubId: club,
+                estadodocumentacionId: espacio,
+                usuarioId: usuario
+            }
+        })
 
         
    
