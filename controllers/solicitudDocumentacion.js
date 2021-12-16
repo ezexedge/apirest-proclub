@@ -234,10 +234,11 @@ exports.getByEstado = async(req,res) => {
         if(!clubExist)throw new Error('el club no existe')
 
 
-        
+        let respuesta 
 
 
-        const respuesta  = await DestinatarioDocumentacion.findAll({
+        if(espacio !== 3){ 
+         respuesta  = await DestinatarioDocumentacion.findAll({
             include:[{
                 model: SolicitudDocumento,
                 as: 'solicituddocumento',
@@ -259,7 +260,9 @@ exports.getByEstado = async(req,res) => {
         })
 
         
-   
+    }else{
+        respuesta = 'pepaaa'
+    }
 
         res.status(200).json(respuesta)
 
