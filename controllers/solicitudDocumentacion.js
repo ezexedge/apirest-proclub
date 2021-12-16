@@ -267,7 +267,18 @@ exports.getByEstado = async(req,res) => {
 
         if(Number(req.params.estado) === 3){
 
-            pepa = respuestaClone
+
+            let arr = []
+
+            for(let val of respuestaClone){
+
+                let encontrado = _.find(arr, { 'solicituddocumentoId': val.solicituddocumentoId });
+                if(!encontrado){
+                    arr.push(val)
+                }
+            }
+
+            pepa = arr
 
         }else{
      
