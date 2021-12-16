@@ -254,24 +254,31 @@ exports.getByEstado = async(req,res) => {
         ],
             where:{
                 clubId: club,
-                estadodocumentacionId: espacio,
                 usuarioId: usuario
             }
         })
 
 
+
+       let respuestaClone  = _.clone(respuesta);
+
         let pepa 
 
         if(Number(req.params.estado) === 3){
-            pepa = 'enviadas'
+
+            pepa = respuestaClone
+
         }else{
-            pepa = 'otros'
+     
+            pepa = respuestaClone.filter(val => val.solicituddocumentoId ===  Number(req.params.estado) )
+
+
         }
 
         
    
 
-        res.status(200).json({message: pepa})
+        res.status(200).json(pepa)
 
     }catch(err){
         res.status(400).json({error: err.message})
