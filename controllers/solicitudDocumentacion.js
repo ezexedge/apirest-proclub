@@ -205,6 +205,9 @@ exports.getByEstado = async(req,res) => {
         const club = req.params.club
         const usuario =  req.params.usuario
 
+
+        console.log('sssss')
+
         const result = await EstadoDocumento.findOne({
             where:{
                 id: espacio
@@ -237,7 +240,7 @@ exports.getByEstado = async(req,res) => {
         
 let respuesta 
 
-        if(espacio !== 3){
+        if(Number(espacio) !== 3){
             respuesta  = await DestinatarioDocumentacion.findAll({
                 include:[{
                     model: SolicitudDocumento,
@@ -261,7 +264,7 @@ let respuesta
 
         }
         
-        if(espacio  === 3){
+        if(Number(espacio)  === 3){
 
             let result = await DestinatarioDocumentacion.findAll({
                 include:[{
