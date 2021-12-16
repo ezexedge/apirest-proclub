@@ -197,6 +197,8 @@ exports.cargarDocumento = async(req,res) => {
     }
 }
 
+
+
 exports.getByEstado = async(req,res) => {
     try{
 
@@ -233,12 +235,10 @@ exports.getByEstado = async(req,res) => {
 
         if(!clubExist)throw new Error('el club no existe')
 
+        
 
-        let respuesta 
 
-
-        if(espacio !== 3){ 
-         respuesta  = await DestinatarioDocumentacion.findAll({
+        const respuesta  = await DestinatarioDocumentacion.findAll({
             include:[{
                 model: SolicitudDocumento,
                 as: 'solicituddocumento',
@@ -260,11 +260,9 @@ exports.getByEstado = async(req,res) => {
         })
 
         
-    }else{
-        respuesta = 'pepaaa'
-    }
+   
 
-        res.status(200).json(respuesta)
+        res.status(200).json({message: 'eeeeeee'})
 
     }catch(err){
         res.status(400).json({error: err.message})
