@@ -267,7 +267,7 @@ exports.getByEstado = async(req,res) => {
             resultadoFinal = 'pepa'
 
         }else{
-          resultadoFinal =   _.find(respuesta, { 'solicituddocumentoId': Number(espacio)});
+          resultadoFinal =   _.filter(respuesta, { 'solicituddocumentoId': Number(espacio)});
         }
 
         
