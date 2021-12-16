@@ -50,10 +50,9 @@ exports.crearSolicitud = async(req,res) => {
         let flag = 0
         let result
         for(let val of usuarios){
-        if(flag === 0){
+     
           result = await DestinatarioDocumentacion.create({solicituddocumentoId: resultNotificacion.id,clubId: val.clubId,usuarioId:val.usuarioId,documentacionId:null,estadodocumentacionId:1},{ transaction: t })
-         flag = 1
-        }
+      
 
 
 
