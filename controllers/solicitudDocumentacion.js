@@ -301,11 +301,12 @@ let respuesta
                 }
 
                 let encontrado =  arr.find(valor => valor.solicituddocumentoId === val.solicituddocumentoId)
+                console.log('encontradoooo',encontrado)
                 if(!encontrado){
-                    arr.push(obj)
+              
 
                 }
-                
+                arr.push(obj)  
 
              }
 
