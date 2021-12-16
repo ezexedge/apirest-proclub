@@ -284,6 +284,7 @@ let respuesta
             })
 
 
+            console.log('s=====',result)
             let arr = []
 
              for(let val of result){
