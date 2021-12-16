@@ -274,7 +274,19 @@ exports.getByEstado = async(req,res) => {
 
                 let encontrado = _.find(arr, { 'solicituddocumentoId': val.solicituddocumentoId });
                 if(!encontrado){
-                    arr.push(val)
+
+                    let obj = {
+                        titulo: val && val.solicituddocumento && val.solicituddocumento.titulo,
+                        descripcion: val && val.solicituddocumento && val.solicituddocumento.descripcion,
+                        fecha: val && val.solicituddocumento && val.solicituddocumento.fecha,
+                        hora: val && val.solicituddocumento && val.solicituddocumento.hora,
+                        enviadopor: val && val.solicituddocumento && val.solicituddocumento.enviadopor && val.solicituddocumento.enviadopor.persona && `${val.solicituddocumento.enviadopor.persona.nombre} ${val.solicituddocumento.enviadopor.persona.apellido}`
+
+
+
+                    }
+
+                    arr.push(obj)
                 }
             }
 
