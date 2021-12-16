@@ -259,7 +259,9 @@ let respuesta
                 }
             })
 
-        }else{
+        }
+        
+        if(espacio  === 3){
 
             let result = await DestinatarioDocumentacion.findAll({
                 include:[{
@@ -299,7 +301,7 @@ let respuesta
                     enviadoPor: val && val.solicituddocumento && val.solicituddocumento.enviadopor && val.solicituddocumento.enviadopor.persona && val.solicituddocumento.enviadopor.persona.nombre && val.solicituddocumento.enviadopor.apellido 
                 }
 
-                let encontrado =  arr.find(val => val.solicituddocumentoId === val.solicituddocumentoId)
+                let encontrado =  arr.find(valor => valor.solicituddocumentoId === val.solicituddocumentoId)
                 if(!encontrado){
                     arr.push(obj)
 
