@@ -256,7 +256,8 @@ exports.getByEstado = async(req,res) => {
             where:{
                 clubId: club,
                 usuarioId: usuario
-            }
+            },
+            order: [['id', 'DESC']]
         })
 
 
