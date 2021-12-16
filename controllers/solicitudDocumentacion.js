@@ -234,26 +234,85 @@ exports.getByEstado = async(req,res) => {
         if(!clubExist)throw new Error('el club no existe')
 
 
-        const respuesta  = await DestinatarioDocumentacion.findAll({
-            include:[{
-                model: SolicitudDocumento,
-                as: 'solicituddocumento',
+        
+let respuesta 
+
+        if(espacio !== 3){
+            respuesta  = await DestinatarioDocumentacion.findAll({
                 include:[{
-                    model: Usuario,
-                    as: 'enviadopor',
+                    model: SolicitudDocumento,
+                    as: 'solicituddocumento',
                     include:[{
-                        model: Persona,
-                        as: 'persona'
+                        model: Usuario,
+                        as: 'enviadopor',
+                        include:[{
+                            model: Persona,
+                            as: 'persona'
+                        }]
                     }]
-                }]
-            }
-        ],
-            where:{
-                clubId: club,
-                estadodocumentacionId: espacio,
-                usuarioId: usuario
-            }
-        })
+                }
+            ],
+                where:{
+                    clubId: club,
+                    estadodocumentacionId: espacio,
+                    usuarioId: usuario
+                }
+            })
+
+        }else{
+
+            let result = await DestinatarioDocumentacion.findAll({
+                include:[{
+                    model: SolicitudDocumento,
+                    as: 'solicituddocumento',
+                    include:[{
+                        model: Usuario,
+                        as: 'enviadopor',
+                        include:[{
+                            model: Persona,
+                            as: 'persona'
+                        }]
+                    }]
+                }
+            ],
+                where:{
+                    clubId: club,
+                    estadodocumentacionId: espacio,
+                    usuarioId: usuario
+                }
+            })
+
+
+            let arr = []
+
+             for(let val of result){
+
+                let obj = {
+                    solicituddocumentoId: val.solicituddocumentoId,
+                    clubId: val.clubId,
+                    usuarioId: val.usuarioId,
+                    estadodocumentacionId: val.estadodocumentacionId,
+                    titulo: val && val.solicituddocumento &&  val.solicituddocumento.titulo,
+                    descripcion:  val && val.solicituddocumento &&  val.solicituddocumento.descripcion,
+                    fecha:  val && val.solicituddocumento &&  val.solicituddocumento.fecha,
+                    hora:  val && val.solicituddocumento &&  val.solicituddocumento.hora,
+                    enviadoPor: val && val.solicituddocumento && val.solicituddocumento.enviadopor && val.solicituddocumento.enviadopor.persona && val.solicituddocumento.enviadopor.persona.nombre && val.solicituddocumento.enviadopor.apellido 
+                }
+
+                let encontrado =  arr.find(val => val.solicituddocumentoId === val.solicituddocumentoId)
+                if(!encontrado){
+                    arr.push(obj)
+
+                }
+                
+
+             }
+
+             respuesta = arr
+
+        }
+
+
 
         
    
