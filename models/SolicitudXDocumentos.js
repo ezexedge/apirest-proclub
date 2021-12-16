@@ -30,7 +30,6 @@ const SolicitudXDocumentos = db.define('solicitudxdocumentos', {
 
 SolicitudXDocumentos.belongsTo(Usuario,{as:"usuario",foreignKey: 'usuarioId'})
 SolicitudXDocumentos.belongsTo(SolicitudDocumento,{as:"solicituddocumento",foreignKey: 'solicituddocumentoId'})
-SolicitudXDocumentos.belongsTo(Club,{as:"club",foreignKey: 'clubId'})
 SolicitudXDocumentos.belongsTo(Documentacion,{as:"documentacion",foreignKey: 'documentacionId'})
 
 

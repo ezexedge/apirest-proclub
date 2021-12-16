@@ -144,6 +144,7 @@ exports.cargarDocumento = async(req,res) => {
 
         
         console.log('filleee',req)
+        const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
 
         if(!req.files)throw new Error('debe cargar un archivo')
@@ -175,7 +176,7 @@ exports.cargarDocumento = async(req,res) => {
           for(let val of req.files){
 
             let resultDocumento = await Documentacion.create({ titulo:val.originalname ,pathFile: `https://api.klubo.club/api/documento/${val.filename}`})
-            await SolicitudXDocumentos.create({solicituddocumentoId: idSolicitud, documentacionId: resultDocumento.id , usuarioId: usuario })
+            await SolicitudXDocumentos.create({solicituddocumentoId: idSolicitud, documentacionId: resultDocumento.id , usuarioId: usuario,hora:hora })
 
           }
 
