@@ -11,6 +11,7 @@ const Club = require('../models/Club')
 const Categoria = require("../models/Categoria")
 const CategoriaDocumentacion = require("../models/CategoriaDocumentacion")
 const SolicitudXDocumentos = require("../models/SolicitudXDocumentos")
+const _ = require('lodash')
 
 
 exports.crearSolicitud = async(req,res) => {
@@ -259,12 +260,20 @@ exports.getByEstado = async(req,res) => {
         })
 
 
-        
+        let resultadoFinal 
+
+        if(espacio === 3){
+
+            resultadoFinal = 'pepa'
+
+        }else{
+          resultadoFinal =   _.find(respuesta, { 'solicituddocumentoId': Number(espacio)});
+        }
 
         
    
 
-        res.status(200).json(respuesta)
+        res.status(200).json(resultadoFinal)
 
     }catch(err){
         res.status(400).json({error: err.message})
