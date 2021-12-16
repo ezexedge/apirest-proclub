@@ -254,15 +254,17 @@ exports.getByEstado = async(req,res) => {
         ],
             where:{
                 clubId: club,
-                estadodocumentacionId: espacio,
                 usuarioId: usuario
             }
         })
 
+
+        
+
         
    
 
-        res.status(200).json({message: 'eeeeeee'})
+        res.status(200).json(respuesta)
 
     }catch(err){
         res.status(400).json({error: err.message})
