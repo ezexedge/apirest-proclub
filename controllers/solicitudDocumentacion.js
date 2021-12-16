@@ -277,6 +277,7 @@ exports.getByEstado = async(req,res) => {
                 if(!encontrado){
 
                     let obj = {
+                        solicituddocumentoId: val.solicituddocumentoId,
                         titulo: val && val.solicituddocumento && val.solicituddocumento.titulo,
                         descripcion: val && val.solicituddocumento && val.solicituddocumento.descripcion,
                         fecha: val && val.solicituddocumento && val.solicituddocumento.fecha,
