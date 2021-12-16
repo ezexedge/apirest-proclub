@@ -271,7 +271,7 @@ exports.getByEstado = async(req,res) => {
 
         }else{
      
-            pepa = respuestaClone.filter(val => val.solicituddocumentoId ===  Number(req.params.estado) )
+            pepa = respuestaClone.filter(val => val.estadodocumentacionId ===  Number(req.params.estado) )
 
 
         }
