@@ -11,6 +11,7 @@ const Club = require('../models/Club')
 const Categoria = require("../models/Categoria")
 const CategoriaDocumentacion = require("../models/CategoriaDocumentacion")
 const SolicitudXDocumentos = require("../models/SolicitudXDocumentos")
+const _ = require('lodash');
 
 
 exports.crearSolicitud = async(req,res) => {
