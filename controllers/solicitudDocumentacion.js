@@ -279,7 +279,6 @@ let respuesta
             ],
                 where:{
                     clubId: club,
-                    estadodocumentacionId: espacio,
                     usuarioId: usuario
                 }
             })
