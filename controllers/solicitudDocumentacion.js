@@ -701,3 +701,46 @@ exports.getEnviadasByEstado = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+
+
+exports.aprobadosLista = async(req,res) => {
+    try{
+
+
+        const club = req.params.club
+        const solicitud = req.params.solicitud
+
+
+        
+
+
+        const result  = await DestinatarioDocumentacion.findAll({
+            include:[{
+                model: SolicitudDocumento,
+                as: 'solicituddocumento',
+                include:[{
+                    model: Usuario,
+                    as: 'enviadopor',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
+            }
+        ],
+            where:{
+                clubId: club,
+                solicituddocumentoId: solicitud,
+                estadodocumentacionId: 3
+            },
+            order: [['id', 'DESC']]
+        })
+
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
