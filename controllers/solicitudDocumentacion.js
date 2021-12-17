@@ -636,7 +636,69 @@ exports.getEnviadasByEstado = async(req,res) => {
 
         if(!clubExist)throw new Error('el club no existe')
 
+        let arr = []
 
+
+        if(espacio === null){
+
+
+            const respuesta  = await DestinatarioDocumentacion.findAll({
+                include:[{
+                    model: SolicitudDocumento,
+                    as: 'solicituddocumento',
+                    include:[{
+                        model: Usuario,
+                        as: 'enviadopor',
+                        where:{
+                            id: usuario
+                        },
+                        include:[{
+                            model: Persona,
+                            as: 'persona'
+                        }]
+                    }]
+                },{
+                    model: Usuario,
+                    as: 'usuario',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                },{
+                    model: EstadoDocumento,
+                    as: 'estadodocumentacion'
+                }
+            ],
+                where:{
+                    clubId: club
+                }
+            })
+            
+
+            for(let respuesta1 of respuesta){
+
+                let obj  = {
+                    id: respuesta1.id,
+                    solicituddocumentoId: respuesta1.solicituddocumentoId,
+                    clubId: respuesta1.clubId,
+                    usuarioId: respuesta1.usuarioId,
+                    estadodocumentacionId: respuesta1.estadodocumentacionId,
+                    titulo: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.titulo,
+                    descripcion: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.descripcion,
+                    fecha: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.fecha,
+                    hora: respuesta1 && respuesta1.solicituddocumento && respuesta1.solicituddocumento.hora,
+                    enviadoA:  respuesta1 && respuesta1.usuario && respuesta1.usuario.persona && `${respuesta1.usuario.persona.nombre} ${respuesta1.usuario.persona.apellido}`,
+                    estado: respuesta1 && respuesta1.estadodocumentacion && respuesta1.estadodocumentacion.nombre
+        
+                }   
+                arr.push(obj)
+    
+            }
+
+
+        }else{
+
+        
         const respuesta  = await DestinatarioDocumentacion.findAll({
             include:[{
                 model: SolicitudDocumento,
@@ -671,7 +733,7 @@ exports.getEnviadasByEstado = async(req,res) => {
         })
 
 
-        let arr = []
+     
         for(let respuesta1 of respuesta){
 
             let obj  = {
@@ -691,7 +753,7 @@ exports.getEnviadasByEstado = async(req,res) => {
             arr.push(obj)
 
         }
-
+    }
 
    
    
