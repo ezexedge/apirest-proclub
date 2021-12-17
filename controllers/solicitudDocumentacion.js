@@ -768,6 +768,9 @@ exports.solicitudByClub = async(req,res) => {
                         model: Persona,
                         as: 'persona'
                     }]
+                },{
+                    model: CategoriaDocumentacion,
+                    as: 'categoriadocumento'
                 }]
             },{
                 model: Usuario,
@@ -800,7 +803,8 @@ exports.solicitudByClub = async(req,res) => {
                 hora: val && val.solicituddocumento &&  val.solicituddocumento.hora,
                 enviadoA: val && val.usuario && val.usuario.persona && `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`,
                 avatar : val && val.usuario && val.usuario.persona && val.usuario.persona.avatar,
-                estadoDocumentacion: val && val.estadodocumentacion && val.estadodocumentacion.nombre
+                estadoDocumentacion: val && val.estadodocumentacion && val.estadodocumentacion.nombre,
+                categoria: val && val.solicituddocumento && val.solicituddocumento.categoriadocumento && val.solicituddocumento.categoriadocumento.nombre 
             }
             arr.push(obj)
         }
