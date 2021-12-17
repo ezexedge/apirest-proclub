@@ -745,3 +745,66 @@ exports.aprobadosLista = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+exports.solicitudByClub = async(req,res) => {
+    try{
+
+
+        const club = req.params.club
+
+
+        
+
+
+        const result  = await DestinatarioDocumentacion.findAll({
+            include:[{
+                model: SolicitudDocumento,
+                as: 'solicituddocumento',
+                include:[{
+                    model: Usuario,
+                    as: 'enviadopor',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
+            },{
+                model: Usuario,
+                as: 'usuario',
+                include:[{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            },{
+                model: EstadoDocumento,
+                as: 'estadodocumentacion'
+            }
+        ],
+            where:{
+                clubId: club,
+            
+            },
+            order: [['id', 'DESC']]
+        })
+/*
+        let arr = []
+        for(let val of result){
+            let obj = {
+                clubId: val && val.clubId,
+                usuarioId: val && val.usuarioId,
+                solicituddocumentoId: val && val.solicituddocumentoId,
+                title: val && val.solicituddocumento &&  val.solicituddocumento.titulo,
+                fecha: val && val.solicituddocumento &&  val.solicituddocumento.fecha,
+                hora: val && val.solicituddocumento &&  val.solicituddocumento.hora,
+                enviadoA: val && val.
+            }
+        }
+*/
+
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
