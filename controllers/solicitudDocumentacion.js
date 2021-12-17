@@ -684,7 +684,11 @@ console.log('respuestaaaaaa...',espacio)
                     estado: respuesta1 && respuesta1.estadodocumentacion && respuesta1.estadodocumentacion.nombre
         
                 }   
-                arr.push(obj)
+                let encontrado =  arr.find(val => val.solicituddocumentoId === respuesta1.solicituddocumentoId )
+                if(!encontrado){
+                    arr.push(obj)
+
+                }
     
             }
 
