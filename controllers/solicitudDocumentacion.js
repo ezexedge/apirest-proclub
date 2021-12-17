@@ -664,7 +664,8 @@ console.log('respuestaaaaaa...',espacio)
             ],
                 where:{
                     clubId: club
-                }
+                },
+                order: [['id', 'DESC']]
             })
             
 
