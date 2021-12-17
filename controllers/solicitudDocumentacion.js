@@ -716,14 +716,13 @@ console.log('respuestaaaaaa...',espacio)
 
 //sss
 
-exports.aprobadosLista = async(req,res) => {
+exports.lista = async(req,res) => {
     try{
 
 
         const club = req.params.club
         const solicitud = req.params.solicitud
         const estado =  req.params.estado
-        const usuario =  req.params.usuario
         
 
 
@@ -734,9 +733,6 @@ exports.aprobadosLista = async(req,res) => {
                 include:[{
                     model: Usuario,
                     as: 'enviadopor',
-                    where:{
-                        id: usuario
-                    },
                     include:[{
                         model: Persona,
                         as: 'persona'
