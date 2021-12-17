@@ -609,19 +609,6 @@ exports.getEnviadasByEstado = async(req,res) => {
         const usuario =  req.params.usuario
 console.log('respuestaaaaaa...',espacio)
 
-        if(espacio !== null || espacio !== 'null' ){
-        const result = await EstadoDocumento.findOne({
-            where:{
-                id: espacio
-            }
-        })
-
-    
-    
-        if(!result) throw new Error('el estado ingresado no existe')
-
-    }
-
 
         const usuarioExist =  await Usuario.findOne({
             where:{
