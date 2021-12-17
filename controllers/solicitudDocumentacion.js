@@ -404,50 +404,9 @@ exports.eliminarDocumento = async(req,res) => {
     try{
 
 
-   const solicitud = req.params.solicitud
-   const usuario =  req.params.usuario
-   const club = req.params.club
+  
    const documento = req.params.documento
     
-
-
-   const usuarioExist =  await Usuario.findOne({
-    where:{
-        id: usuario
-    }
-})
-
-
-if(!usuarioExist)throw new Error('el usuario no existe')
-
-
-const clubExist =  await Club.findOne({
-    where:{
-        id:club
-    }
-})
-
-if(!clubExist)throw new Error('el club no existe')
-
-
-
-    const documentacionExist =  await DestinatarioDocumentacion.findOne({
-        where:{
-            solicituddocumentoId: solicitud
-        }
-    })
-
-    if(!documentacionExist)throw new Error('la documentacion no existe')
-
-
-
-    const resultDocumento = await Documentacion.findOne({
-        where: {
-            id: documento
-        }
-    })
-
-    if(!resultDocumento)throw new Error('la documentacion no existe')
 
 
 
@@ -465,18 +424,7 @@ if(!clubExist)throw new Error('el club no existe')
        })
 
 
-    
-        const totalDocumentos = await SolicitudXDocumentos.findAndCountAll({
-            where:{
-                solicituddocumentoId: solicitud,
-                usuarioId: usuario
-            }
-        })
 
-        if(totalDocumentos.count === 0){
-            await DestinatarioDocumentacion.update({estadodocumentacionId: 1},{ where: { solicituddocumentoId: solicitud , usuarioId: usuario , clubId: club} })
-
-        }
 
 
         res.status(200).json({message: 'documento eliminado'})
