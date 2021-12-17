@@ -787,7 +787,7 @@ exports.solicitudByClub = async(req,res) => {
             },
             order: [['id', 'DESC']]
         })
-/*
+
         let arr = []
         for(let val of result){
             let obj = {
@@ -797,12 +797,15 @@ exports.solicitudByClub = async(req,res) => {
                 title: val && val.solicituddocumento &&  val.solicituddocumento.titulo,
                 fecha: val && val.solicituddocumento &&  val.solicituddocumento.fecha,
                 hora: val && val.solicituddocumento &&  val.solicituddocumento.hora,
-                enviadoA: val && val.
+                enviadoA: val && val.usuario && val.usuario.persona && `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`,
+                avatar : val && val.usuario && val.usuario.persona && val.usuario.persona.avatar,
+                estadoDocumentacion: val && val.estadodocumentacion && val.estadodocumentacion.nombre
             }
+            arr.push(obj)
         }
-*/
 
-        res.status(200).json(result)
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
