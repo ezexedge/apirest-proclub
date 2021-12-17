@@ -544,7 +544,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.put('/documentacion/rechazado/:usuario/:solicitud',authSignupControllers.requireSignin,solicitudControllers.rechazado)
 
     router.get('/documento/:nombre',archivoControllers.getArchivo)
-    router.delete('/documentacion/eliminar/:club/:usuario/:solicitud/:documento',authSignupControllers.requireSignin,solicitudControllers.eliminarDocumento)
+    router.delete('/documentacion/eliminar/:documento',authSignupControllers.requireSignin,solicitudControllers.eliminarDocumento)
 
     //notificacion
 
