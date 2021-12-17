@@ -722,8 +722,8 @@ exports.aprobadosLista = async(req,res) => {
 
         const club = req.params.club
         const solicitud = req.params.solicitud
-
-
+        const estado =  req.params.estado
+        const usuario =  req.params.usuario
         
 
 
@@ -734,17 +734,27 @@ exports.aprobadosLista = async(req,res) => {
                 include:[{
                     model: Usuario,
                     as: 'enviadopor',
+                    where:{
+                        id: usuario
+                    },
                     include:[{
                         model: Persona,
                         as: 'persona'
                     }]
+                }]
+            },{
+                model: Usuario,
+                as: 'usuario',
+                include:[{
+                    model: Persona,
+                    as: 'persona'
                 }]
             }
         ],
             where:{
                 clubId: club,
                 solicituddocumentoId: solicitud,
-                estadodocumentacionId: 3
+                estadodocumentacionId: estado
             },
             order: [['id', 'DESC']]
         })

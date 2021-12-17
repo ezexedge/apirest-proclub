@@ -1886,6 +1886,38 @@
 ///documentacion/rechazado/:usuario/:solicitud
 
 
+//documentacion/solicitud/usuarios/:club/:usuario/:solicitud/:estado',authSignupControllers.requireSignin,solicitudControllers.aprobadosLista)
+
+
+     /**
+ * @swagger
+ * /api/documentacion/solicitud/usuarios/{club}/{usuario}/{solicitud}/{estado}:
+ *   get:
+ *     summary: get lista de usuario por solicitud y estado
+ *     tags: [Documentacion]
+ *     parameters:
+ *      - in: path
+ *        name: club
+ *        type: number
+ *        description: agregar el id de un club existente 
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un usuario existente.
+ *      - in: path
+ *        name: solicitud
+ *        type: number
+ *        description: agregar id de una solicitud
+ *      - in: path
+ *        name: estado
+ *        type: number
+ *        description: agregar el id de un estado
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
      /**
  * @swagger
  * /api/documentacion/aprobado/{usuario}/{solicitud}:
