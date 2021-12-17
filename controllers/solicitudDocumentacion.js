@@ -632,7 +632,7 @@ console.log('respuestaaaaaa...',espacio)
         let arr = []
 
 
-        if(espacio === null || espacio === 'null' || espacio === NULL ){
+        if(espacio === null || espacio === 'null'  ){
 
 
             const respuesta  = await DestinatarioDocumentacion.findAll({
