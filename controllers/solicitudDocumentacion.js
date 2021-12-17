@@ -608,6 +608,10 @@ exports.getEnviadasByEstado = async(req,res) => {
         const club = req.params.club
         const usuario =  req.params.usuario
 
+
+
+
+        if(espacio !== null){
         const result = await EstadoDocumento.findOne({
             where:{
                 id: espacio
@@ -618,11 +622,15 @@ exports.getEnviadasByEstado = async(req,res) => {
     
         if(!result) throw new Error('el estado ingresado no existe')
 
+    }
+    
+
         const usuarioExist =  await Usuario.findOne({
             where:{
                 id: usuario
             }
         })
+    
 
 
         if(!usuarioExist)throw new Error('el usuario no existe')
