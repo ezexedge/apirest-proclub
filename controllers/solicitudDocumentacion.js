@@ -791,6 +791,7 @@ exports.solicitudByClub = async(req,res) => {
         let arr = []
         for(let val of result){
             let obj = {
+                id: val && val.id,
                 clubId: val && val.clubId,
                 usuarioId: val && val.usuarioId,
                 solicituddocumentoId: val && val.solicituddocumentoId,
