@@ -377,7 +377,7 @@ exports.getSolicitudById = async(req,res) => {
        arr.push(val.documentacion)
    }
 
-
+//guardado
    let obj = {
         estadodocumentacionId: result.estadodocumentacionId,
        titulo : result && result.solicituddocumento &&  result.solicituddocumento.titulo,
