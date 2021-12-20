@@ -8,6 +8,7 @@ const Pregunta = require('../models/Pregunta')
 const Respuesta = require('../models/Respuesta')
 const RespuestaUsuario = require('../models/RespuestaUsuario')
 const Usuario = require('../models/Usuario')
+const Persona = require('../models/Persona')
 const moment = require('moment')
 const _ = require('lodash')
 
