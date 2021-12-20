@@ -723,7 +723,6 @@ exports.lista = async(req,res) => {
 
         const club = req.params.club
         const solicitud = req.params.solicitud
-        const estado =  req.params.estado
         
 
 
@@ -750,8 +749,7 @@ exports.lista = async(req,res) => {
         ],
             where:{
                 clubId: club,
-                solicituddocumentoId: solicitud,
-                estadodocumentacionId: estado
+                solicituddocumentoId: solicitud
             },
             order: [['id', 'DESC']]
         })

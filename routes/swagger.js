@@ -1904,10 +1904,6 @@
  *        name: solicitud
  *        type: number
  *        description: agregar id de una solicitud
- *      - in: path
- *        name: estado
- *        type: number
- *        description: agregar el id de un estado
  *     responses:
  *       200:
  *        description: OK
