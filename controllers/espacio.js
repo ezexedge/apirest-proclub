@@ -322,7 +322,11 @@ exports.getEspacioByClubId =  async (req,res) => {
             const disciplinas = await EspacioXDisciplinaXClub.findAll({
                 include:[{
                     model: RelDisiciplinaXClub,
-                    as: 'disciplinaxclub'
+                    as: 'disciplinaxclub',
+                    include:[{
+                        model: Disciplina,
+                        as: 'disciplina'
+                    }],
                 }],
                 where:{
                     espacioId: val.id
