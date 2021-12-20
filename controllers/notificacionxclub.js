@@ -3,6 +3,7 @@ const Club = require('../models/Club')
 const ClubXUsuario = require('../models/ClubXUsuario')
 const NotificacionXClub = require('../models/NotificacionXClub')
 const NotXClubXUsuario =  require('../models/NotXClubXUsuario')
+const Usuario = require('../models/Usuario')
 const Persona = require('../models/Persona')
 const Rol = require('../models/rol')
 const _ = require('lodash')
@@ -118,7 +119,15 @@ exports.getByClub = async(req,res) => {
             include: [
             {
                 model: Notificacion,
-                as: 'notificacion'
+                as: 'notificacion',
+                include:[{
+                    model: Usuario,
+                    as: 'usuario',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }]
             },
            
         ],
@@ -156,8 +165,9 @@ exports.getByClub = async(req,res) => {
                     id: val.id,
                     notificacionId: val.notificacionId,
                     clubId: val.clubId,
-                    cantidad: cantidad.count
-                }
+                    cantidad: cantidad.count,
+                    enviadoPor: val.notificacion && val.notificacion.usuario && val.notificacion.usuario.persona && `${val.notificacion.usuario.persona.nombre} ${val.notificacion.usuario.persona.apellido}`
+                 }
 
                 arr.push(obj)
             }
