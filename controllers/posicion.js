@@ -186,7 +186,8 @@ exports.crearPosicionAdmin = async(req,res) => {
 
        const result = await RelDisciplinaXClub.findOne({where : {
            clubId: clubId,
-           disciplinaId: disciplinaId
+           disciplinaId: disciplinaId,
+           activo: 1
        }})
 
 
@@ -295,6 +296,7 @@ exports.getAllPosicionesByDivision = async(req,res) => {
             })
 
 
+            console.log('aca las pociones',cantidadPosicion)
             let obj = {
                 id: val.disciplinaxpos.id ,
                 name: val.disciplinaxpos.nombre,
