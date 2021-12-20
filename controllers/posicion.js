@@ -169,7 +169,7 @@ exports.eliminarPosicion = async(req,res) => {
                 model: RelDisciplinaXPos,
                 as: 'disciplinaxpos',
                 where:{
-                    id: id
+                    id: req.params.id
                 }
             }]
           }]
@@ -177,8 +177,8 @@ exports.eliminarPosicion = async(req,res) => {
 
       for(let val of resultFinal){
 
-          await RelPosXUsuarioXDivXDep.update({activo: 0 },{where: {id:val.id}})
-
+//          await RelPosXUsuarioXDivXDep.update({activo: 0 },{where: {id:val.id}})
+            console.log('aca estamos=====',val)
 
       }
 
