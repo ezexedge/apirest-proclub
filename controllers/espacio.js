@@ -320,6 +320,10 @@ exports.getEspacioByClubId =  async (req,res) => {
         for(let val of result){
 
             const disciplinas = await EspacioXDisciplinaXClub.findAll({
+                include:[{
+                    model: RelDisiciplinaXClub,
+                    as: 'disciplinaxclub'
+                }],
                 where:{
                     espacioId: val.id
                 }
