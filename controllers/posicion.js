@@ -237,7 +237,8 @@ exports.getAllPosicionesByDivision = async(req,res) => {
         include: [{
             model: RelDisciplinaXPos,
             as: 'disciplinaxpos',
-            where:{activo:1}
+            where:{activo:1},
+           
         },
         {
             model: RelDisXClubXDiv,
