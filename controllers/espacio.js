@@ -318,7 +318,6 @@ exports.getEspacioByClubId =  async (req,res) => {
         
         let arr = []
         for(let val of result){
-            let arrDisciplina = []
             const disciplinas = await EspacioXDisciplinaXClub.findAll({
                 include:[{
                     model: RelDisiciplinaXClub,
@@ -335,13 +334,7 @@ exports.getEspacioByClubId =  async (req,res) => {
 
 
 
-            for(let val of disciplinas.deportes){
-                if(val.disciplinaxclub && val.disciplinaxclub.disciplina && val.disciplinaxclub.disciplina.nombre){
-                    arrDisciplina.push(val.disciplinaxclub.disciplina.nombre)
-
-                }
-
-            }
+        
 
            
 
@@ -366,7 +359,7 @@ exports.getEspacioByClubId =  async (req,res) => {
                 ReservaAmpliada: val.ReservaAmpliada,
                 clubId: val.clubId,
                 estadoespacioId: val.estadoespacioId,
-                deportes: arrDisciplina
+                deportes: disciplinas ? disciplinas : []
                 }
 
                 arr.push(obj)
