@@ -312,6 +312,14 @@ exports.getByClub = async(req,res) => {
 
 
             const resultDestinatario = await Destinatario.findOne({
+                include:[{
+                    model: Usuario,
+                    as: 'enviadoPor',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                }], 
 
                 where:{
                     encuestId: val.encuestaId
@@ -335,6 +343,7 @@ exports.getByClub = async(req,res) => {
                 descripcion: val.encuesta.descripcion,
                 fecha: val.encuesta.fecha,
                 hora: val.encuesta.hora,
+                enviadoPor: resultDestinatario && resultDestinatario.enviadoPor && resultDestinatario.enviadoPor.persona && `${resultDestinatario.enviadoPor.persona.nombre} ${resultDestinatario.enviadoPor.persona.apellido}`,
                 cantidadEnviados: cantidadEnviados.count
             }
             arr.push(obj)
