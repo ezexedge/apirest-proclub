@@ -295,7 +295,6 @@ exports.getAllPosicionesByDivision = async(req,res) => {
             })
 
 
-            console.log('aca las pociones',cantidadPosicion)
             let obj = {
                 id: val.disciplinaxpos.id ,
                 name: val.disciplinaxpos.nombre,

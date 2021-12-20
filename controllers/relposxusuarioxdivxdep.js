@@ -996,7 +996,7 @@ exports.usuarioDeportes = async (req,res) => {
 }
 
 
-
+//se agrego un club a deporte
 exports.listaDeUsuariosXDeporte = async (req,res) => {
     
     try{
@@ -1004,7 +1004,7 @@ exports.listaDeUsuariosXDeporte = async (req,res) => {
      
 
         const disciplina = req.params.disciplina
-
+        const club = req.params.club
 
         const existe = await Disciplina.findByPk(disciplina)
 
@@ -1031,7 +1031,8 @@ exports.listaDeUsuariosXDeporte = async (req,res) => {
                         model: Club,
                         as: 'club',
                         where:{
-                            activo: 1
+                            activo: 1,
+                            id: club
                         }   
                      }
                 ]
