@@ -165,13 +165,7 @@ exports.eliminarPosicion = async(req,res) => {
           include:[{
             model: DisciplinaXClubXPos,
             as: 'disciplinaxclubxpos',
-            include:[{
-                model: RelDisciplinaXPos,
-                as: 'disciplinaxpos',
-                where:{
-                    id: req.params.id
-                }
-            }]
+            where:{disciplinaxposId: req.params.id}
           }]
       })
 
