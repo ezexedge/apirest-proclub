@@ -386,7 +386,7 @@ exports.getSolicitudById = async(req,res) => {
        hora: result && result.solicituddocumento && result.solicituddocumento.hora,
        enviadopor: result && result.solicituddocumento && result.solicituddocumento.enviadopor && result.solicituddocumento.enviadopor.persona && `${result.solicituddocumento.enviadopor.persona.nombre} ${result.solicituddocumento.enviadopor.persona.apellido}`,
        categoria : result && result.solicituddocumento && result.solicituddocumento.categoriadocumento && result.solicituddocumento.categoriadocumento.nombre,
-       documentacionDe: result && result.usuario && result.usuario.persona && `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`,
+       enviadoA: result && result.usuario && result.usuario.persona && `${result.usuario.persona.nombre} ${result.usuario.persona.apellido}`,
        estadoDocumentacion: result && result.estadodocumentacion && result.estadodocumentacion.nombre,
        documentacion: arr
     }
