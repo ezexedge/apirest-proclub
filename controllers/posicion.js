@@ -154,11 +154,33 @@ exports.eliminarPosicion = async(req,res) => {
 
 
        if(!result) throw new  Error('la posicion no existe')
+
+
+
        
 
       await RelDisciplinaXPos.update({activo:  0 },{where: {id:id}})
       
+      let resultFinal = await RelPosXUsuarioXDivXDep.findAll({
+          include:[{
+            model: DisciplinaXClubXPos,
+            as: 'disciplinaxclubxpos',
+            include:[{
+                model: RelDisciplinaXPos,
+                as: 'disciplinaxpos',
+                where:{
+                    id: id
+                }
+            }]
+          }]
+      })
 
+      for(let val of resultFinal){
+
+          await RelPosXUsuarioXDivXDep.update({activo: 0 },{where: {id:val.id}})
+
+
+      }
 
        res.status(200).json({message: 'eliminado correctamente'})
 

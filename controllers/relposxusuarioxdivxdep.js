@@ -1068,11 +1068,7 @@ exports.listaDeUsuariosXDeporte = async (req,res) => {
             {
              model: DisciplinaXClubXPos,
              as:   'disciplinaxclubxpos',
-             include:[{
-                 model: RelDisciplinaXPos,
-                 as: 'disciplinaxpos',
-                 activo: 1
-             }]
+         
         
             }
            
