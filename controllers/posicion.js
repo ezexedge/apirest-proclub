@@ -171,8 +171,7 @@ exports.eliminarPosicion = async(req,res) => {
 
       for(let val of resultFinal){
 
-//          await RelPosXUsuarioXDivXDep.update({activo: 0 },{where: {id:val.id}})
-            console.log('aca estamos=====',val)
+     await RelPosXUsuarioXDivXDep.update({activo: 0 },{where: {id:val.id}})
 
       }
 
