@@ -308,16 +308,60 @@ exports.getEspacioByClubId =  async (req,res) => {
 
         })
         
-        
-        if(result){
+//hacer un pasarle el espacio en el where y cargarlo en un nuevo json
+//fijarme que en el front se manipula el json hace diferente la 
+//respuesta del json que trae el back
 
-    
-            res.status(200).json(result)    
+
         
-        }else{
-            throw new Error('el espacio no existe ')
+        
+        
+        let arr = []
+        for(let val of result){
+
+            const disciplinas = await EspacioXDisciplinaXClub.findAll({
+                where:{
+                    espacioId: val.id
+                }
+            })
+
+
+           
+
+                let obj = {
+                id:val.id ,
+                nombre: val.nombre,
+                descripcion: val.descripcion,
+                maxReservasDia: val.maxReservasDia,
+                maxReservasMes: val.maxReservasMes,
+                maxReservasSem: val.maxReservasSem,
+                maxReservasAno: val.maxReservasAno,
+                intervaloEntreTurnos: val.intervaloEntreTurnos,
+                image: val.image,
+                tiempoDeAnticipacion: val.tiempoDeAnticipacion,
+                DuracionDeTurnos: val.DuracionDeTurnos,
+                valor: val.valor,
+                activo: val.activo,
+                visibilidad: val.visibilidad,
+                multiplesReservasEnUnHorario: val.multiplesReservasEnUnHorario,
+                LimitarAUnSoloEventoAprobado: val.LimitarAUnSoloEventoAprobado,
+                ProhibirMasDeUnaReservaPendiente: val.ProhibirMasDeUnaReservaPendiente,
+                ReservaAmpliada: val.ReservaAmpliada,
+                clubId: val.clubId,
+                estadoespacioId: val.estadoespacioId,
+                deportes: disciplinas ? disciplinas : []
+                }
+
+                arr.push(obj)
+           
+
+
+
         }
-    
+
+            res.status(200).json(arr)    
+        
+       
 
 
     }catch(error){
