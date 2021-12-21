@@ -479,7 +479,7 @@ exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
 
 
         
-    if(Number(division) === -1 && Number(deporte) === -1){
+    if(Number(division) === -1 || Number(deporte) === -1){
 
 
         console.log('//////////////',deporte)
