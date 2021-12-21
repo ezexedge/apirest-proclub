@@ -309,6 +309,8 @@ router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin
 
 
 router.get('/disciplina/listado-usuarios/:disciplina/:club',usuarioInformacionFinal.listaDeUsuariosXDeporte)
+//lo hicimos solo para deportes divisions
+router.get('/disciplina-admin/listado-usuarios/:disciplina/:club',usuarioInformacionFinal.listaDeUsuariosXDeporteModificado)
 
 
 

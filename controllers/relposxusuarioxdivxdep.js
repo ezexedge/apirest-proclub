@@ -1086,3 +1086,111 @@ exports.listaDeUsuariosXDeporte = async (req,res) => {
         res.status(400).json({'error': error.message})
     }
 }
+
+
+exports.listaDeUsuariosXDeporteModificado = async (req,res) => {
+    
+    try{
+
+     
+
+        const disciplina = req.params.disciplina
+        const club = req.params.club
+
+        const existe = await Disciplina.findByPk(disciplina)
+
+        if(!existe)throw new Error('la disciplina no existe')
+
+        const result = await RelPosXUsarioXDiviXDep.findAll({
+            include: [
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    where:{
+                        activo:1
+                    },
+                    include: [{
+                        model: Disciplina,
+                        as: 'disciplina',
+                        where:{
+                            id: disciplina,
+                            activo: 1
+                        }
+                     
+                    },
+                    {
+                        model: Club,
+                        as: 'club',
+                        where:{
+                            activo: 1,
+                            id: club
+                        }   
+                     }
+                ]
+                },
+                {
+                model: ClubXUsuario,
+                as: 'clubxusuario',
+                where:{
+                    activo: 1
+                },
+                include: [{
+                    model: Usuario,
+                    as: 'usuario',
+                    where:{
+                        activo: 1
+                    },
+                    include: [{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                  
+                },{
+                    model: Rol,
+                    as: 'rol'
+                }]
+            },
+            {
+                model: RelDisXClubXDiv,
+                as: 'disxclubxdiv',
+              
+            
+            },
+            {
+             model: DisciplinaXClubXPos,
+             as:   'disciplinaxclubxpos',
+         
+        
+            }
+           
+        ],
+        where:{
+            activo: 1
+        }
+        })
+
+
+        let arr = []
+        for(let val of result){
+            
+            let obj = {
+                id: val.clubxusuario  && val.clubxusuario.usuario && val.clubxusuario.usuario.id,
+                nombre: val.clubxusuario && val.clubxusuario.usuario &&  val.clubxusuario.usuario.persona && val.clubxusuario.usuario.persona.nombre,
+                apellido: val.clubxusuario && val.clubxusuario.usuario &&  val.clubxusuario.usuario.persona && val.clubxusuario.usuario.persona.apellido,
+                rol:  val.clubxusuario && val.clubxusuario.rol && val.clubxusuario.rol.nombre,
+                documento: val.clubxusuario && val.clubxusuario.usuario &&  val.clubxusuario.usuario.persona && val.clubxusuario.usuario.persona.documento,
+                telefono: val.clubxusuario && val.clubxusuario.usuario &&  val.clubxusuario.usuario.persona && val.clubxusuario.usuario.persona.telefono
+        
+            }
+
+            arr.push(obj)
+        }
+     
+
+        res.status(200).json(arr)
+
+    }catch(error){
+        res.status(400).json({'error': error.message})
+    }
+}
+//listaDeUsuariosXDeporteModificado)
