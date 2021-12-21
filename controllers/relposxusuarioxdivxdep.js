@@ -556,10 +556,17 @@ exports.filterUsuarioPorClubPorDeportePorDivision = async (req,res) => {
              model: RelDisciplinaXPos,
              as: 'disciplinaxpos'
          }]
+        },{
+            model: RelDisciplinaXClub,
+            as: 'disciplinaxclub'
+    
         }
+        
     ],
     where:{
-        activo: 1
+        activo: 1,
+        disciplinaxclubId: deporte,
+        disxclubxdivId: division
     }
 
 
