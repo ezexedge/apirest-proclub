@@ -9,6 +9,7 @@ const RelDisiciplinaXClub = require('../models/RelDisciplinaXClub')
 const Disiciplina = require('../models/Disciplina')
 const Reserva = require('../models/Reservas')
 const Beneficios = require('../models/Beneficios')
+const Club =  require('../models/Club')
 exports.crearEspacio =  async (req,res) => {
  
  
@@ -731,3 +732,57 @@ exports.modificarImagenes = async (req, res) => {
 
 };
 
+
+
+
+
+exports.modificarImagenesClub = async (req, res) => {
+
+
+    const t = await db.transaction()
+  
+    try {
+  
+      const club  = req.params.club
+    
+  
+  
+        const result =  await Club.findOne({
+            where:{
+                id: club
+            }
+        })
+  
+        if(!result)throw new Error('el club no existe')
+  
+      
+      let imagen
+      if(req.file) {
+       imagen =  `https://api.klubo.club/api/image/${req.file.filename}`
+       
+     
+      }else{
+        imagen = result.image
+      } 
+      
+      await Club.update({ logo : imagen },{where: {id: club},  transaction: t})
+  
+  
+   
+  
+  
+     await t.commit();
+   
+     res.status(200).json({ "message": "modificado con exito" })
+  
+    } catch (err) {
+      console.log('error', err)
+  
+      await t.rollback();
+      res.status(400).json({ "error": err.message })
+  
+    }
+  
+  };
+  
+  

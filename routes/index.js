@@ -182,7 +182,9 @@ module.exports = function(){
 //ModificarPerfilPersona
 
 router.put('/espacio/update/image/:espacio',imageControllers.subirArchivos,espacioControllers.modificarImagenes)
-    
+
+router.put('/update-club/image/:club',imageControllers.subirArchivos,espacioControllers.modificarImagenesClub)
+
           
 router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.modificarImagenes)
     
@@ -1060,6 +1062,8 @@ router.get('/admin/deportes-usuario/:usuario',authSignupControllers.requireSigni
 router.get('/espacio-reservas/:espacio',authSignupControllers.requireSignin, reservaControllers.getByEspacioId)
  
 router.put('/update-imagen/club/:id',espacioControllers.updateImagen)
+
+
 
     return router
 }
