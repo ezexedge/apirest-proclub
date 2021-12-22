@@ -503,3 +503,56 @@ exports.eliminarAdministrador = async (req,res) => {
 
 }
 
+
+
+
+exports.ModificarPerfilClub = async (req, res) => {
+
+
+  const t = await db.transaction()
+
+  try {
+
+    const club = req.params.club
+
+    const resultClub = await Club.findOne({
+    where:{
+      id: club
+    }
+    })
+
+ 
+    if(!resultClub)throw new Error('El club no existe')
+   
+
+
+
+const {nombre ,telefono ,email,cuit,facebook,instagram,twitter,calle,numero,localidad } = req.body
+    
+ 
+    await Club.update({ nombre: nombre,telefono: telefono, email: email,  twitter: twitter , facebook: facebook, instagram: instagram, cuit: cuit },{where: {id: club},  transaction: t})
+
+
+    if(resultClub.direccionId === null){
+    const resultDireccion =   await Direccion.create({ calle: calle, numero: numero, localidad: localidad },  {transaction: t})
+      await Club.update({ direccionId: resultDireccion.id },{where: {id: resultClub.id},  transaction: t})
+
+    }
+  await Direccion.update({ calle: calle, numero: numero, localidad: localidad },{where: {id: resultClub.direccionId},  transaction: t})
+
+   
+
+
+   await t.commit();
+ 
+   res.status(200).json({ "message": "modificado con exito" })
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+    res.status(400).json({ "error": err.message })
+
+  }
+
+};

@@ -178,7 +178,8 @@ module.exports = function(){
 
 
              router.put('/perfil/persona/:persona',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.ModificarPerfilPersona)
-    
+             router.put('/perfil/club/:club',authSignupControllers.requireSignin,clubControllers.ModificarPerfilClub)
+
 //ModificarPerfilPersona
 
 router.put('/espacio/update/image/:espacio',imageControllers.subirArchivos,espacioControllers.modificarImagenes)
