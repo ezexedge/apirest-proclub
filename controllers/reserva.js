@@ -1,5 +1,6 @@
 const Reservas =  require('../models/Reservas')
 const Usuario = require('../models/Usuario')
+const Persona = require('../models/Persona')
 const Turno = require('../models/Turno')
 const QRCode = require('qrcode')
 const Espacio = require('../models/Espacio')
@@ -329,7 +330,26 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
         if(fechaInicio === null || fechaInicio === 'null'){
 
             result =  await Reservas.findAll({
-
+                include:[{
+                    model: Usuario,
+                    as: 'usuario',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                },{
+                    model: EstadoReserva,
+                    as: 'estadoreserva'
+                },
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    include:[{
+                        model: Disciplina,
+                        as: 'disciplina'
+                    }]
+                }
+            ],
                order: [['id', 'DESC']]            
                     
                })
@@ -337,6 +357,26 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
         }else{
 
              result =  await Reservas.findAll({
+                include:[{
+                    model: Usuario,
+                    as: 'usuario',
+                    include:[{
+                        model: Persona,
+                        as: 'persona'
+                    }]
+                },{
+                    model: EstadoReserva,
+                    as: 'estadoreserva'
+                },
+                {
+                    model: RelDisciplinaXClub,
+                    as: 'disciplinaxclub',
+                    include:[{
+                        model: Disciplina,
+                        as: 'disciplina'
+                    }]
+                }
+            ],
 
                 where: { 
                     fechaInicio : fechaFilterInicio
