@@ -589,12 +589,12 @@ console.log('respuestaaaaaa...',espacio)
                 include:[{
                     model: SolicitudDocumento,
                     as: 'solicituddocumento',
+                    where:{
+                        enviadoporId: usuario
+                    },
                     include:[{
                         model: Usuario,
                         as: 'enviadopor',
-                        where:{
-                            id: usuario
-                        },
                         include:[{
                             model: Persona,
                             as: 'persona'
