@@ -542,7 +542,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
     router.get('/documentacion/solicitud/:club',authSignupControllers.requireSignin,solicitudControllers.solicitudByClub)
 
-    router.get('/documentacion-enviadas/estado/:club/:usuario/:estado',authSignupControllers.requireSignin,solicitudControllers.getEnviadasByEstado)
+    router.get('/documentacion-enviadas/estado/:club/:usuario/:solicitud/:estado',authSignupControllers.requireSignin,solicitudControllers.getEnviadasByEstado)
     router.get('/documentacion/solicitud/:club/:usuario/:solicitud',authSignupControllers.requireSignin,solicitudControllers.getSolicitudById)
     router.get('/documentacion/estados',authSignupControllers.requireSignin,solicitudControllers.getEstados)
     

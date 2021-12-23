@@ -557,6 +557,7 @@ exports.getEnviadasByEstado = async(req,res) => {
         const espacio = req.params.estado
         const club = req.params.club
         const usuario =  req.params.usuario
+        const solicitud = req.params.solicitud
 console.log('respuestaaaaaa...',espacio)
 
 
@@ -613,12 +614,13 @@ console.log('respuestaaaaaa...',espacio)
                 }
             ],
                 where:{
-                    clubId: club
+                    clubId: club,
+                    solicituddocumentoId: solicitud
                 },
                 order: [['id', 'DESC']]
             })
             
-
+//ver informacion que envia demas al pedo
             for(let respuesta1 of respuesta){
 
                 let obj  = {
@@ -677,6 +679,7 @@ console.log('respuestaaaaaa...',espacio)
             where:{
                 clubId: club,
                 estadodocumentacionId: espacio,
+                solicituddocumentoId: solicitud
             },
             order: [['id', 'DESC']]
 
