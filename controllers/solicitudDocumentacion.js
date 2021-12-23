@@ -87,8 +87,8 @@ exports.crearSolicitud = async(req,res) => {
     };
 
 
-  //  let idString = resultNotificacion.id
-   // let idModificado = idString.toString()
+  let idString = resultNotificacion.id
+    let idModificado = idString.toString()
 
     const message_notification = {
         notification: {
@@ -96,9 +96,9 @@ exports.crearSolicitud = async(req,res) => {
             body: solicitud.descripcion
         },
         data:{
-            idSolicitud: 'prueba'
+            idSolicitud: idModificado
 
-           // idNoti: idModificado
+
         }
     };
 
