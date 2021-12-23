@@ -556,3 +556,53 @@ const {nombre ,telefono ,email,cuit,facebook,instagram,twitter,calle,numero,loca
   }
 
 };
+
+
+
+exports.ModificarPerfilClubColor = async (req, res) => {
+
+
+  const t = await db.transaction()
+
+  try {
+
+    const club = req.params.club
+
+    const resultClub = await Club.findOne({
+    where:{
+      id: club
+    }
+    })
+
+ 
+    if(!resultClub)throw new Error('El club no existe')
+   
+
+
+
+const { colorPrimario,colorSecundario,colorTextoPrimario,colorTextoSecundario } = req.body
+    
+ 
+    await Club.update({ 
+      colorPrimario: colorPrimario,
+      colorTextoPrimario: colorTextoPrimario, colorSecundario: colorSecundario,
+      colorTextoSecundario: colorTextoSecundario
+     },{where: {id: club},  transaction: t})
+
+
+
+
+
+   await t.commit();
+ 
+   res.status(200).json({ "message": "color modificado con exito" })
+
+  } catch (err) {
+    console.log('error', err)
+
+    await t.rollback();
+    res.status(400).json({ "error": err.message })
+
+  }
+
+};

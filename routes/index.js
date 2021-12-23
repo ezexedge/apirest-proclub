@@ -179,6 +179,7 @@ module.exports = function(){
 
              router.put('/perfil/persona/:persona',authSignupControllers.requireSignin,imageControllers.subirArchivos,personControllers.ModificarPerfilPersona)
              router.put('/perfil/club/:club',authSignupControllers.requireSignin,clubControllers.ModificarPerfilClub)
+             router.put('/perfil/club/color/:club',authSignupControllers.requireSignin,clubControllers.ModificarPerfilClubColor)
 
 //ModificarPerfilPersona
 
