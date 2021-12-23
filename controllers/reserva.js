@@ -322,19 +322,32 @@ exports.getFiltroXEspacioXDia = async (req,res) => {
         const fechaFilterInicio =  fechaInicio !== 'null' ? ` ${fechaInicio} 00:00:00` : moment().format("YYYY-MM-DD HH:mm:ss")
 
 
-
+        let result
         console.log('/////',fechaFilterInicio)
    
 
-       let result =  await Reservas.findAll({
+        if(fechaInicio === null || fechaInicio === 'null'){
 
-        where: { 
-            fechaInicio : fechaFilterInicio
-           
-    },
-       order: [['id', 'DESC']]            
-            
-       })
+            result =  await Reservas.findAll({
+
+               order: [['id', 'DESC']]            
+                    
+               })
+
+        }else{
+
+             result =  await Reservas.findAll({
+
+                where: { 
+                    fechaInicio : fechaFilterInicio
+                   
+            },
+               order: [['id', 'DESC']]            
+                    
+               })
+
+        }
+
 
 
 
