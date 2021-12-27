@@ -541,12 +541,6 @@ exports.getBeneficioXClubByClubByUsario = async (req,res) => {
     const usuario = req.params.usuario
 
 
-    const resp = await ClubXusuario.findOne({
-      where:{
-        clubId: club,
-        usuarioId: usuario
-      }
-    })
 
     if(!resp)throw new Error('el id del club o del usuario no existe')
 
@@ -572,7 +566,6 @@ exports.getBeneficioXClubByClubByUsario = async (req,res) => {
       where : {
         activo: 1,
         clubId: club,
-        usuarioId: usuario
       }
     })
 
