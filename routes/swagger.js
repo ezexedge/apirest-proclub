@@ -4844,7 +4844,7 @@
  *      - in: path
  *        name: usuario
  *        type: number
- *        description: agregar id de un manager
+ *        description: agregar id de un usuario
  *        schema:
  *          type: integer
  *        required: true
