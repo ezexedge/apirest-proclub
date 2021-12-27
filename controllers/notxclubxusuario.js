@@ -636,7 +636,7 @@ exports.getNotificacionesLeidas = async (req,res) => {
                 }  
             ],
             order: [['id', 'DESC']],
-            limit: 2
+            limit: 30
 
         })
 
