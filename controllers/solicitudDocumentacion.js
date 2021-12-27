@@ -832,3 +832,36 @@ exports.solicitudByClub = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
+
+exports.listaUsuarios = async(req,res) => {
+    try{
+
+
+        const solicitud = req.params.solicitud
+        
+
+
+        const result  = await DestinatarioDocumentacion.findAll({
+            include:[{
+                model: Usuario,
+                as: 'usuario',
+                include:[{
+                    model: Persona,
+                    as: 'persona'
+                }]
+            }
+        ],
+            where:{
+                solicituddocumentoId: solicitud
+            },
+            order: [['id', 'DESC']]
+        })
+
+        res.status(200).json(result)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}

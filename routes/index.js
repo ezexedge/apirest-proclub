@@ -539,6 +539,8 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.post('/documentacion/upload/:solicitud/:usuario',authSignupControllers.requireSignin,archivoControllers.subirArchivos,solicitudControllers.cargarDocumento)
     router.get('/documentacion/estado/:club/:usuario/:estado',authSignupControllers.requireSignin,solicitudControllers.getByEstado)
     router.get('/documentacion/solicitud/usuarios/:club/:solicitud',authSignupControllers.requireSignin,solicitudControllers.lista)
+    
+    router.get('/documentacion/lista/usuarios/:solicitud',authSignupControllers.requireSignin,solicitudControllers.listaUsuarios)
 
     router.get('/documentacion/solicitud/:club',authSignupControllers.requireSignin,solicitudControllers.solicitudByClub)
 
