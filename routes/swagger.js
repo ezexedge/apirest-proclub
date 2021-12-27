@@ -1791,6 +1791,27 @@
 
  ///documentacion-enviadas/estado/:club/:usuario/:estado'
 
+ ///documentacion/lista/usuarios/:solicitud
+
+     /**
+ * @swagger
+ * /api/documentacion/lista/usuarios/{solicitud}:
+ *   get:
+ *     summary: get de las solicitudes enviadas por un usuario
+ *     tags: [Documentacion]
+ *     parameters:
+ *      - in: path
+ *        name: solicitud
+ *        type: number
+ *        description: agregar id de una solicitud
+ *     responses:
+ *       200:
+ *        description: OK
+
+ */  
+
+
+
      /**
  * @swagger
  * /api/documentacion-enviadas/estado/{club}/{usuario}/{estado}:
