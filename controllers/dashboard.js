@@ -33,6 +33,7 @@ exports.getAll = async (req,res) => {
         const usuario = req.params.user
 
 
+    
 
         const existeClub = await Club.findByPk(club)
 
@@ -158,25 +159,25 @@ exports.getAll = async (req,res) => {
 
     final.turnos = [...resultReservas]
 
-/*
+
     const resultBeneficios = await BeneficioXClub.findAll({
-        include:[  {
-            model : Beneficios,
+
+        include:[{
+            model: Beneficios,
             as: 'beneficio',
-            include:[{
-                model: Rubro,
-                as: 'rubro'
-            }]
+            where:{
+                activo: 1
+            }
         }],
         where:{
-            usuarioId: usuario,
-            activo:1
-        }
+            clubId: club,
+            activo: 1
+        },
+        order: [['id', 'DESC']],
+        limit: 3
     })
 
-    */
-
-    final.beneficios = []
+    final.beneficios = [...resultBeneficios]
 
 
 
