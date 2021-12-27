@@ -2843,8 +2843,35 @@
  * 
  */
 
+///beneficios/mobile/club/:club
 
-
+                    /**
+ * @swagger
+ * /api/beneficios/mobile/club/{club}:
+ *   get:
+ *     summary: get beneficios de un club
+ *     tags: [Beneficios]
+ *     parameters:
+ *       - in : path
+ *         name: club
+ *         description: id de un club
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description:  get beneficios x club
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Beneficios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
 
                     //info util
 
