@@ -16,7 +16,7 @@ const configuracionMulter = {
         }
     }),
     fileFilter(req, file, cb) {
-       if(file.mimetype === 'application/pdf' ) {
+       if(file.mimetype === 'application/pdf' || file.mimetype === 'image/jpeg' ||  file.mimetype ==='image/png'  || file.mimetype === 'application/doc' || file.mimetype === 'application/docx') {
             cb(null, true);
         } else {
             cb(new Error('Formato No válido'))
