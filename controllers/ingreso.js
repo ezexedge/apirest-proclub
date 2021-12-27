@@ -62,9 +62,11 @@ exports.getById =  async (req,res) => {
 exports.crear =  async (req,res) => {
 
     try{
+//falta ponerle el id del usuario 
+//agregarle la fecha
 
       const espacio = req.params.espacio
-      const usuario = req.auth.userId
+      const usuario = req.params.usuario
       const manager = req.params.manager
 
 

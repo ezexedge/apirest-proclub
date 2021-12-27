@@ -4829,7 +4829,7 @@
 
    /**
  * @swagger
- * /api/ingreso/crear/{espacio}/{manager}:
+ * /api/ingreso/crear/{espacio}/{usuario}/{manager}:
  *   post:
  *     summary: se crea un ingreso
  *     tags: [Ingreso]
@@ -4838,6 +4838,13 @@
  *        name: espacio
  *        type: number
  *        description: agregar id de un espacio
+ *        schema:
+ *          type: integer
+ *        required: true
+ *      - in: path
+ *        name: usuario
+ *        type: number
+ *        description: agregar id de un manager
  *        schema:
  *          type: integer
  *        required: true
