@@ -521,6 +521,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 //cambios
 
     router.get('/beneficios/club/:club/:page',authSignupControllers.requireSignin,beneficiosControllers.getBeneficioXClubByClub)
+    router.get('/beneficios/mobile/club/:club',authSignupControllers.requireSignin,beneficiosControllers.getBeneficioXClubByClubMobile)
 
 
     router.get('/beneficios/club/usuario/:club/:usuario',authSignupControllers.requireSignin,beneficiosControllers.getBeneficioXClubByClubByUsario)

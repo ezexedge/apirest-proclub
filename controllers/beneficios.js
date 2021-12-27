@@ -372,6 +372,91 @@ exports.crearBeneficioXClub  = async (req,res) => {
 
 }
 
+//getBeneficioXClubByClubMobile
+exports.getBeneficioXClubByClubMobile = async (req,res) => {
+  try{
+
+
+
+
+
+
+
+    const club = req.params.club
+
+
+    const resultClub =  await Club.findByPk(club)
+
+    if(!resultClub)throw new Error('el id del club no existe')
+
+
+
+
+
+    const result = await BeneficioXClub.findAll({
+      include:[
+    
+  {
+    model : Beneficios,
+    as: 'beneficio',
+    where:{
+      activo: 1
+    }
+},
+
+  ],
+      where : {
+        activo: 1,
+        clubId: club
+      },
+      order: [['id', 'DESC']]
+
+    })
+
+
+
+
+
+
+
+    let arr = []
+    for(let val of result){
+
+      const  resultRubro =  await RubroXBeneficio.findAll({
+        include:[{
+          model: Rubro,
+          as: 'rubro'
+        }],
+        where:{
+          beneficioId: val.beneficioId
+        }
+      })
+
+
+      let obj = {
+
+    id: val.id,
+    activo: val.activo,
+    clubId: val.clubId,
+    usuarioId: val.usuarioId,
+    beneficioId: val.beneficioId,
+    beneficio: val.beneficio,
+    rubro: resultRubro ? resultRubro : []
+      }
+
+
+      arr.push(obj)
+
+    }
+
+    res.status(200).json(result)
+
+  }catch(err){
+    res.status(400).json({error: err.message})
+  }
+}
+
+
 exports.getBeneficioXClubByClub = async (req,res) => {
   try{
 
