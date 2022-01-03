@@ -145,7 +145,7 @@ exports.crear = async(req,res) => {
 
 
         
-        const result  =  await Reservas.create({usuarioId: Number(usuario),estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre ,espacioId: req.body.espacioId,disciplinaxclubId: req.body.disciplinaxclubId })
+        const result  =  await Reservas.create({usuarioId: req.body.usuarioId,estadoreservaId: estado.id , desde: req.body.desde, hasta: req.body.hasta ,fechaInicio: req.body.fechaInicio , fechaFin: req.body.fechaFin , nombre : req.body.nombre ,espacioId: req.body.espacioId,disciplinaxclubId: req.body.disciplinaxclubId })
 
         
         res.status(200).json({message: 'reserva creada correctamente'})
