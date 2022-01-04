@@ -2079,6 +2079,39 @@
 
  */ 
 
+   //    router.get('/usuario/no-clubs/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioNoClubs)
+
+
+        /**
+ * @swagger
+ * /api/usuario/no-clubs/{usuario}:
+ *   get:
+ *     summary: get de los clubs que no posee un usuario
+ *     tags: [Usuario]
+ *     parameters:
+ *       - in : path
+ *         name: usuario
+ *         description: id de un usuario
+ *         schema:
+ *           type: integer
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: get clubxusuario by usuarioId
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/ClubXUsuarios'
+ *       400:
+ *         description: post can not be found
+ * 
+ * 
+ */
+
+
+
         /**
  * @swagger
  * /api/usuario/clubs/{usuario}:
