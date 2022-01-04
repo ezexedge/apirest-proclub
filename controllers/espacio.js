@@ -145,7 +145,7 @@ exports.updateEspacio =  async (req,res) => {
         
 
 
-     if(reservas.length > 0){
+     if(reservas.length > 0 ){
         let arr = []
 
      for(let val of reservas){

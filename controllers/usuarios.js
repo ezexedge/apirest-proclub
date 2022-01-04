@@ -352,6 +352,85 @@ exports.usuarioEliminar = async (req, res) => {
   }
 
 
+  exports.usuarioNoClubs = async (req,res) => {
+    try{
+
+      const usuario = req.params.usuario
+
+
+
+      const resultUsuario = await Usuario.findOne({
+        where:{
+          activo: 1,
+          id: usuario
+        }
+      })
+
+      if(!resultUsuario)throw new Error('el usuario no existe')
+
+
+
+      const resultClub = await Club.findAll({})
+
+      const result = await ClubXusuario.findAll({
+        include:[
+          {
+            model: Usuario,
+            as: 'usuario',
+            include:[{
+              model:Persona,
+              as:'persona'
+            }]
+          },
+          {
+          model: Club,
+          as: 'club',
+          include:[
+            {
+              model: Direccion,
+              as: 'direccion'
+            },
+            {
+            model: Persona,
+            as: 'persona'
+          }
+        ]
+        }],
+        where:{
+          usuarioId: usuario,
+          activo:1
+        }
+      })
+
+
+      let arr =[]
+      for(let val of result){
+        
+        arr.push(val.clubId)
+      }
+
+      let respuestaFinal = []
+      for(let val of resultClub){
+        ////
+
+        if(arr.includes(val.id) === false){
+          respuestaFinal.push(val)
+        }
+
+      }
+
+     res.status(200).json(respuestaFinal)
+
+      
+
+    }catch (err) {
+
+      res.status(400).json({'error': err.message})
+    }
+  }
+
+
+
   exports.usuarioXClub = async (req,res) =>{
 
  

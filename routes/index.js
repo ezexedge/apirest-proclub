@@ -254,7 +254,9 @@ router.put('/personas/update/image/:usuario',authSignupControllers.requireSignin
 
     router.get('/usuario/clubs/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioClubs)
 
-   
+    router.get('/usuario/no-clubs/:usuario',authSignupControllers.requireSignin,usuariosControllers.usuarioNoClubs)
+
+   //usuarioNoClubs
         
   router.get('/usuario/:id',authSignupControllers.requireSignin ,usuariosControllers.usuarioById)
 
