@@ -370,7 +370,11 @@ exports.usuarioEliminar = async (req, res) => {
 
 
 
-      const resultClub = await Club.findAll({})
+      const resultClub = await Club.findAll({
+        where:{
+          activo:1
+        }
+      })
 
       const result = await ClubXusuario.findAll({
         include:[
