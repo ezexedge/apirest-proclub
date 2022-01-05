@@ -602,7 +602,10 @@ exports.sendEncuesta = async (req,res) => {
   //
   
           const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora})
-  
+
+          await EncuestaXClub.create({clubId: club,encuestaId: resultEncuesta.id})
+
+
           for(let val of preguntasRespuesta){
   
               if(val.respuestas.length > 0){
