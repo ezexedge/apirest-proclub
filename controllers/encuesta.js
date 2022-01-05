@@ -387,6 +387,14 @@ exports.getEncuesta = async(req,res) => {
             }
         })
 
+
+
+        let cantidadEnviadosCount = await Destinatario.findAndCountAll({
+            where:{
+                encuestId:encuesta
+            }
+        })
+
         let cantidadEnviados = await Destinatario.findAll({
             include:[{
                 model: Usuario,
@@ -426,7 +434,9 @@ exports.getEncuesta = async(req,res) => {
                 encuesta: encuestaExist,
                 pregunta: val,
                 respuesta: result,
-                usuario: arrUsuarios
+                usuario: arrUsuarios,
+                cantidadEnviados: cantidadEnviadosCount.count
+
 
             }
 
