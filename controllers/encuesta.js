@@ -402,6 +402,19 @@ exports.getEncuesta = async(req,res) => {
         })
 
 
+        let arrUsuarios = []
+        for(let val of cantidadEnviados){
+            let obj = {
+                nombre: val.usuario && val.usuario.persona && `${val.usuario.persona.nombre} ${val.usuario.persona.apellido}`,
+                dni: val.usuario && val.usuario.persona && val.usuario.persona.documento,
+                telefono: val.usuario && val.usuario.persona && val.usuario.persona.telefono,
+                estado: val.usuario && val.usuario.activo === 1 ? 'activo' : 'eliminado'
+ 
+             }
+             arrUsuarios.push(obj)
+        }
+
+
         const resultRespuesta =  await Respuesta.findAll({})
 
         let arr = []
@@ -413,7 +426,7 @@ exports.getEncuesta = async(req,res) => {
                 encuesta: encuestaExist,
                 pregunta: val,
                 respuesta: result,
-                usuario: cantidadEnviados
+                usuario: arrUsuarios
 
             }
 
