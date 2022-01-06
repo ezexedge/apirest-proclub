@@ -119,7 +119,7 @@ exports.crearSolicitud = async(req,res) => {
 
       await t.commit();
 
-        res.status(200).json({message: 'enviadooo'})
+        res.status(200).json(resultNotificacion)
 
 
     }catch(err){

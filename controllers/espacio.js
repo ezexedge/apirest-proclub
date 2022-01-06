@@ -194,7 +194,7 @@ exports.updateEspacio =  async (req,res) => {
 
         for(let val of config){
 
-            if(val.id > 0){
+            if(val.id > 0 ){
                 await ConfiguracionDiasHs.update({
                     pertenece: val.pertenece,
                     lunes: val.lunes,
