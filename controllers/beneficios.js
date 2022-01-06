@@ -191,7 +191,7 @@ exports.crear = async (req, res) => {
 
     try {
     
-      let limit = 2
+      let limit = 9
       let offset = 0 
 
 
@@ -462,7 +462,7 @@ exports.getBeneficioXClubByClub = async (req,res) => {
 
 
 
-    let limit = 2
+    let limit = 9
     let offset = 0 
 
 
