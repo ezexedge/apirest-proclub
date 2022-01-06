@@ -130,7 +130,7 @@ exports.getAll = async (req,res) => {
 
   try {
   
-    let limit = 2
+    let limit = 9
     let offset = 0 
 
 
@@ -222,7 +222,7 @@ exports.getByClub = async (req,res) => {
   try {
   
     const club =  req.params.club
-    let limit = 2
+    let limit = 9
     let offset = 0 
 
 
