@@ -556,8 +556,10 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
 
     router.get('/documento/:nombre',archivoControllers.getArchivo)
     router.delete('/documentacion/eliminar/:documento',authSignupControllers.requireSignin,solicitudControllers.eliminarDocumento)
-
-    //notificacion
+//eliminarSolicitud
+router.delete('/documentacion/eliminar/solicitud/:solicitud',authSignupControllers.requireSignin,solicitudControllers.eliminarSolicitud)
+ 
+//notificacion
 
 
     router.get('/usuario-perfil/:club/:userId',authSignupControllers.requireSignin,usuarioInformacionFinal.getDeportes)

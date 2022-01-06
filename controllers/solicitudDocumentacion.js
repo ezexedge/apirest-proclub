@@ -460,27 +460,36 @@ exports.eliminarSolicitud = async(req,res) => {
     
 
 
+   const documentos = await SolicitudXDocumentos.findAll({
+    where:{
+        solicituddocumentoId: solicitud
+
+    }
+})
+
+for(let val of documentos){
+    await Documentacion.destroy({
+        where:{
+            id: val.documentacionId
+        }
+    })
+}
+
+
+for(let val of documentos){
     await SolicitudXDocumentos.destroy({
         where:{
-            solicituddocumentoId: solicitud
+            id: val.id
         }
     })
 
-    const documentos = await SolicitudXDocumentos.findAll({
-        where:{
-            solicituddocumentoId: solicitud
+}
 
-        }
-    })
 
-    for(let val of documentos){
-        await Documentacion.destroy({
-            where:{
-                id: val.documentacionId
-            }
-        })
-    }
 
+   
+
+  
 
       
 
