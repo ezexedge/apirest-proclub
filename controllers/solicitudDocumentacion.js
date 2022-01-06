@@ -444,6 +444,7 @@ exports.eliminarSolicitud = async(req,res) => {
 
   
    const solicitud = req.params.solicitud
+   const usuario =  req.params.usuario
 
 
     
@@ -456,45 +457,21 @@ exports.eliminarSolicitud = async(req,res) => {
    if(!result) throw new Error('La solicitud no existe')
 
 
-   await SolicitudDocumento.update({activo: 0},{ where: { id: solicitud } })
     
 
 
-   const documentos = await SolicitudXDocumentos.findAll({
-    where:{
-        solicituddocumentoId: solicitud
-
-    }
-})
-
-for(let val of documentos){
-    await Documentacion.destroy({
-        where:{
-            id: val.documentacionId
-        }
-    })
-}
-
-
-for(let val of documentos){
-    await SolicitudXDocumentos.destroy({
-        where:{
-            id: val.id
-        }
-    })
-
-}
+  
+  await DestinatarioDocumentacion.destroy({
+      where:{
+        solicituddocumentoId: solicitud,
+        usuarioId: usuario
+      }
+  })
 
 
 
-   
 
   
-
-      
-
-
-
 
 
         res.status(200).json({message: 'documento eliminado'})
