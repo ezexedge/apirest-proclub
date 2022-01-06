@@ -38,7 +38,7 @@ exports.crear = async (req, res) => {
       console.log(imagen)
  
 
-    const resultInfoUtil = await InfoUtil.create({ titulo: titulo, descripcion: descripcion,pathImage:imagen, pertenece_superadmin: 1, created: new Date()},{ transaction: t })
+    const resultInfoUtil = await InfoUtil.create({ titulo: titulo, descripcion: descripcion,pathImage: `https://api.klubo.club/api/image/${imagen}`, pertenece_superadmin: 1, created: new Date()},{ transaction: t })
 
      if(categoria.length > 0 ){
 
@@ -94,7 +94,7 @@ exports.crearAdmin = async (req, res) => {
       console.log(imagen)
  
 
-    const resultInfoUtil = await InfoUtil.create({ titulo: titulo, descripcion: descripcion,pathImage:imagen, pertenece_superadmin: 0,clubId:clubId, created: new Date()},{ transaction: t })
+    const resultInfoUtil = await InfoUtil.create({ titulo: titulo, descripcion: descripcion,pathImage: `https://api.klubo.club/api/image/${imagen}`, pertenece_superadmin: 0,clubId:clubId, created: new Date()},{ transaction: t })
 
      if(categoria.length > 0 ){
 
