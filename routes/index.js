@@ -557,7 +557,7 @@ router.put('/info/:id',authSignupControllers.requireSignin,imageControllers.subi
     router.get('/documento/:nombre',archivoControllers.getArchivo)
     router.delete('/documentacion/eliminar/:documento',authSignupControllers.requireSignin,solicitudControllers.eliminarDocumento)
 //eliminarSolicitud
-router.delete('/documentacion/eliminar/solicitud/:solicitud',authSignupControllers.requireSignin,solicitudControllers.eliminarSolicitud)
+router.delete('/documentacion/eliminar/solicitud/:solicitud/:usuario',authSignupControllers.requireSignin,solicitudControllers.eliminarSolicitud)
  
 //notificacion
 
