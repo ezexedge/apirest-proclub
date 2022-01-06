@@ -743,7 +743,7 @@ exports.crearAdmin = async (req, res) => {
       console.log(imagen)
  
 
-    const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : imagen , pertenece_superadmin: 0, created: new Date()},{ transaction: t })
+    const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : `https://api.klubo.club/api/image/${imagen}` , pertenece_superadmin: 0, created: new Date()},{ transaction: t })
 
     await BeneficioXClub.create({activo:1,clubId:req.auth.clubId,beneficioId:resultBeneficio.id},{ transaction: t })
 
