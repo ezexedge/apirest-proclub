@@ -438,6 +438,63 @@ exports.eliminarDocumento = async(req,res) => {
 }
 
 
+exports.eliminarSolicitud = async(req,res) => {
+    try{
+
+
+  
+   const solicitud = req.params.solicitud
+
+
+    
+   const result = await SolicitudDocumento.findOne({
+       where:{
+           id: solicitud
+       }
+   })
+
+   if(!result) throw new Error('La solicitud no existe')
+
+
+   await SolicitudDocumento.update({activo: 0},{ where: { id: solicitud } })
+    
+
+
+    await SolicitudXDocumentos.destroy({
+        where:{
+            solicituddocumentoId: solicitud
+        }
+    })
+
+    const documentos = await SolicitudXDocumentos.findAll({
+        where:{
+            solicituddocumentoId: solicitud
+
+        }
+    })
+
+    for(let val of documentos){
+        await Documentacion.destroy({
+            where:{
+                id: val.documentacionId
+            }
+        })
+    }
+
+
+      
+
+
+
+
+
+        res.status(200).json({message: 'documento eliminado'})
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
 
 
 exports.getEstados = async(req,res) => {
