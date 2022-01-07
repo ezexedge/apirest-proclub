@@ -160,13 +160,10 @@ exports.signin = async (req,res)=>{
     }catch(error){
 
 
-        if(error && error.code){
-            res.status(400).json({'error': resultFirebase})
-
-        }else{
+      
             res.status(400).json({'error': error.message})
 
-        }
+        
     
 
     }
