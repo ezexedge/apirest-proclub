@@ -10,6 +10,7 @@ const RelUsuarioXDis = require('../../models/RelUsuarioXDis')
 const Estados = require('../../models/Estados')
 const jwt = require('jsonwebtoken')
 const expressJwt = require('express-jwt')
+const {setLanguage, getTranslation} = require('firebase-error-translator')
 
             
 exports.signup = async(req,res)=>{
@@ -158,6 +159,12 @@ exports.signin = async (req,res)=>{
 
 
     }catch(error){
+        console.log('aca huboo un error....... sin translation',err)
+
+        if(err && err.code){
+            console.log('aca huboo un error.......',getTranslation(err.code))
+        }
+
         res.status(400).json({'error': error.message})
     }
 }
@@ -348,6 +355,8 @@ exports.guardarToken = async (req,res) => {
 
 
     }catch(err){
+
+      
 
         console.log(err)
         res.status(400).json({error : err.message})
