@@ -10,9 +10,10 @@ const RelUsuarioXDis = require('../../models/RelUsuarioXDis')
 const Estados = require('../../models/Estados')
 const jwt = require('jsonwebtoken')
 const expressJwt = require('express-jwt')
-const {setLanguage, getTranslation} = require('firebase-error-translator')
-
+const firebaseError = require('firebase-error-translator')
+//{setLanguage, getTranslation}
             
+
 exports.signup = async(req,res)=>{
 
     const t = await db.transaction()
@@ -86,8 +87,7 @@ exports.signup = async(req,res)=>{
 exports.signin = async (req,res)=>{
     try{
     
-
-
+        firebaseError.setLanguage('es')
         const {email,password} = req.body
 
 
@@ -159,10 +159,13 @@ exports.signin = async (req,res)=>{
 
 
     }catch(error){
+
+        firebaseError.setLanguage('es')
+
         console.log('aca huboo un error....... sin translation',err)
 
         if(err && err.code){
-            console.log('aca huboo un error.......',getTranslation(err.code))
+            console.log('aca huboo un error.......',firebaseError.getTranslation(err.code))
         }
 
         res.status(400).json({'error': error.message})
