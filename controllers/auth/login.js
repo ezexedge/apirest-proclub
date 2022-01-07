@@ -159,9 +159,16 @@ exports.signin = async (req,res)=>{
 
     }catch(error){
 
+
+        if(error && error.code){
+            res.status(400).json({'error': error.code})
+
+        }else{
+            res.status(400).json({'error': error.message})
+
+        }
     
 
-        res.status(400).json({'error': error.message})
     }
 }
 
