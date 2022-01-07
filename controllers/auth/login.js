@@ -87,7 +87,6 @@ exports.signup = async(req,res)=>{
 exports.signin = async (req,res)=>{
     try{
     
-        firebaseError.setLanguage('es')
         const {email,password} = req.body
 
 
@@ -162,7 +161,7 @@ exports.signin = async (req,res)=>{
 
     
 
-        res.status(400).json({'error': error})
+        res.status(400).json({'error': error.message})
     }
 }
 
