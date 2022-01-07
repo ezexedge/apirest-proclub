@@ -13,7 +13,7 @@ const expressJwt = require('express-jwt')
 
 //{setLanguage, getTranslation}
             
-
+let resultFirebase
 exports.signup = async(req,res)=>{
 
     const t = await db.transaction()
@@ -95,7 +95,7 @@ exports.signin = async (req,res)=>{
 
         
 
-        const resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
+         resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
         console.log('tokken',resultFirebase)
         let token = ''
         if(resultFirebase ){
@@ -161,7 +161,7 @@ exports.signin = async (req,res)=>{
 
 
         if(error && error.code){
-            res.status(400).json({'error': error.code})
+            res.status(400).json({'error': resultFirebase})
 
         }else{
             res.status(400).json({'error': error.message})
