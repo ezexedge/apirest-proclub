@@ -708,11 +708,9 @@ exports.modificarImagenes = async (req, res) => {
     if(req.file) {
      imagen = req.file.filename
    
-    }else{
-      imagen = result.image
-    } 
+    }
     
-    await Espacio.update({ image : imagen },{where: {id: result.id},  transaction: t})
+    await Espacio.update({ image : `https://api.klubo.club/api/image/${imagen}` },{where: {id: result.id},  transaction: t})
 
 
  
@@ -758,16 +756,15 @@ exports.modificarImagenesClub = async (req, res) => {
       
       let imagen
       if(req.file) {
-       imagen =  req.file.filename
-
-       //https://api.klubo.club/api/image/80TyMOR24.png
+       imagen =  `https://api.klubo.club/api/image/${req.file.filename}`
+       
        
      
       }else{
         imagen = result.image
       } 
       
-      await Club.update({ logo :`https://api.klubo.club/api/image/${imagen}`  },{where: {id: club},  transaction: t})
+      await Club.update({ logo : imagen },{where: {id: club},  transaction: t})
   
   
    
