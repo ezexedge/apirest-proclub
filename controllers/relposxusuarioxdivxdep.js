@@ -701,6 +701,8 @@ exports.getDeportes = async (req,res) => {
             }
         })
 
+
+        if(!resultClubXUsuario)throw new Error('El club y el usuario no estan relacionado')
        
 
         const result = await RelPosXUsarioXDiviXDep.findAll({
@@ -708,15 +710,11 @@ exports.getDeportes = async (req,res) => {
                 {
                     model: RelDisciplinaXClub,
                     as: 'disciplinaxclub',
-                    where: {
-                        activo: 1
-                    },
+                  
                     include: [{
                         model: Disciplina,
                         as: 'disciplina',
-                        where: {
-                            activo: 1
-                        }
+                   
                     }]
                 },
             {
@@ -728,7 +726,7 @@ exports.getDeportes = async (req,res) => {
                  include:[{
                      model: Disciplina,
                      as: 'disciplina',
-                     where: {activo:1}
+                  
                  }]
                 
                 }]  
@@ -739,7 +737,7 @@ exports.getDeportes = async (req,res) => {
              include: [{
                  model: RelDisciplinaXPos,
                  as: 'disciplinaxpos',
-                 where: {activo:1}
+              
              }]
             }
         ],
