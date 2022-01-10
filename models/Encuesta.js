@@ -23,6 +23,10 @@ const Encuesta = db.define('encuesta', {
     },
     hora:{
         type: Sequelize.TIME
+    },
+    superadmin:{
+        type: Sequelize.INTEGER,   
+        defaultValue: 0
     }
     
     
