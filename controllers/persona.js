@@ -215,7 +215,7 @@ exports.crearPersona = async (req, res) => {
 
 
 
-    await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultclubxusuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal  },{ transaction: t })
+    await RelPosXUsarioXDiviXDep.create({clubxusuarioId: resultclubxusuario.id ,disxclubxdivId: divisionFinal , disciplinaxclubxposId: posicionFinal ,disciplinaxclubId: resultDisciplinaXClub.id },{ transaction: t })
 
 
 

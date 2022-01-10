@@ -606,7 +606,7 @@ exports.usuarioEliminar = async (req, res) => {
     
         let valores = JSON.parse(req.body.data)
         
-        const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, sexo, direccion,disciplinaxclubxdiv, disciplinaxpos  , cp} = valores
+        const { nombre, apellido, telefono, correo, fechaNacimiento, idClub, rol, documento, tipoDocumentId, disciplinaxclub ,sexo, direccion,disciplinaxclubxdiv, disciplinaxpos  , cp} = valores
         
 
         const resultRol = await Rol.findOne({
@@ -674,7 +674,7 @@ exports.usuarioEliminar = async (req, res) => {
         
         
 
-        await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos },{ transaction: t })
+        await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos,disciplinaxclubId: disciplinaxclub },{ transaction: t })
 
 
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
