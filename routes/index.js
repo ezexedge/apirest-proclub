@@ -675,7 +675,8 @@ router.delete('/documentacion/eliminar/solicitud/:solicitud/:usuario',authSignup
 
     router.delete('/encuesta/:id',authSignupControllers.requireSignin,encuestaControllers.eliminar)
 
-
+//getBySuperAdmin 
+router.get('/encuesta/superadmin',authSignupControllers.requireSignin,encuestaControllers.getBySuperAdmin)
 
 
     router.post('/encuesta-post',authSignupControllers.requireSignin,notificacionControllers.sendNotificacion)

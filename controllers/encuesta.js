@@ -365,6 +365,56 @@ exports.getByClub = async(req,res) => {
 
 
 
+exports.getBySuperAdmin = async(req,res) => {
+    try{
+
+       
+        const result = await Encuesta.findAll({
+            where: {
+                superadmin: 1,
+                activo: 1
+            },
+            order: [['id', 'DESC']]
+        })
+///aca
+
+        let arr = []
+        for(let val of result){
+
+
+     
+
+       
+
+            let cantidadEnviados = await Destinatario.findAndCountAll({
+                where:{
+                    encuestId:val.id
+                }
+            })
+
+//agregar el enviado por luego
+            let obj = {
+                id: val.id,
+                titulo: val.titulo,
+                descripcion: val.descripcion,
+                fecha: val.fecha,
+                hora: val.hora,
+                cantidadEnviados: cantidadEnviados.count
+            }
+            arr.push(obj)
+
+
+        }
+
+
+        res.status(200).json(arr)
+
+    }catch(err){
+        res.status(400).json({error: err.message})
+    }
+}
+
+
 
 exports.getEncuesta = async(req,res) => {
     try{
@@ -453,3 +503,5 @@ exports.getEncuesta = async(req,res) => {
         res.status(400).json({error: err.message})
     }
 }
+
+
