@@ -786,3 +786,40 @@ exports.modificarImagenesClub = async (req, res) => {
   };
   
   
+
+
+
+exports.subirImagenes = (req, res) => {
+
+
+ 
+  
+    try {
+  
+      
+  
+  
+    
+     
+     
+
+      if(!req.file)throw new Error('No se agrego una imagen')
+  
+      let imagen
+      imagen = req.file.filename
+    
+   
+
+   
+     res.status(200).json(imagen)
+  
+    } catch (err) {
+      console.log('error', err)
+  
+      await t.rollback();
+      res.status(400).json({ "error": err.message })
+  
+    }
+  
+  };
+  

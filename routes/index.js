@@ -406,6 +406,8 @@ router.get('/disciplina-admin/listado-usuarios/:disciplina/:club',usuarioInforma
 
     router.post('/image',imageControllers.subirArchivos)
 
+    
+    router.post('/image-name',imageControllers.subirArchivos,espacioControllers.subirImagenes)
 
 
     router.get('/image/:img',imageControllers.getImage)
