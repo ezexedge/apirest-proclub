@@ -676,7 +676,7 @@ exports.usuarioEliminar = async (req, res) => {
 
         await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos,disciplinaxclubId: disciplinaxclub },{ transaction: t })
 
-
+//disciplinaxclubxdiv
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
     
      //   await RelUsuarioXCatXDis.create({disxclubxcatId: categoria,clubxusuarioId:clubxusuarioId.id},{ transaction: t })
@@ -698,8 +698,11 @@ exports.usuarioEliminar = async (req, res) => {
     
       } catch (err) {
         
+
+        console.log('........',err)
         await t.rollback();
         
+
         
         res.status(400).json({ "error": err.message })
     
