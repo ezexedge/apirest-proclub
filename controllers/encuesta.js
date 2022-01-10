@@ -299,7 +299,10 @@ exports.getByClub = async(req,res) => {
         const result = await EncuestaXClub.findAll({
             include: [{
                 model:  Encuesta,
-                as: 'encuesta'
+                as: 'encuesta',
+                where:{
+                    superadmin: 0
+                }
             }],
             where: {
                 clubId: club
@@ -399,6 +402,7 @@ exports.getBySuperAdmin = async(req,res) => {
                 descripcion: val.descripcion,
                 fecha: val.fecha,
                 hora: val.hora,
+                enviadoPor: 'superadmin',
                 cantidadEnviados: cantidadEnviados.count
             }
             arr.push(obj)
