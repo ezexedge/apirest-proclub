@@ -378,10 +378,36 @@ exports.getBySuperAdmin = async(req,res) => {
         })
 ///aca
 
-   
+        let arr = []
+        for(let val of result){
 
 
-        res.status(200).json(result)
+     
+
+       
+
+            let cantidadEnviados = await Destinatario.findAndCountAll({
+                where:{
+                    encuestId:val.id
+                }
+            })
+
+//agregar el enviado por luego
+            let obj = {
+                id: val.id,
+                titulo: val.titulo,
+                descripcion: val.descripcion,
+                fecha: val.fecha,
+                hora: val.hora,
+                cantidadEnviados: cantidadEnviados.count
+            }
+            arr.push(obj)
+
+
+        }
+
+
+        res.status(200).json(arr)
 
     }catch(err){
         res.status(400).json({error: err.message})
