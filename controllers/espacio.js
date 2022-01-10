@@ -758,14 +758,16 @@ exports.modificarImagenesClub = async (req, res) => {
       
       let imagen
       if(req.file) {
-       imagen =  `https://api.klubo.club/api/image/${req.file.filename}`
+       imagen =  req.file.filename
+
+       //https://api.klubo.club/api/image/80TyMOR24.png
        
      
       }else{
         imagen = result.image
       } 
       
-      await Club.update({ logo : imagen },{where: {id: club},  transaction: t})
+      await Club.update({ logo :`https://api.klubo.club/api/image/${imagen}`  },{where: {id: club},  transaction: t})
   
   
    
