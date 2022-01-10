@@ -741,7 +741,7 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
   
           const hora = moment().tz('America/Argentina/Buenos_Aires').format('HH:mm:ss')
 
-          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora},{ transaction: t })
+          const resultEncuesta  =  await Encuesta.create({titulo:titulo,descripcion:descripcion,activo:1,hora:hora,superadmin:1},{ transaction: t })
   
           for(let val of preguntasRespuesta){
   
