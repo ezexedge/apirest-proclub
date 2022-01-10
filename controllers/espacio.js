@@ -816,7 +816,6 @@ exports.subirImagenes = (req, res) => {
     } catch (err) {
       console.log('error', err)
   
-      await t.rollback();
       res.status(400).json({ "error": err.message })
   
     }
