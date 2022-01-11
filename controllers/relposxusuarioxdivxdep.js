@@ -76,23 +76,38 @@ exports.filterPosicion = async (req,res) => {
         const result = await RelPosXUsarioXDiviXDep.findAll({
             include: [{
                 model: ClubXUsuario,
-                as: 'clubxusuario'
+                as: 'clubxusuario',
+                where:{
+                    activo: 1
+                }
             },
             {
                 model: RelDisXClubXDiv,
                 as: 'disxclubxdiv',
-                where: {id: id},
+                where: {
+                    id: id,
+                activo : 1
+                },
                 include:[{
                  model: RelDisciplinaXClub,
-                 as: 'disciplinaxclub'
+                 as: 'disciplinaxclub',
+                 where:{
+                     activo : 1
+                 }
                 }]  
             },
             {
              model: DisciplinaXClubXPos,
              as:   'disciplinaxclubxpos',
+             where: {
+                 activo : 1
+             },
              include: [{
                  model: RelDisciplinaXPos,
-                 as: 'disciplinaxpos'
+                 as: 'disciplinaxpos',
+                 where:{
+                     activo: 1
+                 }
              }]
             }
         ],
