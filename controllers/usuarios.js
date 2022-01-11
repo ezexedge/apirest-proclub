@@ -660,6 +660,12 @@ exports.usuarioEliminar = async (req, res) => {
         if(!aprobado){
           throw new Error('no existe el estado aprobado en la base de datos')
         }
+
+        const posicion = await DisciplinaXClubXPos.findOne({
+          where:{
+            disciplinaxposId: disciplinaxpos
+          }
+        })
     
     
         const nuevaDireccion = await Direccion.create({ calle: direccion.calle, numero: direccion.numero, localidad: direccion.localidad, provinciaId: direccion.provincia ,cp: cp },{ transaction: t })
@@ -672,7 +678,7 @@ exports.usuarioEliminar = async (req, res) => {
     
         const clubxusuarioId =  await ClubXusuario.create({  rolId: 3, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: estado  },{ transaction: t })
         
-          await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos,disciplinaxclubId: disciplinaxclub },{ transaction: t })
+          await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId: posicion.id ,disciplinaxclubId: disciplinaxclub },{ transaction: t })
 
         
 
