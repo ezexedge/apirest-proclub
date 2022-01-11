@@ -610,8 +610,11 @@ exports.usuarioEliminar = async (req, res) => {
         
 
         const resultRol = await Rol.findOne({
-          where: {id: 3}
+          where: {id: rol}
         })
+
+
+        if(!resultRol)throw new Error('el rol no existe')
 
         let estado = 1
         if(resultRol.nombre === 'socio'){
