@@ -1,5 +1,7 @@
 const RelDisciplinaXClub = require('../models/RelDisciplinaXClub')
 const Club = require('../models/Club')
+const ClubXUsuario = require('../models/ClubXUsuario')
+
 const Disciplina = require('../models/Disciplina')
 const RelDisXClubXDiv = require('../models/RelDisXClubXDiv')
 const RelPosXUsarioXDiviXDep = require('../models/RelPosXUsarioXDiviXDep')
@@ -46,7 +48,15 @@ exports.getDeporteXClub = async (req,res)=> {
                         }
                     })
 
+                    //////////////
                     const totalUsuarios = await RelPosXUsarioXDiviXDep.findAndCountAll({
+                        include:[{
+                            model: ClubXUsuario,
+                            as: 'clubxusuario',
+                            where:{
+                                activo: 1
+                            }
+                        }],
                         where:{
                             disciplinaxclubId: val.id,
                             activo: 1
