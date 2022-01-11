@@ -610,7 +610,7 @@ exports.usuarioEliminar = async (req, res) => {
         
 
         const resultRol = await Rol.findOne({
-          where: {id: rol}
+          where: {id: 3}
         })
 
         let estado = 1
@@ -672,9 +672,12 @@ exports.usuarioEliminar = async (req, res) => {
     
         const clubxusuarioId =  await ClubXusuario.create({  rolId: rol, clubId: idClub, usuarioId: nuevoUsuario.id , activo: 1, estadoId: estado  },{ transaction: t })
         
-        
+        if(clubxusuarioId && clubxusuarioId.id){
 
-        await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos,disciplinaxclubId: disciplinaxclub },{ transaction: t })
+          await RelPosXUsuarioXDivXDep.create({clubxusuarioId:clubxusuarioId.id, disxclubxdivId: disciplinaxclubxdiv, disciplinaxclubxposId:  disciplinaxpos,disciplinaxclubId: disciplinaxclub },{ transaction: t })
+
+        }
+
 
 //disciplinaxclubxdiv
        //  await RelUsuarioXDis.create({disciplinaxclubId:deporte , clubxusuarioId: clubxusuarioId.id},{ transaction: t })
