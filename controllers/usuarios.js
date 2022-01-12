@@ -623,7 +623,7 @@ exports.usuarioEliminar = async (req, res) => {
         if(Number(rol) === 2){
 
           const config = {
-            url: 'klubo.club/#/complete-registration',
+            url: 'https://klubo.club/#/complete-registration',
             handleCodeInApp: true
         };
 
