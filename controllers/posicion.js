@@ -257,7 +257,10 @@ exports.getAllPosicionesByDivision = async(req,res) => {
         },
         {
             model: RelDisXClubXDiv,
-            as: 'disciplinaxclubxdiv'
+            as: 'disciplinaxclubxdiv',
+            where:{
+                activo: 1
+            }
         }
     ],
         where: {
@@ -308,7 +311,12 @@ exports.getAllPosicionesByDivision = async(req,res) => {
                     
                 
 
-                ]
+                ],
+
+                
+                where:{
+                    activo:1
+                }
             })
 
 
