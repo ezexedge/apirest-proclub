@@ -614,7 +614,29 @@ exports.usuarioEliminar = async (req, res) => {
         })
 
 
+
+
+
         if(!resultRol)throw new Error('el rol no existe')
+
+
+        if(Number(rol) === 2){
+
+          const config = {
+            url: 'http://dev.texdinamo.com/klubo/#/complete-registration',
+            handleCodeInApp: true
+        };
+
+
+        const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
+        //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
+           console.log('guardando respuesta',result)
+                     
+       
+
+        }
+
+
 
         let estado = 1
         if(resultRol.nombre === 'socio'){

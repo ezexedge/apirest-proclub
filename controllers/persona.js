@@ -79,6 +79,12 @@ exports.personaWhitDireccionById = async (req, res) => {
 }
 
 
+
+
+
+
+
+
 exports.crearPersona = async (req, res) => {
 
   const t = await db.transaction()
@@ -236,6 +242,13 @@ exports.crearPersona = async (req, res) => {
   }
 
 };
+
+
+
+
+
+
+
 
 
 
