@@ -663,7 +663,7 @@ exports.usuarioEliminar = async (req, res) => {
         //  url: 'http://localhost:3000/#/complete-registration',
 
         const config = {
-          url: 'http://dev.texdinamo.com/klubo/#/complete-registration',
+          url: 'https://klubo.club/#/complete-registration',
           handleCodeInApp: true
       };
 
