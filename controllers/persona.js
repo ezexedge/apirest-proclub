@@ -152,7 +152,7 @@ exports.crearPersona = async (req, res) => {
 
       console.log('entro ----admin')
       const config = {
-        url: 'http://dev.texdinamo.com/klubo/#/complete-registration',
+        url: 'https://klubo.club/#/complete-registration',
         handleCodeInApp: true
     };
   
