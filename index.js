@@ -18,15 +18,23 @@ require('dotenv').config({path: 'variables.env'});
 
 const db = require('./config/db')
 
+const app = express()
+
+const http = require("http").createServer(app);
+
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-type"],
+  },
+});
 
 fs.readdirSync('./models').map((r)=> require(`./models/${r}`))
 
 db.sync({alter:true})
     .then(() => console.log('Conectado al Servidor'))
     .catch(error => console.log(error));
-
-
-const app = express()
 
 
 
@@ -120,6 +128,16 @@ app.use(function (err, req, res, next) {
     console.log('sssss',req.auth)
     next()
   })
+
+
+  io.on("connect", (socket) => {
+     console.log("SOCKET>IO", socket.id);
+    socket.on("new-post", (newPost) => {
+       console.log("socketio new post => ", newPost);
+   //   socket.broadcast.emit("new-post", newPost);
+    });
+  });
+  
 
 const host = process.env.HOST || '0.0.0.0'
 var port = process.env.PORT || 5000;
