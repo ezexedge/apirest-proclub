@@ -166,13 +166,13 @@ exports.crear = async (req, res) => {
         }
       })
 
-      if(!result)throw new Error('el beneficio no existe')
+      if(!result)throw new Error('El beneficio no existe')
 
 
 
       await Beneficios.update({activo: 0},{where:{id:id}})
 
-      res.status(200).json({'message': 'beneficio eliminado'})
+      res.status(200).json({'message': 'Beneficio eliminado correctamente'})
           
          
 
