@@ -63,13 +63,13 @@ exports.crear = async (req,res) => {
         })
 
 
-        if(existeRubro)throw new Error('el rubro existe')
+        if(existeRubro)throw new Error('El rubro existe')
 
 
        await  Rubro.create({nombre:nombre})
 
 
-            res.status(200).json({message: 'creado correctamente'})
+            res.status(200).json({message: 'El rubro se creo correctamente'})
 
 
         
@@ -101,7 +101,7 @@ exports.eliminar = async (req,res) => {
 
 
 
-        if(!existeRubro)throw new Error('el rubro existe')
+        if(!existeRubro)throw new Error('El rubro no existe')
 
 
        await  Rubro.destroy({
@@ -111,7 +111,7 @@ exports.eliminar = async (req,res) => {
        })
 
 
-            res.status(200).json({message: 'eliminado correctamente'})
+            res.status(200).json({message: 'El rubro se elimino correctamente'})
 
 
         
