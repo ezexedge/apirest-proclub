@@ -99,7 +99,7 @@ exports.crear = async (req, res) => {
       } 
    
 
-      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo  , pathImage : imagen },{where: {id: result.id}, transaction: t })
+      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo  , pathImage : `https://api.klubo.club/api/image/${imagen}` },{where: {id: result.id}, transaction: t })
       
 
       if( rubro.length > 0){
