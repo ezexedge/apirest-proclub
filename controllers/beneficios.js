@@ -140,7 +140,7 @@ exports.crear = async (req, res) => {
 
       await t.commit();
   
-      res.status(200).json({'message': 'beneficio modificado'})
+      res.status(200).json({'message': 'Beneficio actualizado correctamente'})
   
     } catch (err) {
       console.log('error', err)
