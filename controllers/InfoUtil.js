@@ -52,7 +52,7 @@ exports.crear = async (req, res) => {
 
     await t.commit();
 
-    res.status(200).json({'message': 'informacion util creada'})
+    res.status(200).json({'message': 'Información util creada'})
 
   } catch (err) {
     console.log('error', err)
