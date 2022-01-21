@@ -111,7 +111,7 @@ exports.eliminar = async (req,res) => {
        })
 
 
-            res.status(200).json({message: 'eliminado correctamente'})
+            res.status(200).json({message: 'La categoria se elimino correctamente'})
 
 
         

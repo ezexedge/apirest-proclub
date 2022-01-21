@@ -19,7 +19,16 @@ require('dotenv').config({path: 'variables.env'});
 
 const db = require('./config/db')
 
+
 const app = express()
+const http = require("http").createServer(app);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-type"],
+  },
+});
 
 
 
@@ -52,6 +61,8 @@ app.use(function (req, res, next) {
 });
 
 app.use(cors());
+
+
 
 app.use(morgan('dev'))
 
@@ -128,7 +139,14 @@ app.use(function (err, req, res, next) {
 const host = process.env.HOST || '0.0.0.0'
 var port = process.env.PORT || 5000;
 
+io.on("connect", (socket) => {
+  // console.log("SOCKET>IO", socket.id);
+  socket.on("send-message", (message) => {
+   //  console.log("new message received => ", message);
+    socket.emit("receive-message", message);
+  });
+});
 
-app.listen(port,function() {
+http.listen(port,function() {
     console.log(`app running en el puerto ${port}`); 
 });
