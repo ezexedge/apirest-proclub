@@ -235,6 +235,20 @@ exports.getByClub = async (req,res) => {
       }
     })
 
+    const cantidadSuperadmin = await InfoUtil.findAndCountAll({
+      where: {
+        activo: 1,
+        pertenece_superadmin: 1
+      
+      }
+    })
+
+    
+
+    console.log('aca cantidad de superadmin',cantidadSuperadmin)
+
+
+
     let page = Number(req.params.page)
 
     let pages = Math.ceil(cantidad.count / limit)

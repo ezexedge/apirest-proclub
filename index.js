@@ -140,10 +140,10 @@ const host = process.env.HOST || '0.0.0.0'
 var port = process.env.PORT || 5000;
 
 io.on("connect", (socket) => {
-  // console.log("SOCKET>IO", socket.id);
+   console.log("SOCKET>IO", socket.id);
   socket.on("send-message", (message) => {
-   //  console.log("new message received => ", message);
-    socket.emit("receive-message", message);
+     console.log("new message received => ", message);
+    socket.broadcast.emit("receive-message", message);
   });
 });
 
