@@ -233,7 +233,10 @@ exports.getByClub = async (req,res) => {
         [Op.or]: [
           { clubId: club },
           { pertenece_superadmin: 1 }
-        ]
+        ],
+        [Op.and]: {
+          activo: 1
+      }
       }
     })
 
@@ -261,7 +264,10 @@ exports.getByClub = async (req,res) => {
         [Op.or]: [
           { clubId: club },
           { pertenece_superadmin: 1 }
-        ]
+        ],
+        [Op.and]: {
+          activo: 1
+      }
       },
       order: [['id', 'DESC']]
     })
