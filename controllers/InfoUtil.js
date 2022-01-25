@@ -11,6 +11,7 @@ const Persona = require('../models/Persona')
 const RubroXBeneficio = require('../models/RubroXBeneficio')
 const CategoriaXInfo = require('../models/CategoriaXInfo')
 const Categoria= require('../models/Categoria')
+const { Op } = require("sequelize");
 
 const _ = require('lodash')
 
@@ -229,27 +230,22 @@ exports.getByClub = async (req,res) => {
 
     const cantidad = await InfoUtil.findAndCountAll({
       where: {
-        activo: 1,
-        pertenece_superadmin: 0,
-        clubId: club
+        [Op.or]: [
+          { clubId: club },
+          { pertenece_superadmin: 1 }
+        ]
       }
     })
 
-    const cantidadSuperadmin = await InfoUtil.findAndCountAll({
-      where: {
-        activo: 1,
-        pertenece_superadmin: 1
-      
-      }
-    })
+  
 
-    
 
-    console.log('aca cantidad de superadmin',cantidadSuperadmin)
+
 
 
 
     let page = Number(req.params.page)
+
 
     let pages = Math.ceil(cantidad.count / limit)
 
@@ -262,9 +258,10 @@ exports.getByClub = async (req,res) => {
       offset: offset,
       $sort: { id: 1 },
       where: {
-        activo: 1,
-        pertenece_superadmin: 0,
-        clubId: club
+        [Op.or]: [
+          { clubId: club },
+          { pertenece_superadmin: 1 }
+        ]
       },
       order: [['id', 'DESC']]
     })
