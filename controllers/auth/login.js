@@ -191,7 +191,7 @@ exports.signinMobile = async (req,res)=>{
 
 
 
-             const clubxusuario =  await ClubXUsuario.findOne({where: { usuarioId: usuario.id }})
+             const clubxusuario =  await ClubXUsuario.findAll({where: { usuarioId: usuario.id }})
 
             if(!clubxusuario){
                 throw new Error('error al encontrar usuario en clubXusuario')
