@@ -175,6 +175,9 @@ exports.signin = async (req,res)=>{
 
 exports.signinMobile = async (req,res)=>{
     try{
+
+        const {email,password} = req.body
+
     
         const persona = await Persona.findOne({where:{correo: email}})
 
