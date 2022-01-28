@@ -179,7 +179,7 @@ exports.signinMobile = async (req,res)=>{
         const {email,password} = req.body
 
 
-        console.log(re.body)
+        console.log(req.body)
     
         const persona = await Persona.findOne({where:{correo: email}})
 
