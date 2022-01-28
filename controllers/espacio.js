@@ -10,6 +10,8 @@ const Disiciplina = require('../models/Disciplina')
 const Reserva = require('../models/Reservas')
 const Beneficios = require('../models/Beneficios')
 const Club =  require('../models/Club')
+const { Op } = require("sequelize");
+
 exports.crearEspacio =  async (req,res) => {
  
  
@@ -544,12 +546,17 @@ exports.getEspacioByDisciplina =  async (req,res) => {
         }],
         where:{
             disciplinaxclubId: id,
-            activo: 1
+            activo: 1,
+            espacioId: {
+                [Op.ne]: null
+              }
         }
         
     })
     
 
+
+    
 
 
     res.status(200).json(espacioResult)    
