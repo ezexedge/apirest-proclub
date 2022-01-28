@@ -321,6 +321,8 @@ router.get('/disciplina-admin/listado-usuarios/:disciplina/:club',usuarioInforma
 
 
     router.post('/signin',authSignupControllers.signin)
+    router.post('/mobile/signin',authSignupControllers.signinMobile)
+
     router.post('/registrar-firebase',authSignupControllers.registrarEnFirebase)
 
  

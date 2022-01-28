@@ -169,6 +169,116 @@ exports.signin = async (req,res)=>{
     }
 }
 
+
+
+
+
+exports.signinMobile = async (req,res)=>{
+    try{
+    
+        const persona = await Persona.findOne({where:{correo: email}})
+
+        if(!persona){
+            throw new Error('no esta registrado')
+        }
+
+        const usuario = await Usuario.findOne({where: {personaId : persona.id} })
+
+
+
+             const clubxusuario =  await ClubXUsuario.findOne({where: { usuarioId: usuario.id }})
+
+            if(!clubxusuario){
+                throw new Error('error al encontrar usuario en clubXusuario')
+            }
+
+
+
+            for(let val of clubxusuario){
+                if(val.rolId === 2){
+                    throw new Error('El usuario es una admin')
+                }
+            }
+
+        
+
+         resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
+        console.log('tokken',resultFirebase)
+        let token = ''
+        if(resultFirebase ){
+
+            const persona = await Persona.findOne({where:{correo: email}})
+
+            if(!persona){
+                throw new Error('no esta registrado')
+            }
+
+            const usuario = await Usuario.findOne({where: {personaId : persona.id} })
+
+
+            if(!usuario){
+                throw new Error('no esta registrado')
+            }
+
+            const clubxusuario =  await ClubXUsuario.findOne({where: { usuarioId: usuario.id }})
+
+            if(!clubxusuario){
+                throw new Error('error al encontrar usuario en clubXusuario')
+            }
+
+            const pendiente = await Estados.findOne({where:{ nombre : 'pendiente' }})
+            if(!pendiente){
+            throw new Error('no existe el estado pendiente en la base de datos')
+            }
+
+            if(pendiente.id === clubxusuario.estadoId){
+                throw new Error('su estado esta pendiente no puede ingresar')
+            }
+            const desaprobado = await Estados.findOne({where:{ nombre : 'desaprobado' }})
+            
+
+            if(desaprobado.id === clubxusuario.estadoId){
+                throw new Error('no esta aprobado no puede ingresar')
+            }
+
+
+            const rol = await Rol.findByPk(clubxusuario.rolId)
+
+
+            if(!rol){
+                throw new Error('no esta registrado')
+            }
+
+        
+             token = jwt.sign({userId: usuario.id , rol : rol.nombre , clubId: clubxusuario.clubId }, process.env.JWT_SECRET)
+
+            res.cookie("t",token,{expire: new Date() + 9999 })
+            
+       
+        }
+
+    
+
+        res.status(200).json({token : token})
+
+        
+
+
+    }catch(error){
+
+
+      
+            res.status(400).json({'error': error.message,'firebaseError':error})
+
+        
+    
+
+    }
+}
+
+
+
+
 exports.registrarEnFirebase = async(req,res)=>{
     
     try{
