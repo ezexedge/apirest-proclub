@@ -10,6 +10,7 @@ const RelUsuarioXDis = require('../../models/RelUsuarioXDis')
 const Estados = require('../../models/Estados')
 const jwt = require('jsonwebtoken')
 const expressJwt = require('express-jwt')
+const { Op } = require("sequelize");
 
 //{setLanguage, getTranslation}
             
