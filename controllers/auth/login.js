@@ -180,6 +180,10 @@ exports.signinMobile = async (req,res)=>{
 
 
         console.log(req.body)
+
+
+        let esAdmin = false
+        let noEsAdmin = false
     
         const persona = await Persona.findOne({where:{correo: email}})
 
@@ -200,12 +204,18 @@ exports.signinMobile = async (req,res)=>{
 
 
             for(let val of clubxusuario){
+                if(val.rolId === 3 || val.rolId === 4){
+                    noEsAdmin = true
+                }
+
                 if(val.rolId === 2){
-                    throw new Error('El usuario es una admin')
+                    esAdmin = true
                 }
             }
 
-        
+
+            if(esAdmin && !noEsAdmin)throw new Error('El usuario es una admin')
+            
 
          resultFirebase = await  firebase.auth().signInWithEmailAndPassword(email, password)
         console.log('tokken',resultFirebase)
@@ -225,7 +235,7 @@ exports.signinMobile = async (req,res)=>{
                 throw new Error('no esta registrado')
             }
 
-            const clubxusuario =  await ClubXUsuario.findOne({where: { usuarioId: usuario.id }})
+            const clubxusuario =  await ClubXUsuario.findOne({where: { usuarioId: usuario.id, rolId : {[Op.ne]: 2}}})
 
             if(!clubxusuario){
                 throw new Error('error al encontrar usuario en clubXusuario')
