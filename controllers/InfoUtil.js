@@ -32,7 +32,7 @@ exports.crear = async (req, res) => {
    
    
 
-    if(categoria.length === 0 )throw new Error('Debe seleccionar al menos una categoria')
+    if(categoria.length === 0 )throw new Error('La categoría es obligatoria')
 
       
       let imagen = req.file.filename
