@@ -447,7 +447,7 @@ exports.editar = async (req, res) => {
     } 
  
 
-    await InfoUtil.update({ titulo: titulo, descripcion: descripcion,pathImage: `https://api.klubo.club/api/image/${imagen}` },{where: {id: result.id}, transaction: t })
+    await InfoUtil.update({ titulo: titulo, descripcion: descripcion,pathImage: imagen },{where: {id: result.id}, transaction: t })
     
 
     if( rubro.length > 0){
