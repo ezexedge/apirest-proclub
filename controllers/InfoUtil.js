@@ -25,7 +25,7 @@ exports.crear = async (req, res) => {
   try {
 
     if(!req.file) {
-      throw new Error('debe ingresar una imagen')
+      throw new Error("La imagen es obligatoria")
     }
 
     const { titulo, descripcion , categoria } = JSON.parse(req.body.data)
@@ -82,7 +82,7 @@ exports.crearAdmin = async (req, res) => {
     const clubId = req.params.club
 
     if(!req.file) {
-      throw new Error('debe ingresar una imagen')
+      throw new Error("La imagen es obligatoria")
     }
 
     const { titulo, descripcion , categoria } = JSON.parse(req.body.data)
