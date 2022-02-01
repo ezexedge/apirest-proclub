@@ -488,20 +488,30 @@ exports.getBeneficioXClubByClub = async (req,res) => {
         }
       }],
       where: {
-        activo: 1,
-        [Op.or]: [
-        
-          {clubId: club},
-          { pertenece_superadmin: 1 }
-        ]
+        clubId: club
+      }
+    })
+
+
+    let cantidadSuperadmin = await BeneficioXClub.findAndCountAll({
+      include:[{
+        model: Beneficios,
+        as: "beneficio",
+        where:{
+          activo:1
+        }
+      }],
+      where: {
+        pertenece_superadmin: 1
       }
     })
 
 
 
+    let cantidadFinal = Number(cantidad.count) + Number(cantidadSuperadmin.count)
     let page = Number(req.params.page)
 
-    let pages = Math.ceil(cantidad.count / limit)
+    let pages = Math.ceil(cantidadFinal / limit)
 
     offset = limit * (page - 1)    
 
@@ -571,7 +581,7 @@ exports.getBeneficioXClubByClub = async (req,res) => {
 
     }
 
-    res.status(200).json({'result': arr,'count': cantidad.count,'pages':pages})
+    res.status(200).json({'result': arr,'count': cantidadFinal,'pages':pages})
 
   }catch(err){
     res.status(400).json({error: err.message})
