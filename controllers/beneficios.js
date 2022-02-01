@@ -488,21 +488,13 @@ exports.getBeneficioXClubByClub = async (req,res) => {
         }
       }],
       where: {
-        beneficioId: {
-          [Op.ne]: null
-        },
-        [Op.and]: {
-           clubId: club 
-      },
-      [Op.or]: [
-        { pertenece_superadmin: 1 }
-      ],
-        
+      { clubId: club },
+       [Op.or]: [ 
+          { pertenece_superadmin: 1 }
+        ]
 
       }
     })
-
-   
 
 
 
