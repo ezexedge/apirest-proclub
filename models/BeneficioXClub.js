@@ -11,6 +11,10 @@ const BeneficioXClub = db.define('beneficioxclub', {
         primaryKey: true
 
     },
+    pertenece_superadmin:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
