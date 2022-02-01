@@ -9,6 +9,7 @@ const ClubXusuario = require('../models/ClubXUsuario')
 const Persona = require('../models/Persona')
 const RubroXBeneficio = require('../models/RubroXBeneficio')
 const _ = require('lodash')
+const { Op } = require("sequelize");
 
 exports.crear = async (req, res) => {
   
@@ -487,7 +488,11 @@ exports.getBeneficioXClubByClub = async (req,res) => {
         }
       }],
       where: {
-        clubId: club
+        [Op.or]: [
+          { clubId: club },
+          { pertenece_superadmin: 1 }
+        ]
+
       }
     })
 
