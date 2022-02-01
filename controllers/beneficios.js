@@ -491,7 +491,7 @@ exports.getBeneficioXClubByClub = async (req,res) => {
         [Op.or]: [
           { clubId: club },
           { pertenece_superadmin: 1 }
-        ]
+        ],
 
       }
     })
