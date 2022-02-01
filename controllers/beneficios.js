@@ -484,16 +484,11 @@ exports.getBeneficioXClubByClub = async (req,res) => {
         model: Beneficios,
         as: "beneficio",
         where:{
-          activo:1,
-          [Op.or]: [ 
-            { pertenece_superadmin: 1 }
-          ]
+          activo:1
         }
       }],
       where: {
-       clubId: club 
-     
-
+        clubId: club
       }
     })
 
