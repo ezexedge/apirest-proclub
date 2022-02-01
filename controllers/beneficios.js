@@ -519,7 +519,11 @@ exports.getBeneficioXClubByClub = async (req,res) => {
   ],
       where : {
         activo: 1,
-        clubId: club
+        clubId: club,
+        [Op.or]: [
+          { pertenece_superadmin: 1 }
+        ]
+
       },
       order: [['id', 'DESC']]
 
