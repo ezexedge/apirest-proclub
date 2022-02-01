@@ -34,8 +34,10 @@ exports.crear = async (req, res) => {
  
 
     const resultBeneficio = await Beneficios.create({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo, pathImage : `https://api.klubo.club/api/image/${imagen}` , pertenece_superadmin: 1, created: new Date()},{ transaction: t })
-
-     if(rubro.length > 0 ){
+    
+    BeneficioXClub.create({clubId: null , usuarioId: null, beneficioId: beneficio,pertenece_superadmin: 1})
+    
+    if(rubro.length > 0 ){
 
       for(let val of rubro){
           await RubroXBeneficio.create({beneficioId: resultBeneficio.id , rubroId: val },{ transaction: t })
