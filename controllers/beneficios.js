@@ -95,14 +95,16 @@ exports.crear = async (req, res) => {
      
       let imagen
       if(req.file) {
-       imagen = req.file.filename
+
+        let nuevoImg =  `https://api.klubo.club/api/image/${req.file.filename}`
+       imagen = nuevoImg
      
       }else{
         imagen = result.pathImage
       } 
    
 
-      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo  , pathImage : `https://api.klubo.club/api/image/${imagen}` },{where: {id: result.id}, transaction: t })
+      await Beneficios.update({ nombre: nombre, descripcion: descripcion, telefono: telefono , web : web , instagram: instagram , correo: correo  , pathImage : imagen },{where: {id: result.id}, transaction: t })
       
 
       if( rubro.length > 0){
