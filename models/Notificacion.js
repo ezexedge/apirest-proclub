@@ -15,13 +15,13 @@ const Notificacion = db.define('notificacion', {
 
     },
     titulo: {
-        type: Sequelize.LONGTEXT
+        type: Sequelize.VARCHAR(40000)
     },
     descripcion: {
-        type: Sequelize.LONGTEXT
+        type: Sequelize.VARCHAR(40000)
     },
     descripcion_corta: {
-        type: Sequelize.LONGTEXT
+        type: Sequelize.VARCHAR(40000)
     }
     ,
     fecha: {
