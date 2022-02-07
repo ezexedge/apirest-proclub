@@ -423,8 +423,7 @@ exports.getEspacioById =  async (req,res) => {
           as: 'estadoespacio'
         }],
         where: {
-            id: id,
-            activo: 1
+            id: id
         }
     })
     
