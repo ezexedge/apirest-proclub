@@ -804,6 +804,8 @@ router.put('/espacio/:id',authSignupControllers.requireSignin,espacioControllers
 
 router.delete('/espacio/:id',authSignupControllers.requireSignin,espacioControllers.eliminarEspacio)
 
+router.post('/espacio-activar/:id',authSignupControllers.requireSignin,espacioControllers.activarEspacio)
+
 //estado espacio
 
 

@@ -292,6 +292,39 @@ exports.eliminarEspacio =  async (req,res) => {
     }
 }
 
+
+
+exports.ActivarEspacio =  async (req,res) => {
+
+    try{
+
+        const id = req.params.id
+
+        const result = await Espacio.findByPk(id)
+
+        if(!result)throw new Error('el espacio no existe.')
+
+      
+            
+            result.activo = 1
+
+            await result.save()
+          
+          
+            res.status(200).json({message: 'Espacio activado'})
+          
+            
+       
+
+    }catch(error){
+
+
+   res.status(400).json({'error': error.message})
+     
+    }
+}
+
+
 exports.getEspacioByClubId =  async (req,res) => {
 
     try{
