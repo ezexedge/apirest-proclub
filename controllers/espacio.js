@@ -294,7 +294,7 @@ exports.eliminarEspacio =  async (req,res) => {
 
 
 
-exports.ActivarEspacio =  async (req,res) => {
+exports.activarEspacio =  async (req,res) => {
 
     try{
 
