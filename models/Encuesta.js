@@ -11,8 +11,12 @@ const Encuesta = db.define('encuesta', {
         primaryKey: true
 
     },
-    titulo: Sequelize.TEXT,
-    descripcion: Sequelize.TEXT,
+    titulo: {
+        type: Sequelize.TEXT
+    },
+    descripcion: {
+        type: Sequelize.TEXT
+    },
     activo:{
         type: Sequelize.INTEGER,   
         defaultValue: 1
