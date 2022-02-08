@@ -11,7 +11,7 @@ const Documentacion = db.define('documentacion', {
     },
 
     titulo: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
     pathFile: {
         type: Sequelize.STRING
