@@ -705,7 +705,7 @@ console.log('estado de envio de notificacion',result)
 }
 }//sss
           
-              res.status(200).json({'message': 'encuesta creada'})
+              res.status(200).json({'message': 'encuesta creada','idEncuesta':resultEncuesta && resultEncuesta.id ? resultEncuesta.id : null})
 
   
   
@@ -799,7 +799,7 @@ exports.sendEncuestaSuperadmin = async (req,res) => {
   
               console.log('el array',arr)
                await Destinatario.bulkCreate(arr)
-                  res.status(200).json({message: 'Encuesta creada'})
+                  res.status(200).json({message: 'Encuesta creada',idEncuesta: resultEncuesta && resultEncuesta.id ?   resultEncuesta.id : null})
   
                   const notification_options = {
                     priority: "high",
