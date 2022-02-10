@@ -38,6 +38,6 @@ const Encuesta = db.define('encuesta', {
 
 
 
-
+//dede
 
 module.exports = Encuesta;
