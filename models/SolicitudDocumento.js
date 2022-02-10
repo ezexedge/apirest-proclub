@@ -18,10 +18,10 @@ const SolicitudDocumento = db.define('solicitudDocumento', {
 
     },
     titulo: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
     descripcion: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
     },
    
     
