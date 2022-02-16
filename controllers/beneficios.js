@@ -141,25 +141,8 @@ exports.crear = async (req, res) => {
        
       }else{
 
-        const result = await  RubroXBeneficio.findAll({
-          where:{
-            beneficioId:beneficiosId
-          }
-        })
+        res.status(400).json({ "error": 'Es obligatorio seleccionar al menos 1 rubro' })
 
-
-        for(let val2 of result){
-
-          await  RubroXBeneficio.destroy({
-            where:{
-                id: val2.id
-            }
-        },{ transaction: t })
-
-               
-
-
-        }
         
       }
 
