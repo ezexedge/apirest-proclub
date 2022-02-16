@@ -139,7 +139,30 @@ exports.crear = async (req, res) => {
 
         }
        
+      }else{
+
+        const result = await  RubroXBeneficio.findAll({
+          where:{
+            beneficioId:beneficiosId
+          }
+        })
+
+
+        for(let val2 of result){
+
+          await  RubroXBeneficio.destroy({
+            where:{
+                id: val2.id
+            }
+        },{ transaction: t })
+
+               
+
+
+        }
+        
       }
+
     
    
 
