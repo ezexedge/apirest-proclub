@@ -108,7 +108,7 @@ exports.crear = async (req, res) => {
       
 
       if( rubro.length > 0){
-
+//ss
         const result = await  RubroXBeneficio.findAll({
           where:{
             beneficioId:beneficiosId
