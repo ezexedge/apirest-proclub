@@ -366,7 +366,10 @@ exports.getEspacioByClubId =  async (req,res) => {
                 }],
                 where:{
                     espacioId: val.id,
-                    activo: 1
+                    activo: 1,
+                    disciplinaxclubId: {
+                        [Op.ne]: null
+                      }
                 }
             })
 
