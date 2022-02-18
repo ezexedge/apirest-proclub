@@ -358,16 +358,15 @@ exports.getEspacioByClubId =  async (req,res) => {
                 include:[{
                     model: RelDisiciplinaXClub,
                     as: 'disciplinaxclub',
-                    where:{
-                        activo: 1
-                    },
+
                     include:[{
                         model: Disciplina,
                         as: 'disciplina'
                     }],
                 }],
                 where:{
-                    espacioId: val.id
+                    espacioId: val.id,
+                    activo: 1
                 }
             })
 
