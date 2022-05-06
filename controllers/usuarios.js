@@ -620,21 +620,7 @@ exports.usuarioEliminar = async (req, res) => {
         if(!resultRol)throw new Error('el rol no existe')
 
 
-        if(Number(rol) === 2){
-
-          const config = {
-            url: 'https://klubo.club/#/complete-registration',
-            handleCodeInApp: true
-        };
-
-
-        const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
-        //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
-           console.log('guardando respuesta',result)
-                     
-       
-
-        }
+   
 
 
 
@@ -724,6 +710,22 @@ exports.usuarioEliminar = async (req, res) => {
     
           await admin.auth().setCustomUserClaims(rta.uid, { role: 'SuperAdmin' }) */
     
+          if(Number(rol) === 2){
+
+            const config = {
+              url: 'https://klubo.club/#/complete-registration',
+              handleCodeInApp: true
+          };
+  
+  
+          const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
+          //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
+             console.log('guardando respuesta',result)
+                       
+         
+  
+          }
+          
         await t.commit();
     
        
