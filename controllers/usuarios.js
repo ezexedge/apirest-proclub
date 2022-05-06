@@ -620,8 +620,7 @@ exports.usuarioEliminar = async (req, res) => {
         if(!resultRol)throw new Error('el rol no existe')
 
 
-   
-
+      
 
 
         let estado = 1
@@ -648,15 +647,7 @@ exports.usuarioEliminar = async (req, res) => {
         //desarrollo
         //  url: 'http://localhost:3000/#/complete-registration',
 
-        const config = {
-          url: 'https://klubo.club/#/complete-registration',
-          handleCodeInApp: true
-      };
-
-    const result = await firebase.default.auth().sendSignInLinkToEmail(correo,config)
-     //signInWithEmailLink(correo,"http://localhost:8000/api/agregar-usuario")
-        console.log('guardando respuesta',result)
-                  
+           
 
 
         let imagen
@@ -725,6 +716,7 @@ exports.usuarioEliminar = async (req, res) => {
          
   
           }
+
           
         await t.commit();
     
